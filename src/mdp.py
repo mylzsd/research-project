@@ -1,20 +1,22 @@
 import classifier
 import pandas as pd
+import random
 
-FEATURE_COST = 5
+FEATURE_COST = 20
 LEARNING_RATE = 0.1
 DISCOUNT = 0.9
+CORRECT_REWARD = 100
+EPSILON = 0.9
 
 class TreeState:
 
 	def __init__(self, size, value = None, is_term = False):
 		self.size = size
 		if value == None:
-			self.value = [0] * size
+			self.value = [None] * size
 		else:
 			self.value = value[:]
 		self.is_term = is_term
-		self.valid_count = 0
 
 	def setTerm(self, is_term):
 		self.is_term = is_term
@@ -33,14 +35,14 @@ class TreeState:
 	def usedClassifier(self):
 		ret = set()
 		for i, v in enumerate(self.value):
-			if v == 0: continue
+			if v is None: continue
 			ret.add(i)
 		return ret
 
 	def feature(self, cluster):
 		ret = set()
 		for i, v in enumerate(self.value):
-			if v == 0: continue
+			if v is None: continue
 			ret.update(cluster.features[i])
 		return ret
 
@@ -50,7 +52,8 @@ class TreeState:
 		return self.value == other.value and self.is_term == other.is_term
 
 	def __hash__(self):
-		t = (tuple(self.value), self.is_term)
+		t = tuple(self.value + [self.is_term])
+		# print(t)
 		return hash(t)
 
 	def __str__(self):
@@ -69,8 +72,15 @@ class Action:
 			state_p.setTerm(True)
 		else:
 			i = action.index
-			state_p.setValueAt(i, prediction[i])
+			# print("i is %d" % i)
+			# print("prediction is %s" % prediction[i])
+			state_p.setValueAt(i, prediction.iloc[i])
 		return state_p
+
+	def __str__(self):
+		if self.is_term:
+			return "Stop"
+		return "Visit %d" % (self.index)
 
 
 class MDP:
@@ -79,9 +89,10 @@ class MDP:
 		self.cluster = cluster
 		self.policy = dict()
 		self.q_table = dict()
+		self.validation_count = dict()
 
 	def getAction(self, state):
-		return self.policy.get(state, 0)
+		return self.policy.get(state, None)
 
 	def getQ(self, state):
 		return self.q_table.get(state, 0)
@@ -91,57 +102,89 @@ class MDP:
 		value = state.getValue()
 		actions = [Action(-1)]
 		for i, v in enumerate(value):
-			if v == 0:
+			if v is None:
 				actions.append(Action(i))
 		return actions
 
 	def getSuccessors(self, state):
 		pass
 
-	def qLearning(self, predictions):
-		n = len(predictions.index)
-		for i in range(EPOCH):
-			next_policy = dict()
-			next_q_table = dict()
-			for j in range(n):
-				init_ts = TreeState(self.cluster.size)
-				qHelper(init_ts, predictions.iloc[j], next_policy, next_q_table)
-				# monitor updates after 1 instance
-			self.policy = next_policy
-			self.q_table = next_q_table
-			# monitor updates after 1 epoch
+	def updateDict(self, new_policy, new_q_table):
+		for k, v in new_policy.items():
+			self.policy[k] = v
+		for k, v in new_q_table.items():
+			self.q_table[k] = v
 
-	def qHelper(state, prediction, next_policy, next_q_table):
+	def qLearning(self, predictions, epoch):
+		n = len(predictions.index)
+		for i in range(epoch):
+			print("training epoch %d" % (i))
+			for j in range(n):
+				next_policy = dict()
+				next_q_table = dict()
+				init_ts = TreeState(self.cluster.size)
+				self.qHelper(init_ts, predictions.iloc[j], next_policy, next_q_table)
+				# monitor updates after 1 instance
+				self.updateDict(next_policy, next_q_table)
+			# monitor updates after 1 epoch
+			for state in self.q_table.keys():
+				q = self.getQ(state)
+				a = self.getAction(state)
+				if self.getQ(state) > 0 and not a is None:
+					print("%s\npolicy: %s, Q: %f" % (state, a, q))
+
+	def qHelper(self, state, prediction, next_policy, next_q_table):
 		curr_q = self.getQ(state)
+		# print("\t%s: %f" % (str(state), curr_q))
 		if state.is_term:
 			# currently using fixed weighted voting
 			# TODO: change to a trainable network
-			res = prediction.iloc[0][-1]
-			total_size = 0
-			total_value = 0
+			real = prediction.iloc[-1]
 			value = state.getValue()
+			vote = dict()
 			for i, v in enumerate(value):
-				if v == 0: continue
+				if v is None: continue
 				size = len(self.cluster.features[i])
-				total_size += size
-				total_value += size * (1 if v == 1 else -1)
-			total_q = state.valid_count * curr_q
-			total_q += 100 if (total_value > 0) == (res == 0) else -100
-			state.valid_count += 1
-			next_q_table[state] = total_q / state.valid_count
+				curr_v = vote.get(v, 0)
+				vote[v] = curr_v + size
+			pairs = [(v, k) for k, v in vote.items()]
+			if len(pairs) > 0:
+				_, res = max(pairs)
+			else:
+				res = None
+			v_count = self.validation_count.get(state, 0)
+			if res is None or res != real:
+				next_q = (curr_q * v_count - CORRECT_REWARD) / (v_count + 1)
+				# next_q = curr_q - CORRECT_REWARD
+			else:
+				next_q = (curr_q * v_count + CORRECT_REWARD) / (v_count + 1)
+				# next_q = curr_q + CORRECT_REWARD
+			self.validation_count[state] = v_count + 1
+			# if next_q > 0:
+			# print("\t\t%s: %f" % (state, next_q))
+			next_q_table[state] = next_q
 		else:
+			# apply the best action
+			# TODO: use e-greedy
 			actions = self.getLegalActions(state)
+			best_pairs = []
 			best_q = -9999
 			for a in actions:
 				state_p = Action.applyAction(state, a, prediction)
 				cost = len(state_p.feature(self.cluster) - state.feature(self.cluster)) * FEATURE_COST
-				temp_q = curr_q + LEARNING_RATE * (cost + DISCOUNT * self.getQ(state_p) - curr_q)
-				if temp_q > best_q:
-					best_q = temp_q
-					best_action = a
-				qHelper(state_p, prediction, next_policy, next_q_table)
-			next_policy[state] = best_action
-			next_q_table[state] = best_q
+				q = DISCOUNT * self.getQ(state_p) - cost
+				# print(state_p, q)
+				if q > best_q:
+					best_q = q
+					best_pairs = [(a, state_p)]
+				elif q == best_q:
+					best_pairs.append((a, state_p))
+			# print("\t\t%f" % best_q)
+			action, state_p = random.choice(best_pairs)
+			next_q = curr_q + LEARNING_RATE * (best_q - curr_q)
+			next_policy[state] = action
+			next_q_table[state] = next_q
+			self.qHelper(state_p, prediction, next_policy, next_q_table)
 
 	def valueIteration(self):
 		pass

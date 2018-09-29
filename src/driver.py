@@ -1,21 +1,87 @@
 import classifier
 import mdp
+import pandas as pd
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.svm import SVC
+import random
 
-class T:
+NUM_CLASSIFIER = 10
 
-	def __init__(self, v):
-		self.v = v[:]
-
-	def __eq__(self, other):
-		return self.v == other.v
+def splitByPortion(data, portion, rd = 666):
+	part1 = data.sample(frac = portion, random_state = rd)
+	part2 = data.loc[~data.index.isin(part1.index), :]
+	return (part1, part2)
 
 if __name__ == '__main__':
-	l = [1, 2, 3]
-	l2 = [1, 4, 3]
-	t1 = T(l)
-	t2 = T(l2)
-	print(l == l2)
-	print(t1 == t2)
+	# # bank = pd.read_csv("data/bank-additional/bank-additional-full.csv", sep = ";")
+	# frog = pd.read_csv("data/MFCCs/Frogs_MFCCs.csv")
+	# frog.drop("RecordID", axis = 1, inplace = True)
+	# frog.drop("Species", axis = 1, inplace = True)
+	# frog.drop("Genus", axis = 1, inplace = True)
+	# # frog.drop("Family", axis = 1, inplace = True)
+
+	# num_feature = frog.shape[1] - 1
+	# print(num_feature)
+	
+	# frog_train_clf, frog_rest = splitByPortion(frog, 0.4)
+	# frog_train_mdp, frog_test = splitByPortion(frog_rest, 0.8)
+	# print(frog_train_clf.shape)
+	# print(frog_train_mdp.shape)
+	# print(frog_test.shape)
+
+	# feature_size = [3, 3, 3, 5, 5, 5, 10, 10, 15, 20]
+	# features = []
+	# for i in range(len(feature_size)):
+	# 	feature = random.sample(range(num_feature), feature_size[i])
+	# 	features.append(feature)
+	# # print(features)
+	# cluster = classifier.Cluster(10, ["dt"], features)
+	# cluster.train(frog_train_clf)
+	# scores = cluster.validation(frog_test)
+	# # print(scores)
+	# results = cluster.results(frog_train_mdp)
+	# real = frog_train_mdp.iloc[:, -1].reset_index(drop=True)
+	# # print(real)
+	# predictions = pd.concat([results, real], axis = 1)
+	# # print(predictions)
+
+	# model = mdp.MDP(cluster)
+	# model.qLearning(predictions, 5)
+
+
+	iris = pd.read_csv("data/iris/iris.csv", header = None)
+	bezd = pd.read_csv("data/iris/bezdekIris.csv", header = None)
+	iris = pd.concat([iris, bezd], ignore_index = True)
+
+	num_feature = iris.shape[1] - 1
+	iris_train_clf, iris_rest = splitByPortion(iris, 0.4)
+	iris_train_mdp, iris_test = splitByPortion(iris_rest, 0.8)
+	print(iris_train_clf.shape)
+	print(iris_train_mdp.shape)
+	print(iris_test.shape)
+
+	# feature_size = [1, 1, 2, 2, 3]
+	# features = []
+	# for i in range(len(feature_size)):
+	# 	feature = random.sample(range(num_feature), feature_size[i])
+	# 	features.append(feature)
+	# print(features)
+	features = [[0], [1], [2], [3], 
+				[0, 1], [0, 2], [0, 3], [1, 2], [1, 3], [2, 3], 
+				[0, 1, 2], [0, 1, 3], [0, 2, 3], [1, 2, 3], 
+				[0, 1, 2, 3]]
+
+	cluster = classifier.Cluster(15, ["dt"], features)
+	cluster.train(iris_train_clf)
+	results = cluster.results(iris_train_mdp)
+	real = iris_train_mdp.iloc[:, -1].reset_index(drop = True)
+	predictions = pd.concat([results, real], axis = 1)
+	model = mdp.MDP(cluster)
+	model.qLearning(predictions, 100)
+
+	scores = cluster.validation(iris_test)
+	print(scores)
+
 	pass
 	# read data
 	# partition data 4:4:2

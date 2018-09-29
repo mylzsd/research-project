@@ -37,7 +37,7 @@ class Cluster:
 		self.clf_types = []
 		for i in range(size):
 			self.clf_types.append(types[i % len(types)])
-			self.classifiers.append(Classifier(self.clf_types[i]))
+			self.classifiers.append(Classifier(self.clf_types[i], features[i]))
 
 
 	def train(self, data):
@@ -49,14 +49,28 @@ class Cluster:
 			y = data.iloc[:, -1]
 			self.classifiers[i].train(X, y)
 
-	def validation(self, test_X, test_y):
+	def validation(self, data):
 		ret = []
 		for i in range(self.size):
+			feature = self.features[i]
+			test_X = data.iloc[:, feature]
+			test_y = data.iloc[:, -1]
 			s = self.classifiers[i].validation(test_X, test_y)
 			ret.append(s)
+		return ret
 
 	def individualResult(self, X, index):
 		return self.classifiers[index].result(X)
+
+	def results(self, data):
+		ret = []
+		for i in range(self.size):
+			feature = self.features[i]
+			X = data.iloc[:, feature]
+			res = self.classifiers[i].result(X)
+			ret.append(res)
+		df = pd.DataFrame(ret)
+		return df.T
 
 	def getTypes(self):
 		return self.clf_types
