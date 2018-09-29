@@ -2,7 +2,7 @@ import classifier
 import pandas as pd
 import random
 
-FEATURE_COST = 20
+FEATURE_COST = 0
 LEARNING_RATE = 0.1
 DISCOUNT = 0.9
 CORRECT_REWARD = 100
@@ -74,7 +74,10 @@ class Action:
 			i = action.index
 			# print("i is %d" % i)
 			# print("prediction is %s" % prediction[i])
-			state_p.setValueAt(i, prediction.iloc[i])
+			if isinstance(prediction, pd.Series):
+				state_p.setValueAt(i, prediction.iloc[i])
+			else:
+				state_p.setValueAt(i, prediction)
 		return state_p
 
 	def __str__(self):
@@ -118,7 +121,6 @@ class MDP:
 	def qLearning(self, predictions, epoch):
 		n = len(predictions.index)
 		for i in range(epoch):
-			print("training epoch %d" % (i))
 			for j in range(n):
 				next_policy = dict()
 				next_q_table = dict()
@@ -127,10 +129,12 @@ class MDP:
 				# monitor updates after 1 instance
 				self.updateDict(next_policy, next_q_table)
 			# monitor updates after 1 epoch
-			for state in self.q_table.keys():
-				q = self.getQ(state)
-				a = self.getAction(state)
-				if self.getQ(state) > 0 and not a is None:
+			if (i + 1) % 20 == 0:
+				print("Epoch %d" % (i))
+				for state in self.q_table.keys():
+					q = self.getQ(state)
+					a = self.getAction(state)
+					# if self.getQ(state) > 0 and not a is None:
 					print("%s\npolicy: %s, Q: %f" % (state, a, q))
 
 	def qHelper(self, state, prediction, next_policy, next_q_table):
@@ -140,18 +144,7 @@ class MDP:
 			# currently using fixed weighted voting
 			# TODO: change to a trainable network
 			real = prediction.iloc[-1]
-			value = state.getValue()
-			vote = dict()
-			for i, v in enumerate(value):
-				if v is None: continue
-				size = len(self.cluster.features[i])
-				curr_v = vote.get(v, 0)
-				vote[v] = curr_v + size
-			pairs = [(v, k) for k, v in vote.items()]
-			if len(pairs) > 0:
-				_, res = max(pairs)
-			else:
-				res = None
+			res = self.decisionFunction(state)
 			v_count = self.validation_count.get(state, 0)
 			if res is None or res != real:
 				next_q = (curr_q * v_count - CORRECT_REWARD) / (v_count + 1)
@@ -186,6 +179,21 @@ class MDP:
 			next_q_table[state] = next_q
 			self.qHelper(state_p, prediction, next_policy, next_q_table)
 
+	def decisionFunction(self, state):
+		value = state.getValue()
+		vote = dict()
+		for i, v in enumerate(value):
+			if v is None: continue
+			size = len(self.cluster.features[i])
+			curr_v = vote.get(v, 0)
+			vote[v] = curr_v + size
+		pairs = [(v, k) for k, v in vote.items()]
+		if len(pairs) > 0:
+			_, res = max(pairs)
+		else:
+			res = None
+		return res
+
 	def valueIteration(self):
 		pass
 
@@ -198,5 +206,28 @@ class MDP:
 	def write(self, filename):
 		pass
 
-	def execute(self, case):
-		pass
+	def validation(self, data):
+		total = len(data.index)
+		correct = 0
+		feature = 0
+		predictions = self.cluster.results(data)
+		for i in range(total):
+			state = TreeState(self.cluster.size)
+			while not state.is_term:
+				action = self.getAction(state)
+				if action is None:
+					print("No policy: %s" % (state))
+					action = Action(-1)
+				state_p = Action.applyAction(state, action, predictions.iloc[i])
+				state = state_p
+			res = self.decisionFunction(state)
+			# get real result
+			# get predicted result
+			# modify counter
+			real = data.iloc[i, -1]
+			if res == real:
+				correct += 1
+			feature += len(state.feature(self.cluster))
+		accuracy = correct / total
+		cost = feature / total
+		return accuracy, cost

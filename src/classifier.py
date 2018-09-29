@@ -59,8 +59,12 @@ class Cluster:
 			ret.append(s)
 		return ret
 
-	def individualResult(self, X, index):
-		return self.classifiers[index].result(X)
+	def individualResult(self, data, index):
+		feature = self.features[index]
+		X = data.iloc[feature]
+		res = self.classifiers[index].result(X)
+		print(res)
+		return res[0]
 
 	def results(self, data):
 		ret = []

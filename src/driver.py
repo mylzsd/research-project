@@ -77,11 +77,12 @@ if __name__ == '__main__':
 	real = iris_train_mdp.iloc[:, -1].reset_index(drop = True)
 	predictions = pd.concat([results, real], axis = 1)
 	model = mdp.MDP(cluster)
-	model.qLearning(predictions, 100)
+	model.qLearning(predictions, 200)
 
-	scores = cluster.validation(iris_test)
-	print(scores)
-
+	clf_scores = cluster.validation(iris_test)
+	print(clf_scores)
+	mdp_score, cost = model.validation(iris_test)
+	print(mdp_score, cost)
 	pass
 	# read data
 	# partition data 4:4:2
