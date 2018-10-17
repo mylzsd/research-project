@@ -1,0 +1,41 @@
+FEATURE_COST = 25
+LEARNING_RATE = 0.1
+DISCOUNT = 0.9
+CORRECT_REWARD = 100
+EPSILON = 0.9
+
+Epoch 199
+None None None None None None None None None None None None None None None False
+policy: Visit 3, Q: 48.080576
+None None None None None None None None None None None None None None None True
+policy: None, Q: -100.000000
+None None None Iris-versicolor None None None None None None None None None None None False
+policy: Stop, Q: 71.997656
+None None None Iris-versicolor None None None None None None None None None None None True
+policy: None, Q: 80.006004
+None None Iris-setosa None None None None None None None None None None None None False
+policy: Stop, Q: 0.000000
+None None Iris-setosa None None None None None None None None None None None None True
+policy: None, Q: 100.000000
+None Iris-setosa None None None None None None None None None None None None None False
+policy: Stop, Q: 0.000000
+None Iris-setosa None None None None None None None None None None None None None True
+policy: None, Q: -100.000000
+Iris-setosa None None None None None None None None None None None None None None False
+policy: Stop, Q: 0.000000
+Iris-setosa None None None None None None None None None None None None None None True
+policy: None, Q: 100.000000
+None None None Iris-setosa None None None None None None None None None None None False
+policy: Stop, Q: 90.000000
+None None None Iris-setosa None None None None None None None None None None None True
+policy: None, Q: 100.000000
+None None None Iris-virginica None None None None None None None None None None None False
+policy: Stop, Q: 90.000000
+None None None Iris-virginica None None None None None None None None None None None True
+policy: None, Q: 100.000000
+Iris-virginica None None None None None None None None None None None None None None False
+policy: Stop, Q: 65.927361
+Iris-virginica None None None None None None None None None None None None None None True
+policy: None, Q: 73.333333
+[0.6944444444444444, 0.5277777777777778, 0.9166666666666666, 0.9444444444444444, 0.75, 0.9166666666666666, 0.9166666666666666, 0.9444444444444444, 0.9166666666666666, 1.0, 0.9166666666666666, 0.8888888888888888, 1.0, 1.0, 0.9444444444444444]
+0.9444444444444444 1.0

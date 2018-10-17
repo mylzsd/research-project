@@ -1,0 +1,856 @@
+FEATURE_COST = 0
+LEARNING_RATE = 0.1
+DISCOUNT = 0.9
+CORRECT_REWARD = 100
+EPSILON = 0.9
+
+Epoch 199
+None None None None None None None None None None None None None None None False
+policy: Visit 8, Q: 75.354890
+None None None None None None None None None None None None None None None True
+policy: None, Q: -100.000000
+None None None None None None None None None None None None Iris-versicolor None None False
+policy: Visit 0, Q: 0.000000
+Iris-setosa None None None None None None None None None None None Iris-versicolor None None False
+policy: Visit 2, Q: 0.000000
+Iris-setosa None Iris-versicolor None None None None None None None None None Iris-versicolor None None False
+policy: Visit 3, Q: 0.000000
+Iris-setosa None Iris-versicolor Iris-versicolor None None None None None None None None Iris-versicolor None None False
+policy: Visit 4, Q: 0.000000
+Iris-setosa None Iris-versicolor Iris-versicolor Iris-versicolor None None None None None None None Iris-versicolor None None False
+policy: Visit 10, Q: 0.000000
+Iris-setosa None Iris-versicolor Iris-versicolor Iris-versicolor None None None None None Iris-versicolor None Iris-versicolor None None False
+policy: Stop, Q: 0.000000
+Iris-setosa None Iris-versicolor Iris-versicolor Iris-versicolor None None None None None Iris-versicolor None Iris-versicolor None None True
+policy: None, Q: 100.000000
+None None None None None None Iris-setosa None None None None None None None None False
+policy: Visit 12, Q: 0.000000
+None None None None None None Iris-setosa None None None None None Iris-setosa None None False
+policy: Visit 8, Q: 0.000000
+None None None None None None Iris-setosa None Iris-setosa None None None Iris-setosa None None False
+policy: Visit 10, Q: 0.000000
+None None None None None None Iris-setosa None Iris-setosa None Iris-setosa None Iris-setosa None None False
+policy: Visit 13, Q: 0.000000
+None None None None None None Iris-setosa None Iris-setosa None Iris-setosa None Iris-setosa Iris-setosa None False
+policy: Visit 1, Q: 0.000000
+None Iris-virginica None None None None Iris-setosa None Iris-setosa None Iris-setosa None Iris-setosa Iris-setosa None False
+policy: Visit 11, Q: 0.000000
+None Iris-virginica None None None None Iris-setosa None Iris-setosa None Iris-setosa Iris-setosa Iris-setosa Iris-setosa None False
+policy: Visit 0, Q: 0.000000
+Iris-setosa Iris-virginica None None None None Iris-setosa None Iris-setosa None Iris-setosa Iris-setosa Iris-setosa Iris-setosa None False
+policy: Visit 14, Q: 0.000000
+Iris-setosa Iris-virginica None None None None Iris-setosa None Iris-setosa None Iris-setosa Iris-setosa Iris-setosa Iris-setosa Iris-setosa False
+policy: Stop, Q: 0.000000
+Iris-setosa Iris-virginica None None None None Iris-setosa None Iris-setosa None Iris-setosa Iris-setosa Iris-setosa Iris-setosa Iris-setosa True
+policy: None, Q: 100.000000
+None None None None None None None None None None None None None None Iris-versicolor False
+policy: Visit 12, Q: 79.128767
+None None None None None None None None None None None None Iris-versicolor None Iris-versicolor False
+policy: Stop, Q: 90.000000
+None None None None None None None None None None None None Iris-versicolor None Iris-versicolor True
+policy: None, Q: 100.000000
+None None None None None None None None None None None None Iris-virginica None None False
+policy: Visit 0, Q: 0.000000
+None None Iris-virginica None None None None None None None None None Iris-virginica None None False
+policy: Visit 5, Q: 0.000000
+None None Iris-virginica None None Iris-virginica None None None None None None Iris-virginica None None False
+policy: Visit 11, Q: 0.000000
+None None Iris-virginica None None Iris-virginica None None None None None Iris-virginica Iris-virginica None None False
+policy: Visit 8, Q: 0.000000
+None None Iris-virginica None None Iris-virginica None None Iris-virginica None None Iris-virginica Iris-virginica None None False
+policy: Visit 14, Q: 0.000000
+None None Iris-virginica None None Iris-virginica None None Iris-virginica None None Iris-virginica Iris-virginica None Iris-virginica False
+policy: Visit 0, Q: 0.000000
+Iris-virginica None Iris-virginica None None Iris-virginica None None Iris-virginica None None Iris-virginica Iris-virginica None Iris-virginica False
+policy: Visit 6, Q: 0.000000
+Iris-virginica None Iris-virginica None None Iris-virginica Iris-virginica None Iris-virginica None None Iris-virginica Iris-virginica None Iris-virginica False
+policy: Visit 10, Q: 0.000000
+Iris-virginica None Iris-virginica None None Iris-virginica Iris-virginica None Iris-virginica None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica False
+policy: Visit 4, Q: 0.000000
+Iris-virginica None Iris-virginica None Iris-versicolor Iris-virginica Iris-virginica None Iris-virginica None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica False
+policy: Visit 9, Q: 0.000000
+Iris-virginica None Iris-virginica None Iris-versicolor Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica False
+policy: Visit 13, Q: 0.000000
+Iris-virginica None Iris-virginica None Iris-versicolor Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica False
+policy: Visit 7, Q: 0.000000
+Iris-virginica None Iris-virginica None Iris-versicolor Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica False
+policy: Visit 1, Q: 0.000000
+Iris-virginica Iris-setosa Iris-virginica None Iris-versicolor Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica False
+policy: Stop, Q: 0.000000
+Iris-virginica Iris-setosa Iris-virginica None Iris-versicolor Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica True
+policy: None, Q: 100.000000
+None None None None Iris-versicolor None None None None None None None None None None False
+policy: Stop, Q: 28.241476
+None None None None Iris-versicolor None None None None None None None None None None True
+policy: None, Q: 17.647059
+None None None Iris-versicolor None None None None None None None None None None None False
+policy: Visit 5, Q: 0.000000
+None None None Iris-versicolor None Iris-versicolor None None None None None None None None None False
+policy: Visit 11, Q: 0.000000
+None None None Iris-versicolor None Iris-versicolor None None None None None Iris-versicolor None None None False
+policy: Visit 2, Q: 0.000000
+None None Iris-versicolor Iris-versicolor None Iris-versicolor None None None None None Iris-versicolor None None None False
+policy: Visit 7, Q: 0.000000
+None None Iris-versicolor Iris-versicolor None Iris-versicolor None Iris-versicolor None None None Iris-versicolor None None None False
+policy: Visit 8, Q: 0.000000
+None None Iris-versicolor Iris-versicolor None Iris-versicolor None Iris-versicolor Iris-versicolor None None Iris-versicolor None None None False
+policy: Visit 10, Q: 0.000000
+None None Iris-versicolor Iris-versicolor None Iris-versicolor None Iris-versicolor Iris-versicolor None Iris-versicolor Iris-versicolor None None None False
+policy: Stop, Q: 0.000000
+None None Iris-versicolor Iris-versicolor None Iris-versicolor None Iris-versicolor Iris-versicolor None Iris-versicolor Iris-versicolor None None None True
+policy: None, Q: 100.000000
+None None None None Iris-setosa None None None None None None None None None None False
+policy: Stop, Q: 0.000000
+None None None None Iris-setosa None None None None None None None None None None True
+policy: None, Q: 100.000000
+None None None None None None None None Iris-setosa None None None None None None False
+policy: Stop, Q: 90.000000
+None None None None None None None None Iris-setosa None None None None None None True
+policy: None, Q: 100.000000
+None Iris-versicolor None None None None None None None None None None None None None False
+policy: Visit 11, Q: 0.000000
+None Iris-versicolor None None None None Iris-versicolor None None None None None None None None False
+policy: Visit 13, Q: 0.000000
+None Iris-versicolor None None None None Iris-versicolor None None None None None None Iris-versicolor None False
+policy: Visit 4, Q: 0.000000
+None Iris-versicolor None None Iris-versicolor None Iris-versicolor None None None None None None Iris-versicolor None False
+policy: Visit 9, Q: 0.000000
+None Iris-versicolor None None Iris-versicolor None Iris-versicolor None None Iris-versicolor None None None Iris-versicolor None False
+policy: Stop, Q: 0.000000
+None Iris-versicolor None None Iris-versicolor None Iris-versicolor None None Iris-versicolor None None None Iris-versicolor None True
+policy: None, Q: 100.000000
+None None None None None None None None None Iris-virginica None None None None None False
+policy: Visit 4, Q: 0.000000
+None None None None Iris-virginica None None None None Iris-virginica None None None None None False
+policy: Visit 11, Q: 0.000000
+None None None None Iris-virginica None None None None Iris-virginica None Iris-versicolor None None None False
+policy: Visit 0, Q: 0.000000
+Iris-virginica None None None Iris-virginica None None None None Iris-virginica None Iris-versicolor None None None False
+policy: Visit 2, Q: 0.000000
+Iris-virginica None Iris-virginica None Iris-virginica None None None None Iris-virginica None Iris-versicolor None None None False
+policy: Visit 5, Q: 0.000000
+Iris-virginica None Iris-virginica None Iris-virginica Iris-versicolor None None None Iris-virginica None Iris-versicolor None None None False
+policy: Visit 14, Q: 0.000000
+Iris-virginica None Iris-virginica None Iris-virginica Iris-versicolor None None None Iris-virginica None Iris-versicolor None None Iris-versicolor False
+policy: Visit 12, Q: 0.000000
+Iris-virginica None Iris-virginica None Iris-virginica Iris-versicolor None None None Iris-virginica None Iris-versicolor Iris-virginica None Iris-versicolor False
+policy: Visit 6, Q: 0.000000
+Iris-virginica None Iris-virginica None Iris-virginica Iris-versicolor Iris-versicolor None None Iris-virginica None Iris-versicolor Iris-virginica None Iris-versicolor False
+policy: Visit 13, Q: 0.000000
+Iris-virginica None Iris-virginica None Iris-virginica Iris-versicolor Iris-versicolor None None Iris-virginica None Iris-versicolor Iris-virginica Iris-virginica Iris-versicolor False
+policy: Visit 8, Q: 0.000000
+Iris-virginica None Iris-virginica None Iris-virginica Iris-versicolor Iris-versicolor None Iris-versicolor Iris-virginica None Iris-versicolor Iris-virginica Iris-virginica Iris-versicolor False
+policy: Visit 3, Q: 0.000000
+Iris-virginica None Iris-virginica Iris-versicolor Iris-virginica Iris-versicolor Iris-versicolor None Iris-versicolor Iris-virginica None Iris-versicolor Iris-virginica Iris-virginica Iris-versicolor False
+policy: Visit 1, Q: 0.000000
+Iris-virginica Iris-setosa Iris-virginica Iris-versicolor Iris-virginica Iris-versicolor Iris-versicolor None Iris-versicolor Iris-virginica None Iris-versicolor Iris-virginica Iris-virginica Iris-versicolor False
+policy: Visit 7, Q: 0.000000
+Iris-virginica Iris-setosa Iris-virginica Iris-versicolor Iris-virginica Iris-versicolor Iris-versicolor Iris-virginica Iris-versicolor Iris-virginica None Iris-versicolor Iris-virginica Iris-virginica Iris-versicolor False
+policy: Stop, Q: 0.000000
+Iris-virginica Iris-setosa Iris-virginica Iris-versicolor Iris-virginica Iris-versicolor Iris-versicolor Iris-virginica Iris-versicolor Iris-virginica None Iris-versicolor Iris-virginica Iris-virginica Iris-versicolor True
+policy: None, Q: -100.000000
+None None None None Iris-virginica None None None None None None None None None None False
+policy: Visit 7, Q: 0.000000
+None None None None Iris-virginica None None Iris-virginica None None None None None None None False
+policy: Visit 9, Q: 0.000000
+None None None Iris-virginica Iris-virginica None None Iris-virginica None None None None None None None False
+policy: Visit 10, Q: 0.000000
+None None None Iris-virginica Iris-virginica None None Iris-virginica None None Iris-virginica None None None None False
+policy: Visit 6, Q: 0.000000
+None None None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None None Iris-virginica None None None None False
+policy: Visit 2, Q: 0.000000
+None None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None None Iris-virginica None None None None False
+policy: Visit 14, Q: 0.000000
+None None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None None Iris-virginica None None None Iris-virginica False
+policy: Visit 0, Q: 0.000000
+Iris-virginica None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None None Iris-virginica None None None Iris-virginica False
+policy: Visit 13, Q: 0.000000
+Iris-virginica None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None None Iris-virginica None None Iris-virginica Iris-virginica False
+policy: Visit 8, Q: 0.000000
+Iris-virginica None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica None None Iris-virginica Iris-virginica False
+policy: Visit 11, Q: 0.000000
+Iris-virginica None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica False
+policy: Visit 9, Q: 0.000000
+Iris-virginica None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica False
+policy: Visit 12, Q: 0.000000
+Iris-virginica None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica False
+policy: Stop, Q: 9.000000
+Iris-virginica None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica True
+policy: None, Q: 100.000000
+None None None None Iris-virginica None None None None None None None Iris-virginica None None False
+policy: Visit 5, Q: 0.000000
+None None None None Iris-virginica Iris-virginica None None None None None None Iris-virginica None None False
+policy: Visit 0, Q: 0.000000
+Iris-virginica None None None Iris-virginica Iris-virginica None None None None None None Iris-virginica None None False
+policy: Visit 3, Q: 0.000000
+Iris-virginica None None Iris-virginica Iris-virginica Iris-virginica None None None None None None Iris-virginica None None False
+policy: Visit 10, Q: 0.000000
+Iris-virginica None None Iris-virginica Iris-virginica Iris-virginica None None None None Iris-virginica None Iris-virginica None None False
+policy: Visit 11, Q: 0.000000
+Iris-virginica None None Iris-virginica Iris-virginica Iris-virginica None None None None Iris-virginica Iris-virginica Iris-virginica None None False
+policy: Stop, Q: 0.000000
+Iris-virginica None None Iris-virginica Iris-virginica Iris-virginica None None None None Iris-virginica Iris-virginica Iris-virginica None None True
+policy: None, Q: 100.000000
+None None None None None None None None None None Iris-virginica None None None None False
+policy: Visit 0, Q: 0.000000
+None None None Iris-virginica None None None None None None Iris-virginica None None None None False
+policy: Visit 0, Q: 0.000000
+Iris-virginica None None Iris-virginica None None None None None None Iris-virginica None None None None False
+policy: Stop, Q: 0.000000
+Iris-virginica None None Iris-virginica None None None None None None Iris-virginica None None None None True
+policy: None, Q: 100.000000
+None None None None None None None None None None None None None None Iris-virginica False
+policy: Visit 12, Q: 0.000000
+None None None None None None None None None None None None Iris-virginica None Iris-virginica False
+policy: Visit 8, Q: 0.000000
+None None None None None None None None Iris-virginica None None None Iris-virginica None Iris-virginica False
+policy: Visit 9, Q: 0.000000
+None None None None None None None None Iris-virginica Iris-virginica None None Iris-virginica None Iris-virginica False
+policy: Visit 1, Q: 0.000000
+None Iris-setosa None None None None None None Iris-virginica Iris-virginica None None Iris-virginica None Iris-virginica False
+policy: Visit 3, Q: 0.000000
+None Iris-setosa None Iris-virginica None None None None Iris-virginica Iris-virginica None None Iris-virginica None Iris-virginica False
+policy: Visit 13, Q: 0.000000
+None Iris-setosa None Iris-virginica None None None None Iris-virginica Iris-virginica None None Iris-virginica Iris-virginica Iris-virginica False
+policy: Visit 6, Q: 0.000000
+None Iris-setosa None Iris-virginica None None Iris-virginica None Iris-virginica Iris-virginica None None Iris-virginica Iris-virginica Iris-virginica False
+policy: Visit 7, Q: 0.000000
+None Iris-setosa None Iris-virginica None None Iris-virginica Iris-virginica Iris-virginica Iris-virginica None None Iris-virginica Iris-virginica Iris-virginica False
+policy: Stop, Q: 0.000000
+None Iris-setosa None Iris-virginica None None Iris-virginica Iris-virginica Iris-virginica Iris-virginica None None Iris-virginica Iris-virginica Iris-virginica True
+policy: None, Q: 100.000000
+None None None None None None None None Iris-virginica None None None None None None False
+policy: Visit 14, Q: 0.000000
+None None None None Iris-virginica None None None Iris-virginica None None None None None None False
+policy: Visit 2, Q: 0.000000
+None None None Iris-virginica Iris-virginica None None None Iris-virginica None None None None None None False
+policy: Visit 6, Q: 0.000000
+None None None Iris-virginica Iris-virginica None Iris-virginica None Iris-virginica None None None None None None False
+policy: Visit 12, Q: 0.000000
+None None None Iris-virginica Iris-virginica None Iris-virginica None Iris-virginica None None None Iris-virginica None None False
+policy: Stop, Q: 0.000000
+None None None Iris-virginica Iris-virginica None Iris-virginica None Iris-virginica None None None Iris-virginica None None True
+policy: None, Q: 100.000000
+None None None None None None None None None None None Iris-virginica None None None False
+policy: Visit 5, Q: 0.000000
+None None None None None None None None None None None Iris-virginica None None Iris-virginica False
+policy: Visit 10, Q: 0.000000
+None None None None None None None None None None Iris-virginica Iris-virginica None None Iris-virginica False
+policy: Visit 13, Q: 0.000000
+None None None None None None None None None None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica False
+policy: Visit 1, Q: 0.000000
+None Iris-versicolor None None None None None None None None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica False
+policy: Visit 7, Q: 0.000000
+None Iris-versicolor None None None None None Iris-virginica None None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica False
+policy: Visit 8, Q: 0.000000
+None Iris-versicolor None None None None None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica False
+policy: Visit 6, Q: 0.000000
+None Iris-versicolor None None None None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica False
+policy: Visit 2, Q: 0.000000
+None Iris-versicolor Iris-virginica None None None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica False
+policy: Visit 3, Q: 0.000000
+None Iris-versicolor Iris-virginica Iris-virginica None None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica False
+policy: Stop, Q: 0.000000
+None Iris-versicolor Iris-virginica Iris-virginica None None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica True
+policy: None, Q: 100.000000
+None None None None None None None None Iris-virginica None None None None None Iris-virginica False
+policy: Stop, Q: 0.000000
+None None None None None None None None Iris-virginica None None None None None Iris-virginica True
+policy: None, Q: 100.000000
+None None None None None Iris-virginica None None None None None None None None None False
+policy: Visit 3, Q: 0.000000
+None None None None None Iris-virginica None None None None None None None Iris-virginica None False
+policy: Visit 7, Q: 0.000000
+None None None None None Iris-virginica None Iris-virginica None None None None None Iris-virginica None False
+policy: Visit 14, Q: 0.000000
+None None None None None Iris-virginica None Iris-virginica None None None None None Iris-virginica Iris-virginica False
+policy: Visit 10, Q: 0.000000
+None None None None None Iris-virginica None Iris-virginica None None Iris-virginica None None Iris-virginica Iris-virginica False
+policy: Stop, Q: 0.000000
+None None None None None Iris-virginica None Iris-virginica None None Iris-virginica None None Iris-virginica Iris-virginica True
+policy: None, Q: 100.000000
+None None None None Iris-virginica None None None None None Iris-virginica None None None None False
+policy: Visit 1, Q: 0.000000
+None Iris-virginica None None Iris-virginica None None None None None Iris-virginica None None None None False
+policy: Visit 6, Q: 0.000000
+None Iris-virginica None None Iris-virginica None Iris-virginica None None None Iris-virginica None None None None False
+policy: Visit 3, Q: 0.000000
+None Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica None None None Iris-virginica None None None None False
+policy: Visit 2, Q: 0.000000
+None Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica None None None Iris-virginica None None None None False
+policy: Visit 5, Q: 0.000000
+None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None None None Iris-virginica None None None None False
+policy: Stop, Q: 0.000000
+None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None None None Iris-virginica None None None None True
+policy: None, Q: 100.000000
+Iris-versicolor None None None None None None None None None None None None None None False
+policy: Visit 9, Q: 0.000000
+Iris-versicolor None None None None None None None None Iris-virginica None None None None None False
+policy: Visit 8, Q: 0.000000
+Iris-versicolor None None None None None None None Iris-virginica Iris-virginica None None None None None False
+policy: Visit 7, Q: 0.000000
+Iris-versicolor None None None None None None Iris-virginica Iris-virginica Iris-virginica None None None None None False
+policy: Visit 13, Q: 0.000000
+Iris-versicolor None None None None None None Iris-virginica Iris-virginica Iris-virginica None None None Iris-virginica None False
+policy: Visit 10, Q: 0.000000
+Iris-versicolor None None None None None None Iris-virginica Iris-virginica Iris-virginica Iris-virginica None None Iris-virginica None False
+policy: Visit 3, Q: 0.000000
+Iris-versicolor None None Iris-virginica None None None Iris-virginica Iris-virginica Iris-virginica Iris-virginica None None Iris-virginica None False
+policy: Visit 1, Q: 0.000000
+Iris-versicolor Iris-virginica None Iris-virginica None None None Iris-virginica Iris-virginica Iris-virginica Iris-virginica None None Iris-virginica None False
+policy: Stop, Q: 0.000000
+Iris-versicolor Iris-virginica None Iris-virginica None None None Iris-virginica Iris-virginica Iris-virginica Iris-virginica None None Iris-virginica None True
+policy: None, Q: 100.000000
+None None None None None None Iris-versicolor None None None None None None None None False
+policy: Stop, Q: 80.811345
+None None None None None None Iris-versicolor None None None None None None None None True
+policy: None, Q: 89.800138
+None None None None None None None Iris-versicolor None None None None None None None False
+policy: Visit 14, Q: 0.000000
+None None None None None None None Iris-versicolor None None None None None None Iris-versicolor False
+policy: Visit 4, Q: 0.000000
+None None None None Iris-virginica None None Iris-versicolor None None None None None None Iris-versicolor False
+policy: Stop, Q: 0.000000
+None None None None Iris-virginica None None Iris-versicolor None None None None None None Iris-versicolor True
+policy: None, Q: 100.000000
+None Iris-virginica None None None None None None None None Iris-virginica None None None None False
+policy: Visit 13, Q: 0.000000
+None Iris-virginica None None None None None None None None Iris-virginica None None Iris-virginica None False
+policy: Visit 8, Q: 0.000000
+None Iris-virginica None None None None None None Iris-virginica None Iris-virginica None None Iris-virginica None False
+policy: Visit 2, Q: 0.000000
+None Iris-virginica Iris-virginica None None None None None Iris-virginica None Iris-virginica None None Iris-virginica None False
+policy: Visit 6, Q: 0.000000
+None Iris-virginica Iris-virginica None None None Iris-virginica None Iris-virginica None Iris-virginica None None Iris-virginica None False
+policy: Visit 3, Q: 0.000000
+None Iris-virginica Iris-virginica Iris-versicolor None None Iris-virginica None Iris-virginica None Iris-virginica None None Iris-virginica None False
+policy: Visit 9, Q: 0.000000
+None Iris-virginica Iris-virginica Iris-versicolor None None Iris-virginica None Iris-virginica Iris-virginica Iris-virginica None None Iris-virginica None False
+policy: Visit 5, Q: 0.000000
+None Iris-virginica Iris-virginica Iris-versicolor None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica None None Iris-virginica None False
+policy: Visit 11, Q: 0.000000
+None Iris-virginica Iris-virginica Iris-versicolor None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica None False
+policy: Visit 0, Q: 0.000000
+Iris-virginica Iris-virginica Iris-virginica Iris-versicolor None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica None False
+policy: Visit 4, Q: 0.000000
+Iris-virginica Iris-virginica Iris-virginica Iris-versicolor Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica None False
+policy: Stop, Q: 0.000000
+Iris-virginica Iris-virginica Iris-virginica Iris-versicolor Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica None True
+policy: None, Q: 100.000000
+None None Iris-virginica None Iris-virginica None None None Iris-virginica None None None None None None False
+policy: Visit 7, Q: 0.000000
+None None Iris-virginica None Iris-virginica None None Iris-virginica Iris-virginica None None None None None None False
+policy: Visit 9, Q: 0.000000
+None None Iris-virginica None Iris-virginica None None Iris-virginica Iris-virginica Iris-virginica None None None None None False
+policy: Visit 11, Q: 0.000000
+None None Iris-virginica None Iris-virginica None None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica None None None False
+policy: Visit 12, Q: 0.000000
+None None Iris-virginica None Iris-virginica None None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None None False
+policy: Visit 1, Q: 0.000000
+None Iris-virginica Iris-virginica None Iris-virginica None None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None None False
+policy: Visit 10, Q: 0.000000
+None Iris-virginica Iris-virginica None Iris-virginica None None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None None False
+policy: Visit 6, Q: 0.000000
+None Iris-virginica Iris-virginica None Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None None False
+policy: Stop, Q: 0.000000
+None Iris-virginica Iris-virginica None Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None None True
+policy: None, Q: 100.000000
+None None None None None None None None None None None Iris-virginica Iris-virginica None None False
+policy: Visit 0, Q: 0.000000
+Iris-virginica None None None None None None None None None None Iris-virginica Iris-virginica None None False
+policy: Visit 7, Q: 0.000000
+Iris-virginica None None None None None None Iris-virginica None None None Iris-virginica Iris-virginica None None False
+policy: Stop, Q: 0.000000
+Iris-virginica None None None None None None Iris-virginica None None None Iris-virginica Iris-virginica None None True
+policy: None, Q: 100.000000
+None None None None None None None Iris-virginica None None None None None None None False
+policy: Visit 14, Q: 0.000000
+None None None None None None None Iris-virginica None None None None None None Iris-virginica False
+policy: Visit 13, Q: 0.000000
+None None None None None None None Iris-virginica None None Iris-virginica None None None Iris-virginica False
+policy: Visit 9, Q: 0.000000
+None None None None None None None Iris-virginica None Iris-virginica Iris-virginica None None None Iris-virginica False
+policy: Visit 6, Q: 0.000000
+None None None None None None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None None None Iris-virginica False
+policy: Visit 11, Q: 0.000000
+None None None None None None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica None None Iris-virginica False
+policy: Visit 13, Q: 0.000000
+None None None None None None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica False
+policy: Visit 0, Q: 0.000000
+Iris-virginica None None None None None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica False
+policy: Visit 4, Q: 0.000000
+Iris-virginica None None None Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica False
+policy: Visit 8, Q: 0.000000
+Iris-virginica None None None Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica False
+policy: Visit 2, Q: 0.000000
+Iris-virginica None Iris-virginica None Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica False
+policy: Visit 3, Q: 0.000000
+None None None None None None None None None None None None None Iris-virginica None False
+policy: Stop, Q: 80.806937
+None None None None None None None None None Iris-virginica None None None Iris-virginica None False
+policy: Visit 6, Q: 0.000000
+None None None None None None Iris-virginica None None Iris-virginica None None None Iris-virginica None False
+policy: Visit 12, Q: 0.000000
+None None None None None None Iris-virginica None None Iris-virginica None None Iris-virginica Iris-virginica None False
+policy: Visit 3, Q: 0.000000
+None None None Iris-virginica None None Iris-virginica None None Iris-virginica None None Iris-virginica Iris-virginica None False
+policy: Visit 14, Q: 0.000000
+None None None Iris-virginica None None Iris-virginica None None Iris-virginica None None Iris-virginica Iris-virginica Iris-virginica False
+policy: Visit 1, Q: 0.000000
+None Iris-setosa None Iris-virginica None None Iris-virginica None None Iris-virginica None None Iris-virginica Iris-virginica Iris-virginica False
+policy: Visit 10, Q: 0.000000
+None Iris-setosa None Iris-virginica None None Iris-virginica None None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica False
+policy: Visit 4, Q: 0.000000
+None Iris-setosa None Iris-virginica Iris-virginica None Iris-virginica None None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica False
+policy: Stop, Q: 0.000000
+None Iris-setosa None Iris-virginica Iris-virginica None Iris-virginica None None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica True
+policy: None, Q: 100.000000
+None Iris-setosa None None None None None Iris-virginica None None None None None None Iris-virginica False
+policy: Visit 6, Q: 0.000000
+None Iris-setosa None None None None Iris-virginica Iris-virginica None None None None None None Iris-virginica False
+policy: Visit 9, Q: 0.000000
+None Iris-setosa None None None None Iris-virginica Iris-virginica None Iris-virginica None None None None Iris-virginica False
+policy: Stop, Q: 0.000000
+None Iris-setosa None None None None Iris-virginica Iris-virginica None Iris-virginica None None None None Iris-virginica True
+policy: None, Q: 100.000000
+None None None None None None None None None None None Iris-versicolor None None None False
+policy: Visit 8, Q: 0.000000
+None None None None None None None None Iris-versicolor None None Iris-versicolor None None None False
+policy: Visit 13, Q: 0.000000
+None None None None None None None None Iris-versicolor None None Iris-versicolor None Iris-versicolor None False
+policy: Visit 5, Q: 0.000000
+None None None None None Iris-versicolor None None Iris-versicolor None None Iris-versicolor None Iris-versicolor None False
+policy: Visit 12, Q: 0.000000
+None None None None None Iris-versicolor None None Iris-versicolor None None Iris-versicolor Iris-versicolor Iris-versicolor None False
+policy: Visit 1, Q: 0.000000
+None Iris-virginica None None None Iris-versicolor None None Iris-versicolor None None Iris-versicolor Iris-versicolor Iris-versicolor None False
+policy: Visit 7, Q: 0.000000
+None Iris-virginica None None None Iris-versicolor None Iris-versicolor Iris-versicolor None None Iris-versicolor Iris-versicolor Iris-versicolor None False
+policy: Visit 0, Q: 0.000000
+Iris-virginica Iris-virginica None None None Iris-versicolor None Iris-versicolor Iris-versicolor None None Iris-versicolor Iris-versicolor Iris-versicolor None False
+policy: Visit 14, Q: 0.000000
+Iris-virginica Iris-virginica None None None Iris-versicolor None Iris-versicolor Iris-versicolor None None Iris-versicolor Iris-versicolor Iris-versicolor Iris-versicolor False
+policy: Visit 4, Q: 0.000000
+Iris-virginica Iris-virginica None None Iris-virginica Iris-versicolor None Iris-versicolor Iris-versicolor None None Iris-versicolor Iris-versicolor Iris-versicolor Iris-versicolor False
+policy: Visit 2, Q: 0.000000
+Iris-virginica Iris-virginica Iris-versicolor None Iris-virginica Iris-versicolor None Iris-versicolor Iris-versicolor None None Iris-versicolor Iris-versicolor Iris-versicolor Iris-versicolor False
+policy: Visit 6, Q: 0.000000
+Iris-virginica Iris-virginica Iris-versicolor None Iris-virginica Iris-versicolor Iris-versicolor Iris-versicolor Iris-versicolor None None Iris-versicolor Iris-versicolor Iris-versicolor Iris-versicolor False
+policy: Stop, Q: 0.000000
+Iris-virginica Iris-virginica Iris-versicolor None Iris-virginica Iris-versicolor Iris-versicolor Iris-versicolor Iris-versicolor None None Iris-versicolor Iris-versicolor Iris-versicolor Iris-versicolor True
+policy: None, Q: 100.000000
+None None None None None Iris-virginica None None None None None Iris-virginica None None None False
+policy: Visit 12, Q: 0.000000
+None None None None None Iris-virginica None None None None None Iris-virginica Iris-virginica None None False
+policy: Visit 3, Q: 0.000000
+None None None Iris-virginica None Iris-virginica None None None None None Iris-virginica Iris-virginica None None False
+policy: Visit 14, Q: 0.000000
+None None None Iris-virginica None Iris-virginica None None None None None Iris-virginica Iris-virginica None Iris-virginica False
+policy: Visit 9, Q: 0.000000
+None None None Iris-virginica None Iris-virginica None None None Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica False
+policy: Visit 13, Q: 0.000000
+None None None Iris-virginica None Iris-virginica None None None Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica False
+policy: Visit 1, Q: 0.000000
+None Iris-setosa None Iris-virginica None Iris-virginica None None None Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica False
+policy: Visit 7, Q: 0.000000
+None Iris-setosa None Iris-virginica None Iris-virginica None Iris-virginica None Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica False
+policy: Visit 10, Q: 0.000000
+None Iris-setosa None Iris-virginica None Iris-virginica None Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica False
+policy: Visit 2, Q: 0.000000
+None Iris-setosa Iris-virginica Iris-virginica None Iris-virginica None Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica False
+policy: Visit 0, Q: 0.000000
+Iris-virginica Iris-setosa Iris-virginica Iris-virginica None Iris-virginica None Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica False
+policy: Visit 6, Q: 0.000000
+Iris-virginica Iris-setosa Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica False
+policy: Visit 4, Q: 0.000000
+Iris-virginica Iris-setosa Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica False
+policy: Visit 8, Q: 0.000000
+Iris-virginica Iris-setosa Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica False
+policy: Stop, Q: 0.000000
+Iris-virginica Iris-setosa Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica True
+policy: None, Q: 100.000000
+None None None None None None None None None None None None None Iris-versicolor None False
+policy: Visit 12, Q: 0.000000
+None None None None None None None None None None None None Iris-versicolor Iris-versicolor None False
+policy: Visit 3, Q: 0.000000
+None None None Iris-versicolor None None None None None None None None Iris-versicolor Iris-versicolor None False
+policy: Visit 6, Q: 0.000000
+None None None Iris-versicolor None None Iris-virginica None None None None None Iris-versicolor Iris-versicolor None False
+policy: Visit 10, Q: 0.000000
+None None None Iris-versicolor None None Iris-virginica None None None Iris-virginica None Iris-versicolor Iris-versicolor None False
+policy: Visit 1, Q: 0.000000
+None Iris-versicolor None Iris-versicolor None None Iris-virginica None None None Iris-virginica None Iris-versicolor Iris-versicolor None False
+policy: Stop, Q: 0.000000
+None Iris-versicolor None Iris-versicolor None None Iris-virginica None None None Iris-virginica None Iris-versicolor Iris-versicolor None True
+policy: None, Q: 100.000000
+None None None None None None None Iris-virginica None None None None None Iris-virginica Iris-virginica False
+policy: Visit 0, Q: 0.000000
+Iris-virginica None None None None None None Iris-virginica None None None None None Iris-virginica Iris-virginica False
+policy: Visit 4, Q: 0.000000
+Iris-virginica None None None Iris-virginica None None Iris-virginica None None None None None Iris-virginica Iris-virginica False
+policy: Visit 2, Q: 0.000000
+Iris-virginica None Iris-virginica None Iris-virginica None None Iris-virginica None None None None None Iris-virginica Iris-virginica False
+policy: Visit 8, Q: 0.000000
+Iris-virginica None Iris-virginica None Iris-virginica None None Iris-virginica Iris-virginica None None None None Iris-virginica Iris-virginica False
+policy: Visit 1, Q: 0.000000
+Iris-virginica Iris-virginica Iris-virginica None Iris-virginica None None Iris-virginica Iris-virginica None None None None Iris-virginica Iris-virginica False
+policy: Visit 3, Q: 0.000000
+Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None None Iris-virginica Iris-virginica None None None None Iris-virginica Iris-virginica False
+policy: Visit 9, Q: 0.000000
+Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None None Iris-virginica Iris-virginica Iris-virginica None None None Iris-virginica Iris-virginica False
+policy: Visit 10, Q: 0.000000
+Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None None Iris-virginica Iris-virginica Iris-virginica Iris-virginica None None Iris-virginica Iris-virginica False
+policy: Visit 6, Q: 0.000000
+Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None None Iris-virginica Iris-virginica False
+policy: Visit 11, Q: 0.000000
+Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica False
+policy: Visit 5, Q: 0.000000
+Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica False
+policy: Stop, Q: 0.000000
+Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica True
+policy: None, Q: 100.000000
+None None Iris-virginica None None None None None None None None None None None None False
+policy: Visit 10, Q: 0.000000
+None None Iris-virginica None None None None None Iris-virginica None None None None None None False
+policy: Stop, Q: 0.000000
+None None Iris-virginica None None None None None Iris-virginica None None None None None None True
+policy: None, Q: 100.000000
+None None None None None None None None Iris-virginica None None None None Iris-virginica None False
+policy: Visit 4, Q: 0.000000
+None None None None Iris-virginica None None None Iris-virginica None None None None Iris-virginica None False
+policy: Visit 14, Q: 0.000000
+None None None None Iris-virginica None None None Iris-virginica None None None None Iris-virginica Iris-virginica False
+policy: Visit 6, Q: 0.000000
+None None None None Iris-virginica None Iris-virginica None Iris-virginica None None None None Iris-virginica Iris-virginica False
+policy: Visit 3, Q: 0.000000
+None None None Iris-virginica Iris-virginica None Iris-virginica None Iris-virginica None None None None Iris-virginica Iris-virginica False
+policy: Visit 11, Q: 0.000000
+None None None Iris-virginica Iris-virginica None Iris-virginica None Iris-virginica None None Iris-virginica None Iris-virginica Iris-virginica False
+policy: Visit 10, Q: 0.000000
+None None None Iris-virginica Iris-virginica None Iris-virginica None Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica False
+policy: Visit 0, Q: 0.000000
+Iris-virginica None None Iris-virginica Iris-virginica None Iris-virginica None Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica False
+policy: Visit 2, Q: 0.000000
+Iris-virginica None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica None Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica False
+policy: Visit 1, Q: 0.000000
+Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica None Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica False
+policy: Visit 9, Q: 0.000000
+Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica False
+policy: Visit 12, Q: 0.000000
+Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica False
+policy: Stop, Q: 0.000000
+Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica True
+policy: None, Q: 100.000000
+Iris-virginica None None None None None None None None None None None None None None False
+policy: Visit 10, Q: 0.000000
+Iris-virginica None None None None None None None None None Iris-virginica None None None None False
+policy: Visit 13, Q: 0.000000
+Iris-virginica None None None None None None None None None Iris-virginica None None Iris-virginica None False
+policy: Visit 4, Q: 0.000000
+Iris-virginica None None None Iris-virginica None None None None None Iris-virginica None None Iris-virginica None False
+policy: Visit 8, Q: 0.000000
+Iris-virginica None None None Iris-virginica None None None Iris-virginica None Iris-virginica None None Iris-virginica None False
+policy: Visit 5, Q: 0.000000
+Iris-virginica None None None Iris-virginica Iris-virginica None None Iris-virginica None Iris-virginica None None Iris-virginica None False
+policy: Visit 6, Q: 0.000000
+Iris-virginica None None None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica None Iris-virginica None None Iris-virginica None False
+policy: Visit 7, Q: 0.000000
+Iris-virginica None None None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica None None Iris-virginica None False
+policy: Visit 14, Q: 0.000000
+Iris-virginica None None None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica None None Iris-virginica Iris-virginica False
+policy: Visit 12, Q: 0.000000
+Iris-virginica None None None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica None Iris-virginica Iris-virginica Iris-virginica False
+policy: Stop, Q: 0.000000
+Iris-virginica None None None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica None Iris-virginica Iris-virginica Iris-virginica True
+policy: None, Q: 100.000000
+None None None None None None None None None None Iris-virginica None None Iris-virginica None False
+policy: Visit 14, Q: 0.000000
+None None None None None None Iris-virginica None None None Iris-virginica None None Iris-virginica None False
+policy: Stop, Q: 0.000000
+None None None None None None Iris-virginica None None None Iris-virginica None None Iris-virginica None True
+policy: None, Q: 100.000000
+None None None None None None None None None None None None None Iris-virginica None True
+policy: None, Q: 89.792222
+None None None None None None Iris-virginica None None None None None None None None False
+policy: Visit 10, Q: 0.000000
+None None None None None None Iris-virginica None None None Iris-virginica None None None None False
+policy: Visit 3, Q: 0.000000
+None None None Iris-virginica None None Iris-virginica None None None Iris-virginica None None None None False
+policy: Visit 14, Q: 0.000000
+None None None Iris-virginica None None Iris-virginica None None None Iris-virginica None None None Iris-virginica False
+policy: Visit 7, Q: 0.000000
+None None None Iris-virginica None None Iris-virginica Iris-virginica None None Iris-virginica None None None Iris-virginica False
+policy: Stop, Q: 0.000000
+None None None Iris-virginica None None Iris-virginica Iris-virginica None None Iris-virginica None None None Iris-virginica True
+policy: None, Q: 100.000000
+None None None None Iris-virginica None None Iris-virginica None Iris-virginica None None None None None False
+policy: Visit 1, Q: 0.000000
+None Iris-versicolor None None Iris-virginica None None Iris-virginica None Iris-virginica None None None None None False
+policy: Visit 2, Q: 0.000000
+None Iris-versicolor Iris-virginica None Iris-virginica None None Iris-virginica None Iris-virginica None None None None None False
+policy: Visit 5, Q: 0.000000
+None Iris-versicolor Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica None Iris-virginica None None None None None False
+policy: Visit 8, Q: 0.000000
+None Iris-versicolor Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica None None None None None False
+policy: Visit 0, Q: 0.000000
+Iris-virginica Iris-versicolor Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica None None None None None False
+policy: Stop, Q: 0.000000
+Iris-virginica Iris-versicolor Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica None None None None None True
+policy: None, Q: 100.000000
+None None None None None None None None None None Iris-virginica None None Iris-virginica Iris-virginica False
+policy: Visit 1, Q: 0.000000
+None Iris-setosa None None None None None None None None Iris-virginica None None Iris-virginica Iris-virginica False
+policy: Visit 12, Q: 0.000000
+None Iris-setosa None None None None None None None None Iris-virginica None Iris-virginica Iris-virginica Iris-virginica False
+policy: Visit 5, Q: 0.000000
+None Iris-setosa None None None Iris-virginica None None None None Iris-virginica None Iris-virginica Iris-virginica Iris-virginica False
+policy: Visit 8, Q: 0.000000
+None Iris-setosa None None None Iris-virginica None None Iris-virginica None Iris-virginica None Iris-virginica Iris-virginica Iris-virginica False
+policy: Visit 11, Q: 0.000000
+None Iris-setosa None None None Iris-virginica None None Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica False
+policy: Visit 7, Q: 0.000000
+None Iris-setosa None None None Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica False
+policy: Visit 4, Q: 0.000000
+None Iris-setosa None None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica False
+policy: Visit 3, Q: 0.000000
+None Iris-setosa None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica False
+policy: Visit 0, Q: 0.000000
+Iris-virginica Iris-setosa None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica False
+policy: Visit 2, Q: 0.000000
+Iris-virginica Iris-setosa Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica False
+policy: Stop, Q: 0.000000
+Iris-virginica Iris-setosa Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica True
+policy: None, Q: 100.000000
+None Iris-versicolor None None None None None None None None None Iris-virginica None None None False
+policy: Visit 6, Q: 0.000000
+None Iris-versicolor None None None None Iris-virginica None None None None Iris-virginica None None None False
+policy: Visit 14, Q: 0.000000
+None Iris-versicolor None None None None Iris-virginica None None None None Iris-virginica None None Iris-virginica False
+policy: Visit 4, Q: 0.000000
+None Iris-versicolor None None Iris-virginica None Iris-virginica None None None None Iris-virginica None None Iris-virginica False
+policy: Visit 8, Q: 0.000000
+None Iris-versicolor None None Iris-virginica None Iris-virginica None Iris-virginica None None Iris-virginica None None Iris-virginica False
+policy: Stop, Q: 0.000000
+None Iris-versicolor None None Iris-virginica None Iris-virginica None Iris-virginica None None Iris-virginica None None Iris-virginica True
+policy: None, Q: 100.000000
+None None Iris-virginica None None None None None None None Iris-virginica None None None None False
+policy: Visit 8, Q: 0.000000
+None None Iris-virginica None None None None None Iris-virginica None Iris-virginica None None None None False
+policy: Visit 1, Q: 0.000000
+None Iris-virginica Iris-virginica None None None None None Iris-virginica None Iris-virginica None None None None False
+policy: Visit 7, Q: 0.000000
+None Iris-virginica Iris-virginica None None None None Iris-virginica Iris-virginica None Iris-virginica None None None None False
+policy: Visit 13, Q: 0.000000
+None Iris-virginica Iris-virginica None None None None Iris-virginica Iris-virginica None Iris-virginica None None Iris-virginica None False
+policy: Visit 11, Q: 0.000000
+None Iris-virginica Iris-virginica None None None None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica None False
+policy: Visit 5, Q: 0.000000
+None Iris-virginica Iris-virginica None None Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica None False
+policy: Visit 4, Q: 0.000000
+None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica None False
+policy: Visit 3, Q: 0.000000
+None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica None False
+policy: Visit 14, Q: 0.000000
+None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica False
+policy: Stop, Q: 0.000000
+None Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica None Iris-virginica Iris-virginica True
+policy: None, Q: 100.000000
+None None None Iris-virginica None Iris-virginica None None None None None None None None None False
+policy: Visit 1, Q: 0.000000
+None Iris-virginica None Iris-virginica None Iris-virginica None None None None None None None None None False
+policy: Visit 11, Q: 0.000000
+None Iris-virginica None Iris-virginica None Iris-virginica None None None None None Iris-virginica None None None False
+policy: Visit 10, Q: 0.000000
+None Iris-virginica None Iris-virginica None Iris-virginica None None None None Iris-virginica Iris-virginica None None None False
+policy: Visit 14, Q: 0.000000
+None Iris-virginica None Iris-virginica None Iris-virginica None None None None Iris-virginica Iris-virginica None None Iris-virginica False
+policy: Visit 9, Q: 0.000000
+None Iris-virginica None Iris-virginica None Iris-virginica None None None Iris-versicolor Iris-virginica Iris-virginica None None Iris-virginica False
+policy: Visit 12, Q: 0.000000
+None Iris-virginica None Iris-virginica None Iris-virginica None None None Iris-versicolor Iris-virginica Iris-virginica Iris-virginica None Iris-virginica False
+policy: Visit 13, Q: 0.000000
+None Iris-virginica None Iris-virginica None Iris-virginica None None None Iris-versicolor Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica False
+policy: Stop, Q: 0.000000
+None Iris-virginica None Iris-virginica None Iris-virginica None None None Iris-versicolor Iris-virginica Iris-virginica Iris-virginica Iris-virginica Iris-virginica True
+policy: None, Q: 100.000000
+None None None Iris-virginica None None None None None None None None None None None False
+policy: Visit 4, Q: 0.000000
+None None None Iris-virginica Iris-virginica None None None None None None None None None None False
+policy: Visit 0, Q: 0.000000
+Iris-virginica None None Iris-virginica Iris-virginica None None None None None None None None None None False
+policy: Visit 14, Q: 0.000000
+Iris-virginica None None Iris-virginica Iris-virginica None None None None None None None None None Iris-virginica False
+policy: Visit 13, Q: 0.000000
+Iris-virginica None None Iris-virginica Iris-virginica None None None None None None None None Iris-virginica Iris-virginica False
+policy: Visit 9, Q: 0.000000
+Iris-virginica None None Iris-virginica Iris-virginica None None None None Iris-virginica None None None Iris-virginica Iris-virginica False
+policy: Visit 5, Q: 0.000000
+Iris-virginica None None Iris-virginica Iris-virginica Iris-virginica None None None Iris-virginica None None None Iris-virginica Iris-virginica False
+policy: Visit 7, Q: 0.000000
+Iris-virginica None None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica None Iris-virginica None None None Iris-virginica Iris-virginica False
+policy: Visit 10, Q: 0.000000
+Iris-virginica None None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica None Iris-virginica Iris-virginica None None Iris-virginica Iris-virginica False
+policy: Stop, Q: 0.000000
+Iris-virginica None None Iris-virginica Iris-virginica Iris-virginica None Iris-virginica None Iris-virginica Iris-virginica None None Iris-virginica Iris-virginica True
+policy: None, Q: 100.000000
+Iris-virginica None None None None None None None None None None None Iris-virginica None None False
+policy: Visit 5, Q: 0.000000
+Iris-virginica None None None None Iris-virginica None None None None None None Iris-virginica None None False
+policy: Visit 8, Q: 0.000000
+Iris-virginica None None None None Iris-virginica None None Iris-versicolor None None None Iris-virginica None None False
+policy: Stop, Q: 0.000000
+Iris-virginica None None None None Iris-virginica None None Iris-versicolor None None None Iris-virginica None None True
+policy: None, Q: 100.000000
+None None None None None None None None None Iris-versicolor None None None None None False
+policy: Visit 5, Q: 0.000000
+None None None None None None None Iris-versicolor None Iris-versicolor None None None None None False
+policy: Visit 1, Q: 0.000000
+None Iris-versicolor None None None None None Iris-versicolor None Iris-versicolor None None None None None False
+policy: Visit 5, Q: 0.000000
+None Iris-versicolor None None None Iris-virginica None Iris-versicolor None Iris-versicolor None None None None None False
+policy: Visit 0, Q: 0.000000
+Iris-setosa Iris-versicolor None None None Iris-virginica None Iris-versicolor None Iris-versicolor None None None None None False
+policy: Visit 3, Q: 0.000000
+Iris-setosa Iris-versicolor None Iris-versicolor None Iris-virginica None Iris-versicolor None Iris-versicolor None None None None None False
+policy: Visit 4, Q: 0.000000
+Iris-setosa Iris-versicolor None Iris-versicolor Iris-setosa Iris-virginica None Iris-versicolor None Iris-versicolor None None None None None False
+policy: Visit 14, Q: 0.000000
+Iris-setosa Iris-versicolor None Iris-versicolor Iris-setosa Iris-virginica None Iris-versicolor None Iris-versicolor None None None None Iris-versicolor False
+policy: Visit 2, Q: 0.000000
+Iris-setosa Iris-versicolor Iris-versicolor Iris-versicolor Iris-setosa Iris-virginica None Iris-versicolor None Iris-versicolor None None None None Iris-versicolor False
+policy: Visit 12, Q: 0.000000
+Iris-setosa Iris-versicolor Iris-versicolor Iris-versicolor Iris-setosa Iris-virginica None Iris-versicolor None Iris-versicolor None None Iris-versicolor None Iris-versicolor False
+policy: Visit 11, Q: 0.000000
+Iris-setosa Iris-versicolor Iris-versicolor Iris-versicolor Iris-setosa Iris-virginica None Iris-versicolor None Iris-versicolor None Iris-virginica Iris-versicolor None Iris-versicolor False
+policy: Stop, Q: 0.000000
+Iris-setosa Iris-versicolor Iris-versicolor Iris-versicolor Iris-setosa Iris-virginica None Iris-versicolor None Iris-versicolor None Iris-virginica Iris-versicolor None Iris-versicolor True
+policy: None, Q: 100.000000
+None None None None None None None None None None Iris-virginica None None Iris-versicolor None False
+policy: Visit 12, Q: 0.000000
+None None None None None None None None None None Iris-virginica None Iris-versicolor Iris-versicolor None False
+policy: Visit 8, Q: 0.000000
+None None None None None None None None Iris-versicolor None Iris-virginica None Iris-versicolor Iris-versicolor None False
+policy: Visit 2, Q: 0.000000
+None None Iris-versicolor None None None None None Iris-versicolor None Iris-virginica None Iris-versicolor Iris-versicolor None False
+policy: Visit 6, Q: 0.000000
+None None Iris-versicolor None None None Iris-virginica None Iris-versicolor None Iris-virginica None Iris-versicolor Iris-versicolor None False
+policy: Visit 1, Q: 0.000000
+None Iris-versicolor Iris-versicolor None None None Iris-virginica None Iris-versicolor None Iris-virginica None Iris-versicolor Iris-versicolor None False
+policy: Visit 5, Q: 0.000000
+None Iris-versicolor Iris-versicolor None None Iris-virginica Iris-virginica None Iris-versicolor None Iris-virginica None Iris-versicolor Iris-versicolor None False
+policy: Visit 14, Q: 0.000000
+None Iris-versicolor Iris-versicolor None None Iris-virginica Iris-virginica None Iris-versicolor None Iris-virginica None Iris-versicolor Iris-versicolor Iris-versicolor False
+policy: Stop, Q: 0.000000
+None Iris-versicolor Iris-versicolor None None Iris-virginica Iris-virginica None Iris-versicolor None Iris-virginica None Iris-versicolor Iris-versicolor Iris-versicolor True
+policy: None, Q: 100.000000
+Iris-setosa None None None None None None None None None Iris-virginica None None None None False
+policy: Visit 14, Q: 0.000000
+Iris-setosa None None None None None None None None None Iris-virginica None None None Iris-versicolor False
+policy: Visit 3, Q: 0.000000
+Iris-setosa None None Iris-versicolor None None None None None None Iris-virginica None None None Iris-versicolor False
+policy: Visit 6, Q: 0.000000
+Iris-setosa None None Iris-versicolor None None Iris-virginica None None None Iris-virginica None None None Iris-versicolor False
+policy: Visit 5, Q: 0.000000
+Iris-setosa None None Iris-versicolor None Iris-virginica Iris-virginica None None None Iris-virginica None None None Iris-versicolor False
+policy: Visit 1, Q: 0.000000
+Iris-setosa Iris-versicolor None Iris-versicolor None Iris-virginica Iris-virginica None None None Iris-virginica None None None Iris-versicolor False
+policy: Visit 2, Q: 0.000000
+Iris-setosa Iris-versicolor Iris-versicolor Iris-versicolor None Iris-virginica Iris-virginica None None None Iris-virginica None None None Iris-versicolor False
+policy: Visit 13, Q: 0.000000
+Iris-setosa Iris-versicolor Iris-versicolor Iris-versicolor None Iris-virginica Iris-virginica None None None Iris-virginica None None Iris-versicolor Iris-versicolor False
+policy: Visit 7, Q: 0.000000
+Iris-setosa Iris-versicolor Iris-versicolor Iris-versicolor None Iris-virginica Iris-virginica Iris-versicolor None None Iris-virginica None None Iris-versicolor Iris-versicolor False
+policy: Visit 11, Q: 0.000000
+Iris-setosa Iris-versicolor Iris-versicolor Iris-versicolor None Iris-virginica Iris-virginica Iris-versicolor None None Iris-virginica Iris-virginica None Iris-versicolor Iris-versicolor False
+policy: Visit 4, Q: 0.000000
+Iris-setosa Iris-versicolor Iris-versicolor Iris-versicolor Iris-setosa Iris-virginica Iris-virginica Iris-versicolor None None Iris-virginica Iris-virginica None Iris-versicolor Iris-versicolor False
+policy: Visit 12, Q: 0.000000
+Iris-setosa Iris-versicolor Iris-versicolor Iris-versicolor Iris-setosa Iris-virginica Iris-virginica Iris-versicolor None None Iris-virginica Iris-virginica Iris-versicolor Iris-versicolor Iris-versicolor False
+policy: Visit 9, Q: 0.000000
+Iris-setosa Iris-versicolor Iris-versicolor Iris-versicolor Iris-setosa Iris-virginica Iris-virginica Iris-versicolor None Iris-versicolor Iris-virginica Iris-virginica Iris-versicolor Iris-versicolor Iris-versicolor False
+policy: Stop, Q: 0.000000
+Iris-setosa Iris-versicolor Iris-versicolor Iris-versicolor Iris-setosa Iris-virginica Iris-virginica Iris-versicolor None Iris-versicolor Iris-virginica Iris-virginica Iris-versicolor Iris-versicolor Iris-versicolor True
+policy: None, Q: 100.000000
+None None None None None Iris-virginica None None None Iris-versicolor None None None None None False
+policy: Visit 14, Q: 0.000000
+None None None None None Iris-virginica None None None Iris-versicolor None None None None Iris-versicolor False
+policy: Visit 8, Q: 0.000000
+None None None None None Iris-virginica None None Iris-versicolor Iris-versicolor None None None None Iris-versicolor False
+policy: Visit 3, Q: 0.000000
+None None None Iris-versicolor None Iris-virginica None None Iris-versicolor Iris-versicolor None None None None Iris-versicolor False
+policy: Visit 4, Q: 0.000000
+None None None Iris-versicolor Iris-setosa Iris-virginica None None Iris-versicolor Iris-versicolor None None None None Iris-versicolor False
+policy: Visit 11, Q: 0.000000
+None None None Iris-versicolor Iris-setosa Iris-virginica None None Iris-versicolor Iris-versicolor None Iris-virginica None None Iris-versicolor False
+policy: Visit 1, Q: 0.000000
+None Iris-versicolor None Iris-versicolor Iris-setosa Iris-virginica None None Iris-versicolor Iris-versicolor None Iris-virginica None None Iris-versicolor False
+policy: Stop, Q: 0.000000
+None Iris-versicolor None Iris-versicolor Iris-setosa Iris-virginica None None Iris-versicolor Iris-versicolor None Iris-virginica None None Iris-versicolor True
+policy: None, Q: 100.000000
+None Iris-versicolor None None None None None None None None None None None None Iris-versicolor False
+policy: Visit 2, Q: 0.000000
+None Iris-versicolor None None None Iris-virginica None None None None None None None None Iris-versicolor False
+policy: Visit 0, Q: 0.000000
+Iris-versicolor Iris-versicolor None None None Iris-virginica None None None None None None None None Iris-versicolor False
+policy: Visit 13, Q: 0.000000
+Iris-versicolor Iris-versicolor None None None Iris-virginica None None None None None None None Iris-virginica Iris-versicolor False
+policy: Visit 3, Q: 0.000000
+Iris-versicolor Iris-versicolor None Iris-versicolor None Iris-virginica None None None None None None None Iris-virginica Iris-versicolor False
+policy: Stop, Q: 0.000000
+Iris-versicolor Iris-versicolor None Iris-versicolor None Iris-virginica None None None None None None None Iris-virginica Iris-versicolor True
+policy: None, Q: -100.000000
+Iris-versicolor None None None None None None None None None None None None None Iris-versicolor False
+policy: Stop, Q: 0.000000
+Iris-versicolor None None None None None None None None None None None None None Iris-versicolor True
+policy: None, Q: -100.000000
+None None None None None None None None None None None None None Iris-virginica Iris-versicolor False
+policy: Visit 0, Q: 0.000000
+Iris-versicolor None None None None None None None None None None None None Iris-virginica Iris-versicolor False
+policy: Visit 3, Q: 0.000000
+Iris-versicolor None None Iris-versicolor None None None None None None None None None Iris-virginica Iris-versicolor False
+policy: Visit 1, Q: 0.000000
+Iris-versicolor Iris-versicolor None Iris-versicolor None None None None None None None None None Iris-virginica Iris-versicolor False
+policy: Visit 12, Q: 0.000000
+Iris-versicolor Iris-versicolor None Iris-versicolor None None None None None None None None Iris-virginica Iris-virginica Iris-versicolor False
+policy: Visit 8, Q: 0.000000
+Iris-versicolor Iris-versicolor None Iris-versicolor None None None None Iris-versicolor None None None Iris-virginica Iris-virginica Iris-versicolor False
+policy: Visit 9, Q: 0.000000
+Iris-versicolor Iris-versicolor None Iris-versicolor None None None None Iris-versicolor Iris-virginica None None Iris-virginica Iris-virginica Iris-versicolor False
+policy: Visit 10, Q: 0.000000
+Iris-versicolor Iris-versicolor None Iris-versicolor None None None None Iris-versicolor Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-versicolor False
+policy: Visit 2, Q: 0.000000
+Iris-versicolor Iris-versicolor Iris-virginica Iris-versicolor None None None None Iris-versicolor Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-versicolor False
+policy: Stop, Q: 0.000000
+Iris-versicolor Iris-versicolor Iris-virginica Iris-versicolor None None None None Iris-versicolor Iris-virginica Iris-virginica None Iris-virginica Iris-virginica Iris-versicolor True
+policy: None, Q: 100.000000
+None Iris-versicolor Iris-virginica None None None None None None None None None None None Iris-versicolor False
+policy: Visit 8, Q: 0.000000
+None Iris-versicolor Iris-virginica None None None None None Iris-versicolor None None None None None Iris-versicolor False
+policy: Visit 9, Q: 0.000000
+None Iris-versicolor Iris-virginica None None None None None Iris-versicolor Iris-virginica None None None None Iris-versicolor False
+policy: Visit 11, Q: 0.000000
+None Iris-versicolor Iris-virginica None None None None None Iris-versicolor Iris-virginica None Iris-versicolor None None Iris-versicolor False
+policy: Visit 13, Q: 0.000000
+None Iris-versicolor Iris-virginica None None None None None Iris-versicolor Iris-virginica None Iris-versicolor None Iris-virginica Iris-versicolor False
+policy: Visit 4, Q: 0.000000
+None Iris-versicolor Iris-virginica None Iris-versicolor None None None Iris-versicolor Iris-virginica None Iris-versicolor None Iris-virginica Iris-versicolor False
+policy: Stop, Q: 0.000000
+None Iris-versicolor Iris-virginica None Iris-versicolor None None None Iris-versicolor Iris-virginica None Iris-versicolor None Iris-virginica Iris-versicolor True
+policy: None, Q: -100.000000
+[0.6944444444444444, 0.5277777777777778, 0.9166666666666666, 0.9444444444444444, 0.75, 0.9166666666666666, 0.9166666666666666, 0.9444444444444444, 0.9166666666666666, 0.9444444444444444, 0.9166666666666666, 0.8888888888888888, 0.9444444444444444, 0.9444444444444444, 1.0]
+No policy: None None None None None None None None Iris-virginica None None None None None Iris-versicolor False
+No policy: None None None None None None None None Iris-versicolor None None None None None None False
+No policy: None None None None None None None None Iris-versicolor None None None None None None False
+No policy: None None None None None None None None Iris-versicolor None None None None None None False
+No policy: None None None None None None None None Iris-virginica None None None None None Iris-versicolor False
+No policy: None None None None None None None None Iris-versicolor None None None None None None False
+No policy: None None None None None None None None Iris-versicolor None None None None None None False
+No policy: None None None None None None None None Iris-versicolor None None None None None None False
+No policy: None None None None None None None None Iris-versicolor None None None None None None False
+No policy: None None None None None None None None Iris-versicolor None None None None None None False
+No policy: None None None None None None None None Iris-virginica None None None None None Iris-versicolor False
+No policy: None None None None None None None None Iris-versicolor None None None None None None False
+No policy: None None None None None None None None Iris-versicolor None None None None None None False
+No policy: None None None None None None None None Iris-versicolor None None None None None None False
+No policy: None None None None None None None None Iris-versicolor None None None None None None False
+1.0 2.7777777777777777
