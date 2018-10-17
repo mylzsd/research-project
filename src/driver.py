@@ -7,48 +7,14 @@ import random
 
 NUM_CLASSIFIER = 10
 
+
 def splitByPortion(data, portion, rd = 666):
 	part1 = data.sample(frac = portion, random_state = rd)
 	part2 = data.loc[~data.index.isin(part1.index), :]
 	return (part1, part2)
 
-if __name__ == '__main__':
-	# # bank = pd.read_csv("data/bank-additional/bank-additional-full.csv", sep = ";")
-	# frog = pd.read_csv("data/MFCCs/Frogs_MFCCs.csv")
-	# frog.drop("RecordID", axis = 1, inplace = True)
-	# frog.drop("Species", axis = 1, inplace = True)
-	# frog.drop("Genus", axis = 1, inplace = True)
-	# # frog.drop("Family", axis = 1, inplace = True)
 
-	# num_feature = frog.shape[1] - 1
-	# print(num_feature)
-	
-	# frog_train_clf, frog_rest = splitByPortion(frog, 0.4)
-	# frog_train_mdp, frog_test = splitByPortion(frog_rest, 0.8)
-	# print(frog_train_clf.shape)
-	# print(frog_train_mdp.shape)
-	# print(frog_test.shape)
-
-	# feature_size = [3, 3, 3, 5, 5, 5, 10, 10, 15, 20]
-	# features = []
-	# for i in range(len(feature_size)):
-	# 	feature = random.sample(range(num_feature), feature_size[i])
-	# 	features.append(feature)
-	# # print(features)
-	# cluster = classifier.Cluster(10, ["dt"], features)
-	# cluster.train(frog_train_clf)
-	# scores = cluster.validation(frog_test)
-	# # print(scores)
-	# results = cluster.results(frog_train_mdp)
-	# real = frog_train_mdp.iloc[:, -1].reset_index(drop=True)
-	# # print(real)
-	# predictions = pd.concat([results, real], axis = 1)
-	# # print(predictions)
-
-	# model = mdp.MDP(cluster)
-	# model.qLearning(predictions, 5)
-
-
+def iris():
 	iris = pd.read_csv("data/iris/iris.csv", header = None)
 	bezd = pd.read_csv("data/iris/bezdekIris.csv", header = None)
 	iris = pd.concat([iris, bezd], ignore_index = True)
@@ -83,7 +49,55 @@ if __name__ == '__main__':
 	print(clf_scores)
 	mdp_score, cost = model.validation(iris_test)
 	print(mdp_score, cost)
-	pass
+
+
+def frog():
+	frog = pd.read_csv("data/MFCCs/Frogs_MFCCs.csv")
+	frog.drop("RecordID", axis = 1, inplace = True)
+	frog.drop("Species", axis = 1, inplace = True)
+	frog.drop("Genus", axis = 1, inplace = True)
+	# frog.drop("Family", axis = 1, inplace = True)
+
+	num_feature = frog.shape[1] - 1
+	print(num_feature)
+	
+	frog_train_clf, frog_rest = splitByPortion(frog, 0.4)
+	frog_train_mdp, frog_test = splitByPortion(frog_rest, 0.8)
+	print(frog_train_clf.shape)
+	print(frog_train_mdp.shape)
+	print(frog_test.shape)
+
+	feature_size = [3, 3, 3, 8, 8, 8, 10, 10]
+	features = []
+	for i in range(len(feature_size)):
+		feature = random.sample(range(num_feature), feature_size[i])
+		features.append(feature)
+	print(features)
+	cluster = classifier.Cluster(8, ["dt"], features)
+	cluster.train(frog_train_clf)
+	results = cluster.results(frog_train_mdp)
+	real = frog_train_mdp.iloc[:, -1].reset_index(drop=True)
+	# print(real)
+	predictions = pd.concat([results, real], axis = 1)
+	# print(predictions)
+
+	model = mdp.MDP(cluster)
+	model.qLearning(predictions, 50)
+	for state in model.q_table.keys():
+		q = model.getQ(state)
+		a = model.getAction(state)
+		# if self.getQ(state) > 0 and not a is None:
+		print("%s\npolicy: %s, Q: %f" % (state, a, q))
+
+	clf_scores = cluster.validation(frog_test)
+	print(clf_scores)
+	mdp_score, cost = model.validation(frog_test)
+	print(mdp_score, cost)
+
+
+if __name__ == '__main__':
+	# iris()
+	frog()
 	# read data
 	# partition data 4:4:2
 	# set classifier count

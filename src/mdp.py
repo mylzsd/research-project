@@ -129,13 +129,13 @@ class MDP:
 				# monitor updates after 1 instance
 				self.updateDict(next_policy, next_q_table)
 			# monitor updates after 1 epoch
-			if (i + 1) % 20 == 0:
+			if (i + 1) % 1 == 0:
 				print("Epoch %d" % (i))
 				for state in self.q_table.keys():
 					q = self.getQ(state)
 					a = self.getAction(state)
 					# if self.getQ(state) > 0 and not a is None:
-					print("%s\npolicy: %s, Q: %f" % (state, a, q))
+					# print("%s\npolicy: %s, Q: %f" % (state, a, q))
 
 	def qHelper(self, state, prediction, next_policy, next_q_table):
 		curr_q = self.getQ(state)
@@ -216,7 +216,7 @@ class MDP:
 			while not state.is_term:
 				action = self.getAction(state)
 				if action is None:
-					print("No policy: %s" % (state))
+					# print("No policy: %s" % (state))
 					action = Action(-1)
 				state_p = Action.applyAction(state, action, predictions.iloc[i])
 				state = state_p
@@ -231,3 +231,4 @@ class MDP:
 		accuracy = correct / total
 		cost = feature / total
 		return accuracy, cost
+
