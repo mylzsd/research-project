@@ -1,0 +1,732 @@
+22
+(2878, 23)
+(3454, 23)
+(863, 23)
+[[4, 7, 15], [0, 9, 8], [1, 21, 13], [3, 19, 2, 15, 9, 11, 21, 13], [19, 10, 4, 14, 12, 15, 3, 5], [9, 15, 19, 13, 12, 16, 18, 17, 0, 11], [7, 13, 2, 16, 4, 3, 15, 8, 6, 5, 18, 19, 20, 0, 10], [8, 21, 16, 20, 6, 7, 1, 3, 14, 0, 5, 17, 15, 19, 2, 13, 10, 12, 4, 11, 18, 9]]
+[0.8870874348581355, 0.8503184713375797, 0.8772437753329473, 0.9603358425014475, 0.9675738274464389, 0.9652576722640417, 0.9765489287782282, 0.9808917197452229]
+42
+0         Leptodactylidae
+1                 Hylidae
+2                 Hylidae
+3         Leptodactylidae
+4                 Hylidae
+5         Leptodactylidae
+6         Leptodactylidae
+7         Leptodactylidae
+Family            Hylidae
+Name: 42, dtype: object
+120
+0                 Hylidae
+1                 Hylidae
+2                 Hylidae
+3                 Hylidae
+4         Leptodactylidae
+5               Bufonidae
+6                 Hylidae
+7                 Hylidae
+Family    Leptodactylidae
+Name: 120, dtype: object
+128
+0                 Hylidae
+1                 Hylidae
+2         Leptodactylidae
+3         Leptodactylidae
+4                 Hylidae
+5                 Hylidae
+6                 Hylidae
+7                 Hylidae
+Family    Leptodactylidae
+Name: 128, dtype: object
+189
+0               Bufonidae
+1                 Hylidae
+2         Leptodactylidae
+3         Leptodactylidae
+4         Leptodactylidae
+5         Leptodactylidae
+6         Leptodactylidae
+7                 Hylidae
+Family    Leptodactylidae
+Name: 189, dtype: object
+262
+0                 Hylidae
+1                 Hylidae
+2                 Hylidae
+3                 Hylidae
+4                 Hylidae
+5         Leptodactylidae
+6                 Hylidae
+7         Leptodactylidae
+Family      Dendrobatidae
+Name: 262, dtype: object
+326
+0         Leptodactylidae
+1         Leptodactylidae
+2         Leptodactylidae
+3         Leptodactylidae
+4         Leptodactylidae
+5                 Hylidae
+6                 Hylidae
+7                 Hylidae
+Family    Leptodactylidae
+Name: 326, dtype: object
+446
+0         Dendrobatidae
+1               Hylidae
+2         Dendrobatidae
+3         Dendrobatidae
+4         Dendrobatidae
+5               Hylidae
+6               Hylidae
+7               Hylidae
+Family    Dendrobatidae
+Name: 446, dtype: object
+532
+0         Leptodactylidae
+1         Leptodactylidae
+2                 Hylidae
+3         Leptodactylidae
+4         Leptodactylidae
+5         Leptodactylidae
+6         Leptodactylidae
+7         Leptodactylidae
+Family            Hylidae
+Name: 532, dtype: object
+536
+0         Leptodactylidae
+1         Leptodactylidae
+2         Leptodactylidae
+3         Leptodactylidae
+4                 Hylidae
+5         Leptodactylidae
+6         Leptodactylidae
+7         Leptodactylidae
+Family            Hylidae
+Name: 536, dtype: object
+545
+0                 Hylidae
+1           Dendrobatidae
+2                 Hylidae
+3                 Hylidae
+4         Leptodactylidae
+5                 Hylidae
+6                 Hylidae
+7                 Hylidae
+Family    Leptodactylidae
+Name: 545, dtype: object
+546
+0         Leptodactylidae
+1                 Hylidae
+2         Leptodactylidae
+3         Leptodactylidae
+4                 Hylidae
+5         Leptodactylidae
+6         Leptodactylidae
+7         Leptodactylidae
+Family            Hylidae
+Name: 546, dtype: object
+550
+0               Hylidae
+1               Hylidae
+2               Hylidae
+3               Hylidae
+4               Hylidae
+5               Hylidae
+6               Hylidae
+7               Hylidae
+Family    Dendrobatidae
+Name: 550, dtype: object
+588
+0                 Hylidae
+1                 Hylidae
+2                 Hylidae
+3         Leptodactylidae
+4         Leptodactylidae
+5                 Hylidae
+6                 Hylidae
+7         Leptodactylidae
+Family          Bufonidae
+Name: 588, dtype: object
+614
+0         Leptodactylidae
+1         Leptodactylidae
+2                 Hylidae
+3         Leptodactylidae
+4                 Hylidae
+5         Leptodactylidae
+6         Leptodactylidae
+7                 Hylidae
+Family    Leptodactylidae
+Name: 614, dtype: object
+625
+0                 Hylidae
+1                 Hylidae
+2                 Hylidae
+3                 Hylidae
+4                 Hylidae
+5                 Hylidae
+6                 Hylidae
+7                 Hylidae
+Family    Leptodactylidae
+Name: 625, dtype: object
+644
+0           Dendrobatidae
+1         Leptodactylidae
+2                 Hylidae
+3         Leptodactylidae
+4         Leptodactylidae
+5           Dendrobatidae
+6           Dendrobatidae
+7           Dendrobatidae
+Family            Hylidae
+Name: 644, dtype: object
+716
+0         Leptodactylidae
+1         Leptodactylidae
+2                 Hylidae
+3                 Hylidae
+4                 Hylidae
+5                 Hylidae
+6         Leptodactylidae
+7                 Hylidae
+Family    Leptodactylidae
+Name: 716, dtype: object
+768
+0         Leptodactylidae
+1         Leptodactylidae
+2         Leptodactylidae
+3         Leptodactylidae
+4         Leptodactylidae
+5                 Hylidae
+6         Leptodactylidae
+7                 Hylidae
+Family    Leptodactylidae
+Name: 768, dtype: object
+788
+0         Leptodactylidae
+1               Bufonidae
+2           Dendrobatidae
+3                 Hylidae
+4                 Hylidae
+5                 Hylidae
+6                 Hylidae
+7                 Hylidae
+Family      Dendrobatidae
+Name: 788, dtype: object
+864
+0                 Hylidae
+1         Leptodactylidae
+2                 Hylidae
+3         Leptodactylidae
+4                 Hylidae
+5                 Hylidae
+6         Leptodactylidae
+7                 Hylidae
+Family    Leptodactylidae
+Name: 864, dtype: object
+899
+0         Leptodactylidae
+1           Dendrobatidae
+2                 Hylidae
+3         Leptodactylidae
+4                 Hylidae
+5                 Hylidae
+6         Leptodactylidae
+7                 Hylidae
+Family    Leptodactylidae
+Name: 899, dtype: object
+929
+0                 Hylidae
+1           Dendrobatidae
+2                 Hylidae
+3                 Hylidae
+4                 Hylidae
+5                 Hylidae
+6                 Hylidae
+7                 Hylidae
+Family    Leptodactylidae
+Name: 929, dtype: object
+1000
+0         Leptodactylidae
+1         Leptodactylidae
+2                 Hylidae
+3         Leptodactylidae
+4                 Hylidae
+5         Leptodactylidae
+6         Leptodactylidae
+7         Leptodactylidae
+Family            Hylidae
+Name: 1000, dtype: object
+1115
+0         Leptodactylidae
+1         Leptodactylidae
+2         Leptodactylidae
+3         Leptodactylidae
+4         Leptodactylidae
+5                 Hylidae
+6         Leptodactylidae
+7                 Hylidae
+Family    Leptodactylidae
+Name: 1115, dtype: object
+1116
+0         Leptodactylidae
+1         Leptodactylidae
+2         Leptodactylidae
+3         Leptodactylidae
+4                 Hylidae
+5         Leptodactylidae
+6         Leptodactylidae
+7         Leptodactylidae
+Family            Hylidae
+Name: 1116, dtype: object
+1150
+0         Leptodactylidae
+1                 Hylidae
+2                 Hylidae
+3                 Hylidae
+4         Leptodactylidae
+5                 Hylidae
+6         Leptodactylidae
+7         Leptodactylidae
+Family            Hylidae
+Name: 1150, dtype: object
+1169
+0         Leptodactylidae
+1                 Hylidae
+2                 Hylidae
+3                 Hylidae
+4                 Hylidae
+5                 Hylidae
+6                 Hylidae
+7                 Hylidae
+Family    Leptodactylidae
+Name: 1169, dtype: object
+1270
+0                 Hylidae
+1         Leptodactylidae
+2                 Hylidae
+3                 Hylidae
+4                 Hylidae
+5         Leptodactylidae
+6                 Hylidae
+7                 Hylidae
+Family    Leptodactylidae
+Name: 1270, dtype: object
+1438
+0             Bufonidae
+1               Hylidae
+2         Dendrobatidae
+3               Hylidae
+4               Hylidae
+5               Hylidae
+6               Hylidae
+7               Hylidae
+Family        Bufonidae
+Name: 1438, dtype: object
+1531
+0                 Hylidae
+1         Leptodactylidae
+2         Leptodactylidae
+3         Leptodactylidae
+4                 Hylidae
+5         Leptodactylidae
+6         Leptodactylidae
+7         Leptodactylidae
+Family            Hylidae
+Name: 1531, dtype: object
+1535
+0                 Hylidae
+1                 Hylidae
+2                 Hylidae
+3         Leptodactylidae
+4                 Hylidae
+5                 Hylidae
+6                 Hylidae
+7                 Hylidae
+Family    Leptodactylidae
+Name: 1535, dtype: object
+1593
+0         Leptodactylidae
+1         Leptodactylidae
+2         Leptodactylidae
+3         Leptodactylidae
+4                 Hylidae
+5                 Hylidae
+6         Leptodactylidae
+7                 Hylidae
+Family    Leptodactylidae
+Name: 1593, dtype: object
+1622
+0                 Hylidae
+1                 Hylidae
+2                 Hylidae
+3                 Hylidae
+4         Leptodactylidae
+5                 Hylidae
+6                 Hylidae
+7                 Hylidae
+Family    Leptodactylidae
+Name: 1622, dtype: object
+1696
+0                 Hylidae
+1         Leptodactylidae
+2         Leptodactylidae
+3                 Hylidae
+4                 Hylidae
+5         Leptodactylidae
+6                 Hylidae
+7                 Hylidae
+Family      Dendrobatidae
+Name: 1696, dtype: object
+1785
+0           Dendrobatidae
+1         Leptodactylidae
+2         Leptodactylidae
+3         Leptodactylidae
+4                 Hylidae
+5                 Hylidae
+6         Leptodactylidae
+7         Leptodactylidae
+Family            Hylidae
+Name: 1785, dtype: object
+1788
+0           Hylidae
+1           Hylidae
+2           Hylidae
+3           Hylidae
+4           Hylidae
+5           Hylidae
+6           Hylidae
+7           Hylidae
+Family    Bufonidae
+Name: 1788, dtype: object
+1816
+0         Leptodactylidae
+1         Leptodactylidae
+2                 Hylidae
+3           Dendrobatidae
+4         Leptodactylidae
+5           Dendrobatidae
+6         Leptodactylidae
+7           Dendrobatidae
+Family    Leptodactylidae
+Name: 1816, dtype: object
+1867
+0                 Hylidae
+1         Leptodactylidae
+2                 Hylidae
+3         Leptodactylidae
+4         Leptodactylidae
+5         Leptodactylidae
+6                 Hylidae
+7                 Hylidae
+Family    Leptodactylidae
+Name: 1867, dtype: object
+1902
+0         Leptodactylidae
+1                 Hylidae
+2         Leptodactylidae
+3         Leptodactylidae
+4         Leptodactylidae
+5                 Hylidae
+6         Leptodactylidae
+7         Leptodactylidae
+Family            Hylidae
+Name: 1902, dtype: object
+1969
+0                 Hylidae
+1                 Hylidae
+2                 Hylidae
+3                 Hylidae
+4                 Hylidae
+5                 Hylidae
+6                 Hylidae
+7                 Hylidae
+Family    Leptodactylidae
+Name: 1969, dtype: object
+2065
+0                 Hylidae
+1                 Hylidae
+2                 Hylidae
+3                 Hylidae
+4           Dendrobatidae
+5                 Hylidae
+6                 Hylidae
+7                 Hylidae
+Family    Leptodactylidae
+Name: 2065, dtype: object
+2184
+0                 Hylidae
+1         Leptodactylidae
+2         Leptodactylidae
+3         Leptodactylidae
+4         Leptodactylidae
+5         Leptodactylidae
+6         Leptodactylidae
+7         Leptodactylidae
+Family            Hylidae
+Name: 2184, dtype: object
+2225
+0                 Hylidae
+1                 Hylidae
+2           Dendrobatidae
+3         Leptodactylidae
+4                 Hylidae
+5                 Hylidae
+6                 Hylidae
+7         Leptodactylidae
+Family            Hylidae
+Name: 2225, dtype: object
+2250
+0         Leptodactylidae
+1           Dendrobatidae
+2                 Hylidae
+3                 Hylidae
+4           Dendrobatidae
+5                 Hylidae
+6                 Hylidae
+7                 Hylidae
+Family      Dendrobatidae
+Name: 2250, dtype: object
+2307
+0         Leptodactylidae
+1         Leptodactylidae
+2                 Hylidae
+3                 Hylidae
+4                 Hylidae
+5         Leptodactylidae
+6                 Hylidae
+7         Leptodactylidae
+Family            Hylidae
+Name: 2307, dtype: object
+2345
+0                 Hylidae
+1                 Hylidae
+2                 Hylidae
+3                 Hylidae
+4                 Hylidae
+5                 Hylidae
+6                 Hylidae
+7                 Hylidae
+Family    Leptodactylidae
+Name: 2345, dtype: object
+2356
+0                 Hylidae
+1         Leptodactylidae
+2                 Hylidae
+3         Leptodactylidae
+4                 Hylidae
+5                 Hylidae
+6                 Hylidae
+7                 Hylidae
+Family      Dendrobatidae
+Name: 2356, dtype: object
+2399
+0         Leptodactylidae
+1         Leptodactylidae
+2         Leptodactylidae
+3                 Hylidae
+4                 Hylidae
+5         Leptodactylidae
+6         Leptodactylidae
+7         Leptodactylidae
+Family            Hylidae
+Name: 2399, dtype: object
+2461
+0         Leptodactylidae
+1         Leptodactylidae
+2         Leptodactylidae
+3                 Hylidae
+4         Leptodactylidae
+5         Leptodactylidae
+6                 Hylidae
+7         Leptodactylidae
+Family            Hylidae
+Name: 2461, dtype: object
+2468
+0               Hylidae
+1               Hylidae
+2               Hylidae
+3               Hylidae
+4               Hylidae
+5               Hylidae
+6               Hylidae
+7               Hylidae
+Family    Dendrobatidae
+Name: 2468, dtype: object
+2497
+0           Dendrobatidae
+1                 Hylidae
+2         Leptodactylidae
+3         Leptodactylidae
+4           Dendrobatidae
+5                 Hylidae
+6                 Hylidae
+7                 Hylidae
+Family          Bufonidae
+Name: 2497, dtype: object
+2524
+0         Leptodactylidae
+1                 Hylidae
+2         Leptodactylidae
+3         Leptodactylidae
+4                 Hylidae
+5                 Hylidae
+6         Leptodactylidae
+7         Leptodactylidae
+Family            Hylidae
+Name: 2524, dtype: object
+2692
+0         Leptodactylidae
+1         Leptodactylidae
+2         Leptodactylidae
+3         Leptodactylidae
+4         Leptodactylidae
+5                 Hylidae
+6         Leptodactylidae
+7         Leptodactylidae
+Family            Hylidae
+Name: 2692, dtype: object
+2901
+0         Leptodactylidae
+1         Leptodactylidae
+2         Leptodactylidae
+3         Leptodactylidae
+4                 Hylidae
+5                 Hylidae
+6                 Hylidae
+7                 Hylidae
+Family    Leptodactylidae
+Name: 2901, dtype: object
+2918
+0               Hylidae
+1         Dendrobatidae
+2         Dendrobatidae
+3               Hylidae
+4               Hylidae
+5         Dendrobatidae
+6               Hylidae
+7         Dendrobatidae
+Family          Hylidae
+Name: 2918, dtype: object
+2982
+0         Leptodactylidae
+1         Leptodactylidae
+2         Leptodactylidae
+3                 Hylidae
+4                 Hylidae
+5                 Hylidae
+6         Leptodactylidae
+7         Leptodactylidae
+Family            Hylidae
+Name: 2982, dtype: object
+3143
+0         Leptodactylidae
+1         Leptodactylidae
+2                 Hylidae
+3         Leptodactylidae
+4         Leptodactylidae
+5                 Hylidae
+6         Leptodactylidae
+7                 Hylidae
+Family    Leptodactylidae
+Name: 3143, dtype: object
+3197
+0                 Hylidae
+1           Dendrobatidae
+2                 Hylidae
+3         Leptodactylidae
+4                 Hylidae
+5                 Hylidae
+6         Leptodactylidae
+7                 Hylidae
+Family    Leptodactylidae
+Name: 3197, dtype: object
+3217
+0         Leptodactylidae
+1                 Hylidae
+2         Leptodactylidae
+3                 Hylidae
+4         Leptodactylidae
+5         Leptodactylidae
+6                 Hylidae
+7         Leptodactylidae
+Family            Hylidae
+Name: 3217, dtype: object
+3244
+0           Hylidae
+1           Hylidae
+2           Hylidae
+3         Bufonidae
+4         Bufonidae
+5           Hylidae
+6         Bufonidae
+7           Hylidae
+Family    Bufonidae
+Name: 3244, dtype: object
+3274
+0         Leptodactylidae
+1         Leptodactylidae
+2         Leptodactylidae
+3         Leptodactylidae
+4         Leptodactylidae
+5                 Hylidae
+6         Leptodactylidae
+7         Leptodactylidae
+Family          Bufonidae
+Name: 3274, dtype: object
+3343
+0           Dendrobatidae
+1           Dendrobatidae
+2           Dendrobatidae
+3           Dendrobatidae
+4         Leptodactylidae
+5           Dendrobatidae
+6           Dendrobatidae
+7           Dendrobatidae
+Family    Leptodactylidae
+Name: 3343, dtype: object
+3376
+0           Dendrobatidae
+1         Leptodactylidae
+2                 Hylidae
+3                 Hylidae
+4           Dendrobatidae
+5         Leptodactylidae
+6         Leptodactylidae
+7                 Hylidae
+Family    Leptodactylidae
+Name: 3376, dtype: object
+3387
+0         Leptodactylidae
+1         Leptodactylidae
+2                 Hylidae
+3         Leptodactylidae
+4         Leptodactylidae
+5         Leptodactylidae
+6         Leptodactylidae
+7         Leptodactylidae
+Family            Hylidae
+Name: 3387, dtype: object
+3391
+0         Leptodactylidae
+1           Dendrobatidae
+2                 Hylidae
+3                 Hylidae
+4         Leptodactylidae
+5                 Hylidae
+6         Leptodactylidae
+7                 Hylidae
+Family          Bufonidae
+Name: 3391, dtype: object
+3420
+0         Leptodactylidae
+1         Leptodactylidae
+2         Leptodactylidae
+3           Dendrobatidae
+4           Dendrobatidae
+5           Dendrobatidae
+6           Dendrobatidae
+7         Leptodactylidae
+Family      Dendrobatidae
+Name: 3420, dtype: object

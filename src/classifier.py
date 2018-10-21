@@ -10,7 +10,7 @@ class Classifier:
 		if classifier_type == "dt":
 			self.clf = DecisionTreeClassifier()
 		elif classifier_type == "rf":
-			self.clf = RandomForestClassifier(n_estimators = 30)
+			self.clf = RandomForestClassifier(n_estimators = 100)
 		elif classifier_type == "svm":
 			self.clf = SVC()
 		else:
