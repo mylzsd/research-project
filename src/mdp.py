@@ -118,6 +118,12 @@ class MDP:
 		for k, v in new_q_table.items():
 			self.q_table[k] = v
 
+	def train(self, data):
+		results = self.cluster.results(data)
+		real = data.iloc[:, -1].reset_index(drop = True)
+		
+
+
 	def qLearning(self, predictions, epoch):
 		n = len(predictions.index)
 		for i in range(epoch):

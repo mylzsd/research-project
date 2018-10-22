@@ -80,37 +80,36 @@ def frog():
 	# print(real)
 	predictions = pd.concat([results, real], axis = 1)
 	# print(predictions)
-	clf_scores = cluster.validation(frog_train_mdp)
-	print(clf_scores)
-	total = 0
-	over_half = 0
-	for i in range(len(predictions)):
-		counter = 0
-		row = predictions.iloc[i]
-		for j in range(len(row)):
-			if row.iloc[j] != row.iloc[-1]:
-				counter += 1
-		if counter > 0:
-			total += 1
-			print("%d, %d" % (i, counter))
-			if counter <= 4:
-				over_half += 1
-	print(total)
-	print(over_half)
-	# predictions.to_csv("out/frog_prediction.txt", sep = "\t")
-	return
-	model = mdp.MDP(cluster)
-	model.qLearning(predictions, 50)
-	for state in model.q_table.keys():
-		q = model.getQ(state)
-		a = model.getAction(state)
-		# if self.getQ(state) > 0 and not a is None:
-		print("%s\npolicy: %s, Q: %f" % (state, a, q))
-
 	clf_scores = cluster.validation(frog_test)
 	print(clf_scores)
-	mdp_score, cost = model.validation(frog_test)
-	print(mdp_score, cost)
+	# total = 0
+	# over_half = 0
+	# for i in range(len(predictions)):
+	# 	counter = 0
+	# 	row = predictions.iloc[i]
+	# 	for j in range(len(row)):
+	# 		if row.iloc[j] != row.iloc[-1]:
+	# 			counter += 1
+	# 	if counter > 0:
+	# 		total += 1
+	# 		print("%d, %d" % (i, counter))
+	# 		if counter <= 4:
+	# 			over_half += 1
+	# print(total)
+	# print(over_half)
+	# predictions.to_csv("out/frog_prediction.txt", sep = "\t")
+	# return
+
+	# model = mdp.MDP(cluster)
+	# model.qLearning(predictions, 50)
+	# for state in model.q_table.keys():
+	# 	q = model.getQ(state)
+	# 	a = model.getAction(state)
+	# 	# if self.getQ(state) > 0 and not a is None:
+	# 	print("%s\npolicy: %s, Q: %f" % (state, a, q))
+	# mdp_score, cost = model.validation(frog_test)
+	# print(clf_scores)
+	# print(mdp_score, cost)
 
 
 def humanActivity():
@@ -200,7 +199,8 @@ def humanActivity():
 if __name__ == '__main__':
 	# iris()
 	# frog()
-	humanActivity()
+	for i in range(10):
+		humanActivity()
 	# read data
 	# partition data 4:4:2
 	# set classifier count
