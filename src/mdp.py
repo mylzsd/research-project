@@ -1,6 +1,6 @@
 import classifier
-import pandas as pd
 import random
+import pandas as pd
 
 FEATURE_COST = 0
 LEARNING_RATE = 0.1
@@ -119,9 +119,32 @@ class MDP:
 			self.q_table[k] = v
 
 	def train(self, data):
-		results = self.cluster.results(data)
 		real = data.iloc[:, -1].reset_index(drop = True)
-		
+		results = self.cluster.results(data)
+		predictions = pd.concat([results, real], axis = 1)
+
+		# label_map is used in neural network
+		self.label_map = dict()
+		index = 0
+		for label in real:
+			if label in label_map: continue
+			label_map[label] = index
+			index += 1
+
+		"""
+		qLearning
+			for each episode:
+				shuffle records
+				for each instance:
+					from init state
+					select next state by eps greedy
+					if non-term state:
+						get new Q value
+						back prop Q-network
+					else:
+						get reward if correct??
+				until dqn converge
+		"""
 
 
 	def qLearning(self, predictions, epoch):
