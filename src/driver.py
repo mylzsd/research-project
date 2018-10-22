@@ -1,5 +1,6 @@
 import classifier
 import mdp
+import time
 import random
 import numpy as np
 import pandas as pd
@@ -113,7 +114,7 @@ def frog():
 
 
 def humanActivity():
-	NUM_CLASSIFIER = 15
+	NUM_CLASSIFIER = 100
 
 	ha_train = pd.read_csv("data/humanactivity/train.csv")
 	ha_test = pd.read_csv("data/humanactivity/test.csv")
@@ -132,16 +133,18 @@ def humanActivity():
 
 	features = []
 	for i in range(NUM_CLASSIFIER):
-		feature = random.sample(range(num_feature), int(num_feature / 10))
+		feature = random.sample(range(num_feature), int(num_feature))
 		features.append(feature)
 	# features = [list(range(num_feature))] * NUM_CLASSIFIER
 	# print(features)
 
-	cluster = classifier.Cluster(NUM_CLASSIFIER, ["dt"], features)
+	cluster = classifier.Cluster(NUM_CLASSIFIER, ["rf"], features)
 	cluster.train(ha_train_clf)
 	clf_scores = cluster.validation(ha_test)
 	# print(clf_scores)
 	# print(np.mean(clf_scores))
+
+	start_time = time.time()
 
 	activity_map = dict()
 	index = 0
@@ -191,6 +194,7 @@ def humanActivity():
 	net_score = cnn.score(X_test, y_test)
 	
 	print(pure_clf_scores[0], np.mean(clf_scores), net_score)
+	print("--- %s seconds ---" % (time.time() - start_time))
 
 
 if __name__ == '__main__':
