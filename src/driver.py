@@ -119,7 +119,9 @@ def humanActivity():
 	ha_test = pd.read_csv("data/humanactivity/test.csv")
 	ha_train.drop("subject", axis = 1, inplace = True)
 	ha_test.drop("subject", axis = 1, inplace = True)
-	ha_train_clf, ha_train_net = splitByPortion(ha_train, 0.5)
+	# ha_train_clf, ha_train_net = splitByPortion(ha_train, 0.5)
+	ha_train_clf = ha_train
+	ha_train_net = ha_train
 	# print(ha_train_clf.shape)
 	# print(ha_train_net.shape)
 	# print(ha_test.shape)
@@ -132,7 +134,7 @@ def humanActivity():
 
 	features = []
 	for i in range(NUM_CLASSIFIER):
-		feature = random.sample(range(num_feature), int(num_feature))
+		feature = random.sample(range(num_feature), int(num_feature / 2))
 		features.append(feature)
 	# features = [list(range(num_feature))] * NUM_CLASSIFIER
 	# print(features)
