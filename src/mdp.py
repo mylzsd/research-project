@@ -4,9 +4,9 @@ import pandas as pd
 
 FEATURE_COST = 0
 LEARNING_RATE = 0.1
-DISCOUNT = 0.9
-CORRECT_REWARD = 100
-EPSILON = 0.9
+DISCOUNT = 1.0
+CORRECT_REWARD = 1
+EPSILON = 0.1
 
 class TreeState:
 
@@ -97,7 +97,7 @@ class MDP:
 	def getAction(self, state):
 		return self.policy.get(state, None)
 
-	def getQ(self, state):
+	def getQ(self, state, action):
 		return self.q_table.get(state, 0)
 
 	def getLegalActions(self, state):
@@ -222,6 +222,13 @@ class MDP:
 		else:
 			res = None
 		return res
+
+	def majorityVote(self, state):
+		value = state.getValue()
+		vote = dict()
+		for i, v in enumerate(value):
+			pass
+		pass
 
 	def valueIteration(self):
 		pass
