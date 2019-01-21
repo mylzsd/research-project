@@ -1,7 +1,8 @@
 import classifier
 import mdp
+import reader
 import time
-import random
+import sys, random as rd
 import numpy as np
 import pandas as pd
 from sklearn.neural_network import MLPClassifier
@@ -9,23 +10,15 @@ from sklearn.neural_network import MLPClassifier
 """
 portion is for the first half
 """
-def splitByPortion(data, portion, rd = 666):
-	part1 = data.sample(frac = portion, random_state = rd)
+def splitByPortion(data, portion, seed = 666):
+	part1 = data.sample(frac = portion, random_state = seed)
 	part2 = data.loc[~data.index.isin(part1.index), :]
 	return (part1, part2)
 
 
 def iris():
-	iris = pd.read_csv("data/iris/iris.csv", header = None)
-	bezd = pd.read_csv("data/iris/bezdekIris.csv", header = None)
-	iris = pd.concat([iris, bezd], ignore_index = True)
-
-	num_feature = iris.shape[1] - 1
-	iris_train_clf, iris_rest = splitByPortion(iris, 0.4)
-	iris_train_mdp, iris_test = splitByPortion(iris_rest, 0.8)
-	print(iris_train_clf.shape)
-	print(iris_train_mdp.shape)
-	print(iris_test.shape)
+	iris_train_clf, iris_train_mdp, iris_test = reader.iris()
+	num_feature = iris_train_clf.shape[1] - 1
 
 	# feature_size = [1, 1, 2, 2, 3]
 	# features = []
@@ -40,16 +33,17 @@ def iris():
 
 	cluster = classifier.Cluster(15, ["dt"], features)
 	cluster.train(iris_train_clf)
-	results = cluster.results(iris_train_mdp)
-	real = iris_train_mdp.iloc[:, -1].reset_index(drop = True)
-	predictions = pd.concat([results, real], axis = 1)
+	# results = cluster.results(iris_train_mdp)
+	# real = iris_train_mdp.iloc[:, -1].reset_index(drop = True)
+	# predictions = pd.concat([results, real], axis = 1)
 	model = mdp.MDP(cluster)
-	model.qLearning(predictions, 200)
+	model.train(iris_train_mdp)
+	# model.qLearning(predictions, 200)
 
 	clf_scores = cluster.validation(iris_test)
 	print(clf_scores)
-	mdp_score, cost = model.validation(iris_test)
-	print(mdp_score, cost)
+	mdp_score = model.validation(iris_test)
+	print(mdp_score)
 
 
 def frog():
@@ -135,17 +129,6 @@ def frog():
 	
 	print(pure_clf_scores[0], np.mean(clf_scores), net_score)
 	print("--- %s %s ---" % (time_2 - time_1, time.time() - time_2))
-
-	# model = mdp.MDP(cluster)
-	# model.qLearning(predictions, 50)
-	# for state in model.q_table.keys():
-	# 	q = model.getQ(state)
-	# 	a = model.getAction(state)
-	# 	# if self.getQ(state) > 0 and not a is None:
-	# 	print("%s\npolicy: %s, Q: %f" % (state, a, q))
-	# mdp_score, cost = model.validation(frog_test)
-	# print(clf_scores)
-	# print(mdp_score, cost)
 
 
 def humanActivity():
@@ -233,10 +216,51 @@ def humanActivity():
 	print("--- %s seconds ---" % (time.time() - start_time))
 
 
+def readCommand(argv):
+	from optparse import OptionParser
+	parser = OptionParser()
+	parser.add_option("-d", "--dataset", help="experiment with DATASET", metavar="DATASET")
+	parser.add_option("-m", "--model", help="use MODEL on reinforcement learning", metavar="MODEL")
+	parser.add_option("-n", "--num-rf", type="int", help="number of random forest, default value 100", default=100)
+	parser.add_option("-l", "--learning-rate", type="float", help="default value 0.1", default=0.1)
+	parser.add_option("-f", "--discount-factor", type="float", help="default value 1.0", default=1.0)
+	parser.add_option("-t", "--num-training", type="int", help="default value 10000", default=10000)
+	parser.add_option("-e", "--epsilon", type="float", help="default value 0.1", default=0.1)
+	
+	options, _ = parser.parse_args(argv)
+	args = dict()
+	args['dataset'] = options.dataset
+	args['model'] = options.model
+	args['num_rf'] = options.num_rf
+	args['num_training'] = options.num_training
+	args['learning_rate'] = options.learning_rate
+	args['discount_factor'] = options.discount_factor
+	args['epsilon'] = options.epsilon
+	return args
+
+
+def runExperiment(dataset, model, num_rf, num_training, learning_rate, discount_factor, epsilon):
+	data_map = {
+		"audiology": reader.audiology,
+		"iris": reader.iris
+	}
+	train_clf, train_mdp, test = data_map[dataset]()
+	num_feature = train_clf.shape[1] - 1
+
+	features = [list(range(num_feature))] * num_rf
+	cluster = classifier.Cluster(num_rf, ["rf"], features)
+	cluster.train(train_clf)
+
+	rl = mdp.MDP(cluster, model, learning_rate, discount_factor, epsilon)
+	rl.train(train_mdp, num_training)
+
+	clf_scores = cluster.validation(test)
+	print(clf_scores)
+	mdp_score = rl.validation(test)
+	print(mdp_score)
+
+
 if __name__ == '__main__':
-	# iris()
-	for _ in range(10):
-		frog()
-	# for _ in range(10):
-	# 	humanActivity()
+	options = readCommand(sys.argv[1:])
+	runExperiment(**options)
 
