@@ -16,36 +16,6 @@ def splitByPortion(data, portion, seed = 666):
     return (part1, part2)
 
 
-def iris():
-    iris_train_clf, iris_train_mdp, iris_test = reader.iris()
-    num_feature = iris_train_clf.shape[1] - 1
-
-    # feature_size = [1, 1, 2, 2, 3]
-    # features = []
-    # for i in range(len(feature_size)):
-    #   feature = random.sample(range(num_feature), feature_size[i])
-    #   features.append(feature)
-    # print(features)
-    features = [[0], [1], [2], [3], 
-                [0, 1], [0, 2], [0, 3], [1, 2], [1, 3], [2, 3], 
-                [0, 1, 2], [0, 1, 3], [0, 2, 3], [1, 2, 3], 
-                [0, 1, 2, 3]]
-
-    cluster = classifier.Cluster(15, ["dt"], features)
-    cluster.train(iris_train_clf)
-    # results = cluster.results(iris_train_mdp)
-    # real = iris_train_mdp.iloc[:, -1].reset_index(drop = True)
-    # predictions = pd.concat([results, real], axis = 1)
-    model = mdp.MDP(cluster)
-    model.train(iris_train_mdp)
-    # model.qLearning(predictions, 200)
-
-    clf_scores = cluster.validation(iris_test)
-    print(clf_scores)
-    mdp_score = model.validation(iris_test)
-    print(mdp_score)
-
-
 def frog():
     NUM_CLASSIFIER = 100
 
@@ -217,18 +187,18 @@ def humanActivity():
 
 
 def test():
-    train_clf, train_mdp, test = reader.lymphography()
+    train_clf, train_mdp, test = reader.audiology()
     print(train_clf.shape)
     print(train_mdp.shape)
     print(test.shape)
-    num_feature = train_clf.shape[1] - 1
-    features = [list(range(num_feature))] * 100
-    cluster = classifier.Cluster(100, ["rf"], features)
-    cluster.train(train_clf)
+    # num_feature = train_clf.shape[1] - 1
+    # features = [list(range(num_feature))] * 100
+    # cluster = classifier.Cluster(100, ["rf"], features)
+    # cluster.train(train_clf)
 
-    clf_scores = cluster.validation(test)
-    print(clf_scores)
-    print(np.mean(clf_scores))
+    # clf_scores = cluster.validation(test)
+    # print(clf_scores)
+    # print(np.mean(clf_scores))
 
 
 def readCommand(argv):
@@ -281,9 +251,9 @@ def runExperiment(dataset, model, num_rf, num_training, learning_rate, discount_
     rl.train(train_mdp, num_training)
 
     clf_scores = cluster.validation(test)
+    mdp_score = rl.validation(test)
     print(clf_scores)
     print(np.mean(clf_scores))
-    mdp_score = rl.validation(test)
     print(mdp_score)
 
 

@@ -71,7 +71,7 @@ class Action:
 
 
 	def __str__(self):
-		if self.is_term:
+		if self.index == -1:
 			return "Stop"
 		return "Visit %d" % (self.index)
 
@@ -244,20 +244,25 @@ class MDP:
 		correct = 0
 		predictions = self.cluster.results(data)
 		for i in range(total):
+			# show path
+			print()
 			state = TreeState(self.cluster.size)
+			# get predicted result
 			while state != None:
 				action = self.getAction(state)
+				# show path
+				print(str(state) + " -> " + str(action))
 				if action.index == -1:
 					pred = self.majorityVote(state)
 					break
 				state_p = self.applyAction(state, action, predictions.iloc[i])
 				state = state_p
-			# get real result
-			# get predicted result
-			# modify counter
+			# get real result & modify counter
 			real = data.iloc[i, -1]
 			if pred == real:
 				correct += 1
 		accuracy = correct / total
 		return accuracy
+
+
 

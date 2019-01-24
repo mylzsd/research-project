@@ -68,6 +68,10 @@ def fillEmpty(dfs, col, missing, is_float):
                 df.loc[i, col] = v
 
 
+"""
+(200, 95)
+(26, 95)
+"""
 def audiology():
     train = pd.read_csv(data_dir + "audiology/audiology.data.csv", header = None)
     test = pd.read_csv(data_dir + "audiology/audiology.test.csv", header = None)
@@ -122,6 +126,10 @@ def audiology():
     return (train, train, test)
 
 
+"""
+(257, 16)
+(29, 16)
+"""
 def breast_cancer():
     data = pd.read_csv(data_dir + "breast-cancer/breast-cancer.data.csv", header = None)
     columns = ["Class", "age", "menopause", "tumor-size", "inv-nodes", "node-caps", 
@@ -151,10 +159,14 @@ def breast_cancer():
     data.insert(col_size - 1, "Class", data.pop("Class"))
     data = data.infer_objects()
     # split to train & test sets
-    train, test = splitByPortion(data, 0.8)
+    train, test = splitByPortion(data, 0.9)
     return (train, train, test)
 
 
+"""
+(629, 10)
+(70, 10)
+"""
 def breast_w():
     data = pd.read_csv(data_dir + "breast-w/bc-w.data.csv", header = None)
     columns = ["id", "Clump Thickness", "Uniformity of Cell Size", 
@@ -167,10 +179,14 @@ def breast_w():
     for col in data.columns:
         fillEmpty([data], col, "?", False)
 
-    train, test = splitByPortion(data, 0.8)
+    train, test = splitByPortion(data, 0.9)
     return (train, train, test)
 
 
+"""
+(1326, 22)
+(147, 22)
+"""
 def cmc():
     data = pd.read_csv(data_dir + "cmc/cmc.data.csv", header = None)
     columns = ["W_age", "W_education", "H_education", "Num_children", "W_religion", 
@@ -181,10 +197,14 @@ def cmc():
     for col in cate_columns:
         cateColumn([data], col, "?")
     data = data.infer_objects()
-    train, test = splitByPortion(data, 0.8)
+    train, test = splitByPortion(data, 0.9)
     return (train, train, test)
 
 
+"""
+(329, 35)
+(37, 35)
+"""
 def dematology():
     data = pd.read_csv(data_dir + "dermatology/dermatology.data.csv", header = None)
     columns = ["erythema", "scaling", "definite borders", "itching", 
@@ -204,30 +224,41 @@ def dematology():
     data = data.infer_objects()
     fillEmpty([data], "Age", "?", True)
 
-    train, test = splitByPortion(data, 0.8)
+    train, test = splitByPortion(data, 0.9)
     return (train, train, test)
 
 
+"""
+(302, 8)
+(34, 8)
+"""
 def ecoli():
     data = pd.read_csv(data_dir + "ecoli/ecoli.data.csv", header = None)
     columns = ["Sequence Name", "mcg", "gvh", "lip", "chg", "aac", "alm1", "alm2", "Class"]
     data.columns = columns
     data.drop("Sequence Name", axis = 1, inplace = True)
     data = data.infer_objects()
-    train, test = splitByPortion(data, 0.8)
+    train, test = splitByPortion(data, 0.9)
     return (train, train, test)
 
-
+"""
+(193, 10)
+(21, 10)
+"""
 def glass():
     data = pd.read_csv(data_dir + "glass/glass.data.csv", header = None)
     columns = ["Id", "RI", "Na", "Mg", "Al", "Si", "K", "Ca", "Ba", "Fe", "Class"]
     data.columns = columns
     data.drop("Id", axis = 1, inplace = True)
     data = data.infer_objects()
-    train, test = splitByPortion(data, 0.85)
+    train, test = splitByPortion(data, 0.9)
     return (train, train, test)
 
 
+"""
+(140, 20)
+(15, 20)
+"""
 def hepatitis():
     data = pd.read_csv(data_dir + "hepatitis/hepatitis.data.csv", header = None)
     columns = ["Class", "AGE", "SEX", "STEROID", "ANTIVIRALS", "FATIGUE", 
@@ -248,10 +279,14 @@ def hepatitis():
     col_size = data.shape[1]
     data.insert(col_size - 1, "Class", data.pop("Class"))
 
-    train, test = splitByPortion(data, 0.85)
+    train, test = splitByPortion(data, 0.9)
     return (train, train, test)
 
 
+"""
+(270, 5)
+(30, 5)
+"""
 def iris():
     iris = pd.read_csv(data_dir + "iris/iris.csv", header = None)
     bezd = pd.read_csv(data_dir + "iris/bezdekIris.csv", header = None)
@@ -260,10 +295,14 @@ def iris():
     # iris_train_clf, iris_rest = splitByPortion(iris, 0.4)
     # iris_train_mdp, iris_test = splitByPortion(iris_rest, 0.8)
     # return (iris_train_clf, iris_train_mdp, iris_test)
-    train, test = splitByPortion(iris, 0.8)
+    train, test = splitByPortion(iris, 0.9)
     return (train, train, test)
 
 
+"""
+(133, 39)
+(15, 39)
+"""
 def lymphography():
     data = pd.read_csv(data_dir + "lymphography/lymphography.data.csv", header = None)
     columns = ["class", "lymphatics", "block of affere", "bl. of lymph. c", 
@@ -282,6 +321,6 @@ def lymphography():
     col_size = data.shape[1]
     data.insert(col_size - 1, "class", data.pop("class"))
 
-    train, test = splitByPortion(data, 0.85)
+    train, test = splitByPortion(data, 0.9)
     return (train, train, test)
 
