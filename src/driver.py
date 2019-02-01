@@ -2,7 +2,7 @@ import classifier
 import mdp
 import reader
 import time
-import sys, random as rd
+import os, sys, random as rd
 import numpy as np
 import pandas as pd
 from sklearn.neural_network import MLPClassifier

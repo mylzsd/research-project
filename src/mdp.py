@@ -142,7 +142,7 @@ class MDP:
 			# shuffle incidents
 			for j in range(n):
 				self.qlHelper(predictions.iloc[j])
-			if (i + 1) % 10 == 0:
+			if (i + 1) % 100 == 0:
 				print("Epoch %d" % (i + 1))
 		print(len(self.q_table))
 		# for i in self.q_table.items():

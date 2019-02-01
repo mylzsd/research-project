@@ -1,6 +1,7 @@
+import os
 import pandas as pd
 
-data_dir = "/Users/Lzs/Desktop/research-project/data/"
+data_dir = os.getcwd() + "/data/"
 
 """
 portion is for the first half
