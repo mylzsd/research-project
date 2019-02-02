@@ -88,13 +88,14 @@ class MDP:
 		self.q_table = dict()
 
 
-	def getAction(self, state):
+	def getAction(self, state, randomness):
 		actions = state.getLegalActions()
+		if random.random() < randomness:
+			return random.choice(actions)
 		candidates = list()
 		max_q = 0
 		for a in actions:
-			s_a = state.getHash(a)
-			q = self.q_table.get(s_a, 0)
+			q = self.getQ(state, a)
 			if q >= max_q:
 				if q > max_q:
 					candidates.clear()
@@ -104,7 +105,7 @@ class MDP:
 
 	def getQ(self, state, action):
 		s_a = state.getHash(action)
-		return self.q_table.get(s_a, 0)
+		return self.q_table.get(s_a, random.random())
 
 
 	def applyAction(self, state, action, prediction):
@@ -125,14 +126,12 @@ class MDP:
 		results = self.cluster.results(data)
 		predictions = pd.concat([results, real], axis = 1)
 
-		self.qLearning(predictions, num_training)
-		# label_map is used in neural network
-		# self.label_map = dict()
-		# index = 0
-		# for label in real:
-		# 	if label in label_map: continue
-		# 	label_map[label] = index
-		# 	index += 1
+		if self.model == "ql":
+			self.qLearning(predictions, num_training)
+		elif self.model == "sarsa":
+			self.sarsa(predictions, num_training)
+		elif self.model == "dqn":
+			self.dqn()
 
 
 	def qLearning(self, predictions, num_training):
@@ -140,38 +139,22 @@ class MDP:
 		n = len(predictions.index)
 		for i in range(num_training):
 			# shuffle incidents
+			shuffled = predictions.sample(frac = 1)
 			for j in range(n):
-				self.qlHelper(predictions.iloc[j])
+				self.qlHelper(shuffled.iloc[j])
 			if (i + 1) % 100 == 0:
 				print("Epoch %d" % (i + 1))
 		print(len(self.q_table))
-		# for i in self.q_table.items():
-		# 	print(i)
 
 
 	def qlHelper(self, prediction):
 		state = TreeState(self.cluster.size)
 		while state != None:
-			actions = state.getLegalActions()
-			rand = random.random()
-			# with probability of epsilon choose random action
-			if rand < self.epsilon:
-				action = random.choice(actions)
-			else:
-				candidates = list()
-				max_q = 0
-				for a in actions:
-					s_a = state.getHash(a)
-					q = self.q_table.get(s_a, 0)
-					if q >= max_q:
-						if q > max_q:
-							max_q = q
-							candidates.clear()
-						candidates.append(a)
-				action = random.choice(candidates)
+			action = self.getAction(state, self.epsilon)
 			state_p = self.applyAction(state, action, prediction)
+			# compute factors for updating Q value
 			s_a = state.getHash(action)
-			q_sa = self.q_table.get(s_a, 0)
+			q_sa = self.getQ(state, action)
 			reward = 0
 			q_sp = 0
 			if action.index == -1:
@@ -184,19 +167,54 @@ class MDP:
 				# compute max Q for next state
 				actions = state_p.getLegalActions()
 				for a in actions:
-					sp_a = state_p.getHash(a)
-					q_sp = max(q_sp, self.q_table.get(sp_a, 0))
-			# update Q value based on learning rate
+					q_sp = max(q_sp, self.getQ(state_p, a))
 			self.q_table[s_a] = q_sa + self.learning_rate * (reward + self.discount_factor * q_sp - q_sa)
 			# update current state
 			state = state_p
 
 
-	def sarsa(self, predictions, epoch):
-		pass
+	def sarsa(self, predictions, num_training):
+		n = len(predictions.index)
+		for i in range(num_training):
+			# shuffle incidents
+			shuffled = predictions.sample(frac = 1)
+			for j in range(n):
+				self.saHelper(shuffled.iloc[j])
+			if (i + 1) % 100 == 0:
+				print("Epoch %d" % (i + i))
+		print(len(self.q_table))
+
+
+	def saHelper(self, prediction):
+		state = TreeState(self.cluster.size)
+		action = self.getAction(state, self.epsilon)
+		while state != None:
+			state_p = self.applyAction(state, action, prediction)
+			if state_p != None:
+				action_p = self.getAction(state_p, self.epsilon)
+			else:
+				action_p = None
+			# compute factors for updating Q value
+			q_sp = 0
+			reward = 0
+			if action.index == -1:
+				real = prediction.iloc[-1]
+				pred = self.majorityVote(state)
+				if pred == real:
+					reward = 1.0
+			else:
+				q_sp = self.getQ(state_p, action_p)
+			s_a = state.getHash(action)
+			q_sa = self.getQ(state, action)
+			self.q_table[s_a] = q_sa + self.learning_rate * (reward + self.discount_factor * q_sp - q_sa)
+			# update current state and action
+			state = state_p
+			action = action_p
+
 
 	def dqn(self, predictions, label_map):
 		pass
+
 
 	def featureVote(self, state):
 		value = state.getPred()
@@ -213,6 +231,7 @@ class MDP:
 			res = None
 		return res
 
+
 	def majorityVote(self, state):
 		value = state.getPred()
 		vote = dict()
@@ -227,17 +246,14 @@ class MDP:
 			res = None
 		return res
 
-	def valueIteration(self):
-		pass
-
-	def policyIteration(self):
-		pass
 
 	def load(self, filename):
 		pass
 
+
 	def write(self, filename):
 		pass
+
 
 	def validation(self, data):
 		total = len(data.index)
@@ -249,7 +265,7 @@ class MDP:
 			state = TreeState(self.cluster.size)
 			# get predicted result
 			while state != None:
-				action = self.getAction(state)
+				action = self.getAction(state, 0)
 				# show path
 				print(str(state) + " -> " + str(action))
 				if action.index == -1:
