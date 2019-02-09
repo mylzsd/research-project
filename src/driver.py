@@ -221,6 +221,7 @@ def readCommand(argv):
     args['learning_rate'] = options.learning_rate
     args['discount_factor'] = options.discount_factor
     args['epsilon'] = options.epsilon
+    print(args)
     return args
 
 

@@ -181,7 +181,7 @@ class MDP:
 			for j in range(n):
 				self.saHelper(shuffled.iloc[j])
 			if (i + 1) % 100 == 0:
-				print("Epoch %d" % (i + i))
+				print("Episode %d" % (i + i))
 		print(len(self.q_table))
 
 
