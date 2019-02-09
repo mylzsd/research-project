@@ -4,3 +4,4 @@ python src/driver.py -d audiology -m ql -t 1000
 Spartan usage:
 ssh mylzsd@spartan.hpc.unimelb.edu.au
 squeue --user mylzsd
+module spider Python
