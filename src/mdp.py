@@ -2,6 +2,7 @@ import classifier
 import random
 import pandas as pd
 
+debug_print = False
 
 class TreeState:
 
@@ -48,8 +49,8 @@ class TreeState:
 		return ret
 
 	def getHash(self, action):
-		t = tuple(self.pred + [action])
-		return hash(t)
+		s = str(self) + str(action)
+		return hash(s)
 
 	def __eq__(self, other):
 		if not isinstance(other, TreeState): 
@@ -93,19 +94,23 @@ class MDP:
 		if random.random() < randomness:
 			return random.choice(actions)
 		candidates = list()
-		max_q = 0
+		max_q = float("-inf")
 		for a in actions:
 			q = self.getQ(state, a)
+			if debug_print:
+				print("[%s] (%f)" % (a, q))
 			if q >= max_q:
 				if q > max_q:
 					candidates.clear()
+					max_q = q
 				candidates.append(a)
 		return random.choice(candidates)
 
 
 	def getQ(self, state, action):
 		s_a = state.getHash(action)
-		return self.q_table.get(s_a, random.random())
+		# return self.q_table.get(s_a, random.random())
+		return self.q_table.get(s_a, 0)
 
 
 	def applyAction(self, state, action, prediction):
@@ -121,92 +126,90 @@ class MDP:
 		return state_p
 
 
-	def train(self, data, num_training):
+	def train(self, data, num_training, test):
 		real = data.iloc[:, -1].reset_index(drop = True)
 		results = self.cluster.results(data)
 		predictions = pd.concat([results, real], axis = 1)
 
-		if self.model == "ql":
-			self.qLearning(predictions, num_training)
-		elif self.model == "sarsa":
-			self.sarsa(predictions, num_training)
-		elif self.model == "dqn":
-			self.dqn()
-
-
-	def qLearning(self, predictions, num_training):
-		self.q_table = dict()
 		n = len(predictions.index)
 		for i in range(num_training):
 			# shuffle incidents
 			shuffled = predictions.sample(frac = 1)
 			for j in range(n):
-				self.qlHelper(shuffled.iloc[j])
-			if (i + 1) % 100 == 0:
-				print("Epoch %d" % (i + 1))
+				if self.model == "ql":
+					self.qLearning(shuffled.iloc[j])
+				elif self.model == "sarsa":
+					self.sarsa(shuffled.iloc[j])
+				elif self.model == "dqn":
+					pass
+			if (i + 1) % 1000 == 0:
+				print("Episode %d: accuracy: %f" % (i + 1, self.validation(test)))
 		print(len(self.q_table))
 
 
-	def qlHelper(self, prediction):
+	def qLearning(self, prediction):
 		state = TreeState(self.cluster.size)
 		while state != None:
+			if debug_print:
+				print("\n{%s}" % (state))
 			action = self.getAction(state, self.epsilon)
 			state_p = self.applyAction(state, action, prediction)
 			# compute factors for updating Q value
 			s_a = state.getHash(action)
 			q_sa = self.getQ(state, action)
 			reward = 0
-			q_sp = 0
 			if action.index == -1:
+				q_sp = 0
 				# compute reward
 				real = prediction.iloc[-1]
 				pred = self.majorityVote(state)
 				if pred == real:
 					reward = 1.0
+				else:
+					reward = -1.0
 			else:
 				# compute max Q for next state
+				q_sp = float("-inf")
 				actions = state_p.getLegalActions()
 				for a in actions:
 					q_sp = max(q_sp, self.getQ(state_p, a))
 			self.q_table[s_a] = q_sa + self.learning_rate * (reward + self.discount_factor * q_sp - q_sa)
+			if debug_print:
+				print("[%s]->{%s}" % (str(action), str(state_p)))
+				print("[%f] [%f] (%f)->(%f)\n" % (reward, q_sp, q_sa, self.q_table[s_a]))
 			# update current state
 			state = state_p
 
 
-	def sarsa(self, predictions, num_training):
-		n = len(predictions.index)
-		for i in range(num_training):
-			# shuffle incidents
-			shuffled = predictions.sample(frac = 1)
-			for j in range(n):
-				self.saHelper(shuffled.iloc[j])
-			if (i + 1) % 100 == 0:
-				print("Episode %d" % (i + i))
-		print(len(self.q_table))
-
-
-	def saHelper(self, prediction):
+	def sarsa(self, prediction):
 		state = TreeState(self.cluster.size)
 		action = self.getAction(state, self.epsilon)
 		while state != None:
+			if debug_print:
+				print("\n{%s}" % (state))
 			state_p = self.applyAction(state, action, prediction)
 			if state_p != None:
 				action_p = self.getAction(state_p, self.epsilon)
 			else:
 				action_p = None
 			# compute factors for updating Q value
-			q_sp = 0
-			reward = 0
 			if action.index == -1:
+				q_sp = 0
 				real = prediction.iloc[-1]
 				pred = self.majorityVote(state)
 				if pred == real:
 					reward = 1.0
+				else:
+					reward = -1.0
 			else:
 				q_sp = self.getQ(state_p, action_p)
+				reward = 0
 			s_a = state.getHash(action)
 			q_sa = self.getQ(state, action)
 			self.q_table[s_a] = q_sa + self.learning_rate * (reward + self.discount_factor * q_sp - q_sa)
+			if debug_print:
+				print("\n\n{%s}->[%s]->{%s}->[%s]" % (str(state), str(action), str(state_p), str(action_p)))
+				print("[%f] [%f] (%f)->(%f)" % (reward, q_sp, q_sa, self.q_table[s_a]))
 			# update current state and action
 			state = state_p
 			action = action_p
@@ -235,16 +238,22 @@ class MDP:
 	def majorityVote(self, state):
 		value = state.getPred()
 		vote = dict()
-		for i, v in enumerate(value):
+		for v in value:
 			if v is None: continue
 			curr_v = vote.get(v, 0)
 			vote[v] = curr_v + 1
-		pairs = [(v, k) for k, v in vote.items()]
-		if len(pairs) > 0:
-			_, res = max(pairs)
+		max_v = 0
+		candidates = list()
+		for k, v in vote.items():
+			if v >= max_v:
+				if v > max_v:
+					candidates.clear()
+					max_v = v
+				candidates.append(k)
+		if len(candidates) > 0:
+			return random.choice(candidates)
 		else:
-			res = None
-		return res
+			return None
 
 
 	def load(self, filename):
@@ -260,14 +269,13 @@ class MDP:
 		correct = 0
 		predictions = self.cluster.results(data)
 		for i in range(total):
-			# show path
-			print()
 			state = TreeState(self.cluster.size)
 			# get predicted result
 			while state != None:
 				action = self.getAction(state, 0)
 				# show path
-				print(str(state) + " -> " + str(action))
+				if debug_print:
+					print("{%s}->[%s]" % (str(state), str(action)))
 				if action.index == -1:
 					pred = self.majorityVote(state)
 					break
@@ -277,6 +285,8 @@ class MDP:
 			real = data.iloc[i, -1]
 			if pred == real:
 				correct += 1
+			if debug_print:
+				print("pred: %s, real: %s, correct: %s\n" % (pred, real, pred == real))
 		accuracy = correct / total
 		return accuracy
 

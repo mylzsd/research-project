@@ -123,8 +123,9 @@ def audiology():
     for col in cate_columns:
         cateColumn([train, test], col, "?")
     train = train.infer_objects()
+    train_clf, train_mdp = splitByPortion(train, 0.5)
     test = test.infer_objects()
-    return (train, train, test)
+    return (train, train_clf, train_mdp, test)
 
 
 """
@@ -161,7 +162,8 @@ def breast_cancer():
     data = data.infer_objects()
     # split to train & test sets
     train, test = splitByPortion(data, 0.9)
-    return (train, train, test)
+    train_clf, train_mdp = splitByPortion(train, 0.5)
+    return (train, train_clf, train_mdp, test)
 
 
 """
@@ -181,7 +183,8 @@ def breast_w():
         fillEmpty([data], col, "?", False)
 
     train, test = splitByPortion(data, 0.9)
-    return (train, train, test)
+    train_clf, train_mdp = splitByPortion(train, 0.5)
+    return (train, train_clf, train_mdp, test)
 
 
 """
@@ -199,7 +202,8 @@ def cmc():
         cateColumn([data], col, "?")
     data = data.infer_objects()
     train, test = splitByPortion(data, 0.9)
-    return (train, train, test)
+    train_clf, train_mdp = splitByPortion(train, 0.5)
+    return (train, train_clf, train_mdp, test)
 
 
 """
@@ -226,7 +230,8 @@ def dematology():
     fillEmpty([data], "Age", "?", True)
 
     train, test = splitByPortion(data, 0.9)
-    return (train, train, test)
+    train_clf, train_mdp = splitByPortion(train, 0.5)
+    return (train, train_clf, train_mdp, test)
 
 
 """
@@ -240,7 +245,8 @@ def ecoli():
     data.drop("Sequence Name", axis = 1, inplace = True)
     data = data.infer_objects()
     train, test = splitByPortion(data, 0.9)
-    return (train, train, test)
+    train_clf, train_mdp = splitByPortion(train, 0.5)
+    return (train, train_clf, train_mdp, test)
 
 """
 (193, 10)
@@ -253,7 +259,8 @@ def glass():
     data.drop("Id", axis = 1, inplace = True)
     data = data.infer_objects()
     train, test = splitByPortion(data, 0.9)
-    return (train, train, test)
+    train_clf, train_mdp = splitByPortion(train, 0.5)
+    return (train, train_clf, train_mdp, test)
 
 
 """
@@ -281,7 +288,22 @@ def hepatitis():
     data.insert(col_size - 1, "Class", data.pop("Class"))
 
     train, test = splitByPortion(data, 0.9)
-    return (train, train, test)
+    train_clf, train_mdp = splitByPortion(train, 0.5)
+    return (train, train_clf, train_mdp, test)
+
+
+"""
+(7352, 562)
+(2947, 562)
+"""
+def human_activity():
+    train = pd.read_csv("data/human-activity/train.csv")
+    test = pd.read_csv("data/human-activity/test.csv")
+    train.drop("subject", axis = 1, inplace = True)
+    test.drop("subject", axis = 1, inplace = True)
+
+    train_clf, train_mdp = splitByPortion(train, 0.5)
+    return (train, train_clf, train_mdp, test)
 
 
 """
@@ -293,11 +315,9 @@ def iris():
     bezd = pd.read_csv(data_dir + "iris/bezdekIris.csv", header = None)
     iris = pd.concat([iris, bezd], ignore_index = True)
 
-    # iris_train_clf, iris_rest = splitByPortion(iris, 0.4)
-    # iris_train_mdp, iris_test = splitByPortion(iris_rest, 0.8)
-    # return (iris_train_clf, iris_train_mdp, iris_test)
     train, test = splitByPortion(iris, 0.9)
-    return (train, train, test)
+    train_clf, train_mdp = splitByPortion(train, 0.5)
+    return (train, train_clf, train_mdp, test)
 
 
 """
@@ -323,5 +343,22 @@ def lymphography():
     data.insert(col_size - 1, "class", data.pop("class"))
 
     train, test = splitByPortion(data, 0.9)
-    return (train, train, test)
+    train_clf, train_mdp = splitByPortion(train, 0.5)
+    return (train, train_clf, train_mdp, test)
 
+
+def read(dataset):
+    data_map = {
+        "audiology": audiology,
+        "breast_cancer": breast_cancer,
+        "breast_w": breast_w,
+        "cmc": cmc,
+        "dematology": dematology,
+        "ecoli": ecoli,
+        "glass": glass,
+        "hepatitis": hepatitis,
+        "human_activity": human_activity,
+        "iris": iris,
+        "lymphography": lymphography
+    }
+    return data_map[dataset]()

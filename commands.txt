@@ -1,6 +1,9 @@
 driver usage:
 python src/driver.py -d audiology -m ql -t 1000
 
+test usage:
+python src/test.py -d audiology -m examine -n 10 > out/exam_audiology_10.out
+
 Spartan usage:
 ssh mylzsd@spartan.hpc.unimelb.edu.au
 squeue --user mylzsd

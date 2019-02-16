@@ -1,0 +1,10 @@
+(135, 5)
+(135, 5)
+(30, 5)
+Training classifiers: Fri Feb 15 19:22:55 2019
+Training mlp: Fri Feb 15 19:23:20 2019
+Number of label: 3
+1.0 1.0 1.0
+0.7666666666666667 1.0 0.9540000000000001
+0.9666666666666667
+Finish time: Fri Feb 15 19:23:29 2019
