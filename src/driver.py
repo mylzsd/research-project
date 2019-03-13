@@ -48,7 +48,7 @@ def run(dataset,
     print(test.shape)
     num_feature = train_clf.shape[1] - 1
 
-    rf_kwargs = {'random_state': kwargs['random_state'], 'n_estimators': 300}
+    rf_kwargs = {'random_state': kwargs['random_state'], 'n_estimators': num_clf}
     rf = classifier.Cluster(1, ['rf'], [list(range(num_feature))], **rf_kwargs)
     rf.train(train)
     rf_accu = rf.accuracy(test)[0]

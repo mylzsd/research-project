@@ -6,39 +6,27 @@ debug_print = False
 
 class TreeState:
 
-	def __init__(self, size, pred = None):
-		self.size = size
+	def __init__(self, pred=None, size=1, next_tree=0):
 		if pred == None:
 			self.pred = [None] * size
 		else:
 			self.pred = pred[:]
-
-	def setPredAt(self, index, v):
-		self.pred[index] = v
-
-	def getPredAt(self, index):
-		return self.pred[index]
-
-	def setPred(self, pred):
-		if len(pred) != self.size:
-			raise ValueError('predictions length unmatched')
-		self.pred = pred[:]
+		self.next_tree = next_tree
 
 	def getPred(self):
 		return self.pred[:]
 
 	def getLegalActions(self):
-		actions = [Action(-1)]
-		for i, p in enumerate(self.pred):
-			if p is None:
-				actions.append(Action(i))
-		return actions
+		if self.next_tree == len(self.pred):
+			return ['eval']
+		else:
+			return ['visit', 'skip']
 
 	def usedClassifier(self):
 		ret = set()
 		for i, v in enumerate(self.pred):
-			if v is None: continue
-			ret.add(i)
+			if not v is None:
+				ret.add(i)
 		return ret
 
 	def feature(self, cluster):
@@ -62,25 +50,23 @@ class TreeState:
 		return hash(t)
 
 	def __str__(self):
-		return ' '.join(str(e) for e in self.pred)
+		return ' '.join(str(e) for e in self.pred) + ' next ' + str(self.next_tree)
 
 
-class Action:
+# class Action:
 
-	def __init__(self, index):
-		self.index = index
+# 	def __init__(self, a):
+# 		self.action = str(a)
 
-
-	def __str__(self):
-		if self.index == -1:
-			return 'Stop'
-		return 'Visit %d' % (self.index)
+# 	def __str__(self):
+# 		return self.action
 
 
 class MDP:
 
 	def __init__(self, cluster, model, learning_rate, discount_factor, epsilon, random_state):
 		rd.seed(random_state)
+		self.random_state = random_state
 		self.cluster = cluster
 		self.model = model
 		self.learning_rate = learning_rate
@@ -115,27 +101,29 @@ class MDP:
 
 
 	def applyAction(self, state, action, prediction):
-		if action.index == -1:
+		if action == 'eval':
 			state_p = None
 		else:
-			state_p = TreeState(state.size, state.pred)
-			i = action.index
-			if isinstance(prediction, pd.Series):
-				state_p.setPredAt(i, prediction.iloc[i])
-			else:
-				state_p.setPredAt(i, prediction)
+			i = state.next_tree
+			pred = state.getPred()
+			if action == 'visit':
+				if isinstance(prediction, pd.Series):
+					pred[i] = prediction.iloc[i]
+				else:
+					pred[i] = prediction
+			state_p = TreeState(pred=pred, next_tree=i + 1)
 		return state_p
 
 
 	def train(self, data, num_training, test):
-		real = data.iloc[:, -1].reset_index(drop = True)
+		real = data.iloc[:, -1].reset_index(drop=True)
 		results = self.cluster.results(data)
-		predictions = pd.concat([results, real], axis = 1)
+		predictions = pd.concat([results, real], axis=1)
 
 		n = len(predictions.index)
 		for i in range(num_training):
 			# shuffle incidents
-			shuffled = predictions.sample(frac = 1)
+			shuffled = predictions.sample(frac=1, random_state=self.random_state)
 			for j in range(n):
 				if self.model == 'ql':
 					self.qLearning(shuffled.iloc[j])
@@ -143,13 +131,13 @@ class MDP:
 					self.sarsa(shuffled.iloc[j])
 				elif self.model == 'dqn':
 					pass
-			if (i + 1) % 10 == 0:
+			if (i + 1) % 1000 == 0:
 				print('Episode %d: accuracy: %f' % (i + 1, self.accuracy(test)))
 		print(len(self.q_table))
 
 
 	def qLearning(self, prediction):
-		state = TreeState(self.cluster.size)
+		state = TreeState(size=self.cluster.size)
 		while state != None:
 			if debug_print:
 				print('\n{%s}' % (state))
@@ -159,7 +147,7 @@ class MDP:
 			s_a = state.getHash(action)
 			q_sa = self.getQ(state, action)
 			reward = 0
-			if action.index == -1:
+			if action == 'eval':
 				q_sp = 0
 				# compute reward
 				real = prediction.iloc[-1]
@@ -176,7 +164,7 @@ class MDP:
 					q_sp = max(q_sp, self.getQ(state_p, a))
 			self.q_table[s_a] = q_sa + self.learning_rate * (reward + self.discount_factor * q_sp - q_sa)
 			if debug_print:
-				print('[%s]->{%s}' % (str(action), str(state_p)))
+				print('[%s]->{%s}' % (action, str(state_p)))
 				print('[%f] [%f] (%f)->(%f)\n' % (reward, q_sp, q_sa, self.q_table[s_a]))
 			# update current state
 			state = state_p
@@ -194,7 +182,7 @@ class MDP:
 			else:
 				action_p = None
 			# compute factors for updating Q value
-			if action.index == -1:
+			if action == 'eval':
 				q_sp = 0
 				real = prediction.iloc[-1]
 				pred = self.majorityVote(state)
@@ -209,7 +197,7 @@ class MDP:
 			q_sa = self.getQ(state, action)
 			self.q_table[s_a] = q_sa + self.learning_rate * (reward + self.discount_factor * q_sp - q_sa)
 			if debug_print:
-				print('\n\n{%s}->[%s]->{%s}->[%s]' % (str(state), str(action), str(state_p), str(action_p)))
+				print('\n\n{%s}->[%s]->{%s}->[%s]' % (str(state), action, str(state_p), action_p))
 				print('[%f] [%f] (%f)->(%f)' % (reward, q_sp, q_sa, self.q_table[s_a]))
 			# update current state and action
 			state = state_p
@@ -265,25 +253,25 @@ class MDP:
 		pass
 
 
-	def accuracy(self, data):
-		total = len(data.index)
+	def accuracy(self, test):
+		total = test.shape[0]
 		correct = 0
-		predictions = self.cluster.results(data)
+		predictions = self.cluster.results(test)
 		for i in range(total):
-			state = TreeState(self.cluster.size)
+			state = TreeState(size=self.cluster.size)
 			# get predicted result
 			while state != None:
 				action = self.getAction(state, 0)
 				# show path
 				if debug_print:
-					print('{%s}->[%s]' % (str(state), str(action)))
-				if action.index == -1:
+					print('{%s}->[%s]' % (str(state), action))
+				if action == 'eval':
 					pred = self.majorityVote(state)
 					break
 				state_p = self.applyAction(state, action, predictions.iloc[i])
 				state = state_p
 			# get real result & modify counter
-			real = data.iloc[i, -1]
+			real = test.iloc[i, -1]
 			if pred == real:
 				correct += 1
 			if debug_print:
