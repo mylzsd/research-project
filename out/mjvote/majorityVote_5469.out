@@ -1,0 +1,309 @@
+{'mode': 'mjvote', 'dataset': None, 'num_clf': 50, 'reuse': False, 'random_state': 5469, 'num_estimators': 100}
+Dataset: audiology
+020 trees
+	single rf: 0.769231
+	train->test: 0.769231
+	clf->mdp: 0.730000
+	clf->test: 0.730769
+050 trees
+	single rf: 0.807692
+	train->test: 0.807692
+	clf->mdp: 0.690000
+	clf->test: 0.769231
+100 trees
+	single rf: 0.846154
+	train->test: 0.807692
+	clf->mdp: 0.710000
+	clf->test: 0.807692
+200 trees
+	single rf: 0.807692
+	train->test: 0.807692
+	clf->mdp: 0.760000
+	clf->test: 0.846154
+300 trees
+	single rf: 0.807692
+	train->test: 0.807692
+	clf->mdp: 0.760000
+	clf->test: 0.846154
+
+
+Dataset: breast_cancer
+020 trees
+	single rf: 0.758621
+	train->test: 0.793103
+	clf->mdp: 0.689922
+	clf->test: 0.758621
+050 trees
+	single rf: 0.758621
+	train->test: 0.793103
+	clf->mdp: 0.705426
+	clf->test: 0.758621
+100 trees
+	single rf: 0.758621
+	train->test: 0.758621
+	clf->mdp: 0.720930
+	clf->test: 0.758621
+200 trees
+	single rf: 0.758621
+	train->test: 0.758621
+	clf->mdp: 0.713178
+	clf->test: 0.758621
+300 trees
+	single rf: 0.758621
+	train->test: 0.758621
+	clf->mdp: 0.713178
+	clf->test: 0.758621
+
+
+Dataset: breast_w
+020 trees
+	single rf: 0.957143
+	train->test: 0.971429
+	clf->mdp: 0.968254
+	clf->test: 0.957143
+050 trees
+	single rf: 0.957143
+	train->test: 0.971429
+	clf->mdp: 0.971429
+	clf->test: 0.971429
+100 trees
+	single rf: 0.957143
+	train->test: 0.971429
+	clf->mdp: 0.971429
+	clf->test: 0.971429
+200 trees
+	single rf: 0.957143
+	train->test: 0.971429
+	clf->mdp: 0.971429
+	clf->test: 0.957143
+300 trees
+	single rf: 0.971429
+	train->test: 0.971429
+	clf->mdp: 0.971429
+	clf->test: 0.957143
+
+
+Dataset: cmc
+020 trees
+	single rf: 0.442177
+	train->test: 0.482993
+	clf->mdp: 0.512821
+	clf->test: 0.476190
+050 trees
+	single rf: 0.442177
+	train->test: 0.469388
+	clf->mdp: 0.520362
+	clf->test: 0.476190
+100 trees
+	single rf: 0.448980
+	train->test: 0.503401
+	clf->mdp: 0.521870
+	clf->test: 0.476190
+200 trees
+	single rf: 0.455782
+	train->test: 0.510204
+	clf->mdp: 0.512821
+	clf->test: 0.476190
+300 trees
+	single rf: 0.489796
+	train->test: 0.503401
+	clf->mdp: 0.518854
+	clf->test: 0.469388
+
+
+Dataset: dematology
+020 trees
+	single rf: 0.945946
+	train->test: 0.918919
+	clf->mdp: 0.987879
+	clf->test: 0.972973
+050 trees
+	single rf: 0.945946
+	train->test: 0.918919
+	clf->mdp: 0.981818
+	clf->test: 0.972973
+100 trees
+	single rf: 0.918919
+	train->test: 0.945946
+	clf->mdp: 0.981818
+	clf->test: 0.972973
+200 trees
+	single rf: 0.918919
+	train->test: 0.918919
+	clf->mdp: 0.981818
+	clf->test: 0.918919
+300 trees
+	single rf: 0.918919
+	train->test: 0.945946
+	clf->mdp: 0.981818
+	clf->test: 0.918919
+
+
+Dataset: ecoli
+020 trees
+	single rf: 0.970588
+	train->test: 0.882353
+	clf->mdp: 0.807947
+	clf->test: 0.852941
+050 trees
+	single rf: 0.970588
+	train->test: 0.852941
+	clf->mdp: 0.807947
+	clf->test: 0.882353
+100 trees
+	single rf: 0.911765
+	train->test: 0.911765
+	clf->mdp: 0.801325
+	clf->test: 0.911765
+200 trees
+	single rf: 0.911765
+	train->test: 0.911765
+	clf->mdp: 0.801325
+	clf->test: 0.911765
+300 trees
+	single rf: 0.911765
+	train->test: 0.911765
+	clf->mdp: 0.801325
+	clf->test: 0.911765
+
+
+Dataset: glass
+020 trees
+	single rf: 0.666667
+	train->test: 0.666667
+	clf->mdp: 0.752577
+	clf->test: 0.571429
+050 trees
+	single rf: 0.666667
+	train->test: 0.666667
+	clf->mdp: 0.721649
+	clf->test: 0.666667
+100 trees
+	single rf: 0.666667
+	train->test: 0.619048
+	clf->mdp: 0.731959
+	clf->test: 0.666667
+200 trees
+	single rf: 0.714286
+	train->test: 0.714286
+	clf->mdp: 0.742268
+	clf->test: 0.666667
+300 trees
+	single rf: 0.714286
+	train->test: 0.714286
+	clf->mdp: 0.752577
+	clf->test: 0.666667
+
+
+Dataset: hepatitis
+020 trees
+	single rf: 0.866667
+	train->test: 0.933333
+	clf->mdp: 0.814286
+	clf->test: 0.800000
+050 trees
+	single rf: 0.866667
+	train->test: 0.800000
+	clf->mdp: 0.800000
+	clf->test: 0.866667
+100 trees
+	single rf: 0.800000
+	train->test: 0.933333
+	clf->mdp: 0.800000
+	clf->test: 0.866667
+200 trees
+	single rf: 0.866667
+	train->test: 0.866667
+	clf->mdp: 0.828571
+	clf->test: 0.866667
+300 trees
+	single rf: 0.866667
+	train->test: 0.866667
+	clf->mdp: 0.842857
+	clf->test: 0.866667
+
+
+Dataset: human_activity
+020 trees
+	single rf: 0.921276
+	train->test: 0.918222
+	clf->mdp: 0.966540
+	clf->test: 0.922973
+050 trees
+	single rf: 0.921955
+	train->test: 0.925008
+	clf->mdp: 0.970620
+	clf->test: 0.929420
+100 trees
+	single rf: 0.925687
+	train->test: 0.927384
+	clf->mdp: 0.972524
+	clf->test: 0.927723
+200 trees
+	single rf: 0.927044
+	train->test: 0.927723
+	clf->mdp: 0.974701
+	clf->test: 0.933152
+300 trees
+	single rf: 0.928741
+	train->test: 0.928062
+	clf->mdp: 0.974701
+	clf->test: 0.928062
+
+
+Dataset: iris
+020 trees
+	single rf: 1.000000
+	train->test: 1.000000
+	clf->mdp: 0.992593
+	clf->test: 0.966667
+050 trees
+	single rf: 1.000000
+	train->test: 1.000000
+	clf->mdp: 0.992593
+	clf->test: 0.966667
+100 trees
+	single rf: 1.000000
+	train->test: 1.000000
+	clf->mdp: 0.992593
+	clf->test: 0.966667
+200 trees
+	single rf: 1.000000
+	train->test: 1.000000
+	clf->mdp: 0.992593
+	clf->test: 0.966667
+300 trees
+	single rf: 1.000000
+	train->test: 1.000000
+	clf->mdp: 0.992593
+	clf->test: 0.966667
+
+
+Dataset: lymphography
+020 trees
+	single rf: 0.666667
+	train->test: 0.733333
+	clf->mdp: 0.791045
+	clf->test: 0.666667
+050 trees
+	single rf: 0.666667
+	train->test: 0.666667
+	clf->mdp: 0.835821
+	clf->test: 0.733333
+100 trees
+	single rf: 0.666667
+	train->test: 0.666667
+	clf->mdp: 0.880597
+	clf->test: 0.666667
+200 trees
+	single rf: 0.666667
+	train->test: 0.666667
+	clf->mdp: 0.880597
+	clf->test: 0.733333
+300 trees
+	single rf: 0.666667
+	train->test: 0.666667
+	clf->mdp: 0.880597
+	clf->test: 0.800000
+
+

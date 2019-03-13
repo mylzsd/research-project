@@ -1,0 +1,11 @@
+{'mode': 'mlp', 'dataset': 'glass', 'num_clf': 50, 'reuse': False, 'random_state': 9797, 'num_estimators': 100}
+(96, 10)
+(97, 10)
+(21, 10)
+Training classifiers: Tue Mar 12 14:02:05 2019
+Training mlp: Tue Mar 12 14:02:26 2019
+Number of label: 6
+0.6666666666666666 0.7619047619047619 0.7152380952380952
+0.3333333333333333 0.7619047619047619 0.56
+0.7142857142857143
+Finish time: Tue Mar 12 14:02:39 2019

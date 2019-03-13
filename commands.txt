@@ -8,3 +8,9 @@ Spartan usage:
 ssh mylzsd@spartan.hpc.unimelb.edu.au
 squeue --user mylzsd
 module spider Python
+sacctmgr show user mylzsd
+sacctmgr show account punim0531 -s -P
+sinteractive --time=0:20:0 --partition=gpgpu --gres=gpu:1
+
+Linux command:
+wget URL

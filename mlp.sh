@@ -1,9 +1,10 @@
 #!/bin/sh
 
-for i in breast_cancer breast_w cmc dematology ecoli glass hepatitis human_activity iris lymphography
+for d in breast_cancer breast_w cmc dematology ecoli glass hepatitis human_activity iris lymphography
 do
-	echo "Running python src/test.py -m mlp -d ${i} > out/mlp_${i}_50.out"
-	python src/test.py -m mlp -d ${i} > out/mlp_${i}_50.out
-	echo "Running python src/test.py -m mlp -d ${i} -n 100 > out/mlp_${i}_100.out"
-	python src/test.py -m mlp -d ${i} -n 100 > out/mlp_${i}_100.out
+	for n in 50 100
+	do
+		echo "Running python src/test.py -m mlp -d ${d} -n ${n} > out/mlp/mlp_${d}_${n}.out"
+		python src/test.py -m mlp -d ${d} -n ${n} > out/mlp/mlp_${d}_${n}.out
+	done
 done

@@ -1,0 +1,11 @@
+{'mode': 'mlp', 'dataset': 'ecoli', 'num_clf': 50, 'reuse': False, 'random_state': 1245, 'num_estimators': 100}
+(151, 8)
+(151, 8)
+(34, 8)
+Training classifiers: Tue Mar 12 13:59:04 2019
+Training mlp: Tue Mar 12 13:59:20 2019
+Number of label: 8
+0.7941176470588235 0.8823529411764706 0.8470588235294116
+0.4117647058823529 0.8529411764705882 0.6452941176470588
+0.8235294117647058
+Finish time: Tue Mar 12 13:59:54 2019

@@ -1,5 +1,5 @@
 import classifier
-import random
+import random as rd
 import pandas as pd
 
 debug_print = False
@@ -79,7 +79,7 @@ class Action:
 
 class MDP:
 
-	def __init__(self, cluster, model, learning_rate, discount_factor, epsilon):
+	def __init__(self, cluster, model, learning_rate, discount_factor, epsilon, random_state):
 		self.cluster = cluster
 		self.model = model
 		self.learning_rate = learning_rate
@@ -87,12 +87,13 @@ class MDP:
 		self.epsilon = epsilon
 		self.policy = dict()
 		self.q_table = dict()
+		rd.seed(random_state)
 
 
 	def getAction(self, state, randomness):
 		actions = state.getLegalActions()
-		if random.random() < randomness:
-			return random.choice(actions)
+		if rd.random() < randomness:
+			return rd.choice(actions)
 		candidates = list()
 		max_q = float("-inf")
 		for a in actions:
@@ -104,12 +105,12 @@ class MDP:
 					candidates.clear()
 					max_q = q
 				candidates.append(a)
-		return random.choice(candidates)
+		return rd.choice(candidates)
 
 
 	def getQ(self, state, action):
 		s_a = state.getHash(action)
-		# return self.q_table.get(s_a, random.random())
+		# return self.q_table.get(s_a, rd.random())
 		return self.q_table.get(s_a, 0)
 
 
@@ -142,7 +143,7 @@ class MDP:
 					self.sarsa(shuffled.iloc[j])
 				elif self.model == "dqn":
 					pass
-			if (i + 1) % 1000 == 0:
+			if (i + 1) % 10 == 0:
 				print("Episode %d: accuracy: %f" % (i + 1, self.validation(test)))
 		print(len(self.q_table))
 
@@ -251,7 +252,7 @@ class MDP:
 					max_v = v
 				candidates.append(k)
 		if len(candidates) > 0:
-			return random.choice(candidates)
+			return rd.choice(candidates)
 		else:
 			return None
 

@@ -1,0 +1,11 @@
+{'mode': 'mlp', 'dataset': 'cmc', 'num_clf': 50, 'reuse': False, 'random_state': 4017, 'num_estimators': 100}
+(663, 22)
+(663, 22)
+(147, 22)
+Training classifiers: Tue Mar 12 13:54:26 2019
+Training mlp: Tue Mar 12 13:54:49 2019
+Number of label: 3
+0.4557823129251701 0.5238095238095238 0.4938775510204082
+0.3129251700680272 0.54421768707483 0.42394557823129253
+0.4965986394557823
+Finish time: Tue Mar 12 13:55:05 2019
