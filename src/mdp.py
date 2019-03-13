@@ -21,7 +21,7 @@ class TreeState:
 
 	def setPred(self, pred):
 		if len(pred) != self.size:
-			raise ValueError("predictions length unmatched")
+			raise ValueError('predictions length unmatched')
 		self.pred = pred[:]
 
 	def getPred(self):
@@ -62,7 +62,7 @@ class TreeState:
 		return hash(t)
 
 	def __str__(self):
-		return " ".join(str(e) for e in self.pred)
+		return ' '.join(str(e) for e in self.pred)
 
 
 class Action:
@@ -73,13 +73,14 @@ class Action:
 
 	def __str__(self):
 		if self.index == -1:
-			return "Stop"
-		return "Visit %d" % (self.index)
+			return 'Stop'
+		return 'Visit %d' % (self.index)
 
 
 class MDP:
 
 	def __init__(self, cluster, model, learning_rate, discount_factor, epsilon, random_state):
+		rd.seed(random_state)
 		self.cluster = cluster
 		self.model = model
 		self.learning_rate = learning_rate
@@ -87,7 +88,6 @@ class MDP:
 		self.epsilon = epsilon
 		self.policy = dict()
 		self.q_table = dict()
-		rd.seed(random_state)
 
 
 	def getAction(self, state, randomness):
@@ -95,11 +95,11 @@ class MDP:
 		if rd.random() < randomness:
 			return rd.choice(actions)
 		candidates = list()
-		max_q = float("-inf")
+		max_q = float('-inf')
 		for a in actions:
 			q = self.getQ(state, a)
 			if debug_print:
-				print("[%s] (%f)" % (a, q))
+				print('[%s] (%f)' % (a, q))
 			if q >= max_q:
 				if q > max_q:
 					candidates.clear()
@@ -137,14 +137,14 @@ class MDP:
 			# shuffle incidents
 			shuffled = predictions.sample(frac = 1)
 			for j in range(n):
-				if self.model == "ql":
+				if self.model == 'ql':
 					self.qLearning(shuffled.iloc[j])
-				elif self.model == "sarsa":
+				elif self.model == 'sarsa':
 					self.sarsa(shuffled.iloc[j])
-				elif self.model == "dqn":
+				elif self.model == 'dqn':
 					pass
 			if (i + 1) % 10 == 0:
-				print("Episode %d: accuracy: %f" % (i + 1, self.validation(test)))
+				print('Episode %d: accuracy: %f' % (i + 1, self.accuracy(test)))
 		print(len(self.q_table))
 
 
@@ -152,7 +152,7 @@ class MDP:
 		state = TreeState(self.cluster.size)
 		while state != None:
 			if debug_print:
-				print("\n{%s}" % (state))
+				print('\n{%s}' % (state))
 			action = self.getAction(state, self.epsilon)
 			state_p = self.applyAction(state, action, prediction)
 			# compute factors for updating Q value
@@ -170,14 +170,14 @@ class MDP:
 					reward = -1.0
 			else:
 				# compute max Q for next state
-				q_sp = float("-inf")
+				q_sp = float('-inf')
 				actions = state_p.getLegalActions()
 				for a in actions:
 					q_sp = max(q_sp, self.getQ(state_p, a))
 			self.q_table[s_a] = q_sa + self.learning_rate * (reward + self.discount_factor * q_sp - q_sa)
 			if debug_print:
-				print("[%s]->{%s}" % (str(action), str(state_p)))
-				print("[%f] [%f] (%f)->(%f)\n" % (reward, q_sp, q_sa, self.q_table[s_a]))
+				print('[%s]->{%s}' % (str(action), str(state_p)))
+				print('[%f] [%f] (%f)->(%f)\n' % (reward, q_sp, q_sa, self.q_table[s_a]))
 			# update current state
 			state = state_p
 
@@ -187,7 +187,7 @@ class MDP:
 		action = self.getAction(state, self.epsilon)
 		while state != None:
 			if debug_print:
-				print("\n{%s}" % (state))
+				print('\n{%s}' % (state))
 			state_p = self.applyAction(state, action, prediction)
 			if state_p != None:
 				action_p = self.getAction(state_p, self.epsilon)
@@ -209,8 +209,8 @@ class MDP:
 			q_sa = self.getQ(state, action)
 			self.q_table[s_a] = q_sa + self.learning_rate * (reward + self.discount_factor * q_sp - q_sa)
 			if debug_print:
-				print("\n\n{%s}->[%s]->{%s}->[%s]" % (str(state), str(action), str(state_p), str(action_p)))
-				print("[%f] [%f] (%f)->(%f)" % (reward, q_sp, q_sa, self.q_table[s_a]))
+				print('\n\n{%s}->[%s]->{%s}->[%s]' % (str(state), str(action), str(state_p), str(action_p)))
+				print('[%f] [%f] (%f)->(%f)' % (reward, q_sp, q_sa, self.q_table[s_a]))
 			# update current state and action
 			state = state_p
 			action = action_p
@@ -265,7 +265,7 @@ class MDP:
 		pass
 
 
-	def validation(self, data):
+	def accuracy(self, data):
 		total = len(data.index)
 		correct = 0
 		predictions = self.cluster.results(data)
@@ -276,7 +276,7 @@ class MDP:
 				action = self.getAction(state, 0)
 				# show path
 				if debug_print:
-					print("{%s}->[%s]" % (str(state), str(action)))
+					print('{%s}->[%s]' % (str(state), str(action)))
 				if action.index == -1:
 					pred = self.majorityVote(state)
 					break
@@ -287,7 +287,7 @@ class MDP:
 			if pred == real:
 				correct += 1
 			if debug_print:
-				print("pred: %s, real: %s, correct: %s\n" % (pred, real, pred == real))
+				print('pred: %s, real: %s, correct: %s\n' % (pred, real, pred == real))
 		accuracy = correct / total
 		return accuracy
 

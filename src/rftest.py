@@ -42,8 +42,8 @@ def splitByPortion(data, portion, seed = 666):
 
 rd.seed(666)
 
-card = pd.read_csv("data/creditcard/creditcard.csv")
-card.drop("Time", axis = 1, inplace = True)
+card = pd.read_csv('data/creditcard/creditcard.csv')
+card.drop('Time', axis = 1, inplace = True)
 
 fraud = card.loc[card.Class == 1, :]
 nonfraud = card.loc[card.Class == 0, :]
@@ -69,7 +69,7 @@ t = tree.DecisionTreeClassifier()
 for i in range(4):
 	feature_score = [[], [], [], [], [], []]
 	for j in range(29):
-		print("i: %d, j: %d" % (i, j))
+		print('i: %d, j: %d' % (i, j))
 		rd.seed(i * j)
 		feature = rd.sample(range(29), feature_count[i])
 		X = train.iloc[:, feature]
@@ -99,7 +99,7 @@ print(scores)
 '''
 rf = RandomForestClassifier(n_estimators = 30)
 rf.fit(X, y)
-print("Done training")
+print('Done training')
 # print(rf.feature_importances_)
 # print(rf.predict_proba(X_test))
 print(rf.score(X_test, y_test))
@@ -120,14 +120,14 @@ print(rf.score(X_test, y_test))
 
 outfile = open('out.txt', 'w')
 # for r in res:
-# 	outfile.write("%s\n" % r)
+# 	outfile.write('%s\n' % r)
 
 
 rfs = [RandomForestClassifier(n_estimators = 30) for _ in range(50)]
 for i in range(len(rfs)):
 	print('building rf %d' % i)
 	rfs[i].fit(train_attr, train_label)
-print("Finished RF construction")
+print('Finished RF construction')
 
 # accu = []
 
@@ -157,7 +157,7 @@ for i in range(len(restb[0])):
 	conftb.append(conf)
 
 for row in conftb:
-	outfile.write("%s\n" % row)
+	outfile.write('%s\n' % row)
 
 # print(rfs[0].predict_proba([test_attr[0]]))
 
@@ -169,11 +169,11 @@ im = Image.fromarray(npa).save('p1.png')
 def frog():
 	NUM_CLASSIFIER = 100
 
-	frog = pd.read_csv("data/MFCCs/Frogs_MFCCs.csv")
-	frog.drop("RecordID", axis = 1, inplace = True)
-	frog.drop("Species", axis = 1, inplace = True)
-	frog.drop("Genus", axis = 1, inplace = True)
-	# frog.drop("Family", axis = 1, inplace = True)
+	frog = pd.read_csv('data/MFCCs/Frogs_MFCCs.csv')
+	frog.drop('RecordID', axis = 1, inplace = True)
+	frog.drop('Species', axis = 1, inplace = True)
+	frog.drop('Genus', axis = 1, inplace = True)
+	# frog.drop('Family', axis = 1, inplace = True)
 	frog_train, frog_test = splitByPortion(frog, 0.8)
 	frog_train_clf, frog_train_mdp = splitByPortion(frog_train, 0.5)
 	# print(frog_train_clf.shape)
@@ -182,7 +182,7 @@ def frog():
 	num_feature = frog.shape[1] - 1
 
 	time_1 = time.time()
-	pure_clf = classifier.Cluster(1, ["rf"], [list(range(num_feature))])
+	pure_clf = classifier.Cluster(1, ['rf'], [list(range(num_feature))])
 	pure_clf.train(frog_train)
 	pure_clf_scores = pure_clf.validation(frog_test)
 	# print(pure_clf_scores[0])
@@ -194,7 +194,7 @@ def frog():
 		features.append(feature)
 	# print(features)
 
-	cluster = classifier.Cluster(NUM_CLASSIFIER, ["rf"], features)
+	cluster = classifier.Cluster(NUM_CLASSIFIER, ['rf'], features)
 	cluster.train(frog_train_clf)
 	clf_scores = cluster.validation(frog_test)
 	# print(clf_scores)
@@ -238,7 +238,7 @@ def frog():
 	input_size = int(len(label_map) * NUM_CLASSIFIER)
 	hidden_layers = [input_size, int(input_size / 2), 8, 4]
 	cnn = MLPClassifier(hidden_layer_sizes = tuple(hidden_layers), \
-						alpha = 1e-5, activation = "relu", solver = "sgd", \
+						alpha = 1e-5, activation = 'relu', solver = 'sgd', \
 						random_state = 1, max_iter = 1000)
 	X = train_net.iloc[:, list(range(len(label_map) * NUM_CLASSIFIER))]
 	y = train_net.iloc[:, -1]
@@ -248,16 +248,16 @@ def frog():
 	net_score = cnn.score(X_test, y_test)
 	
 	print(pure_clf_scores[0], np.mean(clf_scores), net_score)
-	print("--- %s %s ---" % (time_2 - time_1, time.time() - time_2))
+	print('--- %s %s ---' % (time_2 - time_1, time.time() - time_2))
 
 
 def humanActivity():
 	NUM_CLASSIFIER = 100
 
-	ha_train = pd.read_csv("data/humanactivity/train.csv")
-	ha_test = pd.read_csv("data/humanactivity/test.csv")
-	ha_train.drop("subject", axis = 1, inplace = True)
-	ha_test.drop("subject", axis = 1, inplace = True)
+	ha_train = pd.read_csv('data/humanactivity/train.csv')
+	ha_test = pd.read_csv('data/humanactivity/test.csv')
+	ha_train.drop('subject', axis = 1, inplace = True)
+	ha_test.drop('subject', axis = 1, inplace = True)
 	# ha_train_clf, ha_train_net = splitByPortion(ha_train, 0.5)
 	ha_train_clf = ha_train
 	ha_train_net = ha_train
@@ -266,7 +266,7 @@ def humanActivity():
 	# print(ha_test.shape)
 	num_feature = ha_train.shape[1] - 1
 
-	pure_clf = classifier.Cluster(1, ["rf"], [list(range(num_feature))])
+	pure_clf = classifier.Cluster(1, ['rf'], [list(range(num_feature))])
 	pure_clf.train(ha_train)
 	pure_clf_scores = pure_clf.validation(ha_test)
 	# print(pure_clf_scores[0])
@@ -277,7 +277,7 @@ def humanActivity():
 		features.append(feature)
 	# print(features)
 
-	cluster = classifier.Cluster(NUM_CLASSIFIER, ["rf"], features)
+	cluster = classifier.Cluster(NUM_CLASSIFIER, ['rf'], features)
 	cluster.train(ha_train_clf)
 	clf_scores = cluster.validation(ha_test)
 	# print(clf_scores)
@@ -323,7 +323,7 @@ def humanActivity():
 	input_size = int(len(label_map) * NUM_CLASSIFIER)
 	hidden_layers = [input_size, int(input_size / 2), int(input_size / 2), 15, 6]
 	cnn = MLPClassifier(hidden_layer_sizes = tuple(hidden_layers), \
-						alpha = 1e-5, activation = "relu", solver = "sgd", \
+						alpha = 1e-5, activation = 'relu', solver = 'sgd', \
 						random_state = 1, max_iter = 1000)
 	X = train_net.iloc[:, list(range(len(label_map) * NUM_CLASSIFIER))]
 	y = train_net.iloc[:, -1]
@@ -333,6 +333,6 @@ def humanActivity():
 	net_score = cnn.score(X_test, y_test)
 	
 	print(pure_clf_scores[0], np.mean(clf_scores), net_score)
-	print("--- %s seconds ---" % (time.time() - start_time))
+	print('--- %s seconds ---' % (time.time() - start_time))
 
 

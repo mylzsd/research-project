@@ -8,14 +8,14 @@ class Classifier:
 
     def __init__(self, classifier_type, feature, **clf_kwarg):
         self.feature = set(feature)
-        if classifier_type == "dt":
+        if classifier_type == 'dt':
             self.clf = DecisionTreeClassifier()
-        elif classifier_type == "rf":
+        elif classifier_type == 'rf':
             self.clf = RandomForestClassifier(**clf_kwarg)
-        elif classifier_type == "svm":
+        elif classifier_type == 'svm':
             self.clf = SVC()
         else:
-            raise ValueError("unrecognized classifier type")
+            raise ValueError('unrecognized classifier type')
 
     def train(self, X, y):
         self.clf.fit(X, y)
@@ -31,15 +31,15 @@ class Cluster:
 
     def __init__(self, size, types, features, **clf_kwarg):
         if len(features) != size:
-            raise ValueError("length of feature does not match number of classifiers")
+            raise ValueError('length of feature does not match number of classifiers')
         self.size = size
         self.features = features
         self.classifiers = []
         self.clf_types = []
-        rd.seed(clf_kwarg.get("random_state", rd.randint(1, 10000)))
+        rd.seed(clf_kwarg.get('random_state', rd.randint(1, 10000)))
         for i in range(size):
             self.clf_types.append(types[i % len(types)])
-            clf_kwarg["random_state"] = rd.randint(1, 10000)
+            clf_kwarg['random_state'] = rd.randint(1, 10000)
             self.classifiers.append(Classifier(self.clf_types[i], features[i], **clf_kwarg))
 
 

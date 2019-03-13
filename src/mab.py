@@ -17,8 +17,8 @@ class EpsGreedy(MAB):
     
     def __init__(self, narms, epsilon, Q0 = np.inf):
         # parameter check
-        assert narms > 0, "number of arms should be positive"
-        assert epsilon >= 0 and epsilon <= 1, "epsilon should between 0 and 1"
+        assert narms > 0, 'number of arms should be positive'
+        assert epsilon >= 0 and epsilon <= 1, 'epsilon should between 0 and 1'
         self.narms = narms
         self.epsilon = epsilon
         self.Q0 = Q0
@@ -28,7 +28,7 @@ class EpsGreedy(MAB):
         
     def play(self, tround, context = None):
         # parameter check
-        assert tround > 0 and tround <= len(self.history) + 1, "invalid tround"
+        assert tround > 0 and tround <= len(self.history) + 1, 'invalid tround'
         if np.random.random_sample() < self.epsilon:
             # exploration with probability of epsilon
             # random integer in range [0, narms)
@@ -64,7 +64,7 @@ class EpsGreedy(MAB):
         
     def update(self, arm, reward, context = None):
         # parameter check
-        assert arm > 0 and arm <= self.narms, "invalid arm index"
+        assert arm > 0 and arm <= self.narms, 'invalid arm index'
         # append new record
         self.history.append((arm, reward))
         
@@ -73,8 +73,8 @@ class UCB(MAB):
     
     def __init__(self, narms, rho, Q0 = np.inf):
         # parameter check
-        assert narms > 0, "number of arms should be positive"
-        assert rho > 0, "rho should be positive"
+        assert narms > 0, 'number of arms should be positive'
+        assert rho > 0, 'rho should be positive'
         self.narms = narms
         self.rho = rho
         self.Q0 = Q0
@@ -84,7 +84,7 @@ class UCB(MAB):
     
     def play(self, tround, context = None):
         # parameter check
-        assert tround > 0 and tround <= len(self.history) + 1, "invalid tround"
+        assert tround > 0 and tround <= len(self.history) + 1, 'invalid tround'
         # sum up first tround - 1 records
         reward = dict()
         count = dict()
@@ -112,7 +112,7 @@ class UCB(MAB):
         
     def update(self, arm, reward, context = None):
         # parameter check
-        assert arm > 0 and arm <= self.narms, "invalid arm index"
+        assert arm > 0 and arm <= self.narms, 'invalid arm index'
         # append new record
         self.history.append((arm, reward))
         
@@ -144,7 +144,7 @@ def offlineEvaluate(mab, arms, rewards, contexts, nrounds = None):
 
 # this section reads dataset.txt and construct
 # arms, rewards, and contexts arrays
-f = open("dataset.txt", "r")
+f = open('dataset.txt', 'r')
 lines = f.readlines()
 arms = []
 rewards = []
@@ -172,7 +172,7 @@ class LinUCB(MAB):
     
     def __init__(self, narms, ndims, alpha):
         # parameters check
-        assert narms > 0 and ndims > 0 and alpha >= 0, "all parameters should be non-negative"
+        assert narms > 0 and ndims > 0 and alpha >= 0, 'all parameters should be non-negative'
         self.narms = narms
         self.ndims = ndims
         self.alpha = alpha
@@ -190,7 +190,7 @@ class LinUCB(MAB):
         
     def play(self, tround, context):
         # parameter check
-        assert tround > 0 and tround <= len(self.matrixA), "invalid tround"
+        assert tround > 0 and tround <= len(self.matrixA), 'invalid tround'
         mAt = self.matrixA[tround - 1]
         vbt = self.vectorb[tround - 1]
         # find the Q value of each arm and put it into the 
@@ -217,7 +217,7 @@ class LinUCB(MAB):
     
     def update(self, arm, reward, context):
         # parameter check
-        assert arm > 0 and arm <= self.narms, "invalid arm index"
+        assert arm > 0 and arm <= self.narms, 'invalid arm index'
         # get previous matrix and vector
         mA_old = self.matrixA[-1]
         vb_old = self.vectorb[-1]
@@ -259,26 +259,26 @@ for i in range(1, len(results_EpsGreedy) + 1):
     y_EpsGreedy.append(s_EpsGreedy[i] / i)
     y_UCB.append(s_UCB[i] / i)
     y_LinUCB.append(s_LinUCB[i] / i)
-plt.plot(x, y_EpsGreedy, label = "EpsGreedy")
-plt.plot(x, y_UCB, label = "UCB")
-plt.plot(x, y_LinUCB, label = "LinUCB")
+plt.plot(x, y_EpsGreedy, label = 'EpsGreedy')
+plt.plot(x, y_UCB, label = 'UCB')
+plt.plot(x, y_LinUCB, label = 'LinUCB')
 plt.legend()
 plt.show()
 
 
-"""
+'''
 Based on the experiment in the paper, 7 different 
 alpha values are tested, then the average reward 
 for each alpha value is printed and plot in graph.
 The result shows that the highest mean reward is achieved
 when alpha equals to 0.2.
-"""
+'''
 x = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2]
 y = []
 for i in x:
     mab = LinUCB(10, 10, i)
     res = offlineEvaluate(mab, arms, rewards, contexts, 800)
-    print("alpha: %.5f, mean reward: %.5f" % (i, np.mean(res)))
+    print('alpha: %.5f, mean reward: %.5f' % (i, np.mean(res)))
     y.append(np.mean(res))
 plt.plot(x, y)
 plt.show()
@@ -290,7 +290,7 @@ class KernelUCB(MAB):
 	
     def __init__(self, narms, ndims, gamma, eta, kern):
         # parameters check
-        assert narms > 0 and ndims > 0 and gamma > 0 and eta > 0, "all parameters should be positive"
+        assert narms > 0 and ndims > 0 and gamma > 0 and eta > 0, 'all parameters should be positive'
         self.narms = narms
         self.ndims = ndims
         self.gamma = gamma
@@ -307,7 +307,7 @@ class KernelUCB(MAB):
     
     def play(self, tround, context):
         # parameter check
-        assert tround > 0 and tround <= len(self.rewards), "invalid tround"
+        assert tround > 0 and tround <= len(self.rewards), 'invalid tround'
         if tround == 1:
             u = [1.0] + [0.0] * (self.narms - 1)
         else:
@@ -390,8 +390,8 @@ class KernelUCB(MAB):
 #     for e in eta:
 #         mab = KernelUCB(10, 10, g, e, rbf_kernel)
 #         results_KernelUCB = offlineEvaluate(mab, arms, rewards, contexts, 800)
-#         print("gamma: %.1f, eta: %.1f, reward: %.5f" % (g, e, np.mean(results_KernelUCB)))
-"""
+#         print('gamma: %.1f, eta: %.1f, reward: %.5f' % (g, e, np.mean(results_KernelUCB)))
+'''
 gamma: 0.5, eta: 0.2, reward: 0.77000
 gamma: 0.5, eta: 0.5, reward: 0.68625
 gamma: 0.5, eta: 0.8, reward: 0.52375
@@ -413,13 +413,13 @@ gamma: 2.0, eta: 0.8, reward: 0.63125
 gamma: 2.0, eta: 1.0, reward: 0.64250
 Based on grid search result, although the performance is unstable,
 gamma = 0.5 and eta = 0.2 is the best combination on average.
-"""
+'''
 mab = KernelUCB(10, 10, 0.5, 0.2, rbf_kernel)
 results_KernelUCB = offlineEvaluate(mab, arms, rewards, contexts, 800)
-print("KernelUCB average reward ", np.mean(results_KernelUCB))
+print('KernelUCB average reward ', np.mean(results_KernelUCB))
 mab = LinUCB(10, 10, 0.2)
 results_LinUCB = offlineEvaluate(mab, arms, rewards, contexts, 800)
-print("LinUCB average reward ", np.mean(results_LinUCB))
+print('LinUCB average reward ', np.mean(results_LinUCB))
 
 x = range(1, len(results_EpsGreedy) + 1)
 y_LinUCB = [results_LinUCB[0]]
@@ -434,7 +434,7 @@ for i in range(1, len(results_LinUCB)):
     # divide number of rounds
     y_LinUCB.append(s_LinUCB / (i + 1))
     y_KernelUCB.append(s_KernelUCB / (i + 1))
-plt.plot(x, y_LinUCB, label = "LinUCB")
-plt.plot(x, y_KernelUCB, label = "KernelUCB")
+plt.plot(x, y_LinUCB, label = 'LinUCB')
+plt.plot(x, y_KernelUCB, label = 'KernelUCB')
 plt.legend()
 plt.show()
