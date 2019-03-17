@@ -1,11 +1,12 @@
-{'mode': 'mlp', 'dataset': 'human_activity', 'num_clf': 100, 'reuse': False, 'random_state': 4374, 'num_estimators': 100}
+Namespace(dataset='human_activity', mode='mlp', n_estimators=1, num_clf=100, random_state=3997, reuse=False)
+Dataset human_activity
 (3676, 562)
 (3676, 562)
 (2947, 562)
-Training classifiers: Tue Mar 12 14:21:20 2019
-Training mlp: Tue Mar 12 14:53:00 2019
+Training classifiers: Mon Mar 18 01:00:42 2019
+Training mlp: Mon Mar 18 01:11:56 2019
 Number of label: 6
-0.9202578893790295 0.9341703427214116 0.9263250763488294
-0.9002375296912114 0.9416355615880556 0.9216728876823888
-0.9317950458092976
-Finish time: Tue Mar 12 14:57:58 2019
+full set majority vote: 0.927044
+half set majority vote: 0.926705
+mlp: 0.9222938581608415
+Finish time: Mon Mar 18 01:15:19 2019

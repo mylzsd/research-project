@@ -34,7 +34,7 @@ def mlp(rdr, dataset, num_clf, **clf_kwargs):
     print('Training classifiers:', time.asctime(time.localtime(time.time())))
     pure_clf = classifier.Cluster(num_clf, ['rf'], [list(range(num_feature))] * num_clf, **clf_kwargs)
     pure_clf.train(train)
-    pure_scores = pure_clf.accuracy(test)
+    pure_scores = pure_clf.majorityVote(test)
 
     features = []
     for i in range(num_clf):
@@ -43,7 +43,7 @@ def mlp(rdr, dataset, num_clf, **clf_kwargs):
 
     cluster = classifier.Cluster(num_clf, ['rf'], features, **clf_kwargs)
     cluster.train(train_clf)
-    clf_scores = cluster.accuracy(test)
+    clf_scores = cluster.majorityVote(test)
 
     print('Training mlp:', time.asctime(time.localtime(time.time())))
 
@@ -74,10 +74,8 @@ def mlp(rdr, dataset, num_clf, **clf_kwargs):
     y_test = test_bi.iloc[:, -1]
     net_score = mlp.score(X_test, y_test)
     
-    print('min: %f, max: %f, mean: %f'
-            % (min(pure_scores), max(pure_scores), np.mean(pure_scores)))
-    print('min: %f, max: %f, mean: %f'
-            % (min(clf_scores), max(clf_scores), np.mean(clf_scores)))
+    print('full set majority vote: %f' % (pure_scores))
+    print('half set majority vote: %f' % (clf_scores))
     print('mlp:', net_score)
     print('Finish time:', time.asctime(time.localtime(time.time())))
 
@@ -236,7 +234,7 @@ def readCommand(argv):
     parser.add_argument('-n', '--num-clf', type=int, default=50)
     parser.add_argument('-u', '--reuse', action='store_true', default=False)
     parser.add_argument('-r', '--random-state', type=int, default=rd.randint(1, 10000))
-    parser.add_argument('-s', '--n-estimators', type =int, default=100)
+    parser.add_argument('-s', '--n-estimators', type =int, default=1)
     
     options = parser.parse_args(argv)
     print(options)

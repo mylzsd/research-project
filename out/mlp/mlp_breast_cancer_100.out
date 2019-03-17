@@ -1,11 +1,12 @@
-{'mode': 'mlp', 'dataset': 'breast_cancer', 'num_clf': 100, 'reuse': False, 'random_state': 2969, 'num_estimators': 100}
+Namespace(dataset='breast_cancer', mode='mlp', n_estimators=1, num_clf=100, random_state=2343, reuse=False)
+Dataset breast_cancer
 (128, 16)
 (129, 16)
 (29, 16)
-Training classifiers: Tue Mar 12 13:52:24 2019
-Training mlp: Tue Mar 12 13:52:56 2019
+Training classifiers: Mon Mar 18 00:49:27 2019
+Training mlp: Mon Mar 18 00:49:31 2019
 Number of label: 2
-0.7241379310344828 0.7931034482758621 0.7651724137931033
-0.4827586206896552 0.8620689655172413 0.6862068965517242
-0.7241379310344828
-Finish time: Tue Mar 12 13:53:02 2019
+full set majority vote: 0.758621
+half set majority vote: 0.827586
+mlp: 0.8275862068965517
+Finish time: Mon Mar 18 00:49:31 2019

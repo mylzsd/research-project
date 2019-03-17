@@ -1,0 +1,11 @@
+{'mode': 'mlp', 'dataset': 'human_activity', 'num_clf': 50, 'reuse': False, 'random_state': 4829, 'num_estimators': 100}
+(3676, 562)
+(3676, 562)
+(2947, 562)
+Training classifiers: Tue Mar 12 14:04:40 2019
+Training mlp: Tue Mar 12 14:20:26 2019
+Number of label: 6
+0.9212758737699356 0.9304377332880895 0.9264743807261621
+0.8951476077366813 0.9358669833729216 0.917482185273159
+0.9263657957244655
+Finish time: Tue Mar 12 14:21:15 2019

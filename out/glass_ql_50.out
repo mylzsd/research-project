@@ -1,0 +1,18 @@
+{'dataset': 'glass', 'model': 'ql', 'num_clf': 50, 'num_training': 10000, 'learning_rate': 0.1, 'discount_factor': 1.0, 'epsilon': 0.1, 'random_state': 3570, 'n_estimators': 1}
+(96, 10)
+(97, 10)
+(21, 10)
+Episode 1000: accuracy: 0.571429
+Episode 2000: accuracy: 0.571429
+Episode 3000: accuracy: 0.619048
+Episode 4000: accuracy: 0.619048
+Episode 5000: accuracy: 0.714286
+Episode 6000: accuracy: 0.666667
+Episode 7000: accuracy: 0.666667
+Episode 8000: accuracy: 0.619048
+Episode 9000: accuracy: 0.619048
+Episode 10000: accuracy: 0.619048
+36928547
+Single random forest accuracy: 0.7619047619047619
+Majority vote accuracy: 0.6666666666666666
+Reinforcement learning accuracy: 0.6190476190476191

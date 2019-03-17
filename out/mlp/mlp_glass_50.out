@@ -1,11 +1,12 @@
-{'mode': 'mlp', 'dataset': 'glass', 'num_clf': 50, 'reuse': False, 'random_state': 9797, 'num_estimators': 100}
+Namespace(dataset='glass', mode='mlp', n_estimators=1, num_clf=50, random_state=3032, reuse=False)
+Dataset glass
 (96, 10)
 (97, 10)
 (21, 10)
-Training classifiers: Tue Mar 12 14:02:05 2019
-Training mlp: Tue Mar 12 14:02:26 2019
+Training classifiers: Mon Mar 18 00:53:10 2019
+Training mlp: Mon Mar 18 00:53:12 2019
 Number of label: 6
-0.6666666666666666 0.7619047619047619 0.7152380952380952
-0.3333333333333333 0.7619047619047619 0.56
-0.7142857142857143
-Finish time: Tue Mar 12 14:02:39 2019
+full set majority vote: 0.809524
+half set majority vote: 0.666667
+mlp: 0.5238095238095238
+Finish time: Mon Mar 18 00:53:20 2019

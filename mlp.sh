@@ -1,6 +1,6 @@
 #!/bin/sh
 
-for d in breast_cancer breast_w cmc dematology ecoli glass hepatitis human_activity iris lymphography
+for d in audiology breast_cancer breast_w cmc dematology ecoli glass hepatitis human_activity iris lymphography
 do
 	for n in 50 100
 	do
