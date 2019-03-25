@@ -3,19 +3,20 @@ import pandas as pd
 
 
 class Reader:
-    def __init__(self, random_state):
+    def __init__(self, random_state, portion=0.5):
         self.random_state = random_state
         self.dir = os.getcwd() + '/data/'
+        self.portion = portion
 
     '''
     portion is for the first half
     '''
     def splitByPortion(self, data, portion):
-        part1 = data.sample(frac = portion, random_state = self.random_state)
+        part1 = data.sample(frac=portion, random_state=self.random_state)
         part2 = data.loc[~data.index.isin(part1.index), :]
         return (part1, part2)
 
-
+    # encode boolean categorical column to numerical
     def boolColumn(self, dfs, col, type1, type2):
         for df in dfs:
             for i in df.index:
@@ -27,7 +28,7 @@ class Reader:
                 else:
                     df.loc[i, col] = 0
 
-
+    # One-hot encoding with pre-defined missing value
     def cateColumn(self, dfs, col, missing):
         types = dict()
         for df in dfs:
@@ -47,13 +48,14 @@ class Reader:
                     df.loc[i, types[var]] = 1
             df.drop(col, axis = 1, inplace = True)
 
-
+    # encode ordered categorical column to numerical
     def numeColumn(self, dfs, col, values):
         for df in dfs:
             for i in df.index:
                 var = df.loc[i, col]
                 df.loc[i, col] = values[var]
 
+    # fill empty numerical column with mean value
     def fillEmpty(self, dfs, col, missing, is_float):
         s = 0
         c = 0
@@ -127,7 +129,7 @@ class Reader:
         for col in cate_columns:
             self.cateColumn([train, test], col, '?')
         train = train.infer_objects()
-        train_clf, train_mdp = self.splitByPortion(train, 0.5)
+        train_clf, train_mdp = self.splitByPortion(train, self.portion)
         test = test.infer_objects()
         return (train, train_clf, train_mdp, test)
 
@@ -166,7 +168,7 @@ class Reader:
         data = data.infer_objects()
         # split to train & test sets
         train, test = self.splitByPortion(data, 0.9)
-        train_clf, train_mdp = self.splitByPortion(train, 0.5)
+        train_clf, train_mdp = self.splitByPortion(train, self.portion)
         return (train, train_clf, train_mdp, test)
 
 
@@ -187,7 +189,7 @@ class Reader:
             self.fillEmpty([data], col, '?', False)
 
         train, test = self.splitByPortion(data, 0.9)
-        train_clf, train_mdp = self.splitByPortion(train, 0.5)
+        train_clf, train_mdp = self.splitByPortion(train, self.portion)
         return (train, train_clf, train_mdp, test)
 
 
@@ -206,7 +208,7 @@ class Reader:
             self.cateColumn([data], col, '?')
         data = data.infer_objects()
         train, test = self.splitByPortion(data, 0.9)
-        train_clf, train_mdp = self.splitByPortion(train, 0.5)
+        train_clf, train_mdp = self.splitByPortion(train, self.portion)
         return (train, train_clf, train_mdp, test)
 
 
@@ -234,7 +236,7 @@ class Reader:
         self.fillEmpty([data], 'Age', '?', True)
 
         train, test = self.splitByPortion(data, 0.9)
-        train_clf, train_mdp = self.splitByPortion(train, 0.5)
+        train_clf, train_mdp = self.splitByPortion(train, self.portion)
         return (train, train_clf, train_mdp, test)
 
 
@@ -249,7 +251,7 @@ class Reader:
         data.drop('Sequence Name', axis = 1, inplace = True)
         data = data.infer_objects()
         train, test = self.splitByPortion(data, 0.9)
-        train_clf, train_mdp = self.splitByPortion(train, 0.5)
+        train_clf, train_mdp = self.splitByPortion(train, self.portion)
         return (train, train_clf, train_mdp, test)
 
     '''
@@ -263,7 +265,7 @@ class Reader:
         data.drop('Id', axis = 1, inplace = True)
         data = data.infer_objects()
         train, test = self.splitByPortion(data, 0.9)
-        train_clf, train_mdp = self.splitByPortion(train, 0.5)
+        train_clf, train_mdp = self.splitByPortion(train, self.portion)
         return (train, train_clf, train_mdp, test)
 
 
@@ -292,7 +294,7 @@ class Reader:
         data.insert(col_size - 1, 'Class', data.pop('Class'))
 
         train, test = self.splitByPortion(data, 0.9)
-        train_clf, train_mdp = self.splitByPortion(train, 0.5)
+        train_clf, train_mdp = self.splitByPortion(train, self.portion)
         return (train, train_clf, train_mdp, test)
 
 
@@ -306,7 +308,7 @@ class Reader:
         train.drop('subject', axis = 1, inplace = True)
         test.drop('subject', axis = 1, inplace = True)
 
-        train_clf, train_mdp = self.splitByPortion(train, 0.5)
+        train_clf, train_mdp = self.splitByPortion(train, self.portion)
         return (train, train_clf, train_mdp, test)
 
 
@@ -320,7 +322,7 @@ class Reader:
         iris = pd.concat([iris, bezd], ignore_index = True)
 
         train, test = self.splitByPortion(iris, 0.9)
-        train_clf, train_mdp = self.splitByPortion(train, 0.5)
+        train_clf, train_mdp = self.splitByPortion(train, self.portion)
         return (train, train_clf, train_mdp, test)
 
 
@@ -347,7 +349,7 @@ class Reader:
         data.insert(col_size - 1, 'class', data.pop('class'))
 
         train, test = self.splitByPortion(data, 0.9)
-        train_clf, train_mdp = self.splitByPortion(train, 0.5)
+        train_clf, train_mdp = self.splitByPortion(train, self.portion)
         return (train, train_clf, train_mdp, test)
 
 

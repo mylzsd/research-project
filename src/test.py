@@ -5,10 +5,13 @@ import time
 import os, sys, random as rd
 import numpy as np
 import pandas as pd
+import tensorflow as tf
 import argparse
 from sklearn.neural_network import MLPClassifier
 
 
+# convert categorical predicted result into binary form
+# using one-hot encoding
 def class2binary(cluster, num_clf, label_map, data):
     real = data.iloc[:, -1].reset_index(drop = True)
     results = cluster.results(data)
@@ -22,6 +25,24 @@ def class2binary(cluster, num_clf, label_map, data):
     bi_df = pd.DataFrame(bi)
     return pd.concat([bi_df, real], axis = 1)
 
+def multilayer_perceptron(x, weights, biases):
+    layer_1 = tf.add(tf.matmul(x, weights[0]), biases[0])
+    layer_1 = tf.nn.sigmoid(layer_1)
+
+    layer_2 = tf.add(tf.matmul(layer_1, weights[1]), biases[1])
+    layer_2 = tf.nn.sigmoid(layer_2)
+
+    layer_3 = tf.add(tf.matmul(layer_2, weights[2]), biases[2])
+    layer_3 = tf.nn.sigmoid(layer_3)
+
+    layer_4 = tf.add(tf.matmul(layer_3, weights[3]), biases[3])
+    layer_4 = tf.nn.sigmoid(layer_4)
+
+    layer_5 = tf.add(tf.matmul(layer_4, weights[4]), biases[4])
+    layer_5 = tf.nn.relu(layer_5)
+
+    out_layer = tf.matmul(layer_5, weights[5]) + biases[5]
+    return out_layer
 
 def mlp(rdr, dataset, num_clf, **clf_kwargs):
     print('Dataset', dataset)
@@ -45,7 +66,7 @@ def mlp(rdr, dataset, num_clf, **clf_kwargs):
     cluster.train(train_clf)
     clf_scores = cluster.majorityVote(test)
 
-    print('Training mlp:', time.asctime(time.localtime(time.time())))
+    print('Training sci mlp:', time.asctime(time.localtime(time.time())))
 
     label_map = dict()
     index = 0
@@ -61,22 +82,98 @@ def mlp(rdr, dataset, num_clf, **clf_kwargs):
 
     train_bi = class2binary(cluster, num_clf, label_map, train_net)
     test_bi = class2binary(cluster, num_clf, label_map, test)
+    print(train_bi.shape)
+    print(test_bi.shape)
 
-    input_size = int(len(label_map) * num_clf)
-    hidden_layers = (input_size, int(input_size / 2), int(input_size / 2), len(label_map) * 2, len(label_map))
+    n_class = len(label_map)
+    input_size = n_class * num_clf
+    hidden_layers = (input_size, int(input_size / 2), int(input_size / 2), n_class * 2, n_class)
     mlp = MLPClassifier(hidden_layer_sizes = hidden_layers,
                         alpha = 1e-5, activation = 'relu', solver = 'sgd',
                         random_state = clf_kwargs['random_state'], max_iter = 10000)
-    X = train_bi.iloc[:, list(range(len(label_map) * num_clf))]
+    X = train_bi.iloc[:, list(range(n_class * num_clf))]
     y = train_bi.iloc[:, -1]
     mlp.fit(X, y)
-    X_test = test_bi.iloc[:, list(range(len(label_map) * num_clf))]
+    X_test = test_bi.iloc[:, list(range(n_class * num_clf))]
     y_test = test_bi.iloc[:, -1]
     net_score = mlp.score(X_test, y_test)
+
+    # start of tensorflow part
+
+    print('Training tf mlp:', time.asctime(time.localtime(time.time())))
+
+    x = tf.placeholder(tf.float32, [None, input_size])
+    y_ = tf.placeholder(tf.float32, [None, n_class])
+
+    x_train_tf = train_bi.iloc[:, list(range(n_class * num_clf))]
+    y_train_tf = []
+    for i in range(train_bi.shape[0]):
+        bi = [0] * n_class
+        bi[label_map[train_bi.iloc[i, -1]]] = 1
+        y_train_tf.append(bi)
+    y_train_tf = pd.DataFrame(y_train_tf)
+
+    x_test_tf = test_bi.iloc[:, list(range(n_class * num_clf))]
+    y_test_tf = []
+    for i in range(test_bi.shape[0]):
+        bi = [0] * n_class
+        bi[label_map[test_bi.iloc[i, -1]]] = 1
+        y_test_tf.append(bi)
+    y_test_tf = pd.DataFrame(y_test_tf)
+
+    hidden_layers = (input_size, int(input_size / 2), int(input_size / 2), n_class * 2, n_class)
+    weights = [
+                tf.Variable(tf.truncated_normal([input_size, hidden_layers[0]])),
+                tf.Variable(tf.truncated_normal([hidden_layers[0], hidden_layers[1]])),
+                tf.Variable(tf.truncated_normal([hidden_layers[1], hidden_layers[2]])),
+                tf.Variable(tf.truncated_normal([hidden_layers[2], hidden_layers[3]])),
+                tf.Variable(tf.truncated_normal([hidden_layers[3], hidden_layers[4]])),
+                tf.Variable(tf.truncated_normal([hidden_layers[4], n_class]))
+                ]
+    biases = [
+                tf.Variable(tf.truncated_normal([hidden_layers[0]])),
+                tf.Variable(tf.truncated_normal([hidden_layers[1]])),
+                tf.Variable(tf.truncated_normal([hidden_layers[2]])),
+                tf.Variable(tf.truncated_normal([hidden_layers[3]])),
+                tf.Variable(tf.truncated_normal([hidden_layers[4]])),
+                tf.Variable(tf.truncated_normal([n_class]))
+                ]
+    y = multilayer_perceptron(x, weights, biases)
+
+    learning_rate = 0.01
+    cost_function = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(labels=y_, logits=y))
+    training_step = tf.train.GradientDescentOptimizer(learning_rate).minimize(cost_function)
+
+    init = tf.global_variables_initializer()
+
+    with tf.Session() as sess:
+        sess.run(init)
+
+        for e in range(600):
+            sess.run(training_step, feed_dict={x: x_train_tf, y_: y_train_tf})
+            cost = sess.run(cost_function, feed_dict={x: x_train_tf, y_: y_train_tf})
+
+            correct = tf.equal(tf.argmax(y, 1), tf.argmax(y_, 1))
+            accuracy = tf.reduce_mean(tf.cast(correct, tf.float32))
+            accuracy = sess.run(accuracy, feed_dict={x: x_train_tf, y_: y_train_tf})
+
+            pred_y = sess.run(y, feed_dict={x: x_test_tf})
+            mse = tf.reduce_mean(tf.square(pred_y - y_test_tf))
+            mse = sess.run(mse)
+
+            if (e + 1) % 100 == 0:
+                print('epoch: %d, cost: %f, accuracy: %f, mse: %f' % (e, cost, accuracy, mse))
+
+        correct = tf.equal(tf.argmax(y, 1), tf.argmax(y_, 1))
+        accuracy = tf.reduce_mean(tf.cast(correct, tf.float32))
+        test_accu = sess.run(accuracy, feed_dict={x: x_test_tf, y_: y_test_tf})
+
+    # end of tensorflow part
     
     print('full set majority vote: %f' % (pure_scores))
-    print('half set majority vote: %f' % (clf_scores))
-    print('mlp:', net_score)
+    print('part set majority vote: %f' % (clf_scores))
+    print('sci mlp:', net_score)
+    print('tf mlp:', test_accu)
     print('Finish time:', time.asctime(time.localtime(time.time())))
 
 
