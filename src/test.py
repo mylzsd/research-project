@@ -149,7 +149,7 @@ def mlp(rdr, dataset, num_clf, **clf_kwargs):
     with tf.Session() as sess:
         sess.run(init)
 
-        for e in range(600):
+        for e in range(1000):
             sess.run(training_step, feed_dict={x: x_train_tf, y_: y_train_tf})
             cost = sess.run(cost_function, feed_dict={x: x_train_tf, y_: y_train_tf})
 
