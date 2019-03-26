@@ -18,6 +18,7 @@ def readCommand(argv):
     parser.add_argument('-e', '--epsilon', type=float, default=0.1)
     parser.add_argument('-r', '--random-state', type=int, default=rd.randint(1, 10000))
     parser.add_argument('-s', '--n-estimators', type=int, default=100)
+    parser.add_argument('-p', '--portion', type=float, default=0.5)
     
     options = parser.parse_args(argv)
     args = dict()
@@ -30,6 +31,7 @@ def readCommand(argv):
     args['epsilon'] = options.epsilon
     args['random_state'] = options.random_state
     args['n_estimators'] = options.n_estimators
+    args['portion'] = options.portion
     print(args)
     return args
 

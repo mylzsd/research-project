@@ -26,23 +26,16 @@ def class2binary(cluster, num_clf, label_map, data):
     return pd.concat([bi_df, real], axis = 1)
 
 def multilayer_perceptron(x, weights, biases):
-    layer_1 = tf.add(tf.matmul(x, weights[0]), biases[0])
-    layer_1 = tf.nn.sigmoid(layer_1)
+    out = x
+    for i in range(len(weights) - 2):
+        out = tf.add(tf.matmul(out, weights[i]), biases[i])
+        out = tf.nn.sigmoid(out)
+    # last hidden layer use relu activation function
+    out = tf.add(tf.matmul(out, weights[-2]), biases[-2])
+    out = tf.nn.relu(out)
 
-    layer_2 = tf.add(tf.matmul(layer_1, weights[1]), biases[1])
-    layer_2 = tf.nn.sigmoid(layer_2)
-
-    layer_3 = tf.add(tf.matmul(layer_2, weights[2]), biases[2])
-    layer_3 = tf.nn.sigmoid(layer_3)
-
-    layer_4 = tf.add(tf.matmul(layer_3, weights[3]), biases[3])
-    layer_4 = tf.nn.sigmoid(layer_4)
-
-    layer_5 = tf.add(tf.matmul(layer_4, weights[4]), biases[4])
-    layer_5 = tf.nn.relu(layer_5)
-
-    out_layer = tf.matmul(layer_5, weights[5]) + biases[5]
-    return out_layer
+    out = tf.add(tf.matmul(out, weights[-1]), biases[-1])
+    return out
 
 def mlp(rdr, dataset, num_clf, hidden_layers, **clf_kwargs):
     # filter out INFO and WARNING logs for tensorflow
@@ -99,7 +92,7 @@ def mlp(rdr, dataset, num_clf, hidden_layers, **clf_kwargs):
             hidden_layers[i] = int(-l * n_class)
     hidden_layers = tuple(hidden_layers)
     print(hidden_layers)
-    # hidden_layers = (input_size, int(input_size / 2), int(input_size / 2), n_class * 2, n_class)
+
     mlp = MLPClassifier(hidden_layer_sizes = hidden_layers,
                         alpha = 1e-5, activation = 'relu', solver = 'sgd',
                         random_state = clf_kwargs['random_state'], max_iter = 10000)
@@ -133,23 +126,15 @@ def mlp(rdr, dataset, num_clf, hidden_layers, **clf_kwargs):
         y_test_tf.append(bi)
     y_test_tf = pd.DataFrame(y_test_tf)
 
-    hidden_layers = (input_size, int(input_size / 2), int(input_size / 2), n_class * 2, n_class)
-    weights = [
-                tf.Variable(tf.truncated_normal([input_size, hidden_layers[0]])),
-                tf.Variable(tf.truncated_normal([hidden_layers[0], hidden_layers[1]])),
-                tf.Variable(tf.truncated_normal([hidden_layers[1], hidden_layers[2]])),
-                tf.Variable(tf.truncated_normal([hidden_layers[2], hidden_layers[3]])),
-                tf.Variable(tf.truncated_normal([hidden_layers[3], hidden_layers[4]])),
-                tf.Variable(tf.truncated_normal([hidden_layers[4], n_class]))
-                ]
-    biases = [
-                tf.Variable(tf.truncated_normal([hidden_layers[0]])),
-                tf.Variable(tf.truncated_normal([hidden_layers[1]])),
-                tf.Variable(tf.truncated_normal([hidden_layers[2]])),
-                tf.Variable(tf.truncated_normal([hidden_layers[3]])),
-                tf.Variable(tf.truncated_normal([hidden_layers[4]])),
-                tf.Variable(tf.truncated_normal([n_class]))
-                ]
+    weights = []
+    biases = []
+    prev = input_size
+    for l in hidden_layers:
+        weights.append(tf.Variable(tf.truncated_normal([prev, l])))
+        biases.append(tf.Variable(tf.truncated_normal([l])))
+        prev = l
+    weights.append(tf.Variable(tf.truncated_normal([prev, n_class])))
+    biases.append(tf.Variable(tf.truncated_normal([n_class])))
     y = multilayer_perceptron(x, weights, biases)
 
     learning_rate = 0.01
@@ -182,8 +167,8 @@ def mlp(rdr, dataset, num_clf, hidden_layers, **clf_kwargs):
 
     # end of tensorflow part
     
-    print('full set majority vote: %f' % (pure_scores))
-    print('part set majority vote: %f' % (clf_scores))
+    print('full set majority vote:', pure_scores)
+    print('part set majority vote:', clf_scores)
     print('sci mlp:', net_score)
     print('tf mlp:', test_accu)
     print('Finish time:', time.asctime(time.localtime(time.time())))
