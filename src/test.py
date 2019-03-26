@@ -44,7 +44,7 @@ def multilayer_perceptron(x, weights, biases):
     out_layer = tf.matmul(layer_5, weights[5]) + biases[5]
     return out_layer
 
-def mlp(rdr, dataset, num_clf, **clf_kwargs):
+def mlp(rdr, dataset, num_clf, hidden_layers, **clf_kwargs):
     # filter out INFO and WARNING logs for tensorflow
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
@@ -90,7 +90,16 @@ def mlp(rdr, dataset, num_clf, **clf_kwargs):
 
     n_class = len(label_map)
     input_size = n_class * num_clf
-    hidden_layers = (input_size, int(input_size / 2), int(input_size / 2), n_class * 2, n_class)
+    for i, l in enumerate(hidden_layers):
+        if l > 1.0:
+            hidden_layers[i] = int(l)
+        elif l > 0.0:
+            hidden_layers[i] = int(l * input_size)
+        else:
+            hidden_layers[i] = int(-l * n_class)
+    hidden_layers = tuple(hidden_layers)
+    print(hidden_layers)
+    # hidden_layers = (input_size, int(input_size / 2), int(input_size / 2), n_class * 2, n_class)
     mlp = MLPClassifier(hidden_layer_sizes = hidden_layers,
                         alpha = 1e-5, activation = 'relu', solver = 'sgd',
                         random_state = clf_kwargs['random_state'], max_iter = 10000)
@@ -336,7 +345,7 @@ def readCommand(argv):
     parser.add_argument('-r', '--random-state', type=int, default=rd.randint(1, 10000))
     parser.add_argument('-s', '--n-estimators', type=int, default=1)
     parser.add_argument('-p', '--portion', type=float, default=0.5)
-    parser.add_argument('-h', '--hidden-layers', nargs='+', type=float)
+    parser.add_argument('-l', '--hidden-layers', nargs='+', type=float)
     
     options = parser.parse_args(argv)
     print(options)
@@ -346,14 +355,14 @@ def readCommand(argv):
 if __name__ == '__main__':
     options = readCommand(sys.argv[1:])
     rs = options.random_state
+    portion = options.portion
     rd.seed(rs)
-    rdr = reader.Reader(rs)
-    return
+    rdr = reader.Reader(rs, portion)
     clf_kwargs = {'random_state': rs, 'n_estimators': options.n_estimators}
     if options.mode == 'examine':
         examine(rdr, options.dataset, options.num_clf, options.reuse, **clf_kwargs)
     elif options.mode == 'mlp':
-        mlp(rdr, options.dataset, options.num_clf, **clf_kwargs)
+        mlp(rdr, options.dataset, options.num_clf, options.hidden_layers, **clf_kwargs)
     elif options.mode == 'variance':
         variance(rdr, rs)
     elif options.mode == 'mjvote':
