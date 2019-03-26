@@ -45,6 +45,9 @@ def multilayer_perceptron(x, weights, biases):
     return out_layer
 
 def mlp(rdr, dataset, num_clf, **clf_kwargs):
+    # filter out INFO and WARNING logs for tensorflow
+    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
     print('Dataset', dataset)
     train, train_clf, train_net, test = rdr.read(dataset)
     print(train_clf.shape)
@@ -102,8 +105,8 @@ def mlp(rdr, dataset, num_clf, **clf_kwargs):
 
     print('Training tf mlp:', time.asctime(time.localtime(time.time())))
 
-    x = tf.placeholder(tf.float32, [None, input_size])
-    y_ = tf.placeholder(tf.float32, [None, n_class])
+    x = tf.placeholder(tf.float32, shape=(None, input_size))
+    y_ = tf.placeholder(tf.float32, shape=(None, n_class))
 
     x_train_tf = train_bi.iloc[:, list(range(n_class * num_clf))]
     y_train_tf = []
