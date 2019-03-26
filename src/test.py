@@ -334,7 +334,9 @@ def readCommand(argv):
     parser.add_argument('-n', '--num-clf', type=int, default=50)
     parser.add_argument('-u', '--reuse', action='store_true', default=False)
     parser.add_argument('-r', '--random-state', type=int, default=rd.randint(1, 10000))
-    parser.add_argument('-s', '--n-estimators', type =int, default=1)
+    parser.add_argument('-s', '--n-estimators', type=int, default=1)
+    parser.add_argument('-p', '--portion', type=float, default=0.5)
+    parser.add_argument('-h', '--hidden-layers', nargs='+', type=float)
     
     options = parser.parse_args(argv)
     print(options)
@@ -346,6 +348,7 @@ if __name__ == '__main__':
     rs = options.random_state
     rd.seed(rs)
     rdr = reader.Reader(rs)
+    return
     clf_kwargs = {'random_state': rs, 'n_estimators': options.n_estimators}
     if options.mode == 'examine':
         examine(rdr, options.dataset, options.num_clf, options.reuse, **clf_kwargs)
