@@ -201,11 +201,9 @@ def frog():
 	# print(np.mean(clf_scores))
 
 	label_map = dict()
-	index = 0
 	for label in frog_train.iloc[:, -1]:
 		if label in label_map: continue
-		label_map[label] = index
-		index += 1
+		label_map[label] = len(label_map)\
 	# print(len(label_map))
 	# print(label_map)
 

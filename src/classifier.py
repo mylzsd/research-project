@@ -36,7 +36,6 @@ class Cluster:
         self.features = features
         self.classifiers = []
         self.clf_types = []
-        rd.seed(clf_kwarg.get('random_state', rd.randint(1, 10000)))
         for i in range(size):
             self.clf_types.append(types[i % len(types)])
             clf_kwarg['random_state'] = rd.randint(1, 10000)

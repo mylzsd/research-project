@@ -65,15 +65,12 @@ def mlp(rdr, dataset, num_clf, hidden_layers, **clf_kwargs):
     print('Training sci mlp:', time.asctime(time.localtime(time.time())))
 
     label_map = dict()
-    index = 0
     for label in train.iloc[:, -1]:
         if label in label_map: continue
-        label_map[label] = index
-        index += 1
+        label_map[label] = len(label_map)
     for label in test.iloc[:, -1]:
         if label in label_map: continue
-        label_map[label] = index
-        index += 1
+        label_map[label] = len(label_map)
     print('Number of label:', len(label_map))
 
     train_bi = class2binary(cluster, num_clf, label_map, train_net)
