@@ -1,3 +1,7 @@
+logistic sigmoid function, f(x) = 1 / (1 + exp(-x))
+hyperbolic tan function, f(x) = tanh(x)
+rectified linear unit function, f(x) = max(0, x)
+
 epoch: 999, cost: 0.554748, training_accu: 0.740000, testing_accu: 0.586207
 epoch: 1999, cost: 0.464621, training_accu: 0.780000, testing_accu: 0.689655
 epoch: 2999, cost: 0.499762, training_accu: 0.760000, testing_accu: 0.724138

@@ -1,8 +1,8 @@
-import classifier
+from classifier import Cluster
+from environment import Environment
 import mdp
 import reader
 import sys
-import numpy as np
 import random as rd
 import argparse
 
@@ -47,32 +47,71 @@ def train(dataset,
           **kwargs):
     rd.seed(kwargs['random_state'])
 
-    train_all, train_clf, train_mdp, test = reader.Reader(kwargs['random_state'], portion).read(dataset)
+    train, train_clf, train_mdp, test = reader.Reader(kwargs['random_state'], portion).read(dataset)
     print(train_clf.shape)
     print(train_mdp.shape)
     print(test.shape)
-    num_feature = train_clf.shape[1] - 1
+    num_feature = train.shape[1] - 1
 
+    label_map = dict()
+    for d in [train, test]:
+        for l in d.iloc[:, -1]:
+            if l not in label_map:
+                label_map[l] = len(label_map)
+    # single n-tree random forest
     rf_kwargs = {'random_state': kwargs['random_state'], 'n_estimators': num_clf}
-    rf = classifier.Cluster(1, ['rf'], [list(range(num_feature))], **rf_kwargs)
-    rf.train(train_all)
+    rf = Cluster(1, ['rf'], [list(range(num_feature))], label_map, **rf_kwargs)
+    rf.train(train)
     rf_accu = rf.accuracy(test)[0]
-
+    # multiple single-tree random forests
     features = [list(range(num_feature))] * num_clf
-    cluster = classifier.Cluster(num_clf, ['rf'], features, **kwargs)
+    cluster = Cluster(num_clf, ['rf'], features, label_map, **kwargs)
     cluster.train(train_clf)
     mjvote_accu = cluster.majorityVote(test)
 
-    rl = mdp.MDP(cluster, model, learning_rate, discount_factor, epsilon, kwargs['random_state'])
-    rl.train(train_mdp, num_training, test)
-    mdp_accu = rl.accuracy(test)
+    real_set = [train_mdp.iloc[:, -1], test.iloc[:, -1]]
+    res_set = [cluster.results(train_mdp), cluster.results(test)]
+    prob_set = [cluster.resProb(train_mdp), cluster.resProb(test)]
 
-    print('Single random forest accuracy:', rf_accu)
-    print('Majority vote accuracy:', mjvote_accu)
-    print('Reinforcement learning accuracy:', mdp_accu)
+    env = Environment(num_clf, real_set, res_set, prob_set, label_map)
+    # q_func = TODO: some load module
+
+    for i in range(num_training):
+        for r in rd.sample(list(range(train_mdp.shape[0])), 100):
+            state = env.initState()
+
+    '''
+    TODO: training process
+    for n epoch
+        select batch-size samples
+        for each sample
+            get initial state
+            while not final state
+                get action from q function
+                apply action 
+                update q function using new state and reward
+    '''
+    '''
+    TODO: test process
+    for each instance in test set
+        get initial state
+        while not final state
+            get action from q function and apply
+        get predicted class and real class
+    compute accuracy and other measurement based on prediction matrix
+    '''
+
+    # rl = mdp.MDP(cluster, model, learning_rate, discount_factor, epsilon, kwargs['random_state'])
+    # rl.train(train_mdp, num_training, test)
+    # mdp_accu = rl.accuracy(test)
+
+    # print('Single random forest accuracy:', rf_accu)
+    # print('Majority vote accuracy:', mjvote_accu)
+    # print('Reinforcement learning accuracy:', mdp_accu)
 
 
 if __name__ == '__main__':
     options = readCommand(sys.argv[1:])
     train(**options)
+
 

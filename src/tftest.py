@@ -14,19 +14,19 @@ def mlp(input_, hiddens, num_labels, activation):
             out = layers.fully_connected(out, num_outputs=hidden, activation_fn=tf.nn.tanh)
         elif activation == 'relu':
             out = layers.fully_connected(out, num_outputs=hidden, activation_fn=tf.nn.relu)
-    out = layers.fully_connected(out, num_outputs=num_labels, activation_fn=None)
+    out = layers.fully_connected(out, num_outputs=num_labels, activation_fn=tf.nn.sigmoid)
     return out
 
 def main():
-    # r_state = rd.randint(1, 1000)
-    r_state = 480
+    r_state = rd.randint(1, 1000)
+    # r_state = 480
     rd.seed(r_state)
     dataset = 'breast_cancer'
-    activation = 'logistic'
+    # activation = 'logistic'
     # activation = 'tanh'
-    # activation = 'relu'
-    # solver = 'adam'
-    solver = 'sgd'
+    activation = 'relu'
+    solver = 'adam'
+    # solver = 'sgd'
 
     train, _, _, test = reader.Reader(r_state).read(dataset)
 
@@ -74,9 +74,11 @@ def main():
     with tf.Session() as sess:
         sess.run(init)
         for i in range(10000):
-            cand = rd.choices(list(range(train.shape[0])), k=50)
-            x_batch = x_train.iloc[cand]
-            y_batch = y_train.iloc[cand]
+            x_batch = x_train
+            y_batch = y_train
+            # cand = rd.choices(list(range(train.shape[0])), k=50)
+            # x_batch = x_train.iloc[cand]
+            # y_batch = y_train.iloc[cand]
             sess.run(training_step, feed_dict={x: x_batch, y_: y_batch})
             if (i + 1) % 1000 == 0:
                 cost = sess.run(cost_function, feed_dict={x: x_batch, y_: y_batch})

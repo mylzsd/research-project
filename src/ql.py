@@ -4,29 +4,19 @@ from state import State
 import random as rd
 import pandas as pd
 import numpy as np
-import tensorflow as tf
-
 
 debug_print = False
 
+class Model:
 
-class MDP:
-
-    def __init__(self, cluster, label_map, model, learning_rate, discount_factor, epsilon, random_state):
+    def __init__(self, cluster, learning_rate, discount_factor, epsilon, random_state):
         self.random_state = random_state
         self.cluster = cluster
-        self.label_map = label_map
-        self.model = model
         self.learning_rate = learning_rate
         self.discount_factor = discount_factor
         self.epsilon = epsilon
-        if model in ['ql', 'sarsa']:
-            self.policy = dict()
-            self.q_table = dict()
-        elif model == 'approx':
-            pass
-        else:
-            pass
+        self.policy = dict()
+        self.q_table = dict()
 
 
     def getAction(self, state, randomness):
@@ -86,6 +76,14 @@ class MDP:
         predictions = pd.concat([results, real], axis=1)
 
         if self.model == 'approx':
+            label_map = dict()
+            for label in data.iloc[:, -1]:
+                if label not in label_map:
+                    label_map[label] = len(label_map)
+            for label in test.iloc[:, -1]:
+                if label not in label_map:
+                    label_map[label] = len(label_map)
+            self.label_map = label_map
             self.weights = [0.0] * len(label_map) * self.cluster.size
 
         n = len(predictions.index)

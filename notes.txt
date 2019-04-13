@@ -5,3 +5,10 @@
 weighted vote
 
 examine single trees
+
+
+4/3
+
+batch related to memory
+
+use soft-max at final layer
