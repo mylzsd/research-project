@@ -16,7 +16,7 @@ class State:
 	def setPred(self, index, val):
 		if index not in range(self.size):
 			raise ValueError('index out of bound')
-		visited.add(index)
+		self.visited.add(index)
 		if val is not None:
 			self.pred[index] = val
 			self.oh_pred[index][self.label_map[val]] = 1
@@ -67,11 +67,11 @@ class Environment:
 	# whether act sequentially, label map, and feature related info
 	def __init__(self,
 				 num_clf,
-				 sequential=True,
 				 real_set,
 				 res_set, 
 				 prob_set, 
 				 label_map, 
+				 sequential=True,
 				 features=None, 
 				 feature_cost=None):
 		self.num_clf = num_clf
@@ -84,6 +84,10 @@ class Environment:
 	# return an initial blank state
 	def initState(self):
 		return State(self.num_clf, self.label_map)
+
+	# return number of instance in a dataset
+	def numInstance(self, index):
+		return self.real_set[index].shape[0]
 
 	# perform state transition s, a -> s', r
 	def step(self, state, action, in_set, in_row, deter=True):
@@ -100,7 +104,7 @@ class Environment:
 				# evaluation and get reward
 				state_p = None
 				pred = state.evaluation()
-				if pred == self.real_set[in_set].iloc[in_row, 0]:
+				if pred == self.real_set[in_set].iloc[in_row]:
 					reward = 1.0
 		else:
 			# TODO: nondeterministic state transition using probabilistic predictions
@@ -109,8 +113,11 @@ class Environment:
 
 	# get possible actions
 	def legal_actions(self, state):
+		if state is None:
+			return []
 		if self.sequential:
-			index = sorted(state.usedClf())[-1] + 1
+			used = sorted(state.usedClf())
+			index = used[-1] + 1 if len(used) > 0 else 0
 			if index == self.num_clf:
 				return [Action(-1)]
 			else:
