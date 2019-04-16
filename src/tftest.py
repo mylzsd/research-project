@@ -5,6 +5,7 @@ import tensorflow as tf
 import tensorflow.contrib.layers as layers
 from sklearn.neural_network import MLPClassifier
 
+
 def mlp(input_, hiddens, num_labels, activation):
     out = input_
     for hidden in hiddens:
@@ -16,6 +17,11 @@ def mlp(input_, hiddens, num_labels, activation):
             out = layers.fully_connected(out, num_outputs=hidden, activation_fn=tf.nn.relu)
     out = layers.fully_connected(out, num_outputs=num_labels, activation_fn=tf.nn.sigmoid)
     return out
+
+
+def train_fn(sess, train_op, feed_dict):
+    sess.run(train_op, feed_dict=feed_dict)
+
 
 def main():
     r_state = rd.randint(1, 1000)
@@ -69,35 +75,52 @@ def main():
         optimizer = tf.train.GradientDescentOptimizer(0.001)
     training_step = optimizer.minimize(cost_function)
 
-    init = tf.global_variables_initializer()
+    # init = tf.global_variables_initializer()
 
-    with tf.Session() as sess:
-        sess.run(init)
-        for i in range(10000):
-            x_batch = x_train
-            y_batch = y_train
-            # cand = rd.choices(list(range(train.shape[0])), k=50)
-            # x_batch = x_train.iloc[cand]
-            # y_batch = y_train.iloc[cand]
-            sess.run(training_step, feed_dict={x: x_batch, y_: y_batch})
-            if (i + 1) % 1000 == 0:
-                cost = sess.run(cost_function, feed_dict={x: x_batch, y_: y_batch})
+    sess = tf.Session()
+    sess.run(tf.global_variables_initializer())
+    for i in range(10000):
+        x_batch = x_train
+        y_batch = y_train
+        train_fn(sess, training_step, {x: x_batch, y_: y_batch})
+        # sess.run(training_step, feed_dict={x: x_batch, y_: y_batch})
+        if (i + 1) % 1000 == 0:
+            # cost = sess.run(cost_function, feed_dict={x: x_batch, y_: y_batch})
+            correct = tf.equal(tf.argmax(y, 1), tf.argmax(y_, 1))
+            accuracy = tf.reduce_mean(tf.cast(correct, tf.float32))
+            cost, training_accu = sess.run([cost_function, accuracy], feed_dict={x: x_batch, y_: y_batch})
+            testing_accu = sess.run(accuracy, feed_dict={x: x_test, y_: y_test})
+            print('epoch: %d, cost: %f, training_accu: %f, testing_accu: %f' % (i, cost, training_accu, testing_accu))
+    tf_score = testing_accu
+    sess.close()
 
-                correct = tf.equal(tf.argmax(y, 1), tf.argmax(y_, 1))
-                accuracy = tf.reduce_mean(tf.cast(correct, tf.float32))
-                training_accu = sess.run(accuracy, feed_dict={x: x_batch, y_: y_batch})
-                testing_accu = sess.run(accuracy, feed_dict={x: x_test, y_: y_test})
+    # with tf.Session() as sess:
+    #     sess.run(tf.global_variables_initializer())
+    #     for i in range(10000):
+    #         x_batch = x_train
+    #         y_batch = y_train
+    #         # cand = rd.choices(list(range(train.shape[0])), k=50)
+    #         # x_batch = x_train.iloc[cand]
+    #         # y_batch = y_train.iloc[cand]
+    #         sess.run(training_step, feed_dict={x: x_batch, y_: y_batch})
+    #         if (i + 1) % 1000 == 0:
+    #             cost = sess.run(cost_function, feed_dict={x: x_batch, y_: y_batch})
 
-                # pred_y = sess.run(y, feed_dict={x: x_test})
-                # mse = tf.reduce_mean(tf.square(pred_y - y_test))
-                # mse = sess.run(mse)
-                # print('epoch: %d, cost: %f, accuracy: %f, mse: %f' % (i, cost, accuracy, mse))
-                print('epoch: %d, cost: %f, training_accu: %f, testing_accu: %f' % (i, cost, training_accu, testing_accu))
+    #             correct = tf.equal(tf.argmax(y, 1), tf.argmax(y_, 1))
+    #             accuracy = tf.reduce_mean(tf.cast(correct, tf.float32))
+    #             training_accu = sess.run(accuracy, feed_dict={x: x_batch, y_: y_batch})
+    #             testing_accu = sess.run(accuracy, feed_dict={x: x_test, y_: y_test})
 
-        # correct = tf.equal(tf.argmax(y, 1), tf.argmax(y_, 1))
-        # accuracy = tf.reduce_mean(tf.cast(correct, tf.float32))
-        # tf_score = sess.run(accuracy, feed_dict={x: x_test, y_: y_test})
-        tf_score = testing_accu
+    #             # pred_y = sess.run(y, feed_dict={x: x_test})
+    #             # mse = tf.reduce_mean(tf.square(pred_y - y_test))
+    #             # mse = sess.run(mse)
+    #             # print('epoch: %d, cost: %f, accuracy: %f, mse: %f' % (i, cost, accuracy, mse))
+    #             print('epoch: %d, cost: %f, training_accu: %f, testing_accu: %f' % (i, cost, training_accu, testing_accu))
+
+    #     # correct = tf.equal(tf.argmax(y, 1), tf.argmax(y_, 1))
+    #     # accuracy = tf.reduce_mean(tf.cast(correct, tf.float32))
+    #     # tf_score = sess.run(accuracy, feed_dict={x: x_test, y_: y_test})
+    #     tf_score = testing_accu
 
     sl_nn = MLPClassifier(hidden_layer_sizes=hiddens, activation=activation, solver=solver, max_iter=10000, random_state=r_state)
     sl_nn.fit(x_train, y_train)

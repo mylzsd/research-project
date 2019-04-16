@@ -32,7 +32,7 @@ class Tabular:
         if action is not None:
             return self.q_table[str(state) + str(action)]
         actions = self.env.legal_actions(state)
-        maxq = 0.0
+        maxq = float('-inf')
         for a in actions:
             k = str(state) + str(a)
             maxq = max(maxq, self.q_table[k])
@@ -46,9 +46,8 @@ class Tabular:
 def learn(env, in_set, num_training, learning_rate, epsilon, discount_factor, random_state):
     model = Tabular(env)
     num_ins = env.numInstance(in_set)
-    for i in range(1, num_training + 1):
-        # randomly select instance
-        in_row = rd.choice(list(range(num_ins)))
+    for i in range(num_training):
+        in_row = i % num_ins
         state = env.initState()
         while state is not None:
             action = model.policy(state, randomness=epsilon)
@@ -57,5 +56,6 @@ def learn(env, in_set, num_training, learning_rate, epsilon, discount_factor, ra
             model.train(state, action, state_p, reward, learning_rate, discount_factor)
             state = state_p
         # print some log indicates training progress
+    print('number of items in q table:', len(model.q_table))
     return model
 

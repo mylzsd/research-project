@@ -5,9 +5,8 @@ import random as rd
 def learn(env, in_set, num_training, learning_rate, epsilon, discount_factor, random_state):
     model = Tabular(env)
     num_ins = env.numInstance(in_set)
-    for i in range(1, num_training + 1):
-        # randomly select instance
-        in_row = rd.choice(list(range(num_ins)))
+    for i in range(num_training):
+        in_row = i % num_ins
         state = env.initState()
         action = model.policy(state, randomness=epsilon)
         while state is not None:
@@ -18,4 +17,5 @@ def learn(env, in_set, num_training, learning_rate, epsilon, discount_factor, ra
             state = state_p
             action = action_p
         # print some log indicates training progress
+    print('number of items in q table:', len(model.q_table))
     return model

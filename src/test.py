@@ -1,5 +1,4 @@
 import classifier
-import mdp
 import reader
 import time
 import os, sys, random as rd
@@ -230,7 +229,7 @@ def examine(rdr, dataset, num_clf, reuse, **clf_kwargs):
 
     num_feature = train.shape[1] - 1
     features = [list(range(num_feature))] * num_clf
-    cluster = classifier.Cluster(num_clf, ['rf'], features, **clf_kwargs)
+    cluster = classifier.Cluster(num_clf, ['rf'], features, label_map=None, **clf_kwargs)
     
     label_map = dict()
     index = 65
@@ -266,6 +265,14 @@ def examine(rdr, dataset, num_clf, reuse, **clf_kwargs):
     clf_scores = cluster.accuracy(test)
     print(clf_scores)
     print(np.mean(clf_scores))
+
+    combination = 1
+    for j in range(train_res.shape[1]):
+        s = set()
+        for i in range(train_res.shape[0]):
+            s.add(train_res.iloc[i, j])
+        combination *= len(s)
+    print('all possible combination:', combination)
 
 
 def variance(rdr, random_state):
