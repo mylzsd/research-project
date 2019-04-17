@@ -213,8 +213,12 @@ class Reader:
 
 
     '''
+    (27000, 31)
+    (3000, 31)
     '''
     def credit_card(self):
+        '''
+        This part reads original excel file and cast to csv
         data = pd.read_excel(self.dir + 'credit_card/credit_card.xls', header=1)
         data.drop('ID', axis = 1, inplace = True)
         data.rename(columns={'default payment next month': 'class'}, inplace=True)
@@ -223,7 +227,11 @@ class Reader:
         for col in cate_columns:
             self.cateColumn([data], col, '0')
         data.to_csv('credit_card.csv', index=False)
-        return (None, None, None, None)
+        '''
+        data = pd.read_csv(self.dir + 'credit_card/credit_card.csv')
+        train, test = self.splitByPortion(data, 0.9)
+        train_clf, train_mdp = self.splitByPortion(train, self.portion)
+        return (train, train_clf, train_mdp, test)
 
 
     '''
@@ -387,5 +395,4 @@ class Reader:
 
 if __name__ == '__main__':
     rdr = Reader(666)
-    rdr.read('credit_card')
 
