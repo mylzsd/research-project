@@ -109,6 +109,7 @@ class DQN:
 
 def learn(env, in_set, num_training, learning_rate, epsilon, discount_factor, random_state, **network_kwargs):
     log_freq = 10
+    batch_size = 0.1
     model = DQN(env, (64, 64, 32), (64, 32), 'relu')
     num_ins = env.numInstance(in_set)
     for i in range(num_training):
@@ -123,8 +124,9 @@ def learn(env, in_set, num_training, learning_rate, epsilon, discount_factor, ra
 
         total_cost = 0.0
         total_loss = 0.0
-        batch_size = int(0.1 * (env.num_clf - 1))
-        sample = rd.choices(history[:-1], k=batch_size) + [history[-1]]
+        sample = [history[-1]]
+        if len(history) > 1:
+            sample += rd.choices(history[:-1], k=int(batch_size * (env.num_clf - 1)))
         for s in sample:
             c, l = model.train(s[0], s[1], s[2], s[3], learning_rate, discount_factor, in_set, in_row)
             total_cost += c
