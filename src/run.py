@@ -96,6 +96,7 @@ def train(dataset,
         if reward == 1.0:
             correct += 1
     rl_accu = correct / test.shape[0]
+    model.close()
 
     print('Single random forest accuracy:', rf_accu)
     print('Majority vote accuracy:', mjvote_accu)

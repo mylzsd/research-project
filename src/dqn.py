@@ -92,21 +92,24 @@ class DQN:
         cost_function = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(labels=target_act, logits=self.p_net))
         optimizer = tf.train.GradientDescentOptimizer(learning_rate)
         training_step = optimizer.minimize(cost_function)
-        self.sess.run(training_step, feed_dict={self.input_: state.getPred(one_hot=True)})
+        cost, _ = self.sess.run([cost_function, training_step], feed_dict={self.input_: state.getPred(one_hot=True)})
 
         # then update value network
-        target_v = reward + discount_factor * self.qValue(state_p)
-        loss = self.v_net - tf.constant(target_v, dtype=tf.float32)
+        target_v = tf.constant(reward + discount_factor * self.qValue(state_p), dtype=tf.float32)
+        loss = tf.losses.absolute_difference(labels=target_v, predictions=self.v_net)
         optimizer = tf.train.GradientDescentOptimizer(learning_rate)
         training_step = optimizer.minimize(loss)
-        self.sess.run(training_step, feed_dict={self.input_: state.getPred(one_hot=True)})
+        loss, _ = self.sess.run([loss, training_step], feed_dict={self.input_: state.getPred(one_hot=True)})
+
+        return (cost, loss)
 
     def close(self):
         self.sess.close()
 
 
 def learn(env, in_set, num_training, learning_rate, epsilon, discount_factor, random_state, **network_kwargs):
-    model = DQN(env, (128, 64), (64,), 'relu')
+    log_freq = 10
+    model = DQN(env, (64, 64, 32), (128,), 'relu')
     num_ins = env.numInstance(in_set)
     for i in range(num_training):
         in_row = i % num_ins
@@ -118,13 +121,19 @@ def learn(env, in_set, num_training, learning_rate, epsilon, discount_factor, ra
             history.append((state, action, state_p, reward))
             state = state_p
 
-        batch_size = int(0.2 * env.num_clf)
+        total_cost = 0.0
+        total_loss = 0.0
+        batch_size = int(0.1 * env.num_clf)
         sample = rd.choices(history[:-1], k=batch_size) + [history[-1]]
         for s in sample:
-            model.train(s[0], s[1], s[2], s[3], learning_rate, discount_factor, in_set, in_row)
+            c, l = model.train(s[0], s[1], s[2], s[3], learning_rate, discount_factor, in_set, in_row)
+            total_cost += c
+            total_loss += l
 
-        if (i + 1) % 100 == 0:
+        if (i + 1) % log_freq == 0:
             print('finished epoch', i)
+            print('average policy cost:', total_cost / log_freq)
+            print('average value loss:', total_loss / log_freq)
 
     return model
 
