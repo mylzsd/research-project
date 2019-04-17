@@ -39,6 +39,8 @@ class State:
 
     def evaluation(self):
         c = Counter([p for p in self.pred if p is not None])
+        if (len(c) == 0):
+            return rd.choice(list(self.label_map.keys()))
         m = max(c.values())
         return rd.choice([k for (k, v) in c.items() if v == m])
 
@@ -129,5 +131,22 @@ class Environment:
             ret = [Action(index) for index in unused] + [Action(-1)]
             return ret
 
-    # TODO: given a complete state return whether it predicts correctly
+    # return the confusion matrix of a given model
+    def evaluation(self, model, in_set, deter=True):
+        if deter:
+            conf_matrix = np.zeros((len(self.label_map), len(self.label_map)), dtype=np.int32)
+            for in_row in range(len(self.res_set[in_set])):
+                state = self.initState()
+                while state is not None:
+                    action = model.policy(state)
+                    if action.index == -1:
+                        pred = state.evaluation()
+                        real = self.real_set[in_set].iloc[in_row]
+                        conf_matrix[self.label_map[real], self.label_map[pred]] += 1
+                    state_p, reward = self.step(state, action, in_set, in_row)
+                    state = state_p
+            return conf_matrix
+        else:
+            # TODO: nondeterministic state transition using probabilistic predictions
+            pass
 

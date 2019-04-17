@@ -80,27 +80,18 @@ def train(dataset,
     res_set = [cluster.results(train_mdp), cluster.results(test)]
     prob_set = [cluster.resProb(train_mdp), cluster.resProb(test)]
 
-    sequential = algorithm == 'dqn'
+    sequential = algorithm != 'dqn'
     env = Environment(num_clf, real_set, res_set, prob_set, label_map, sequential=sequential)
     learn = get_learn_function(algorithm)
     model = learn(env, 0, num_training, learning_rate, epsilon, discount_factor, random_state, **network_kwargs)
 
     # test process, maybe put into env class
-    correct = 0
-    for i in range(test.shape[0]):
-        state = env.initState()
-        while state is not None:
-            action = model.policy(state)
-            state_p, reward = env.step(state, action, 1, i)
-            state = state_p
-        if reward == 1.0:
-            correct += 1
-    rl_accu = correct / test.shape[0]
-    model.close()
+    conf_matrix = env.evaluation(model, 1)
+    print(conf_matrix)
 
     print('Single random forest accuracy:', rf_accu)
     print('Majority vote accuracy:', mjvote_accu)
-    print('Reinforcement learning accuracy:', rl_accu)
+    # print('Reinforcement learning accuracy:', rl_accu)
 
 
 if __name__ == '__main__':

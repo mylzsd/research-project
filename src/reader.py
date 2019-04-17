@@ -198,7 +198,7 @@ class Reader:
     (147, 22)
     '''
     def cmc(self):
-        data = pd.read_csv(self.dir + 'cmc/cmc.data.csv', header = None)
+        data = pd.read_csv(self.dir + 'cmc/cmc.data.csv', header=None)
         columns = ['W_age', 'W_education', 'H_education', 'Num_children', 'W_religion', 
                    'W_working', 'H_occupation', 'Standard-of-living', 
                    'Media', 'Contraceptive method used']
@@ -213,11 +213,25 @@ class Reader:
 
 
     '''
+    '''
+    def credit_card(self):
+        data = pd.read_excel(self.dir + 'credit_card/credit_card.xls', header=1)
+        data.drop('ID', axis = 1, inplace = True)
+        data.rename(columns={'default payment next month': 'class'}, inplace=True)
+        self.boolColumn([data], 'SEX', 1, 2)
+        cate_columns = ['EDUCATION', 'MARRIAGE']
+        for col in cate_columns:
+            self.cateColumn([data], col, '0')
+        data.to_csv('credit_card.csv', index=False)
+        return (None, None, None, None)
+
+
+    '''
     (329, 35)
     (37, 35)
     '''
     def dematology(self):
-        data = pd.read_csv(self.dir + 'dermatology/dermatology.data.csv', header = None)
+        data = pd.read_csv(self.dir + 'dermatology/dermatology.data.csv', header=None)
         columns = ['erythema', 'scaling', 'definite borders', 'itching', 
                    'koebner phenomenon', 'polygonal papules', 'follicular papules', 
                    'oral mucosal involvement', 'knee and elbow involvement', 
@@ -245,7 +259,7 @@ class Reader:
     (34, 8)
     '''
     def ecoli(self):
-        data = pd.read_csv(self.dir + 'ecoli/ecoli.data.csv', header = None)
+        data = pd.read_csv(self.dir + 'ecoli/ecoli.data.csv', header=None)
         columns = ['Sequence Name', 'mcg', 'gvh', 'lip', 'chg', 'aac', 'alm1', 'alm2', 'Class']
         data.columns = columns
         data.drop('Sequence Name', axis = 1, inplace = True)
@@ -259,7 +273,7 @@ class Reader:
     (21, 10)
     '''
     def glass(self):
-        data = pd.read_csv(self.dir + 'glass/glass.data.csv', header = None)
+        data = pd.read_csv(self.dir + 'glass/glass.data.csv', header=None)
         columns = ['Id', 'RI', 'Na', 'Mg', 'Al', 'Si', 'K', 'Ca', 'Ba', 'Fe', 'Class']
         data.columns = columns
         data.drop('Id', axis = 1, inplace = True)
@@ -274,7 +288,7 @@ class Reader:
     (15, 20)
     '''
     def hepatitis(self):
-        data = pd.read_csv(self.dir + 'hepatitis/hepatitis.data.csv', header = None)
+        data = pd.read_csv(self.dir + 'hepatitis/hepatitis.data.csv', header=None)
         columns = ['Class', 'AGE', 'SEX', 'STEROID', 'ANTIVIRALS', 'FATIGUE', 
                    'MALAISE', 'ANOREXIA', 'LIVER BIG', 'LIVER FIRM', 
                    'SPLEEN PALPABLE', 'SPIDERS', 'ASCITES', 'VARICES', 'BILIRUBIN', 
@@ -317,8 +331,8 @@ class Reader:
     (30, 5)
     '''
     def iris(self):
-        iris = pd.read_csv(self.dir + 'iris/iris.csv', header = None)
-        bezd = pd.read_csv(self.dir + 'iris/bezdekIris.csv', header = None)
+        iris = pd.read_csv(self.dir + 'iris/iris.csv', header=None)
+        bezd = pd.read_csv(self.dir + 'iris/bezdekIris.csv', header=None)
         iris = pd.concat([iris, bezd], ignore_index = True)
 
         train, test = self.splitByPortion(iris, 0.9)
@@ -331,7 +345,7 @@ class Reader:
     (15, 39)
     '''
     def lymphography(self):
-        data = pd.read_csv(self.dir + 'lymphography/lymphography.data.csv', header = None)
+        data = pd.read_csv(self.dir + 'lymphography/lymphography.data.csv', header=None)
         columns = ['class', 'lymphatics', 'block of affere', 'bl. of lymph. c', 
                    'bl. of lymph. s', 'by pass', 'extravasates', 'regeneration of', 
                    'early uptake in', 'lym.nodes dimin', 'lym.nodes enlar', 
@@ -359,6 +373,7 @@ class Reader:
             'breast_cancer': self.breast_cancer,
             'breast_w': self.breast_w,
             'cmc': self.cmc,
+            'credit_card': self.credit_card,
             'dematology': self.dematology,
             'ecoli': self.ecoli,
             'glass': self.glass,
@@ -368,3 +383,9 @@ class Reader:
             'lymphography': self.lymphography
         }
         return data_map[dataset]()
+
+
+if __name__ == '__main__':
+    rdr = Reader(666)
+    rdr.read('credit_card')
+
