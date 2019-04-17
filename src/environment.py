@@ -135,6 +135,7 @@ class Environment:
     def evaluation(self, model, in_set, deter=True):
         if deter:
             conf_matrix = np.zeros((len(self.label_map), len(self.label_map)), dtype=np.int32)
+            correct = 0.0
             for in_row in range(len(self.res_set[in_set])):
                 state = self.initState()
                 while state is not None:
@@ -143,8 +144,11 @@ class Environment:
                         pred = state.evaluation()
                         real = self.real_set[in_set].iloc[in_row]
                         conf_matrix[self.label_map[real], self.label_map[pred]] += 1
+                        if pred == real:
+                            correct += 1
                     state_p, reward = self.step(state, action, in_set, in_row)
                     state = state_p
+            print('accuracy:', correct / len(self.res_set[in_set]))
             return conf_matrix
         else:
             # TODO: nondeterministic state transition using probabilistic predictions
