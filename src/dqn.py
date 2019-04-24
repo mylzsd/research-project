@@ -39,7 +39,7 @@ class DQN:
         self.input_ = tf.placeholder(tf.float32, shape=(None, input_size))
         self.p_net = policy_net(self.input_, policy_hiddens, self.num_act, activation)
         self.v_net = value_net(self.input_, value_hiddens, activation)
-        self.sess = tf.Session()
+        self.sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
         self.sess.run(tf.global_variables_initializer())
 
     def a2v(self, action):

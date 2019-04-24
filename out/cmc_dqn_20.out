@@ -1,0 +1,718 @@
+(base) D:\mylzsd\Codes\research-project>python src\run.py -d cmc -a dqn -n 20 -t 1000 -l 0.01
+{'dataset': 'cmc', 'algorithm': 'dqn', 'num_clf': 20, 'num_training': 1000, 'learning_rate': 0.01, 'discount_factor': 1.0, 'epsilon': 0.1, 'random_state': 3891, 'n_estimators': 1, 'portion': 0.5}
+(663, 22)
+(663, 22)
+(147, 22)
+WARNING:tensorflow:From D:\mylzsd\Software\Anaconda3\lib\site-packages\tensorflow\python\framework\op_def_library.py:263: colocate_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Colocations handled automatically by placer.
+2019-04-18 02:32:27.201563: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2
+WARNING:tensorflow:From D:\mylzsd\Software\Anaconda3\lib\site-packages\tensorflow\python\ops\losses\losses_impl.py:277: to_float (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+finished epoch 10
+average policy cost: 0.30444650650024413
+average value loss: 0.10399999618530273
+accuracy: 0.35374149659863946
+[[23 25 21]
+ [10 11  8]
+ [15 16 18]]
+finished epoch 20
+average policy cost: 0.30445213317871095
+average value loss: 0.09000000357627869
+accuracy: 0.3877551020408163
+[[27 24 18]
+ [ 7 13  9]
+ [20 12 17]]
+finished epoch 30
+average policy cost: 0.3044395923614502
+average value loss: 0.11599999666213989
+accuracy: 0.41496598639455784
+[[29 17 23]
+ [ 7 12 10]
+ [14 15 20]]
+finished epoch 40
+average policy cost: 0.30444979667663574
+average value loss: 0.07999999523162842
+accuracy: 0.35374149659863946
+[[25 25 19]
+ [10 13  6]
+ [23 12 14]]
+finished epoch 50
+average policy cost: 0.30444631576538084
+average value loss: 0.07799999713897705
+accuracy: 0.32653061224489793
+[[23 26 20]
+ [13  7  9]
+ [15 16 18]]
+finished epoch 60
+average policy cost: 0.3044496774673462
+average value loss: 0.07400000095367432
+accuracy: 0.3129251700680272
+[[25 21 23]
+ [10  9 10]
+ [16 21 12]]
+finished epoch 70
+average policy cost: 0.3044552803039551
+average value loss: 0.07200000286102295
+accuracy: 0.3401360544217687
+[[22 25 22]
+ [ 6 12 11]
+ [14 19 16]]
+finished epoch 80
+average policy cost: 0.3044427394866943
+average value loss: 0.06800000667572022
+accuracy: 0.35374149659863946
+[[24 24 21]
+ [ 8  9 12]
+ [19 11 19]]
+finished epoch 90
+average policy cost: 0.3043979167938232
+average value loss: 0.13399999141693114
+accuracy: 0.3401360544217687
+[[23 26 20]
+ [14  6  9]
+ [12 16 21]]
+finished epoch 100
+average policy cost: 0.3043897390365601
+average value loss: 0.13599998950958253
+accuracy: 0.3673469387755102
+[[27 27 15]
+ [11  7 11]
+ [15 14 20]]
+finished epoch 110
+average policy cost: 0.3044619083404541
+average value loss: 0.06000001430511474
+accuracy: 0.3469387755102041
+[[25 25 19]
+ [12 11  6]
+ [18 16 15]]
+finished epoch 120
+average policy cost: 0.30437798500061036
+average value loss: 0.14399998188018798
+accuracy: 0.3877551020408163
+[[27 14 28]
+ [11 10  8]
+ [13 16 20]]
+finished epoch 130
+average policy cost: 0.3044595241546631
+average value loss: 0.052000021934509276
+accuracy: 0.35374149659863946
+[[22 20 27]
+ [12  9  8]
+ [15 13 21]]
+finished epoch 140
+average policy cost: 0.30446062088012693
+average value loss: 0.0460000216960907
+accuracy: 0.2857142857142857
+[[22 25 22]
+ [ 7  6 16]
+ [14 21 14]]
+finished epoch 150
+average policy cost: 0.3044548988342285
+average value loss: 0.036000031232833865
+accuracy: 0.30612244897959184
+[[24 19 26]
+ [11  6 12]
+ [19 15 15]]
+finished epoch 160
+average policy cost: 0.3043660640716553
+average value loss: 0.16999995708465576
+accuracy: 0.3741496598639456
+[[27 18 24]
+ [10 10  9]
+ [13 18 18]]
+finished epoch 170
+average policy cost: 0.30445256233215334
+average value loss: 0.03000003695487976
+accuracy: 0.4217687074829932
+[[32 24 13]
+ [ 7 10 12]
+ [16 13 20]]
+finished epoch 180
+average policy cost: 0.30435183048248293
+average value loss: 0.17599995136260987
+accuracy: 0.3129251700680272
+[[22 20 27]
+ [11  7 11]
+ [23  9 17]]
+finished epoch 190
+average policy cost: 0.3044569969177246
+average value loss: 0.022000044584274292
+accuracy: 0.3197278911564626
+[[26 23 20]
+ [10  6 13]
+ [16 18 15]]
+finished epoch 200
+average policy cost: 0.30446035861968995
+average value loss: 0.01800004839897156
+accuracy: 0.2653061224489796
+[[20 20 29]
+ [ 8  7 14]
+ [19 18 12]]
+finished epoch 210
+average policy cost: 0.30445013046264646
+average value loss: 0.01000005602836609
+accuracy: 0.4217687074829932
+[[29 21 19]
+ [11 13  5]
+ [16 13 20]]
+finished epoch 220
+average policy cost: 0.3043303251266479
+average value loss: 0.19399993419647216
+accuracy: 0.2925170068027211
+[[25 25 19]
+ [ 9  7 13]
+ [16 22 11]]
+finished epoch 230
+average policy cost: 0.30446135997772217
+average value loss: 0.00200006365776062
+accuracy: 0.3741496598639456
+[[28 18 23]
+ [11 12  6]
+ [19 15 15]]
+finished epoch 240
+average policy cost: 0.3044466018676758
+average value loss: 5.960464477539063e-08
+accuracy: 0.3197278911564626
+[[25 20 24]
+ [ 7 13  9]
+ [21 19  9]]
+finished epoch 250
+average policy cost: 0.30444998741149903
+average value loss: 5.960464477539063e-08
+accuracy: 0.3469387755102041
+[[26 22 21]
+ [ 9  9 11]
+ [20 13 16]]
+finished epoch 260
+average policy cost: 0.3044646978378296
+average value loss: 0.0020000576972961427
+accuracy: 0.3197278911564626
+[[23 20 26]
+ [14  9  6]
+ [20 14 15]]
+finished epoch 270
+average policy cost: 0.30445902347564696
+average value loss: 5.960464477539063e-08
+accuracy: 0.2857142857142857
+[[22 25 22]
+ [12  7 10]
+ [19 17 13]]
+finished epoch 280
+average policy cost: 0.3042722463607788
+average value loss: 0.19999994039535524
+accuracy: 0.3877551020408163
+[[31 14 24]
+ [12 11  6]
+ [16 18 15]]
+finished epoch 290
+average policy cost: 0.30445218086242676
+average value loss: 5.960464477539063e-08
+accuracy: 0.3333333333333333
+[[27 21 21]
+ [12  7 10]
+ [13 21 15]]
+finished epoch 300
+average policy cost: 0.3044556140899658
+average value loss: 0.0020000576972961427
+accuracy: 0.2653061224489796
+[[24 18 27]
+ [10  4 15]
+ [18 20 11]]
+finished epoch 310
+average policy cost: 0.3044612407684326
+average value loss: 5.960464477539063e-08
+accuracy: 0.3333333333333333
+[[24 26 19]
+ [12 10  7]
+ [14 20 15]]
+finished epoch 320
+average policy cost: 0.304227876663208
+average value loss: 0.19999994039535524
+accuracy: 0.272108843537415
+[[19 34 16]
+ [ 7  8 14]
+ [16 20 13]]
+finished epoch 330
+average policy cost: 0.30421664714813235
+average value loss: 0.19999994039535524
+accuracy: 0.35374149659863946
+[[27 21 21]
+ [13 10  6]
+ [20 14 15]]
+finished epoch 340
+average policy cost: 0.3042053937911987
+average value loss: 0.19999994039535524
+accuracy: 0.3197278911564626
+[[22 26 21]
+ [10  9 10]
+ [15 18 16]]
+finished epoch 350
+average policy cost: 0.3041940927505493
+average value loss: 0.19999994039535524
+accuracy: 0.32653061224489793
+[[25 22 22]
+ [10  7 12]
+ [12 21 16]]
+finished epoch 360
+average policy cost: 0.30446012020111085
+average value loss: 5.960464477539063e-08
+accuracy: 0.3333333333333333
+[[31 17 21]
+ [ 9  9 11]
+ [21 19  9]]
+finished epoch 370
+average policy cost: 0.30447700023651125
+average value loss: 5.960464477539063e-08
+accuracy: 0.2857142857142857
+[[19 30 20]
+ [ 9  7 13]
+ [18 15 16]]
+finished epoch 380
+average policy cost: 0.3044624090194702
+average value loss: 5.960464477539063e-08
+accuracy: 0.29931972789115646
+[[23 25 21]
+ [13  5 11]
+ [19 14 16]]
+finished epoch 390
+average policy cost: 0.3044725894927979
+average value loss: 0.00400005578994751
+accuracy: 0.3673469387755102
+[[25 23 21]
+ [ 9 11  9]
+ [14 17 18]]
+finished epoch 400
+average policy cost: 0.30447142124176024
+average value loss: 5.960464477539063e-08
+accuracy: 0.2857142857142857
+[[19 24 26]
+ [14  7  8]
+ [19 14 16]]
+finished epoch 410
+average policy cost: 0.30412266254425047
+average value loss: 0.19799994230270385
+accuracy: 0.2925170068027211
+[[22 21 26]
+ [ 9  9 11]
+ [11 26 12]]
+finished epoch 420
+average policy cost: 0.30411357879638673
+average value loss: 0.19999994039535524
+accuracy: 0.3333333333333333
+[[26 25 18]
+ [14  5 10]
+ [15 16 18]]
+finished epoch 430
+average policy cost: 0.30446813106536863
+average value loss: 5.960464477539063e-08
+accuracy: 0.3333333333333333
+[[21 23 25]
+ [ 7 13  9]
+ [15 19 15]]
+finished epoch 440
+average policy cost: 0.3040901184082031
+average value loss: 0.19999994039535524
+accuracy: 0.3333333333333333
+[[23 21 25]
+ [12  9  8]
+ [10 22 17]]
+finished epoch 450
+average policy cost: 0.30447044372558596
+average value loss: 5.960464477539063e-08
+accuracy: 0.2925170068027211
+[[19 26 24]
+ [11  7 11]
+ [18 14 17]]
+finished epoch 460
+average policy cost: 0.30406646728515624
+average value loss: 0.19999994039535524
+accuracy: 0.36054421768707484
+[[25 29 15]
+ [12  7 10]
+ [15 13 21]]
+finished epoch 470
+average policy cost: 0.3040545701980591
+average value loss: 0.19999994039535524
+accuracy: 0.2789115646258503
+[[16 22 31]
+ [ 9 13  7]
+ [21 16 12]]
+finished epoch 480
+average policy cost: 0.3040425777435303
+average value loss: 0.19999994039535524
+accuracy: 0.32653061224489793
+[[21 17 31]
+ [10 10  9]
+ [16 16 17]]
+finished epoch 490
+average policy cost: 0.3044683218002319
+average value loss: 5.960464477539063e-08
+accuracy: 0.3469387755102041
+[[20 26 23]
+ [ 9 14  6]
+ [25  7 17]]
+finished epoch 500
+average policy cost: 0.30447399616241455
+average value loss: 5.960464477539063e-08
+accuracy: 0.3333333333333333
+[[26 25 18]
+ [ 7  9 13]
+ [14 21 14]]
+finished epoch 510
+average policy cost: 0.30447068214416506
+average value loss: 5.960464477539063e-08
+accuracy: 0.38095238095238093
+[[32 21 16]
+ [ 7  9 13]
+ [14 20 15]]
+finished epoch 520
+average policy cost: 0.3039942502975464
+average value loss: 0.19999994039535524
+accuracy: 0.35374149659863946
+[[24 31 14]
+ [16  5  8]
+ [17  9 23]]
+finished epoch 530
+average policy cost: 0.3044752597808838
+average value loss: 5.960464477539063e-08
+accuracy: 0.3197278911564626
+[[19 28 22]
+ [ 7 12 10]
+ [18 15 16]]
+finished epoch 540
+average policy cost: 0.303967022895813
+average value loss: 0.19799994230270385
+accuracy: 0.3673469387755102
+[[24 25 20]
+ [ 9 11  9]
+ [19 11 19]]
+finished epoch 550
+average policy cost: 0.30447313785552976
+average value loss: 5.960464477539063e-08
+accuracy: 0.36054421768707484
+[[25 27 17]
+ [ 8 10 11]
+ [18 13 18]]
+finished epoch 560
+average policy cost: 0.3044832944869995
+average value loss: 5.960464477539063e-08
+accuracy: 0.35374149659863946
+[[26 25 18]
+ [ 6 11 12]
+ [16 18 15]]
+finished epoch 570
+average policy cost: 0.30448451042175295
+average value loss: 0.0020000576972961427
+accuracy: 0.3197278911564626
+[[25 19 25]
+ [15  5  9]
+ [18 14 17]]
+finished epoch 580
+average policy cost: 0.30447227954864503
+average value loss: 0.00400005578994751
+accuracy: 0.3333333333333333
+[[25 23 21]
+ [ 8  6 15]
+ [15 16 18]]
+finished epoch 590
+average policy cost: 0.30390751361846924
+average value loss: 0.19999994039535524
+accuracy: 0.3673469387755102
+[[28 20 21]
+ [ 3 10 16]
+ [18 15 16]]
+finished epoch 600
+average policy cost: 0.30447685718536377
+average value loss: 0.0020000576972961427
+accuracy: 0.4217687074829932
+[[28 24 17]
+ [11  8 10]
+ [13 10 26]]
+finished epoch 610
+average policy cost: 0.30448477268218993
+average value loss: 0.0020000576972961427
+accuracy: 0.3673469387755102
+[[21 27 21]
+ [ 8 14  7]
+ [18 12 19]]
+finished epoch 620
+average policy cost: 0.30386953353881835
+average value loss: 0.19999994039535524
+accuracy: 0.36054421768707484
+[[29 20 20]
+ [10  9 10]
+ [19 15 15]]
+finished epoch 630
+average policy cost: 0.3044849395751953
+average value loss: 5.960464477539063e-08
+accuracy: 0.3197278911564626
+[[21 24 24]
+ [11  9  9]
+ [14 18 17]]
+finished epoch 640
+average policy cost: 0.30384390354156493
+average value loss: 0.19999994039535524
+accuracy: 0.3741496598639456
+[[29 19 21]
+ [ 7  9 13]
+ [16 16 17]]
+finished epoch 650
+average policy cost: 0.30383102893829345
+average value loss: 0.19999994039535524
+accuracy: 0.3673469387755102
+[[27 22 20]
+ [ 8 12  9]
+ [14 20 15]]
+finished epoch 660
+average policy cost: 0.30381805896759034
+average value loss: 0.19999994039535524
+accuracy: 0.3877551020408163
+[[25 24 20]
+ [ 9 13  7]
+ [19 11 19]]
+finished epoch 670
+average policy cost: 0.30450973510742185
+average value loss: 5.960464477539063e-08
+accuracy: 0.4013605442176871
+[[25 22 22]
+ [13  7  9]
+ [11 11 27]]
+finished epoch 680
+average policy cost: 0.3037890911102295
+average value loss: 0.19799994230270385
+accuracy: 0.35374149659863946
+[[21 24 24]
+ [ 8 13  8]
+ [12 19 18]]
+finished epoch 690
+average policy cost: 0.30449886322021485
+average value loss: 5.960464477539063e-08
+accuracy: 0.30612244897959184
+[[22 22 25]
+ [14  8  7]
+ [19 15 15]]
+finished epoch 700
+average policy cost: 0.3044844627380371
+average value loss: 5.960464477539063e-08
+accuracy: 0.3333333333333333
+[[24 16 29]
+ [ 7 13  9]
+ [17 20 12]]
+finished epoch 710
+average policy cost: 0.3037465333938599
+average value loss: 0.19599994421005248
+accuracy: 0.32653061224489793
+[[24 19 26]
+ [14  9  6]
+ [16 18 15]]
+finished epoch 720
+average policy cost: 0.30447123050689695
+average value loss: 5.960464477539063e-08
+accuracy: 0.3741496598639456
+[[30 21 18]
+ [11  8 10]
+ [14 18 17]]
+finished epoch 730
+average policy cost: 0.3044903755187988
+average value loss: 5.960464477539063e-08
+accuracy: 0.35374149659863946
+[[26 23 20]
+ [ 7 10 12]
+ [13 20 16]]
+finished epoch 740
+average policy cost: 0.30449833869934084
+average value loss: 0.0020000576972961427
+accuracy: 0.3469387755102041
+[[27 20 22]
+ [12  7 10]
+ [18 14 17]]
+finished epoch 750
+average policy cost: 0.30448839664459226
+average value loss: 5.960464477539063e-08
+accuracy: 0.3333333333333333
+[[21 28 20]
+ [11  6 12]
+ [13 14 22]]
+finished epoch 760
+average policy cost: 0.3036852598190308
+average value loss: 0.19999994039535524
+accuracy: 0.2925170068027211
+[[19 26 24]
+ [13  6 10]
+ [13 18 18]]
+finished epoch 770
+average policy cost: 0.30449979305267333
+average value loss: 5.960464477539063e-08
+accuracy: 0.32653061224489793
+[[22 26 21]
+ [ 7  8 14]
+ [19 12 18]]
+finished epoch 780
+average policy cost: 0.3044764995574951
+average value loss: 5.960464477539063e-08
+accuracy: 0.2857142857142857
+[[22 26 21]
+ [ 9 10 10]
+ [22 17 10]]
+finished epoch 790
+average policy cost: 0.30450007915496824
+average value loss: 5.960464477539063e-08
+accuracy: 0.3401360544217687
+[[31 20 18]
+ [ 9  6 14]
+ [17 19 13]]
+finished epoch 800
+average policy cost: 0.3044946908950806
+average value loss: 0.0020000576972961427
+accuracy: 0.30612244897959184
+[[22 29 18]
+ [14  6  9]
+ [12 20 17]]
+finished epoch 810
+average policy cost: 0.3045003652572632
+average value loss: 5.960464477539063e-08
+accuracy: 0.32653061224489793
+[[18 22 29]
+ [10 11  8]
+ [16 14 19]]
+finished epoch 820
+average policy cost: 0.3044950008392334
+average value loss: 0.0020000576972961427
+accuracy: 0.30612244897959184
+[[16 30 23]
+ [ 9 12  8]
+ [19 13 17]]
+finished epoch 830
+average policy cost: 0.3044939756393433
+average value loss: 5.960464477539063e-08
+accuracy: 0.36054421768707484
+[[24 22 23]
+ [12 11  6]
+ [20 11 18]]
+finished epoch 840
+average policy cost: 0.30449302196502687
+average value loss: 5.960464477539063e-08
+accuracy: 0.3741496598639456
+[[23 23 23]
+ [ 9 14  6]
+ [14 17 18]]
+finished epoch 850
+average policy cost: 0.3035604000091553
+average value loss: 0.19999994039535524
+accuracy: 0.3673469387755102
+[[30 15 24]
+ [11  9  9]
+ [19 15 15]]
+finished epoch 860
+average policy cost: 0.3035461664199829
+average value loss: 0.19999994039535524
+accuracy: 0.3401360544217687
+[[26 20 23]
+ [11 11  7]
+ [ 9 27 13]]
+finished epoch 870
+average policy cost: 0.304505729675293
+average value loss: 5.960464477539063e-08
+accuracy: 0.2857142857142857
+[[22 28 19]
+ [13  6 10]
+ [14 21 14]]
+finished epoch 880
+average policy cost: 0.30351758003234863
+average value loss: 0.19999994039535524
+accuracy: 0.3469387755102041
+[[26 23 20]
+ [ 8 10 11]
+ [17 17 15]]
+finished epoch 890
+average policy cost: 0.303503155708313
+average value loss: 0.19999994039535524
+accuracy: 0.32653061224489793
+[[24 21 24]
+ [10  7 12]
+ [21 11 17]]
+finished epoch 900
+average policy cost: 0.3044940710067749
+average value loss: 0.0020000576972961427
+accuracy: 0.2789115646258503
+[[21 27 21]
+ [10  6 13]
+ [19 16 14]]
+finished epoch 910
+average policy cost: 0.3045019626617432
+average value loss: 5.960464477539063e-08
+accuracy: 0.3945578231292517
+[[22 21 26]
+ [10  9 10]
+ [10 12 27]]
+finished epoch 920
+average policy cost: 0.30449438095092773
+average value loss: 5.960464477539063e-08
+accuracy: 0.40816326530612246
+[[29 23 17]
+ [11 10  8]
+ [15 13 21]]
+finished epoch 930
+average policy cost: 0.30450456142425536
+average value loss: 5.960464477539063e-08
+accuracy: 0.3673469387755102
+[[27 21 21]
+ [ 7 13  9]
+ [18 17 14]]
+finished epoch 940
+average policy cost: 0.3044991970062256
+average value loss: 5.960464477539063e-08
+accuracy: 0.35374149659863946
+[[27 20 22]
+ [10 10  9]
+ [10 24 15]]
+finished epoch 950
+average policy cost: 0.30450494289398194
+average value loss: 5.960464477539063e-08
+accuracy: 0.3197278911564626
+[[22 29 18]
+ [ 7  7 15]
+ [15 16 18]]
+finished epoch 960
+average policy cost: 0.304506254196167
+average value loss: 5.960464477539063e-08
+accuracy: 0.2857142857142857
+[[18 23 28]
+ [ 8 10 11]
+ [16 19 14]]
+finished epoch 970
+average policy cost: 0.30450317859649656
+average value loss: 0.0020000576972961427
+accuracy: 0.2789115646258503
+[[15 29 25]
+ [13  8  8]
+ [22  9 18]]
+finished epoch 980
+average policy cost: 0.3033704042434692
+average value loss: 0.19999994039535524
+accuracy: 0.272108843537415
+[[20 21 28]
+ [10  5 14]
+ [18 16 15]]
+finished epoch 990
+average policy cost: 0.30449464321136477
+average value loss: 5.960464477539063e-08
+accuracy: 0.38095238095238093
+[[25 20 24]
+ [10 12  7]
+ [18 12 19]]
+finished epoch 1000
+average policy cost: 0.30449373722076417
+average value loss: 5.960464477539063e-08
+accuracy: 0.3741496598639456
+[[26 17 26]
+ [13  8  8]
+ [16 12 21]]
+accuracy: 0.2925170068027211
+[[21 26 22]
+ [ 8  8 13]
+ [16 19 14]]
+Single random forest accuracy: 0.5714285714285714
+Majority vote accuracy: 0.5238095238095238
