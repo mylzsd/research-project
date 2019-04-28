@@ -1,4 +1,5 @@
-import classifier
+from classifier import Cluster
+from collections import Counter
 import reader
 import time
 import os, sys, random as rd
@@ -6,7 +7,15 @@ import numpy as np
 import pandas as pd
 import tensorflow as tf
 import argparse
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.neural_network import MLPClassifier
+
+
+datasets = ['audiology', 'breast_cancer', 'breast_w', 
+            'cmc', 'credit_card', 'dematology', 'ecoli', 
+            'glass', 'hepatitis', 'human_activity', 
+            'iris', 'lymphography']
 
 
 # convert categorical predicted result into binary form
@@ -48,7 +57,7 @@ def mlp(rdr, dataset, num_clf, hidden_layers, **clf_kwargs):
     num_feature = train_clf.shape[1] - 1
 
     print('Training classifiers:', time.asctime(time.localtime(time.time())))
-    pure_clf = classifier.Cluster(num_clf, ['rf'], [list(range(num_feature))] * num_clf, **clf_kwargs)
+    pure_clf = Cluster(num_clf, ['rf'], [list(range(num_feature))] * num_clf, **clf_kwargs)
     pure_clf.train(train)
     pure_scores = pure_clf.majorityVote(test)
 
@@ -57,7 +66,7 @@ def mlp(rdr, dataset, num_clf, hidden_layers, **clf_kwargs):
         feature = rd.sample(range(num_feature), int(num_feature / 2))
         features.append(feature)
 
-    cluster = classifier.Cluster(num_clf, ['rf'], features, **clf_kwargs)
+    cluster = Cluster(num_clf, ['rf'], features, **clf_kwargs)
     cluster.train(train_clf)
     clf_scores = cluster.majorityVote(test)
 
@@ -229,7 +238,7 @@ def examine(rdr, dataset, num_clf, reuse, **clf_kwargs):
 
     num_feature = train.shape[1] - 1
     features = [list(range(num_feature))] * num_clf
-    cluster = classifier.Cluster(num_clf, ['rf'], features, label_map=None, **clf_kwargs)
+    cluster = Cluster(num_clf, ['rf'], features, label_map=None, **clf_kwargs)
     
     label_map = dict()
     index = 65
@@ -276,10 +285,6 @@ def examine(rdr, dataset, num_clf, reuse, **clf_kwargs):
 
 
 def variance(rdr, random_state):
-    datasets = ['audiology', 'breast_cancer', 'breast_w', 
-                'cmc', 'dematology', 'ecoli', 'glass', 
-                'hepatitis', 'human_activity', 'iris', 
-                'lymphography']
     n_estimators = [1, 10, 50, 100, 200, 300]
     for d in datasets:
         print('Dataset:', d)
@@ -288,7 +293,7 @@ def variance(rdr, random_state):
         features = [list(range(num_feature))] * 100
         for n in n_estimators:
             kwargs = {'n_estimators': n, 'random_state': random_state}
-            cluster = classifier.Cluster(100, ['rf'], features, **kwargs)
+            cluster = Cluster(100, ['rf'], features, **kwargs)
             cluster.train(train)
             scores = cluster.accuracy(test)
             print('%03d estimators: mean %f, var %f, max %f, min %f' 
@@ -296,33 +301,77 @@ def variance(rdr, random_state):
         print('\n')
 
 
-def majorityVote(rdr, random_state):
-    datasets = ['audiology', 'breast_cancer', 'breast_w', 
-                'cmc', 'dematology', 'ecoli', 'glass', 
-                'hepatitis', 'human_activity', 'iris', 
-                'lymphography']
-    n_clf = [20, 50, 100, 200, 300]
+def computeConfMatrix(conf_matrix):
+    total_count = conf_matrix.sum()
+    correct = 0
+    precision = 0.0
+    recall = 0.0
+    f_score = 0.0
+    for i in range(conf_matrix.shape[0]):
+        tp = conf_matrix[i, i]
+        if tp > 0:
+            tp_fp = conf_matrix.sum(axis=0)[i]
+            tp_fn = conf_matrix.sum(axis=1)[i]
+            correct += tp
+            precision += float(tp) / tp_fp
+            recall += float(tp) / tp_fn
+            f_score += float(2 * tp) / (tp_fp + tp_fn)
+    accuracy = float(correct) / total_count
+    precision /= conf_matrix.shape[0]
+    recall /= conf_matrix.shape[0]
+    f_score /= conf_matrix.shape[0]
+    return accuracy, precision, recall, f_score
+
+
+def benchmark(rdr, random_state):
+    n_clf = [20, 50, 100]
     for d in datasets:
         print('Dataset:', d)
-        train, train_clf, train_mdp, test = rdr.read(d)
+        train, _, _, test = rdr.read(d)
         num_feature = train.shape[1] - 1
-        for n in n_clf:
-            kwargs = {'n_estimators': n, 'random_state': random_state}
-            single_rf = classifier.Cluster(1, ['rf'], [list(range(num_feature))], **kwargs)
-            single_rf.train(train)
-            single_score = single_rf.accuracy(test)[0]
+        label_map = dict()
+        for d in [train, test]:
+            for l in d.iloc[:, -1]:
+                if l not in label_map:
+                    label_map[l] = len(label_map)
 
-            features = [list(range(num_feature))] * n
-            kwargs['n_estimators'] = 1
-            cluster = classifier.Cluster(n, ['rf'], features, **kwargs)
-            cluster.train(train)
-            train2test = cluster.majorityVote(test)
-            cluster.train(train_clf)
-            half2rest = cluster.majorityVote(train_mdp)
-            half2test = cluster.majorityVote(test)
-            print('%03d trees\n\tsingle rf: %f\n\ttrain->test: %f\n\tclf->mdp: %f\n\tclf->test: %f'
-                    % (n, single_score, train2test, half2rest, half2test))
-        print('\n')
+        for n in n_clf:
+            print('\t#trees:', n)
+            trees = []
+            for _ in range(n):
+                tree = DecisionTreeClassifier(random_state=random_state, max_depth=2)
+                bagging = np.random.randint(0, train.shape[0], train.shape[0])
+                X_train = train.iloc[bagging, :-1]
+                y_train = train.iloc[bagging, -1]
+                tree.fit(X_train, y_train)
+                trees.append(tree)
+            X_test = test.iloc[:, :-1]
+            y_test = test.iloc[:, -1]
+
+            majority = np.zeros((len(label_map), len(label_map)), dtype=np.int32)
+            weighted = np.zeros((len(label_map), len(label_map)), dtype=np.int32)
+            for i in range(test.shape[0]):
+                X = test.iloc[i, :-1].values.reshape(1, -1)
+                real = test.iloc[i, -1]
+                m_vote = Counter()
+                w_vote = Counter()
+                for tree in trees:
+                    pred = tree.predict(X)[0]
+                    m_vote[pred] += 1
+                    prob = tree.predict_proba(X)[0]
+                    for c, p in zip(tree.classes_, prob):
+                        w_vote[c] += p
+                p_m = m_vote.most_common()[0][0]
+                p_w = w_vote.most_common()[0][0]
+                majority[label_map[real], label_map[p_m]] += 1
+                weighted[label_map[real], label_map[p_w]] += 1
+            # print(majority)
+            # print(weighted)
+            print('\t\tmajority vote:\taccuracy\tprecision\trecall\tf_score')
+            print('\t\t\t', computeConfMatrix(majority))
+            print('\t\tweighted vote:\taccuracy\tprecision\trecall\tf_score')
+            print('\t\t\t', computeConfMatrix(weighted))
+        print()
 
 
 def readCommand(argv):
@@ -354,6 +403,6 @@ if __name__ == '__main__':
         mlp(rdr, options.dataset, options.num_clf, options.hidden_layers, **clf_kwargs)
     elif options.mode == 'variance':
         variance(rdr, rs)
-    elif options.mode == 'mjvote':
-        majorityVote(rdr, rs)
+    elif options.mode == 'benchmark':
+        benchmark(rdr, rs)
 

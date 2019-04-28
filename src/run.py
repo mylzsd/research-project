@@ -17,8 +17,8 @@ def readCommand(argv):
     parser.add_argument('-t', '--num-training', type=int, default=10000)
     parser.add_argument('-e', '--epsilon', type=float, default=0.1)
     parser.add_argument('-r', '--random-state', type=int, default=rd.randint(1, 10000))
-    parser.add_argument('-s', '--n-estimators', type=int, default=1)
     parser.add_argument('-p', '--portion', type=float, default=0.5)
+    parser.add_argument('-s', '--sequential', type=bool, default=True)
     
     options = parser.parse_args(argv)
     args = dict()
@@ -30,8 +30,8 @@ def readCommand(argv):
     args['discount_factor'] = options.discount_factor
     args['epsilon'] = options.epsilon
     args['random_state'] = options.random_state
-    args['n_estimators'] = options.n_estimators
     args['portion'] = options.portion
+    args['sequential'] = False if options.algorithm == 'dqn' else options.sequential
     print(args)
     return args
 
@@ -40,6 +40,28 @@ def get_learn_function(alg):
     # alg_module = import_module('.'.join(['src', alg]))
     alg_module = import_module(alg)
     return alg_module.learn
+
+
+def computeConfMatrix(conf_matrix):
+    total_count = conf_matrix.sum()
+    correct = 0
+    precision = 0.0
+    recall = 0.0
+    f_score = 0.0
+    for i in range(conf_matrix.shape[0]):
+        tp = conf_matrix[i, i]
+        if tp > 0:
+            tp_fp = conf_matrix.sum(axis=0)[i]
+            tp_fn = conf_matrix.sum(axis=1)[i]
+            correct += tp
+            precision += float(tp) / tp_fp
+            recall += float(tp) / tp_fn
+            f_score += float(2 * tp) / (tp_fp + tp_fn)
+    accuracy = float(correct) / total_count
+    precision /= conf_matrix.shape[0]
+    recall /= conf_matrix.shape[0]
+    f_score /= conf_matrix.shape[0]
+    return accuracy, precision, recall, f_score    
 
 
 def train(dataset,
@@ -51,7 +73,7 @@ def train(dataset,
           discount_factor=1.0,
           epsilon=1.0,
           portion=0.5,
-          n_estimators=1,
+          sequential=True,
           **network_kwargs):
     rd.seed(random_state)
 
@@ -66,32 +88,28 @@ def train(dataset,
         for l in d.iloc[:, -1]:
             if l not in label_map:
                 label_map[l] = len(label_map)
-    # single n-tree random forest
-    rf = Cluster(1, ['rf'], [list(range(num_feature))], label_map, random_state=random_state, n_estimators=num_clf)
-    rf.train(train)
-    rf_accu = rf.accuracy(test)[0]
-    # multiple single-tree random forests
+    
     features = [list(range(num_feature))] * num_clf
-    cluster = Cluster(num_clf, ['rf'], features, label_map, random_state=random_state, n_estimators=n_estimators)
+    cluster = Cluster(num_clf, ['dt'], features, label_map, random_state=random_state)
     cluster.train(train_clf)
-    mjvote_accu = cluster.majorityVote(test)
+    mv_cmatrix = cluster.majorityVote(test)
+    wv_cmatrix = cluster.weightedVote(test)
 
     real_set = [train_mdp.iloc[:, -1], test.iloc[:, -1]]
     res_set = [cluster.results(train_mdp), cluster.results(test)]
     prob_set = [cluster.resProb(train_mdp), cluster.resProb(test)]
 
-    sequential = algorithm != 'dqn'
     env = Environment(num_clf, real_set, res_set, prob_set, label_map, sequential=sequential)
     learn = get_learn_function(algorithm)
     model = learn(env, 0, num_training, learning_rate, epsilon, discount_factor, random_state, **network_kwargs)
+    rl_cmatrix = env.evaluation(model, 1)
 
-    # test process, maybe put into env class
-    conf_matrix = env.evaluation(model, 1)
-    print(conf_matrix)
-
-    print('Single random forest accuracy:', rf_accu)
-    print('Majority vote accuracy:', mjvote_accu)
-    # print('Reinforcement learning accuracy:', rl_accu)
+    print(mv_cmatrix)
+    print(wv_cmatrix)
+    print(rl_cmatrix)
+    print(computeConfMatrix(mv_cmatrix))
+    print(computeConfMatrix(wv_cmatrix))
+    print(computeConfMatrix(rl_cmatrix))
 
 
 if __name__ == '__main__':

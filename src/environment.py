@@ -41,8 +41,7 @@ class State:
         c = Counter([p for p in self.pred if p is not None])
         if (len(c) == 0):
             return rd.choice(list(self.label_map.keys()))
-        m = max(c.values())
-        return rd.choice([k for (k, v) in c.items() if v == m])
+        return c.most_common()[0][0]
 
     def __str__(self):
         return ' '.join(str(e) for e in self.pred)
@@ -63,7 +62,7 @@ class Action:
             return ('visit ' if self.visit else 'skip ') + str(self.index)
 
 
-class Environment:
+class Environment():
     # read in training and test results, including probabilistic results
     # whether act sequentially, label map, and feature related info
     def __init__(self,
@@ -98,7 +97,8 @@ class Environment:
             if action.index >= 0:
                 # get result of target classifier and perform transition
                 val = None
-                if action.visit:
+                # check action.visit is None for non-sequential case
+                if action.visit is None or action.visit:
                     val = self.res_set[in_set].iloc[in_row, action.index]
                 state_p.setPred(action.index, val)
             else:
@@ -126,31 +126,30 @@ class Environment:
             else:
                 return [Action(index, visit=True), Action(index, visit=False)]
         else:
-            # TODO: all unvisited classifier as well as evaluation
             unused = set(list(range(self.num_clf))) - state.usedClf()
             ret = [Action(index) for index in unused] + [Action(-1)]
             return ret
 
     # return the confusion matrix of a given model
     def evaluation(self, model, in_set, deter=True):
+        conf_matrix = np.zeros((len(self.label_map), len(self.label_map)), dtype=np.int32)
         if deter:
-            conf_matrix = np.zeros((len(self.label_map), len(self.label_map)), dtype=np.int32)
-            correct = 0.0
             for in_row in range(len(self.res_set[in_set])):
+                # print('test case', in_row)
                 state = self.initState()
                 while state is not None:
-                    action = model.policy(state)
+                    action = model.policy(state, in_set, in_row)
+                    # print('\t' + str(state))
+                    # print('\t->', str(action))
                     if action.index == -1:
                         pred = state.evaluation()
                         real = self.real_set[in_set].iloc[in_row]
                         conf_matrix[self.label_map[real], self.label_map[pred]] += 1
-                        if pred == real:
-                            correct += 1
+                        # print('\t\treal:', real, 'pred:', pred)
                     state_p, reward = self.step(state, action, in_set, in_row)
                     state = state_p
-            print('accuracy:', correct / len(self.res_set[in_set]))
-            return conf_matrix
         else:
             # TODO: nondeterministic state transition using probabilistic predictions
             pass
+        return conf_matrix
 

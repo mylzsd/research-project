@@ -8,7 +8,7 @@ class Tabular:
         self.env = env
         self.q_table = Counter()
 
-    def policy(self, state, randomness=0.0):
+    def policy(self, state, in_set, in_row, randomness=0.0):
         actions = self.env.legal_actions(state)
         if len(actions) == 0:
             return None
@@ -50,7 +50,7 @@ def learn(env, in_set, num_training, learning_rate, epsilon, discount_factor, ra
         in_row = i % num_ins
         state = env.initState()
         while state is not None:
-            action = model.policy(state, randomness=epsilon)
+            action = model.policy(state, in_set, in_row, randomness=epsilon)
             state_p, reward = env.step(state, action, in_set, in_row)
             # maybe modify model every k steps
             model.train(state, action, state_p, reward, learning_rate, discount_factor)

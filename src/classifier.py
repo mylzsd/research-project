@@ -1,8 +1,10 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.svm import SVC
+from collections import Counter
 import pandas as pd
 import random as rd
+import numpy as np
 
 
 class Classifier:
@@ -48,12 +50,16 @@ class Cluster:
             clf_kwarg['random_state'] = rd.randint(1, 10000)
             self.classifiers.append(Classifier(self.clf_types[i], features[i], **clf_kwarg))
 
-    def train(self, data, bagging=None):
+    def train(self, data, bootstrap=True):
         for i in range(self.size):
             feature = self.features[i]
+            if bootstrap:
+                indices = np.random.randint(0, data.shape[0], data.shape[0])
+            else:
+                indices = list(range(data.shape[0]))
             # use specified features to form X
-            X = data.iloc[:, feature]
-            y = data.iloc[:, -1]
+            X = data.iloc[indices, feature]
+            y = data.iloc[indices, -1]
             self.classifiers[i].train(X, y)
 
     def accuracy(self, data):
@@ -100,32 +106,32 @@ class Cluster:
         df = pd.DataFrame(ret)
         return df.T
 
-    # TODO: add f-score
     def majorityVote(self, data):
-        count = 0
+        conf_matrix = np.zeros((len(self.label_map), len(self.label_map)), dtype=np.int32)
         for i in range(data.shape[0]):
-            y = data.iloc[i, -1]
-            vote = dict()
+            real = data.iloc[i, -1]
+            vote = Counter()
             for j in range(self.size):
                 feature = self.features[j]
                 X = data.iloc[i, feature].values.reshape(1, -1)
-                pred = self.classifiers[j].result(X)[0]
-                curr_v = vote.get(pred, 0)
-                vote[pred] = curr_v + 1
-            max_v = 0
-            candidates = list()
-            for k, v in vote.items():
-                if v >= max_v:
-                    if v > max_v:
-                        candidates.clear()
-                        max_v = v
-                    candidates.append(k)
-            if len(candidates) > 0 and rd.choice(candidates) == y:
-                count += 1
-        return float(count / data.shape[0])
+                p = self.classifiers[j].result(X)[0]
+                vote[p] += 1
+            pred = vote.most_common()[0][0]
+            conf_matrix[self.label_map[real], self.label_map[pred]] += 1
+        return conf_matrix
 
-    # TODO: implementation
     def weightedVote(self, data):
-        pass
-
+        conf_matrix = np.zeros((len(self.label_map), len(self.label_map)), dtype=np.int32)
+        for i in range(data.shape[0]):
+            real = data.iloc[i, -1]
+            vote = Counter()
+            for j in range(self.size):
+                feature = self.features[j]
+                X = data.iloc[i, feature].values.reshape(1, -1)
+                prob = self.classifiers[j].resProb(X)[0]
+                for c, p in zip(self.classifiers[j].classes(), prob):
+                    vote[c] += p
+            pred = vote.most_common()[0][0]
+            conf_matrix[self.label_map[real], self.label_map[pred]] += 1
+        return conf_matrix
 

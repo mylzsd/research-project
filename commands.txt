@@ -6,6 +6,7 @@ python src/test.py -d audiology -m examine -n 10 > out/exam_audiology_10.out
 
 Spartan usage:
 ssh mylzsd@spartan.hpc.unimelb.edu.au
+Liuzs19940915
 squeue --user mylzsd
 module spider Python
 sacctmgr show user mylzsd
