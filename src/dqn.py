@@ -50,7 +50,7 @@ class DQN:
         v[action.index] = 1.0
         return np.reshape(v, (1, -1))
 
-    def policy(self, state, in_set, in_row, randomness=0.0):
+    def policy(self, state, randomness=0.0):
         actions = self.env.legal_actions(state)
         if len(actions) == 0:
             return None
@@ -109,7 +109,7 @@ def learn(env, in_set, num_training, learning_rate, epsilon, discount_factor, ra
         history = []
         state = env.initState()
         while state is not None:
-            action = model.policy(state, in_set, in_row, randomness=epsilon)
+            action = model.policy(state, randomness=epsilon)
             state_p, reward = env.step(state, action, in_set, in_row)
             history.append((state, action, state_p, reward))
             state = state_p

@@ -8,7 +8,7 @@ def learn(env, in_set, num_training, learning_rate, epsilon, discount_factor, ra
     for i in range(num_training):
         in_row = i % num_ins
         state = env.initState()
-        action = model.policy(state, in_set, in_row, randomness=epsilon)
+        action = model.policy(state, randomness=epsilon)
         while state is not None:
             state_p, reward = env.step(state, action, in_set, in_row)
             action_p = model.policy(state_p, randomness=epsilon)

@@ -138,7 +138,7 @@ class Environment():
                 # print('test case', in_row)
                 state = self.initState()
                 while state is not None:
-                    action = model.policy(state, in_set, in_row)
+                    action = model.policy(state)
                     # print('\t' + str(state))
                     # print('\t->', str(action))
                     if action.index == -1:
