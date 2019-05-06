@@ -3,6 +3,9 @@ import random as rd
 import numpy as np
 
 
+output_print = True
+
+
 class State:
 
     def __init__(self, size, label_map):
@@ -135,19 +138,22 @@ class Environment():
         conf_matrix = np.zeros((len(self.label_map), len(self.label_map)), dtype=np.int32)
         if deter:
             for in_row in range(len(self.res_set[in_set])):
-                # print('test case', in_row)
+                if output_print:
+                    print('test case', in_row)
+                actions = []
                 state = self.initState()
                 while state is not None:
                     action = model.policy(state)
-                    # print('\t' + str(state))
-                    # print('\t->', str(action))
+                    actions.append(str(action))
                     if action.index == -1:
                         pred = state.evaluation()
                         real = self.real_set[in_set].iloc[in_row]
                         conf_matrix[self.label_map[real], self.label_map[pred]] += 1
-                        # print('\t\treal:', real, 'pred:', pred)
                     state_p, reward = self.step(state, action, in_set, in_row)
                     state = state_p
+                if output_print:
+                    print('\t', actions)
+                    print('\t# trees:', len(actions) - 1, ', real:', real, ', pred:', pred)
         else:
             # TODO: nondeterministic state transition using probabilistic predictions
             pass

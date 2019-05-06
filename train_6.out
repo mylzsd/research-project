@@ -1,0 +1,467 @@
+{'dataset': 'cmc', 'algorithm': 'dqn', 'num_clf': 100, 'num_training': 500, 'learning_rate': 0.01, 'discount_factor': 0.99, 'epsilon': 0.1, 'random_state': 261, 'portion': 0.5, 'sequential': False}
+(663, 22)
+(663, 22)
+(147, 22)
+finished epoch 100
+average loss: 12338000357077.63
+finished epoch 200
+average loss: 3304406855.74171
+finished epoch 300
+average loss: 1048953633.6551436
+finished epoch 400
+average loss: 8.774625357317849e+22
+finished epoch 500
+average loss: 3.5392475781791685e+22
+test case 0
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 1
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 2
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 3
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 4
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 5
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 2
+test case 6
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 3
+test case 7
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 8
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 9
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 10
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 11
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 3
+test case 12
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 13
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 14
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 15
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 16
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 17
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 18
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 19
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 20
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 21
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 3
+test case 22
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 23
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 24
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 2
+test case 25
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 3
+test case 26
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 27
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 28
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 29
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 3
+test case 30
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 3
+test case 31
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 3
+test case 32
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 33
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 34
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 35
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 36
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 37
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 38
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 39
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 40
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 41
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 3
+test case 42
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 3
+test case 43
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 1
+test case 44
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 1
+test case 45
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 2
+test case 46
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 1
+test case 47
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 2
+test case 48
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 1
+test case 49
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 3
+test case 50
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 3
+test case 51
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 1
+test case 52
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 1
+test case 53
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 1
+test case 54
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 1
+test case 55
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 1
+test case 56
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 3
+test case 57
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 2
+test case 58
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 1
+test case 59
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 2
+test case 60
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 2
+test case 61
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 3
+test case 62
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 1
+test case 63
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 3
+test case 64
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 1
+test case 65
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 3
+test case 66
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 2
+test case 67
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 1
+test case 68
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 1
+test case 69
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 3
+test case 70
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 3
+test case 71
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 3
+test case 72
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 2
+test case 73
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 1
+test case 74
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 1
+test case 75
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 3
+test case 76
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 3
+test case 77
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 1
+test case 78
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 3
+test case 79
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 3
+test case 80
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 1
+test case 81
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 2
+test case 82
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 2
+test case 83
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 1
+test case 84
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 3
+test case 85
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 3
+test case 86
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 3
+test case 87
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 1
+test case 88
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 1
+test case 89
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 3
+test case 90
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 1
+test case 91
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 1
+test case 92
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 3
+test case 93
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 3
+test case 94
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 3
+test case 95
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 1
+test case 96
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 1
+test case 97
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 1
+test case 98
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 1
+test case 99
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 1
+test case 100
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 3
+test case 101
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 1
+test case 102
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 1
+test case 103
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 2
+test case 104
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 3
+test case 105
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 2
+test case 106
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 3
+test case 107
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 108
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 109
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 3
+test case 110
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 111
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 112
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 113
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 3
+test case 114
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 115
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 3
+test case 116
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 3
+test case 117
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 118
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 119
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 120
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 3
+test case 121
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 122
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 123
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 1 , pred: 1
+test case 124
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 1
+test case 125
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 1
+test case 126
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 3
+test case 127
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 3
+test case 128
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 2
+test case 129
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 2
+test case 130
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 1
+test case 131
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 1
+test case 132
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 2 , pred: 3
+test case 133
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 3
+test case 134
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 1
+test case 135
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 2
+test case 136
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 1
+test case 137
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 1
+test case 138
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 1
+test case 139
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 1
+test case 140
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 3
+test case 141
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 3
+test case 142
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 2
+test case 143
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 1
+test case 144
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 3
+test case 145
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 1
+test case 146
+	 ['visit 47', 'visit 62', 'visit 83', 'visit 78', 'visit 58', 'visit 36', 'visit 23', 'visit 94', 'visit 66', 'visit 44', 'visit 0', 'visit 13', 'visit 99', 'visit 24', 'visit 59', 'visit 1', 'visit 9', 'visit 33', 'visit 41', 'visit 27', 'visit 49', 'visit 18', 'visit 21', 'visit 3', 'visit 60', 'visit 88', 'visit 93', 'visit 35', 'visit 37', 'visit 50', 'visit 69', 'visit 95', 'visit 81', 'visit 6', 'visit 12', 'visit 73', 'evaluation']
+	# trees: 36 , real: 3 , pred: 3
+[[43 13  3]
+ [29 21  9]
+ [13 10  6]]
+[[43 13  3]
+ [29 22  8]
+ [13 10  6]]
+[[44 13  2]
+ [27 24  8]
+ [14  8  7]]
+(0.47619047619047616, 0.43882947118241233, 0.4305474381453341, 0.4201027871498848)
+(0.48299319727891155, 0.4492374727668846, 0.4361971556594584, 0.4270562368388455)
+(0.5102040816326531, 0.4875816993464053, 0.46464056107539453, 0.4589991329121765)

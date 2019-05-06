@@ -31,7 +31,10 @@ def readCommand(argv):
     args['epsilon'] = options.epsilon
     args['random_state'] = options.random_state
     args['portion'] = options.portion
-    args['sequential'] = False if options.algorithm == 'dqn' else options.sequential
+    if options.algorithm in ['alphanet', 'dqn']:
+        args['sequential'] = False
+    else:
+        args['sequential'] = options.sequential
     print(args)
     return args
 
