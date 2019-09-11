@@ -1,4 +1,4 @@
-import reader
+import reader as rdr
 import random as rd
 import pandas as pd
 import tensorflow as tf
@@ -27,14 +27,15 @@ def main():
     r_state = rd.randint(1, 1000)
     # r_state = 480
     rd.seed(r_state)
-    dataset = 'breast_cancer'
+    dataset = 'human_activity'
     # activation = 'logistic'
     # activation = 'tanh'
     activation = 'relu'
-    solver = 'adam'
-    # solver = 'sgd'
+    # solver = 'adam'
+    solver = 'sgd'
 
-    train, _, _, test = reader.Reader(r_state).read(dataset)
+    data = rdr.read(dataset)
+    train, test = rdr.splitByPortion(data, 0.8, r_state)
 
     label_map = dict()
     for l in train.iloc[:, -1]:

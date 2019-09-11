@@ -1,10 +1,12 @@
 from classifier import Cluster
 from environment import Environment
-import reader
+import reader as rdr
 import sys
 import random as rd
+import numpy as np
 import argparse
 from importlib import import_module
+from sklearn.model_selection import KFold
 
 
 def readCommand(argv):
@@ -13,7 +15,7 @@ def readCommand(argv):
     parser.add_argument('-a', '--algorithm', metavar='ALGORITHM', required=True)
     parser.add_argument('-n', '--num-clf', type=int, default=50)
     parser.add_argument('-l', '--learning-rate', type=float, default=0.01)
-    parser.add_argument('-f', '--discount-factor', type=float, default=1.0)
+    parser.add_argument('-f', '--discount-factor', type=float, default=1)
     parser.add_argument('-t', '--num-training', type=int, default=10000)
     parser.add_argument('-e', '--epsilon', type=float, default=0.1)
     parser.add_argument('-r', '--random-state', type=int, default=rd.randint(1, 10000))
@@ -31,7 +33,7 @@ def readCommand(argv):
     args['epsilon'] = options.epsilon
     args['random_state'] = options.random_state
     args['portion'] = options.portion
-    if options.algorithm in ['alphanet', 'dqn']:
+    if options.algorithm in ['alphanet', 'tfdqn', 'ptdqn']:
         args['sequential'] = False
     else:
         args['sequential'] = options.sequential
@@ -80,39 +82,55 @@ def train(dataset,
           **network_kwargs):
     rd.seed(random_state)
 
-    train, train_clf, train_mdp, test = reader.Reader(random_state, portion).read(dataset)
-    print(train_clf.shape)
-    print(train_mdp.shape)
-    print(test.shape)
-    num_feature = train.shape[1] - 1
+    data = rdr.read(dataset)
+    print(data.shape)
+    # shuffle dataset
+    data = data.sample(frac=1).reset_index(drop=True)
 
-    label_map = dict()
-    for d in [train, test]:
-        for l in d.iloc[:, -1]:
-            if l not in label_map:
-                label_map[l] = len(label_map)
-    
-    features = [list(range(num_feature))] * num_clf
-    cluster = Cluster(num_clf, ['dt'], features, label_map, random_state=random_state)
-    cluster.train(train_clf)
-    mv_cmatrix = cluster.majorityVote(test)
-    wv_cmatrix = cluster.weightedVote(test)
+    kf = KFold(n_splits=10)
+    for i, (train_idx, test_idx) in enumerate(kf.split(data)):
+        print('Running iteration %d of 10 fold...' % (i + 1))
+        train = data.iloc[train_idx, :]
+        test = data.iloc[test_idx, :]
+        train_clf, train_mdp = rdr.splitByPortion(train, portion, random_state)
+        # print(train_clf.shape)
+        # print(train_mdp.shape)
+        # print(test.shape)
+        num_feature = train.shape[1] - 1
 
-    real_set = [train_mdp.iloc[:, -1], test.iloc[:, -1]]
-    res_set = [cluster.results(train_mdp), cluster.results(test)]
-    prob_set = [cluster.resProb(train_mdp), cluster.resProb(test)]
+        label_map = dict()
+        # label_map[None] = 'N'
+        for d in [train, test]:
+            for l in d.iloc[:, -1]:
+                if l not in label_map:
+                    label_map[l] = len(label_map)
+        
+        features = list()
+        for _ in range(num_clf):
+            features.append(list(range(num_feature)))
+            # features.append(rd.choices(list(range(num_feature)), k=int(np.ceil(num_feature * 0.5))))
+        # features = [list(range(num_feature))] * num_clf
+        cluster = Cluster(num_clf, ['dt'], features, label_map, random_state=random_state)
+        cluster.train(train_clf)
+        mv_cmatrix = cluster.majorityVote(test)
+        wv_cmatrix = cluster.weightedVote(test)
 
-    env = Environment(num_clf, real_set, res_set, prob_set, label_map, sequential=sequential)
-    learn = get_learn_function(algorithm)
-    model = learn(env, 0, num_training, learning_rate, epsilon, discount_factor, random_state, **network_kwargs)
-    rl_cmatrix = env.evaluation(model, 1)
+        real_set = [train_mdp.iloc[:, -1], test.iloc[:, -1]]
+        res_set = [cluster.results(train_mdp), cluster.results(test)]
+        prob_set = [cluster.resProb(train_mdp), cluster.resProb(test)]
 
-    print(mv_cmatrix)
-    print(wv_cmatrix)
-    print(rl_cmatrix)
-    print(computeConfMatrix(mv_cmatrix))
-    print(computeConfMatrix(wv_cmatrix))
-    print(computeConfMatrix(rl_cmatrix))
+        env = Environment(num_clf, real_set, res_set, prob_set, label_map, sequential=sequential)
+        learn = get_learn_function(algorithm)
+        model = learn(env, 0, num_training, learning_rate, epsilon, discount_factor, random_state, **network_kwargs)
+        rl_cmatrix = env.evaluation(model, 1)
+
+        # print(mv_cmatrix)
+        # print(wv_cmatrix)
+        # print(rl_cmatrix)
+        print('               accuracy, precision, recall, f_score')
+        print('majority vote: %.6f, %.6f, %.6f, %.6f' % computeConfMatrix(mv_cmatrix))
+        print('weighted vote: %.6f, %.6f, %.6f, %.6f' % computeConfMatrix(wv_cmatrix))
+        print('reinforcement: %.6f, %.6f, %.6f, %.6f' % computeConfMatrix(rl_cmatrix))
 
 
 if __name__ == '__main__':

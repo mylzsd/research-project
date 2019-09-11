@@ -3,17 +3,26 @@ import random as rd
 import numpy as np
 
 
-output_print = True
+output_print = False
 
 
 class State:
 
-    def __init__(self, size, label_map):
+    def __init__(self, size, label_map, pred=None, oh_pred=None, visited=None):
         self.size = size
         self.label_map = label_map
-        self.pred = np.full((size,), None, dtype=object)
-        self.oh_pred = np.zeros(size * len(label_map), dtype=int)
-        self.visited = set()
+        if pred is None:
+            self.pred = np.full((size,), None, dtype=object)
+        else:
+            self.pred = pred
+        if oh_pred is None:
+            self.oh_pred = np.zeros(size * len(label_map), dtype=int)
+        else:
+            self.oh_pred = oh_pred
+        if visited is None:
+            self.visited = set()
+        else:
+            self.visited = visited
 
     def setPred(self, index, val):
         if index not in range(self.size):
@@ -22,22 +31,22 @@ class State:
         if val is not None:
             self.pred[index] = val
             oh_index = index * len(self.label_map) + self.label_map[val]
-            self.oh_pred[index] = 1
+            self.oh_pred[oh_index] = 1
 
     def getPred(self, one_hot=False):
         if one_hot:
-            return np.copy(np.reshape(self.oh_pred, (1, -1)))
+            return self.oh_pred
         else:
-            return np.copy(self.pred)
+            return self.pred
 
     def usedClf(self):
-        return self.visited.copy()
+        return self.visited
 
     def copy(self):
-        ret = State(self.size, self.label_map)
-        for i, v in enumerate(self.pred):
-            if v is not None:
-                ret.setPred(i, v)
+        ret = State(self.size, self.label_map, 
+                    pred=np.copy(self.pred), 
+                    oh_pred=np.copy(self.oh_pred), 
+                    visited=self.visited.copy())
         return ret
 
     def evaluation(self):
@@ -47,7 +56,7 @@ class State:
         return c.most_common()[0][0]
 
     def __str__(self):
-        return ' '.join(str(e) for e in self.pred)
+        return ' '.join(str(self.label_map[e]) if e is not None else 'N' for e in self.pred)
 
 
 class Action:
@@ -58,11 +67,11 @@ class Action:
 
     def __str__(self):
         if self.index == -1:
-            return 'evaluation'
+            return 'E'
         elif self.visit is None:
-            return 'visit ' + str(self.index)
+            return 'V' + str(self.index)
         else:
-            return ('visit ' if self.visit else 'skip ') + str(self.index)
+            return ('V' if self.visit else 'S') + str(self.index)
 
 
 class Environment():
@@ -111,7 +120,7 @@ class Environment():
                 if pred == self.real_set[in_set].iloc[in_row]:
                     reward = 1.0
                 else:
-                    reward = -1.0
+                    reward = 0.0
         else:
             # TODO: nondeterministic state transition using probabilistic predictions
             pass
@@ -130,7 +139,9 @@ class Environment():
                 return [Action(index, visit=True), Action(index, visit=False)]
         else:
             unused = set(list(range(self.num_clf))) - state.usedClf()
-            ret = [Action(index) for index in unused] + [Action(-1)]
+            ret = [Action(index) for index in unused]
+            if len(ret) < self.num_clf:
+                ret.append(Action(-1))
             return ret
 
     # return the confusion matrix of a given model
@@ -139,12 +150,15 @@ class Environment():
         if deter:
             for in_row in range(len(self.res_set[in_set])):
                 if output_print:
-                    print('test case', in_row)
-                actions = []
+                    print('\ntest case %d' % (in_row))
+                    actions = []
                 state = self.initState()
                 while state is not None:
                     action = model.policy(state)
-                    actions.append(str(action))
+                    if output_print:
+                        # q_values = model.qValues(state)
+                        # print('\tstate: %s\naction: %s\n\t%s' % (str(state), str(action), str(q_values)))
+                        actions.append(str(action))
                     if action.index == -1:
                         pred = state.evaluation()
                         real = self.real_set[in_set].iloc[in_row]
@@ -152,8 +166,10 @@ class Environment():
                     state_p, reward = self.step(state, action, in_set, in_row)
                     state = state_p
                 if output_print:
-                    print('\t', actions)
-                    print('\t# trees:', len(actions) - 1, ', real:', real, ', pred:', pred)
+                    print('\t', actions, 
+                          '\n\t# trees:', len(actions) - 1, 
+                          ', real:', self.label_map[real], 
+                          ', pred:', self.label_map[pred])
         else:
             # TODO: nondeterministic state transition using probabilistic predictions
             pass

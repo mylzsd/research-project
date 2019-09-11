@@ -1,0 +1,352 @@
+{'dataset': 'human_activity', 'algorithm': 'ptdqn', 'num_clf': 50, 'num_training': 10000, 'learning_rate': 0.01, 'discount_factor': 1, 'epsilon': 0.1, 'random_state': 3279, 'portion': 0.5, 'sequential': False}
+(10299, 562)
+Running iteration 1 of 10 fold...
+
+finished epoch 1000
+average loss: 0.13468194116714585
+
+finished epoch 2000
+average loss: 0.08631241107993992
+
+finished epoch 3000
+average loss: 0.08046384982846212
+
+finished epoch 4000
+average loss: 0.08369924084450758
+
+finished epoch 5000
+average loss: 0.06941531192724505
+
+finished epoch 6000
+average loss: 0.058479931456069605
+
+finished epoch 7000
+average loss: 0.032133344868503624
+
+finished epoch 8000
+average loss: 0.011231097007483187
+
+finished epoch 9000
+average loss: 0.009405699065457157
+
+finished epoch 10000
+average loss: 0.010944300331579143
+               accuracy, precision, recall, f_score
+majority vote: 0.971845, 0.971440, 0.971082, 0.971237
+weighted vote: 0.971845, 0.971277, 0.970752, 0.970985
+reinforcement: 0.962136, 0.962048, 0.961893, 0.961960
+Running iteration 2 of 10 fold...
+
+finished epoch 1000
+average loss: 0.11946974167891312
+
+finished epoch 2000
+average loss: 0.09057394252880113
+
+finished epoch 3000
+average loss: 0.08853767169098137
+
+finished epoch 4000
+average loss: 0.07978361414902611
+
+finished epoch 5000
+average loss: 0.07347421021611691
+
+finished epoch 6000
+average loss: 0.04617920020382644
+
+finished epoch 7000
+average loss: 0.0239419675655372
+
+finished epoch 8000
+average loss: 0.008764307325236587
+
+finished epoch 9000
+average loss: 0.006315779346197815
+
+finished epoch 10000
+average loss: 0.007763255757384286
+               accuracy, precision, recall, f_score
+majority vote: 0.969903, 0.970672, 0.969483, 0.969892
+weighted vote: 0.968932, 0.969374, 0.968435, 0.968767
+reinforcement: 0.967961, 0.968447, 0.967736, 0.967935
+Running iteration 3 of 10 fold...
+
+finished epoch 1000
+average loss: 0.12527606864014523
+
+finished epoch 2000
+average loss: 0.08643098884588107
+
+finished epoch 3000
+average loss: 0.09001339822588489
+
+finished epoch 4000
+average loss: 0.07826971771463286
+
+finished epoch 5000
+average loss: 0.07888208288140595
+
+finished epoch 6000
+average loss: 0.059417293137594245
+
+finished epoch 7000
+average loss: 0.030320840529464477
+
+finished epoch 8000
+average loss: 0.010291432749854721
+
+finished epoch 9000
+average loss: 0.00832778652586785
+
+finished epoch 10000
+average loss: 0.011280029970236683
+               accuracy, precision, recall, f_score
+majority vote: 0.971845, 0.970430, 0.971267, 0.970724
+weighted vote: 0.968932, 0.967577, 0.968484, 0.967841
+reinforcement: 0.958252, 0.955793, 0.956574, 0.955864
+Running iteration 4 of 10 fold...
+
+finished epoch 1000
+average loss: 0.11528125883745816
+
+finished epoch 2000
+average loss: 0.08891369775490603
+
+finished epoch 3000
+average loss: 0.08408733883395325
+
+finished epoch 4000
+average loss: 0.08067586689705639
+
+finished epoch 5000
+average loss: 0.07555796657620885
+
+finished epoch 6000
+average loss: 0.06718867292156938
+
+finished epoch 7000
+average loss: 0.028427387950609045
+
+finished epoch 8000
+average loss: 0.014150513877932099
+
+finished epoch 9000
+average loss: 0.005311693859057414
+
+finished epoch 10000
+average loss: 0.005224306887206694
+               accuracy, precision, recall, f_score
+majority vote: 0.969903, 0.969068, 0.969448, 0.969244
+weighted vote: 0.970874, 0.970041, 0.970795, 0.970388
+reinforcement: 0.961165, 0.960041, 0.961101, 0.960512
+Running iteration 5 of 10 fold...
+
+finished epoch 1000
+average loss: 0.1304643014377798
+
+finished epoch 2000
+average loss: 0.09206141516560455
+
+finished epoch 3000
+average loss: 0.08469576669477101
+
+finished epoch 4000
+average loss: 0.09126200606555358
+
+finished epoch 5000
+average loss: 0.08338818932051072
+
+finished epoch 6000
+average loss: 0.06320200994170318
+
+finished epoch 7000
+average loss: 0.02153883884495008
+
+finished epoch 8000
+average loss: 0.008339341379738472
+
+finished epoch 9000
+average loss: 0.005997855004039593
+
+finished epoch 10000
+average loss: 0.007746275515022717
+               accuracy, precision, recall, f_score
+majority vote: 0.969903, 0.968999, 0.968690, 0.968785
+weighted vote: 0.970874, 0.970026, 0.969824, 0.969890
+reinforcement: 0.969903, 0.969396, 0.969003, 0.969153
+Running iteration 6 of 10 fold...
+
+finished epoch 1000
+average loss: 0.12045396158350195
+
+finished epoch 2000
+average loss: 0.08862709965268732
+
+finished epoch 3000
+average loss: 0.08455226719821804
+
+finished epoch 4000
+average loss: 0.0799273684879372
+
+finished epoch 5000
+average loss: 0.06531195091100381
+
+finished epoch 6000
+average loss: 0.035634718504035844
+
+finished epoch 7000
+average loss: 0.0099129600748347
+
+finished epoch 8000
+average loss: 0.007164433422625734
+
+finished epoch 9000
+average loss: 0.005313014187708177
+
+finished epoch 10000
+average loss: 0.004993345134960691
+               accuracy, precision, recall, f_score
+majority vote: 0.976699, 0.976468, 0.975199, 0.975768
+weighted vote: 0.978641, 0.978213, 0.976935, 0.977522
+reinforcement: 0.972816, 0.972825, 0.970539, 0.971507
+Running iteration 7 of 10 fold...
+
+finished epoch 1000
+average loss: 0.10896609467460075
+
+finished epoch 2000
+average loss: 0.0903186102732434
+
+finished epoch 3000
+average loss: 0.08284516595486092
+
+finished epoch 4000
+average loss: 0.07137551192205865
+
+finished epoch 5000
+average loss: 0.05539326285964853
+
+finished epoch 6000
+average loss: 0.03248882612670422
+
+finished epoch 7000
+average loss: 0.011177452415322477
+
+finished epoch 8000
+average loss: 0.007873515497532025
+
+finished epoch 9000
+average loss: 0.007005560943500995
+
+finished epoch 10000
+average loss: 0.007449763949877706
+               accuracy, precision, recall, f_score
+majority vote: 0.966019, 0.966263, 0.966799, 0.966170
+weighted vote: 0.966019, 0.966263, 0.966799, 0.966170
+reinforcement: 0.960194, 0.960060, 0.960498, 0.960016
+Running iteration 8 of 10 fold...
+
+finished epoch 1000
+average loss: 0.11573475027323729
+
+finished epoch 2000
+average loss: 0.08723159267642767
+
+finished epoch 3000
+average loss: 0.08168554825906175
+
+finished epoch 4000
+average loss: 0.08332500032160897
+
+finished epoch 5000
+average loss: 0.07358456754985673
+
+finished epoch 6000
+average loss: 0.05816761409217679
+
+finished epoch 7000
+average loss: 0.027264540351345203
+
+finished epoch 8000
+average loss: 0.01285251051690284
+
+finished epoch 9000
+average loss: 0.006092121552954041
+
+finished epoch 10000
+average loss: 0.006337550163931155
+               accuracy, precision, recall, f_score
+majority vote: 0.963107, 0.964520, 0.964128, 0.964260
+weighted vote: 0.964078, 0.965336, 0.964991, 0.965102
+reinforcement: 0.966019, 0.967012, 0.966668, 0.966778
+Running iteration 9 of 10 fold...
+
+finished epoch 1000
+average loss: 0.12083108215590982
+
+finished epoch 2000
+average loss: 0.0875723747407901
+
+finished epoch 3000
+average loss: 0.09172490242943604
+
+finished epoch 4000
+average loss: 0.07974741642222216
+
+finished epoch 5000
+average loss: 0.060840962265707274
+
+finished epoch 6000
+average loss: 0.03332552709743322
+
+finished epoch 7000
+average loss: 0.011103191801448703
+
+finished epoch 8000
+average loss: 0.007823834948438161
+
+finished epoch 9000
+average loss: 0.008490075810197594
+
+finished epoch 10000
+average loss: 0.00846637701720374
+               accuracy, precision, recall, f_score
+majority vote: 0.970874, 0.971084, 0.971231, 0.970707
+weighted vote: 0.970874, 0.971084, 0.971231, 0.970707
+reinforcement: 0.968932, 0.969847, 0.969350, 0.969246
+Running iteration 10 of 10 fold...
+
+finished epoch 1000
+average loss: 0.1303819045511991
+
+finished epoch 2000
+average loss: 0.08706204403514857
+
+finished epoch 3000
+average loss: 0.08685675664682639
+
+finished epoch 4000
+average loss: 0.08283655533914862
+
+finished epoch 5000
+average loss: 0.07846477989329287
+
+finished epoch 6000
+average loss: 0.07699029918785527
+
+finished epoch 7000
+average loss: 0.045662635148775735
+
+finished epoch 8000
+average loss: 0.024486618155249745
+
+finished epoch 9000
+average loss: 0.011023399409088598
+
+finished epoch 10000
+average loss: 0.006399269850442579
+               accuracy, precision, recall, f_score
+majority vote: 0.974733, 0.974763, 0.973729, 0.974111
+weighted vote: 0.974733, 0.974763, 0.973729, 0.974111
+reinforcement: 0.967930, 0.967568, 0.966329, 0.966840

@@ -48,6 +48,8 @@ class Cluster:
         for i in range(size):
             self.clf_types.append(types[i % len(types)])
             clf_kwarg['random_state'] = rd.randint(1, 10000)
+            if self.clf_types[i] == 'dt':
+                clf_kwarg['max_features'] = 'sqrt'
             self.classifiers.append(Classifier(self.clf_types[i], features[i], **clf_kwarg))
 
     def train(self, data, bootstrap=True):
