@@ -1,6 +1,9 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.svm import SVC
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neural_network import MLPClassifier
+from sklearn.naive_bayes import GaussianNB
 from collections import Counter
 import pandas as pd
 import random as rd
@@ -16,6 +19,12 @@ class Classifier:
             self.clf = RandomForestClassifier(**clf_kwarg)
         elif classifier_type == 'svm':
             self.clf = SVC(**clf_kwarg)
+        elif classifier_type == 'knn':
+            self.clf = KNeighborsClassifier(**clf_kwarg)
+        elif classifier_type == 'mlp':
+            self.clf = MLPClassifier(**clf_kwarg)
+        elif classifier_type == 'nb':
+            self.clf = GaussianNB(**clf_kwarg)
         else:
             raise ValueError('unrecognized classifier type')
 

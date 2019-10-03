@@ -6,6 +6,7 @@ import numpy as np
 import random as rd
 from collections import Counter
 from environment import Action
+import util as U
 
 
 debug_print = False
@@ -34,8 +35,10 @@ class DQN:
         self.discount_factor = discount_factor
         input_size = env.num_clf * len(env.label_map)
         self.num_act = env.num_clf + 1
+        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.net = Net(input_size, hiddens, self.num_act)
-
+        # for param in self.net.parameters():
+        #     print(param.data)
         self.criterion = nn.MSELoss()
         # self.criterion = nn.MSELoss(reduction='sum')
         self.optimizer = optim.Adam(self.net.parameters(), lr=0.0001)
@@ -138,41 +141,68 @@ class DQN:
 
 
 def learn(env, in_set, num_training, learning_rate, epsilon, discount_factor, random_state, **network_kwargs):
-    log_freq = 1000
+    log_freq = 10
     sample_portion = 0.2
-    model = DQN(env, (128, 128, 64, 64), learning_rate, discount_factor)
+    model = DQN(env, (128, 256, 256), learning_rate, discount_factor)
     num_ins = env.numInstance(in_set)
     sum_loss = 0.0
     for i in range(num_training):
-        in_row = i % num_ins
-        # verbose = (i + 1) % log_freq == 0
         verbose = False
-        # exploration = np.exp(-i * epsilon)
-        exploration = epsilon
-        if verbose:
-            print('\nepoch: %d row: %d exploration: %.5f' % (i, in_row, exploration))
-        state = env.initState()
-        history = list()
-        if verbose:
-            actions = list()
-        while state is not None:
-            action = model.policy(state, randomness=exploration)
-            if verbose:
-                actions.append(str(action))
-            state_p, reward = env.step(state, action, in_set, in_row)
-            history.append((state, action, state_p, reward))
-            state = state_p
-        if verbose:
-            print('\t', actions, '\n')
-
-        sample = rd.choices(history[:-1], k=int(np.ceil(len(history) * sample_portion)))
-        sample.append(history[-1])
+        sample = list()
+        for in_row in range(num_ins):
+            exploration = epsilon
+            state = env.initState()
+            history = list()
+            while state is not None:
+                action = model.policy(state, randomness=exploration)
+                state_p, reward = env.step(state, action, in_set, in_row)
+                history.append((state, action, state_p, reward))
+                state = state_p
+            sample.append(history[-1])
+            sample.extend(rd.choices(history[:-1], k=int(np.ceil(len(history) * sample_portion))))
         loss = model.train(sample, verbose=(verbose and debug_print))
         sum_loss += loss
         if (i + 1) % log_freq == 0:
             print('\nfinished epoch', (i + 1))
             print('average loss:', sum_loss / log_freq)
+            rl_cmatrix = env.evaluation(model, 1)
+            rl_res = U.computeConfMatrix(rl_cmatrix)
+            U.outputs(['rl'], [rl_res])
             sum_loss = 0.0
+
+    # for i in range(num_training):
+    #     in_row = i % num_ins
+    #     # verbose = (i + 1) % log_freq == 0
+    #     verbose = False
+    #     # exploration = np.exp(-i * epsilon)
+    #     exploration = epsilon
+    #     if verbose:
+    #         print('\nepoch: %d row: %d exploration: %.5f' % (i, in_row, exploration))
+    #     state = env.initState()
+    #     history = list()
+    #     if verbose:
+    #         actions = list()
+    #     while state is not None:
+    #         action = model.policy(state, randomness=exploration)
+    #         if verbose:
+    #             actions.append(str(action))
+    #         state_p, reward = env.step(state, action, in_set, in_row)
+    #         history.append((state, action, state_p, reward))
+    #         state = state_p
+    #     if verbose:
+    #         print('\t', actions, '\n')
+
+    #     sample = rd.choices(history[:-1], k=int(np.ceil(len(history) * sample_portion)))
+    #     sample.append(history[-1])
+    #     loss = model.train(sample, verbose=(verbose and debug_print))
+    #     sum_loss += loss
+    #     if (i + 1) % log_freq == 0:
+    #         print('\nfinished epoch', (i + 1))
+    #         print('average loss:', sum_loss / log_freq)
+    #         rl_cmatrix = env.evaluation(model, 1)
+    #         rl_res = U.computeConfMatrix(rl_cmatrix)
+    #         U.outputs(['rl'], [rl_res])
+    #         sum_loss = 0.0
     return model
 
 

@@ -1,6 +1,7 @@
 from classifier import Cluster
 from environment import Environment
 import reader as rdr
+import util as U
 import sys
 import random as rd
 import numpy as np
@@ -47,28 +48,6 @@ def get_learn_function(alg):
     return alg_module.learn
 
 
-def computeConfMatrix(conf_matrix):
-    total_count = conf_matrix.sum()
-    correct = 0
-    precision = 0.0
-    recall = 0.0
-    f_score = 0.0
-    for i in range(conf_matrix.shape[0]):
-        tp = conf_matrix[i, i]
-        if tp > 0:
-            tp_fp = conf_matrix.sum(axis=0)[i]
-            tp_fn = conf_matrix.sum(axis=1)[i]
-            correct += tp
-            precision += float(tp) / tp_fp
-            recall += float(tp) / tp_fn
-            f_score += float(2 * tp) / (tp_fp + tp_fn)
-    accuracy = float(correct) / total_count
-    precision /= conf_matrix.shape[0]
-    recall /= conf_matrix.shape[0]
-    f_score /= conf_matrix.shape[0]
-    return accuracy, precision, recall, f_score    
-
-
 def train(dataset,
           algorithm,
           random_state,
@@ -110,27 +89,34 @@ def train(dataset,
             features.append(list(range(num_feature)))
             # features.append(rd.choices(list(range(num_feature)), k=int(np.ceil(num_feature * 0.5))))
         # features = [list(range(num_feature))] * num_clf
-        cluster = Cluster(num_clf, ['dt'], features, label_map, random_state=random_state)
-        cluster.train(train_clf)
-        mv_cmatrix = cluster.majorityVote(test)
-        wv_cmatrix = cluster.weightedVote(test)
+        bm_cluster = Cluster(num_clf, ['dt'], features, label_map, random_state=random_state)
+        bm_cluster.train(train)
+        mv_cmatrix = bm_cluster.majorityVote(test)
+        wv_cmatrix = bm_cluster.weightedVote(test)
+        rl_cluster = Cluster(num_clf, ['dt'], features, label_map, random_state=random_state)
+        rl_cluster.train(train_clf)
+        train_accu = rl_cluster.accuracy(train_mdp)
+        test_accu = rl_cluster.accuracy(test)
 
         real_set = [train_mdp.iloc[:, -1], test.iloc[:, -1]]
-        res_set = [cluster.results(train_mdp), cluster.results(test)]
-        prob_set = [cluster.resProb(train_mdp), cluster.resProb(test)]
+        res_set = [rl_cluster.results(train_mdp), rl_cluster.results(test)]
+        prob_set = [rl_cluster.resProb(train_mdp), rl_cluster.resProb(test)]
 
         env = Environment(num_clf, real_set, res_set, prob_set, label_map, sequential=sequential)
         learn = get_learn_function(algorithm)
         model = learn(env, 0, num_training, learning_rate, epsilon, discount_factor, random_state, **network_kwargs)
-        rl_cmatrix = env.evaluation(model, 1)
+        rl_cmatrix = env.evaluation(model, 1, verbose=True)
 
         # print(mv_cmatrix)
         # print(wv_cmatrix)
         # print(rl_cmatrix)
-        print('               accuracy, precision, recall, f_score')
-        print('majority vote: %.6f, %.6f, %.6f, %.6f' % computeConfMatrix(mv_cmatrix))
-        print('weighted vote: %.6f, %.6f, %.6f, %.6f' % computeConfMatrix(wv_cmatrix))
-        print('reinforcement: %.6f, %.6f, %.6f, %.6f' % computeConfMatrix(rl_cmatrix))
+        mv_res = U.computeConfMatrix(mv_cmatrix)
+        wv_res = U.computeConfMatrix(wv_cmatrix)
+        rl_res = U.computeConfMatrix(rl_cmatrix)
+        U.outputs(['mv', 'wv', 'rl'], [mv_res, wv_res, rl_res])
+        print(U.formatFloats(train_accu, 2))
+        print(U.formatFloats(test_accu, 2))
+        break
 
 
 if __name__ == '__main__':

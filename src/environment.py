@@ -1,9 +1,7 @@
 from collections import Counter
 import random as rd
 import numpy as np
-
-
-output_print = False
+import util as U
 
 
 class State:
@@ -32,6 +30,7 @@ class State:
             self.pred[index] = val
             oh_index = index * len(self.label_map) + self.label_map[val]
             self.oh_pred[oh_index] = 1
+            # self.oh_pred[index] = 1  # thats the stupid mistake!!!
 
     def getPred(self, one_hot=False):
         if one_hot:
@@ -145,19 +144,19 @@ class Environment():
             return ret
 
     # return the confusion matrix of a given model
-    def evaluation(self, model, in_set, deter=True):
+    def evaluation(self, model, in_set, deter=True, verbose=False):
         conf_matrix = np.zeros((len(self.label_map), len(self.label_map)), dtype=np.int32)
         if deter:
             for in_row in range(len(self.res_set[in_set])):
-                if output_print:
+                if verbose:
                     print('\ntest case %d' % (in_row))
                     actions = []
                 state = self.initState()
                 while state is not None:
                     action = model.policy(state)
-                    if output_print:
-                        # q_values = model.qValues(state)
-                        # print('\tstate: %s\naction: %s\n\t%s' % (str(state), str(action), str(q_values)))
+                    if verbose:
+                        q_values = model.qValues(state)
+                        print('\tstate: %s\n\t%s\n\taction: %s' % (str(state), U.formatFloats(q_values, 2), str(action)))
                         actions.append(str(action))
                     if action.index == -1:
                         pred = state.evaluation()
@@ -165,7 +164,7 @@ class Environment():
                         conf_matrix[self.label_map[real], self.label_map[pred]] += 1
                     state_p, reward = self.step(state, action, in_set, in_row)
                     state = state_p
-                if output_print:
+                if verbose:
                     print('\t', actions, 
                           '\n\t# trees:', len(actions) - 1, 
                           ', real:', self.label_map[real], 
