@@ -73,7 +73,7 @@ def train(dataset,
 
     kf = KFold(n_splits=10)
     for i, (train_idx, test_idx) in enumerate(kf.split(data)):
-        print('Running iteration %d of 10 fold...' % (i + 1))
+        print('\nRunning iteration %d of 10 fold...' % (i + 1))
         train = data.iloc[train_idx, :]
         test = data.iloc[test_idx, :]
         train_clf, train_mdp = rdr.splitByPortion(train, portion, random_state)
@@ -110,7 +110,7 @@ def train(dataset,
         env = Environment(num_clf, real_set, res_set, prob_set, label_map, sequential=sequential)
         learn = get_learn_function(algorithm)
         model = learn(env, 0, num_training, learning_rate, epsilon, discount_factor, random_state, **network_kwargs)
-        rl_cmatrix = env.evaluation(model, 1, verbose=False)
+        rl_cmatrix = env.evaluation(model, 1, verbose=True)
 
         # print(mv_cmatrix)
         # print(wv_cmatrix)
@@ -124,7 +124,7 @@ def train(dataset,
         break
 
     training_time = time.time() - start_time - data_reading_time
-    print('training takes %.3f sec' % (training_time))
+    print('\ntraining takes %.3f sec' % (training_time))
 
 
 if __name__ == '__main__':
