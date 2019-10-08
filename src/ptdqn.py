@@ -15,18 +15,30 @@ debug_print = False
 class Net(nn.Module):
     def __init__(self, input_size, hiddens, output_size):
         super(Net, self).__init__()
-        self.layers = nn.ModuleList()
-        for hidden in hiddens:
-            self.layers.append(nn.Linear(input_size, hidden))
+        # using dropout layers
+        self.layers = nn.Sequential()
+        # self.layers.add_module('in-drop', nn.Dropout(p=0.8))
+        for i, hidden in enumerate(hiddens):
+            self.layers.add_module('dense' + str(i), nn.Linear(input_size, hidden))
+            self.layers.add_module('relu' + str(i), nn.ReLU())
+            # self.layers.add_module('lrelu' + str(i), nn.LeakyReLU(negative_slope=0.01))
+            self.layers.add_module('dropout' + str(i), nn.Dropout(p=0.5))
+            # self.layers.add_module('dropout' + str(i), nn.Dropout(p=0.8))
             input_size = hidden
-        self.layers.append(nn.Linear(input_size, output_size))
+        self.layers.add_module('out-dense', nn.Linear(input_size, output_size))
+        # self.layers = nn.ModuleList()
+        # for hidden in hiddens:
+        #     self.layers.append(nn.Linear(input_size, hidden))
+        #     input_size = hidden
+        # self.layers.append(nn.Linear(input_size, output_size))
 
     def forward(self, x):
-        for layer in self.layers[:-1]:
-            x = F.leaky_relu(layer(x), negative_slope=0.1)
-            # x = F.relu(layer(x))
-        # return F.hardtanh(self.layers[-1](x), min_val=0)
-        return self.layers[-1](x)
+        return self.layers(x)
+        # for layer in self.layers[:-1]:
+        #     x = F.leaky_relu(layer(x), negative_slope=0.1)
+        #     # x = F.relu(layer(x))
+        # # return F.hardtanh(self.layers[-1](x), min_val=0)
+        # return self.layers[-1](x)
 
 
 class DQN:
@@ -44,6 +56,7 @@ class DQN:
         self.optimizer = optim.Adam(self.net.parameters(), lr=0.0001)
 
     def policy(self, state, randomness=0.0):
+        self.net.eval()
         actions = self.env.legal_actions(state)
         if len(actions) == 0:
             return None
@@ -59,6 +72,7 @@ class DQN:
         return act_val.most_common()[0][0]
 
     def qValue(self, state):
+        self.net.eval()
         actions = self.env.legal_actions(state)
         if len(actions) == 0:
             return 0.0
@@ -70,11 +84,13 @@ class DQN:
         return max_q
 
     def qValues(self, state):
+        self.net.eval()
         batch_in = torch.tensor(state.getPred(one_hot=True), dtype=torch.float32)
         q_values = self.net(batch_in).detach().numpy()
         return q_values
 
     # def train(self, sample, verbose=False):
+    #     self.net.train()
     #     if verbose:
     #         print('\tsample size: %d' % (len(sample)))
     #     # construct training X and y
@@ -110,6 +126,7 @@ class DQN:
     #     return loss.detach().numpy()
 
     def train(self, sample, verbose=False):
+        self.net.train()
         if verbose:
             print('\tsample size: %d' % (len(sample)))
         # construct training X and y
@@ -143,14 +160,17 @@ class DQN:
 def learn(env, in_set, num_training, learning_rate, epsilon, discount_factor, random_state, **network_kwargs):
     log_freq = 10
     sample_portion = 0.2
-    model = DQN(env, (128, 256, 256), learning_rate, discount_factor)
+    model = DQN(env, (128, 128, 128), learning_rate, discount_factor)
     num_ins = env.numInstance(in_set)
     sum_loss = 0.0
+    # exploration = epsilon
+    # decreasing exploration rate
+    exploration = 0.6
+    fading = 1 / num_training
     for i in range(num_training):
         verbose = False
         sample = list()
         for in_row in range(num_ins):
-            exploration = epsilon
             state = env.initState()
             history = list()
             while state is not None:
@@ -162,13 +182,17 @@ def learn(env, in_set, num_training, learning_rate, epsilon, discount_factor, ra
             sample.extend(rd.choices(history[:-1], k=int(np.ceil(len(history) * sample_portion))))
         loss = model.train(sample, verbose=(verbose and debug_print))
         sum_loss += loss
+        #training log
         if (i + 1) % log_freq == 0:
-            print('\nfinished epoch', (i + 1))
+            print('\nfinished epoch: %d, exploration: %.5f' % (i + 1, exploration))
             print('average loss:', sum_loss / log_freq)
             rl_cmatrix = env.evaluation(model, 1)
             rl_res = U.computeConfMatrix(rl_cmatrix)
             U.outputs(['rl'], [rl_res])
             sum_loss = 0.0
+        # decreasing exploration rate
+        exploration -= fading
+        exploration = max(exploration, 0.1) # keep at least 0.1 exploration rate
 
     # for i in range(num_training):
     #     in_row = i % num_ins

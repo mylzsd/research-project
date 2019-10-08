@@ -6,6 +6,7 @@ import sys
 import random as rd
 import numpy as np
 import argparse
+import time
 from importlib import import_module
 from sklearn.model_selection import KFold
 
@@ -60,11 +61,15 @@ def train(dataset,
           sequential=True,
           **network_kwargs):
     rd.seed(random_state)
+    start_time = time.time()
 
     data = rdr.read(dataset)
     print(data.shape)
     # shuffle dataset
     data = data.sample(frac=1).reset_index(drop=True)
+
+    data_reading_time = time.time() - start_time
+    print('reading data takes %.3f sec' % (data_reading_time))
 
     kf = KFold(n_splits=10)
     for i, (train_idx, test_idx) in enumerate(kf.split(data)):
@@ -105,7 +110,7 @@ def train(dataset,
         env = Environment(num_clf, real_set, res_set, prob_set, label_map, sequential=sequential)
         learn = get_learn_function(algorithm)
         model = learn(env, 0, num_training, learning_rate, epsilon, discount_factor, random_state, **network_kwargs)
-        rl_cmatrix = env.evaluation(model, 1, verbose=True)
+        rl_cmatrix = env.evaluation(model, 1, verbose=False)
 
         # print(mv_cmatrix)
         # print(wv_cmatrix)
@@ -117,6 +122,9 @@ def train(dataset,
         print(U.formatFloats(train_accu, 2))
         print(U.formatFloats(test_accu, 2))
         break
+
+    training_time = time.time() - start_time - data_reading_time
+    print('training takes %.3f sec' % (training_time))
 
 
 if __name__ == '__main__':
