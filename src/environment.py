@@ -149,16 +149,16 @@ class Environment():
         if deter:
             avg_clf = 0
             for in_row in range(len(self.res_set[in_set])):
+                actions = []
                 if verbose:
                     print('\ntest case %d' % (in_row))
-                    actions = []
                 state = self.initState()
                 while state is not None:
                     action = model.policy(state)
+                    actions.append(str(action))
                     if verbose:
                         q_values = model.qValues(state)
                         print('\tstate: %s\n\t%s\n\taction: %s' % (str(state), U.formatFloats(q_values, 2), str(action)))
-                        actions.append(str(action))
                     if action.index == -1:
                         pred = state.evaluation()
                         real = self.real_set[in_set].iloc[in_row]
