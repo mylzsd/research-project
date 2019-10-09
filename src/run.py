@@ -1,5 +1,6 @@
 from classifier import Cluster
 from environment import Environment
+import fs
 import reader as rdr
 import util as U
 import sys
@@ -71,34 +72,50 @@ def train(dataset,
     data_reading_time = time.time() - start_time
     print('reading data takes %.3f sec' % (data_reading_time))
 
+    num_feature = data.shape[1] - 1
+    label_map = dict()
+    # label_map[None] = 'N'
+    for l in data.iloc[:, -1]:
+        if l not in label_map:
+            label_map[l] = len(label_map)
+    features = list()
+    for _ in range(num_clf):
+        features.append(list(range(num_feature)))
+        # features.append(rd.choices(list(range(num_feature)), k=int(np.ceil(num_feature * 0.5))))
+    # features = [list(range(num_feature))] * num_clf
+
+    # clf_types = ['dt']
+    clf_types = ['dt', 'mlp', 'knn', 'nb']
+
+
     kf = KFold(n_splits=10)
     for i, (train_idx, test_idx) in enumerate(kf.split(data)):
         print('\nRunning iteration %d of 10 fold...' % (i + 1))
+        out_model = []
+        out_res = []
         train = data.iloc[train_idx, :]
         test = data.iloc[test_idx, :]
         train_clf, train_mdp = rdr.splitByPortion(train, portion, random_state)
         # print(train_clf.shape)
         # print(train_mdp.shape)
         # print(test.shape)
-        num_feature = train.shape[1] - 1
-
-        label_map = dict()
-        # label_map[None] = 'N'
-        for d in [train, test]:
-            for l in d.iloc[:, -1]:
-                if l not in label_map:
-                    label_map[l] = len(label_map)
         
-        features = list()
-        for _ in range(num_clf):
-            features.append(list(range(num_feature)))
-            # features.append(rd.choices(list(range(num_feature)), k=int(np.ceil(num_feature * 0.5))))
-        # features = [list(range(num_feature))] * num_clf
-        bm_cluster = Cluster(num_clf, ['dt'], features, label_map, random_state=random_state)
+        # results for majority vote and weighted vote
+        bm_cluster = Cluster(num_clf, clf_types, features, label_map, random_state=random_state)
         bm_cluster.train(train)
         mv_cmatrix = bm_cluster.majorityVote(test)
         wv_cmatrix = bm_cluster.weightedVote(test)
-        rl_cluster = Cluster(num_clf, ['dt'], features, label_map, random_state=random_state)
+        # print(mv_cmatrix)
+        # print(wv_cmatrix)
+        mv_res = U.computeConfMatrix(mv_cmatrix)
+        out_model.append('mv')
+        out_res.append(mv_res)
+        wv_res = U.computeConfMatrix(wv_cmatrix)
+        out_model.append('wv')
+        out_res.append(wv_res)
+
+        # classifiers trained by half data
+        rl_cluster = Cluster(num_clf, clf_types, features, label_map, random_state=random_state)
         rl_cluster.train(train_clf)
         train_accu = rl_cluster.accuracy(train_mdp)
         test_accu = rl_cluster.accuracy(test)
@@ -107,18 +124,26 @@ def train(dataset,
         res_set = [rl_cluster.results(train_mdp), rl_cluster.results(test)]
         prob_set = [rl_cluster.resProb(train_mdp), rl_cluster.resProb(test)]
 
+        # FS algorithm
+        fs_model = fs.train(num_clf, real_set[0], res_set[0])
+        print(fs_model)
+        fs_cmatrix = fs.evaluation(fs_model, real_set[1], res_set[1], label_map)
+        # print(fs_cmatrix)
+        fs_res = U.computeConfMatrix(fs_cmatrix)
+        out_model.append('fs')
+        out_res.append(fs_res)
+
+        # CBRL model
         env = Environment(num_clf, real_set, res_set, prob_set, label_map, sequential=sequential)
         learn = get_learn_function(algorithm)
         model = learn(env, 0, num_training, learning_rate, epsilon, discount_factor, random_state, **network_kwargs)
-        rl_cmatrix = env.evaluation(model, 1, verbose=True)
-
-        # print(mv_cmatrix)
-        # print(wv_cmatrix)
+        rl_cmatrix = env.evaluation(model, 1, verbose=False)
         # print(rl_cmatrix)
-        mv_res = U.computeConfMatrix(mv_cmatrix)
-        wv_res = U.computeConfMatrix(wv_cmatrix)
         rl_res = U.computeConfMatrix(rl_cmatrix)
-        U.outputs(['mv', 'wv', 'rl'], [mv_res, wv_res, rl_res])
+        out_model.append('rl')
+        out_res.append(rl_res)
+
+        U.outputs(out_model, out_res)
         print(U.formatFloats(train_accu, 2))
         print(U.formatFloats(test_accu, 2))
         break

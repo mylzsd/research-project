@@ -167,7 +167,7 @@ class DQN:
 def learn(env, in_set, num_training, learning_rate, epsilon, discount_factor, random_state, **network_kwargs):
     log_freq = 100
     sample_portion = 0.2
-    model = DQN(env, (128, 128), learning_rate, discount_factor)
+    model = DQN(env, (128, 128, 128), learning_rate, discount_factor)
     num_ins = env.numInstance(in_set)
     sum_loss = 0.0
     # exploration = epsilon

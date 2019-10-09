@@ -14,17 +14,20 @@ class Classifier:
 
     def __init__(self, classifier_type, feature, **clf_kwarg):
         if classifier_type == 'dt':
-            self.clf = DecisionTreeClassifier(**clf_kwarg)
-        elif classifier_type == 'rf':
-            self.clf = RandomForestClassifier(**clf_kwarg)
-        elif classifier_type == 'svm':
-            self.clf = SVC(**clf_kwarg)
+            self.clf = DecisionTreeClassifier(random_state=clf_kwarg['random_state'],
+                                              max_features=clf_kwarg['max_features'])
+        # elif classifier_type == 'rf':
+        #     self.clf = RandomForestClassifier(random_state=clf_kwarg['random_state'])
+        # elif classifier_type == 'svm':
+        #     self.clf = SVC(random_state=clf_kwarg['random_state'])
         elif classifier_type == 'knn':
-            self.clf = KNeighborsClassifier(**clf_kwarg)
+            self.clf = KNeighborsClassifier(n_neighbors=clf_kwarg['n_neighbors'])
         elif classifier_type == 'mlp':
-            self.clf = MLPClassifier(**clf_kwarg)
+            self.clf = MLPClassifier(random_state=clf_kwarg['random_state'],
+                                     hidden_layer_sizes=clf_kwarg['hidden_layer_sizes'],
+                                     max_iter=clf_kwarg['max_iter'])
         elif classifier_type == 'nb':
-            self.clf = GaussianNB(**clf_kwarg)
+            self.clf = GaussianNB()
         else:
             raise ValueError('unrecognized classifier type')
 
@@ -57,8 +60,10 @@ class Cluster:
         for i in range(size):
             self.clf_types.append(types[i % len(types)])
             clf_kwarg['random_state'] = rd.randint(1, 10000)
-            if self.clf_types[i] == 'dt':
-                clf_kwarg['max_features'] = 'sqrt'
+            clf_kwarg['max_features'] = 'sqrt'
+            clf_kwarg['hidden_layer_sizes'] = (16,)
+            clf_kwarg['max_iter'] = 1000
+            clf_kwarg['n_neighbors'] = int(np.ceil(np.sqrt(self.size)))
             self.classifiers.append(Classifier(self.clf_types[i], features[i], **clf_kwarg))
 
     def train(self, data, bootstrap=True):

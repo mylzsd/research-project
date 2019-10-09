@@ -147,6 +147,7 @@ class Environment():
     def evaluation(self, model, in_set, deter=True, verbose=False):
         conf_matrix = np.zeros((len(self.label_map), len(self.label_map)), dtype=np.int32)
         if deter:
+            avg_clf = 0
             for in_row in range(len(self.res_set[in_set])):
                 if verbose:
                     print('\ntest case %d' % (in_row))
@@ -164,11 +165,14 @@ class Environment():
                         conf_matrix[self.label_map[real], self.label_map[pred]] += 1
                     state_p, reward = self.step(state, action, in_set, in_row)
                     state = state_p
+                avg_clf += len(actions) - 1
                 if verbose:
                     print('\t', actions, 
-                          '\n\t# trees:', len(actions) - 1, 
+                          '\n\t# clfs:', len(actions) - 1, 
                           ', real:', self.label_map[real], 
                           ', pred:', self.label_map[pred])
+            avg_clf /= len(self.res_set[in_set])
+            print('%.2f classifiers used' % (avg_clf))
         else:
             # TODO: nondeterministic state transition using probabilistic predictions
             pass
