@@ -8,6 +8,7 @@ import random as rd
 import numpy as np
 import argparse
 import time
+from collections import Counter
 from importlib import import_module
 from sklearn.model_selection import KFold
 
@@ -18,7 +19,7 @@ def readCommand(argv):
     parser.add_argument('-a', '--algorithm', metavar='ALGORITHM', required=True)
     parser.add_argument('-n', '--num-clf', type=int, default=50)
     parser.add_argument('-l', '--learning-rate', type=float, default=0.01)
-    parser.add_argument('-f', '--discount-factor', type=float, default=1)
+    parser.add_argument('-f', '--discount-factor', type=float, default=1.0)
     parser.add_argument('-t', '--num-training', type=int, default=10000)
     parser.add_argument('-e', '--epsilon', type=float, default=0.1)
     parser.add_argument('-r', '--random-state', type=int, default=rd.randint(1, 10000))
@@ -67,7 +68,7 @@ def train(dataset,
     data = rdr.read(dataset)
     print(data.shape)
     # shuffle dataset
-    data = data.sample(frac=1).reset_index(drop=True)
+    data = data.sample(frac=1, random_state=random_state).reset_index(drop=True)
 
     data_reading_time = time.time() - start_time
     print('reading data takes %.3f sec' % (data_reading_time))
@@ -78,17 +79,41 @@ def train(dataset,
     for l in data.iloc[:, -1]:
         if l not in label_map:
             label_map[l] = len(label_map)
+
+    feature_type = 1
     features = list()
-    for _ in range(num_clf):
-        features.append(list(range(num_feature)))
-        # features.append(rd.choices(list(range(num_feature)), k=int(np.ceil(num_feature * 0.5))))
+    for i in range(num_clf):
+        if feature_type == 1:
+            features.append(list(range(num_feature)))
+        elif feature_type == 2:
+            features.append(rd.choices(list(range(num_feature)), k=int(np.ceil(num_feature * 0.5))))
+        elif feature_type == 3:
+            # first 1/3 features for first 1/3 clf, second for second, and third for third
+            size = int((num_feature - 1) / 3) + 1
+            index = int((num_clf - 1) / 3) + 1
+            if i < index:
+                features.append(list(range(size)))
+            elif i < 2 * index:
+                features.append(list(range(size, 2 * size)))
+            else:
+                features.append(list(range(2 * size, num_feature)))
     # features = [list(range(num_feature))] * num_clf
+    # print(features)
 
-    # clf_types = ['dt']
-    clf_types = ['dt', 'mlp', 'knn', 'nb']
+    clf_type = 1
+    if clf_type == 1:
+        clf_types = ['dt']
+    elif clf_type == 2:
+        clf_types = ['mlp']
+    elif clf_type == 3:
+        clf_types = ['knn']
+    elif clf_type == 4:
+        clf_types = ['nb']
+    elif clf_type == 5:
+        clf_types = ['dt', 'mlp', 'knn', 'nb']
+    # print(clf_types)
 
-
-    kf = KFold(n_splits=10)
+    kf = KFold(n_splits=10, random_state=random_state)
     for i, (train_idx, test_idx) in enumerate(kf.split(data)):
         print('\nRunning iteration %d of 10 fold...' % (i + 1))
         out_model = []
@@ -99,17 +124,27 @@ def train(dataset,
         # print(train_clf.shape)
         # print(train_mdp.shape)
         # print(test.shape)
+        mdp_label_count = Counter()
+        for l in train_mdp.iloc[:, -1]:
+            mdp_label_count[l] += 1
+        test_label_count = Counter()
+        for l in test.iloc[:, -1]:
+            test_label_count[l] += 1
         
         # results for majority vote and weighted vote
         bm_cluster = Cluster(num_clf, clf_types, features, label_map, random_state=random_state)
         bm_cluster.train(train)
+        # bm_cluster.train(train_clf)
+        full_test_accu = bm_cluster.accuracy(test)
+
         mv_cmatrix = bm_cluster.majorityVote(test)
-        wv_cmatrix = bm_cluster.weightedVote(test)
         # print(mv_cmatrix)
-        # print(wv_cmatrix)
         mv_res = U.computeConfMatrix(mv_cmatrix)
         out_model.append('mv')
         out_res.append(mv_res)
+
+        wv_cmatrix = bm_cluster.weightedVote(test)
+        # print(wv_cmatrix)
         wv_res = U.computeConfMatrix(wv_cmatrix)
         out_model.append('wv')
         out_res.append(wv_res)
@@ -123,20 +158,25 @@ def train(dataset,
         real_set = [train_mdp.iloc[:, -1], test.iloc[:, -1]]
         res_set = [rl_cluster.results(train_mdp), rl_cluster.results(test)]
         prob_set = [rl_cluster.resProb(train_mdp), rl_cluster.resProb(test)]
+        label_count_set = []
 
         # FS algorithm
-        fs_model = fs.train(num_clf, real_set[0], res_set[0])
-        print(fs_model)
-        fs_cmatrix = fs.evaluation(fs_model, real_set[1], res_set[1], label_map)
-        # print(fs_cmatrix)
-        fs_res = U.computeConfMatrix(fs_cmatrix)
-        out_model.append('fs')
-        out_res.append(fs_res)
+        # fs_model = fs.train(num_clf, real_set[0], res_set[0])
+        # print(fs_model)
+        # fs_cmatrix = fs.evaluation(fs_model, real_set[1], res_set[1], label_map)
+        # # print(fs_cmatrix)
+        # fs_res = U.computeConfMatrix(fs_cmatrix)
+        # out_model.append('fs')
+        # out_res.append(fs_res)
 
         # CBRL model
-        env = Environment(num_clf, real_set, res_set, prob_set, label_map, sequential=sequential)
+        model_path = 'models/d{}n{:d}c{:d}f{:d}r{:d}i{:d}.ris'.format(dataset, num_clf, clf_type, feature_type, random_state, i)
+        # print(model_path)
+        env = Environment(num_clf, real_set, res_set, prob_set, label_map, label_count_set, sequential=sequential)
         learn = get_learn_function(algorithm)
         model = learn(env, 0, num_training, learning_rate, epsilon, discount_factor, random_state, **network_kwargs)
+        # model.save(model_path)
+        # model.load(model_path)
         rl_cmatrix = env.evaluation(model, 1, verbose=False)
         # print(rl_cmatrix)
         rl_res = U.computeConfMatrix(rl_cmatrix)
@@ -144,9 +184,13 @@ def train(dataset,
         out_res.append(rl_res)
 
         U.outputs(out_model, out_res)
-        print(U.formatFloats(train_accu, 2))
-        print(U.formatFloats(test_accu, 2))
-        break
+        print(np.mean(train_accu))
+        print(U.formatFloats(train_accu, 2) + '\n')
+        print(np.mean(test_accu))
+        print(U.formatFloats(test_accu, 2) + '\n')
+        print(np.mean(full_test_accu))
+        print(U.formatFloats(full_test_accu, 2) + '\n')
+        # break
 
     training_time = time.time() - start_time - data_reading_time
     print('\ntraining takes %.3f sec' % (training_time))

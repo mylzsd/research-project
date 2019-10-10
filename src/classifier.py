@@ -61,15 +61,15 @@ class Cluster:
             self.clf_types.append(types[i % len(types)])
             clf_kwarg['random_state'] = rd.randint(1, 10000)
             clf_kwarg['max_features'] = 'sqrt'
-            clf_kwarg['hidden_layer_sizes'] = (16,)
-            clf_kwarg['max_iter'] = 1000
+            clf_kwarg['hidden_layer_sizes'] = (8,)
             clf_kwarg['n_neighbors'] = int(np.ceil(np.sqrt(self.size)))
             self.classifiers.append(Classifier(self.clf_types[i], features[i], **clf_kwarg))
 
-    def train(self, data, bootstrap=True):
+    def train(self, data, bootstrap=False):
         for i in range(self.size):
             feature = self.features[i]
             if bootstrap:
+                # this cannot be controlled by random_state need some other methods
                 indices = np.random.randint(0, data.shape[0], data.shape[0])
             else:
                 indices = list(range(data.shape[0]))
