@@ -18,7 +18,7 @@ def readCommand(argv):
     parser.add_argument('-d', '--dataset', metavar='DATASET', required=True)
     parser.add_argument('-a', '--algorithm', metavar='ALGORITHM', required=True)
     parser.add_argument('-n', '--num-clf', type=int, default=50)
-    parser.add_argument('-l', '--learning-rate', type=float, default=0.01)
+    parser.add_argument('-l', '--learning-rate', type=float, default=0.1)
     parser.add_argument('-f', '--discount-factor', type=float, default=1.0)
     parser.add_argument('-t', '--num-training', type=int, default=10000)
     parser.add_argument('-e', '--epsilon', type=float, default=0.1)
@@ -79,6 +79,7 @@ def train(dataset,
     for l in data.iloc[:, -1]:
         if l not in label_map:
             label_map[l] = len(label_map)
+    print('number of labels: %d' % (len(label_map)))
 
     feature_type = 1
     features = list()
@@ -177,7 +178,7 @@ def train(dataset,
         model = learn(env, 0, num_training, learning_rate, epsilon, discount_factor, random_state, **network_kwargs)
         # model.save(model_path)
         # model.load(model_path)
-        rl_cmatrix = env.evaluation(model, 1, verbose=False)
+        rl_cmatrix = env.evaluation(model, 1, verbose=True)
         # print(rl_cmatrix)
         rl_res = U.computeConfMatrix(rl_cmatrix)
         out_model.append('rl')
@@ -190,7 +191,7 @@ def train(dataset,
         print(U.formatFloats(test_accu, 2) + '\n')
         print(np.mean(full_test_accu))
         print(U.formatFloats(full_test_accu, 2) + '\n')
-        # break
+        break
 
     training_time = time.time() - start_time - data_reading_time
     print('\ntraining takes %.3f sec' % (training_time))

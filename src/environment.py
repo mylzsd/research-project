@@ -48,6 +48,12 @@ class State:
                     visited=self.visited.copy())
         return ret
 
+    def eval_proba(self):
+        c = Counter([p for p in self.pred if p is not None])
+        if (len(c) == 0):
+            return rd.choice(list(self.label_map.keys()))
+        return (c.most_common()[0][0], c.most_common()[0][1] / len(self.visited))
+
     def evaluation(self):
         c = Counter([p for p in self.pred if p is not None])
         if (len(c) == 0):
@@ -117,6 +123,11 @@ class Environment():
             else:
                 # evaluation and get reward
                 state_p = None
+                pred, prob = state.eval_proba()
+                if pred == self.real_set[in_set].iloc[in_row]:
+                    reward = prob
+                else:
+                    reward = 0.0
                 pred = state.evaluation()
                 if pred == self.real_set[in_set].iloc[in_row]:
                     reward = 1.0

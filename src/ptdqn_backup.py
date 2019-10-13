@@ -137,66 +137,55 @@ class DQN:
 
 
 def learn(env, in_set, num_training, learning_rate, epsilon, discount_factor, random_state, **network_kwargs):
-    log_freq = 10000
-    update_freq = 1000
+    log_freq = 300
     model = DQN(env, (256, 256), learning_rate, discount_factor)
     num_ins = env.numInstance(in_set)
-
     # compute loss for eaily termination
     min_loss = float('inf')
     min_loss_episode = 0
-    losses = list()
-
+    sum_loss = 0.0
     # static sampling
     sample_portion = 0.5
     # dynamic sampling
     # shrink_rate = 0.1 # logrithmic
     # shrink_rate = 0.0000005 # polynomial
     # max_point = 1000 # polynomial
-
     # dynamic exploration rate
     # exploration = epsilon
     exploration = 0.5
-    fading_rate = 0.999992
-
-    sample = list()
+    fading_rate = 0.998
     for i in range(1, num_training + 1):
         verbose = False
+        sample = list()
         # dynamic sampling
         # sample_portion = shrink_rate * np.log(i) # logrithmic
         # sample_portion = shrink_rate * (2 * max_point - min(max_point, i)) * min(max_point, i) # polynomial
-        in_row = (i - 1) % num_ins
-        state = env.initState()
-        history = list()
-        while state is not None:
-            action = model.policy(state, randomness=exploration)
-            state_p, reward = env.step(state, action, in_set, in_row)
-            history.append((state, action, state_p, reward))
-            state = state_p
-        sample.append(history[-1])
-        sample.extend(rd.choices(history[:-1], k=int(np.ceil(len(history) * sample_portion))))
-        history.clear()
-
-        if i % update_freq == 0:
-            # update DQN
-            loss = model.train(sample, verbose=(verbose and debug_print))
-            losses.append(loss)
-            if loss < min_loss:
-                min_loss = loss
-                min_loss_episode = i
-            sample.clear()
+        for in_row in range(num_ins):
+            state = env.initState()
+            history = list()
+            while state is not None:
+                action = model.policy(state, randomness=exploration)
+                state_p, reward = env.step(state, action, in_set, in_row)
+                history.append((state, action, state_p, reward))
+                state = state_p
+            sample.append(history[-1])
+            sample.extend(rd.choices(history[:-1], k=int(np.ceil(len(history) * sample_portion))))
+        loss = model.train(sample, verbose=(verbose and debug_print))
+        if loss < min_loss:
+            min_loss = loss
+            min_loss_episode = i
+        sum_loss += loss
+        #training log
         if i % log_freq == 0:
-            # training log
-            print('\nfinished epoch: %d:\nexploration: %.3f, sampling: %.3f\nlosses: %s' 
-                  % (i, exploration, sample_portion, U.formatFloats(losses, 3)))
+            print('\nfinished epoch: %d:\nexploration: %.3f, sampling: %.3f, average loss: %.3f' 
+                  % (i, exploration, sample_portion, sum_loss / log_freq))
             rl_cmatrix = env.evaluation(model, 1, verbose=False)
             rl_res = U.computeConfMatrix(rl_cmatrix)
             U.outputs(['rl'], [rl_res])
-            losses.clear()
-
+            sum_loss = 0.0
         # dynamic exploration rate
         exploration *= fading_rate
-        exploration = max(exploration, 0.1) # keep at least 0.1 exploration rate
+        # exploration = max(exploration, 0.1) # keep at least 0.1 exploration rate
     print('\nmin loss: %.3f, episode: %d\n' % (min_loss, min_loss_episode))
     return model
 

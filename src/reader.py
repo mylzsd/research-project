@@ -78,6 +78,22 @@ def fillEmpty(dfs, col, missing, is_float):
 
 
 '''
+(4177, 9)
+(4177, 11)
+'''
+def abalone():
+    data = pd.read_csv(data_dir + 'abalone/abalone.data', header = None)
+    columns = ['sex', 'length', 'diameter', 'height', 'whole_weight', 
+               'shucked_weight', 'viscera_weight', 'shell_weight', 'class']
+    data.columns = columns
+    # cast categorical to numerical
+    cateColumn([data], 'sex', '?')
+    data.infer_objects()
+    return data
+
+
+'''
+(226, 70)
 (226, 95)
 '''
 def audiology():
@@ -134,6 +150,28 @@ def audiology():
 
 
 '''
+(20867, 11)
+(20867, 11)
+'''
+def avila():
+    '''
+    This part reads original txt file and save to csv
+    train = pd.read_csv(data_dir + 'avila/avila-tr.txt', header = None)
+    test = pd.read_csv(data_dir + 'avila/avila-ts.txt', header = None)
+    columns = ['intercolumnar_distance', 'upper_margin', 'lower_margin', 
+               'exploitation', 'row_number', 'modular_ratio', 'interlinear_spacing', 
+               'weight', 'peak_number', 'modular_ratio', 'class']
+    data = pd.concat([train, test], ignore_index = True)
+    data.columns = columns
+    data.to_csv('avila.csv', index=False)
+    '''
+    data = pd.read_csv(data_dir + 'avila/avila.csv')
+    data.infer_objects()
+    return data
+
+
+'''
+(286, 10)
 (286, 16)
 '''
 def breast_cancer():
@@ -169,6 +207,7 @@ def breast_cancer():
 
 '''
 (699, 10)
+(699, 10)
 '''
 def breast_w():
     data = pd.read_csv(data_dir + 'breast-w/bc-w.data.csv', header = None)
@@ -185,6 +224,7 @@ def breast_w():
 
 
 '''
+(1473, 10)
 (1473, 22)
 '''
 def cmc():
@@ -201,6 +241,7 @@ def cmc():
 
 
 '''
+(30000, 24)
 (30000, 31)
 '''
 def credit_card():
@@ -216,10 +257,12 @@ def credit_card():
     data.to_csv('credit_card.csv', index=False)
     '''
     data = pd.read_csv(data_dir + 'credit_card/credit_card.csv')
+    data.infer_objects()
     return data
 
 
 '''
+(366, 35)
 (366, 35)
 '''
 def dematology():
@@ -245,6 +288,7 @@ def dematology():
 
 '''
 (336, 8)
+(336, 8)
 '''
 def ecoli():
     data = pd.read_csv(data_dir + 'ecoli/ecoli.data.csv', header=None)
@@ -255,6 +299,7 @@ def ecoli():
     return data
 
 '''
+(214, 10)
 (214, 10)
 '''
 def glass():
@@ -267,6 +312,7 @@ def glass():
 
 
 '''
+(155, 20)
 (155, 20)
 '''
 def hepatitis():
@@ -293,6 +339,7 @@ def hepatitis():
 
 '''
 (10299, 562)
+(10299, 562)
 '''
 def human_activity():
     train = pd.read_csv('data/human-activity/train.csv')
@@ -304,6 +351,7 @@ def human_activity():
 
 '''
 (300, 5)
+(300, 5)
 '''
 def iris():
     iris = pd.read_csv(data_dir + 'iris/iris.csv', header=None)
@@ -313,6 +361,7 @@ def iris():
 
 
 '''
+(148, 19)
 (148, 39)
 '''
 def lymphography():
@@ -337,7 +386,9 @@ def lymphography():
 
 def read(dataset):
     data_map = {
+        'abalone': abalone, 
         'audiology': audiology,
+        'avila': avila, 
         'breast_cancer': breast_cancer,
         'breast_w': breast_w,
         'cmc': cmc,
@@ -354,11 +405,6 @@ def read(dataset):
 
 
 if __name__ == '__main__':
-    data = read('lymphography')
+    data = avila()
     print(data.shape)
-    kf = KFold(n_splits=10)
-    for train, test in kf.split(data):
-        print(str(train))
-        print(data.iloc[train, :])
-        # print("%s %s" % (train, test))
 
