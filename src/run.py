@@ -124,6 +124,7 @@ def train(dataset,
     avg_full_test_accu = 0.0
     avg_test_accu = 0.0
 
+    term = 10
     kf = KFold(n_splits=10, random_state=random_state)
     for i, (train_idx, test_idx) in enumerate(kf.split(data)):
         print('\nRunning iteration %d of 10 fold...' % (i + 1))
@@ -154,16 +155,16 @@ def train(dataset,
         mv_cmatrix = bm_cluster.majorityVote(test)
         # print(mv_cmatrix)
         mv_res = U.computeConfMatrix(mv_cmatrix)
-        for i in range(4):
-            mv_stat[i] += mv_res[i]
+        for s in range(4):
+            mv_stat[s] += mv_res[s]
         out_model.append('mv')
         out_res.append(mv_res)
 
         wv_cmatrix = bm_cluster.weightedVote(test)
         # print(wv_cmatrix)
         wv_res = U.computeConfMatrix(wv_cmatrix)
-        for i in range(4):
-            wv_stat[i] += wv_res[i]
+        for s in range(4):
+            wv_stat[s] += wv_res[s]
         out_model.append('wv')
         out_res.append(wv_res)
 
@@ -187,8 +188,8 @@ def train(dataset,
         fs_cmatrix = fs.evaluation(fs_model, real_set[1], res_set[1], label_map)
         # print(fs_cmatrix)
         fs_res = U.computeConfMatrix(fs_cmatrix)
-        for i in range(4):
-            fs_stat[i] += fs_res[i]
+        for s in range(4):
+            fs_stat[s] += fs_res[s]
         out_model.append('fs')
         out_res.append(fs_res)
 
@@ -197,8 +198,8 @@ def train(dataset,
         # print(model_path)
         env = Environment(num_clf, real_set, res_set, prob_set, label_map, label_count_set, sequential=sequential)
         learn = get_learn_function(algorithm)
-        # model = learn(env, 0, num_training, learning_rate, epsilon, discount_factor, random_state, **network_kwargs)
         model = learn(env, 0, num_training, learning_rate, epsilon, discount_factor, random_state, **network_kwargs)
+        # model = learn(env, 2, num_training, learning_rate, epsilon, discount_factor, random_state, **network_kwargs)
         model.save(model_path)
         # model.load(model_path)
         rl_cmatrix, avg_clf = env.evaluation(model, 1, verbose=False)
@@ -220,16 +221,17 @@ def train(dataset,
         print(U.formatFloats(test_accu, 2) + '\n')
         print(np.mean(full_test_accu))
         print(U.formatFloats(full_test_accu, 2) + '\n')
-        # break
+        if i == term:
+            break
 
-    mv_stat = [n / 10 for n in mv_stat]
-    wv_stat = [n / 10 for n in wv_stat]
-    fs_stat = [n / 10 for n in fs_stat]
-    rl_stat = [n / 10 for n in rl_stat]
-    fs_size /= 10
-    rl_size /= 10
-    avg_full_test_accu /= 10
-    avg_test_accu /= 10
+    mv_stat = [n / term for n in mv_stat]
+    wv_stat = [n / term for n in wv_stat]
+    fs_stat = [n / term for n in fs_stat]
+    rl_stat = [n / term for n in rl_stat]
+    fs_size /= term
+    rl_size /= term
+    avg_full_test_accu /= term
+    avg_test_accu /= term
     U.outputs(['mv', 'wv', 'fs', 'rl'], [mv_stat, wv_stat, fs_stat, rl_stat])
     print('fs avg size: %.5f, rl avg size: %.5f' % (fs_size, rl_size))
     print('full test avg accu: %.5f, test avg accu: %.5f' % (avg_full_test_accu, avg_test_accu))
