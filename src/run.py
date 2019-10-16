@@ -63,12 +63,13 @@ def train(dataset,
           sequential=True,
           **network_kwargs):
     rd.seed(random_state)
+    np.random.seed(random_state)
     start_time = time.time()
 
     data = rdr.read(dataset)
     print(data.shape)
     # shuffle dataset
-    data = data.sample(frac=1, random_state=random_state).reset_index(drop=True)
+    # data = data.sample(frac=1, random_state=random_state).reset_index(drop=True)
 
     data_reading_time = time.time() - start_time
     print('reading data takes %.3f sec' % (data_reading_time))
@@ -114,19 +115,30 @@ def train(dataset,
         clf_types = ['dt', 'mlp', 'knn', 'nb']
     # print(clf_types)
 
+    mv_stat = [0.0] * 4
+    wv_stat = [0.0] * 4
+    fs_stat = [0.0] * 4
+    rl_stat = [0.0] * 4
+    fs_size = 0.0
+    rl_size = 0.0
+    avg_full_test_accu = 0.0
+    avg_test_accu = 0.0
+
     kf = KFold(n_splits=10, random_state=random_state)
     for i, (train_idx, test_idx) in enumerate(kf.split(data)):
         print('\nRunning iteration %d of 10 fold...' % (i + 1))
+        # print(test_idx)
         out_model = []
         out_res = []
         train = data.iloc[train_idx, :]
         test = data.iloc[test_idx, :]
-        train_clf, train_mdp = rdr.splitByPortion(train, portion, random_state)
+        train_clf, train_ens = rdr.splitByPortion(train, portion, random_state)
+        train_dqn, valid_dqn = rdr.splitByPortion(train_ens, 0.5, random_state)
         # print(train_clf.shape)
-        # print(train_mdp.shape)
+        # print(train_ens.shape)
         # print(test.shape)
         mdp_label_count = Counter()
-        for l in train_mdp.iloc[:, -1]:
+        for l in train_ens.iloc[:, -1]:
             mdp_label_count[l] += 1
         test_label_count = Counter()
         for l in test.iloc[:, -1]:
@@ -137,62 +149,90 @@ def train(dataset,
         bm_cluster.train(train)
         # bm_cluster.train(train_clf)
         full_test_accu = bm_cluster.accuracy(test)
+        avg_full_test_accu += np.mean(full_test_accu)
 
         mv_cmatrix = bm_cluster.majorityVote(test)
         # print(mv_cmatrix)
         mv_res = U.computeConfMatrix(mv_cmatrix)
+        for i in range(4):
+            mv_stat[i] += mv_res[i]
         out_model.append('mv')
         out_res.append(mv_res)
 
         wv_cmatrix = bm_cluster.weightedVote(test)
         # print(wv_cmatrix)
         wv_res = U.computeConfMatrix(wv_cmatrix)
+        for i in range(4):
+            wv_stat[i] += wv_res[i]
         out_model.append('wv')
         out_res.append(wv_res)
 
         # classifiers trained by half data
         rl_cluster = Cluster(num_clf, clf_types, features, label_map, random_state=random_state)
         rl_cluster.train(train_clf)
-        train_accu = rl_cluster.accuracy(train_mdp)
+        train_accu = rl_cluster.accuracy(train_ens)
+        valid_accu = rl_cluster.accuracy(valid_dqn)
         test_accu = rl_cluster.accuracy(test)
+        avg_test_accu += np.mean(test_accu)
 
-        real_set = [train_mdp.iloc[:, -1], test.iloc[:, -1]]
-        res_set = [rl_cluster.results(train_mdp), rl_cluster.results(test)]
-        prob_set = [rl_cluster.resProb(train_mdp), rl_cluster.resProb(test)]
+        real_set = [train_ens.iloc[:, -1], test.iloc[:, -1], train_dqn.iloc[:, -1], valid_dqn.iloc[:, -1]]
+        res_set = [rl_cluster.results(train_ens), rl_cluster.results(test), rl_cluster.results(train_dqn), rl_cluster.results(valid_dqn)]
+        prob_set = [rl_cluster.resProb(train_ens), rl_cluster.resProb(test), rl_cluster.resProb(train_dqn), rl_cluster.resProb(valid_dqn)]
         label_count_set = []
 
         # FS algorithm
-        # fs_model = fs.train(num_clf, real_set[0], res_set[0])
-        # print(fs_model)
-        # fs_cmatrix = fs.evaluation(fs_model, real_set[1], res_set[1], label_map)
-        # # print(fs_cmatrix)
-        # fs_res = U.computeConfMatrix(fs_cmatrix)
-        # out_model.append('fs')
-        # out_res.append(fs_res)
+        fs_model = fs.train(num_clf, real_set[0], res_set[0])
+        print(fs_model)
+        fs_size += len(fs_model)
+        fs_cmatrix = fs.evaluation(fs_model, real_set[1], res_set[1], label_map)
+        # print(fs_cmatrix)
+        fs_res = U.computeConfMatrix(fs_cmatrix)
+        for i in range(4):
+            fs_stat[i] += fs_res[i]
+        out_model.append('fs')
+        out_res.append(fs_res)
 
         # CBRL model
         model_path = 'models/d{}n{:d}c{:d}f{:d}r{:d}i{:d}.ris'.format(dataset, num_clf, clf_type, feature_type, random_state, i)
         # print(model_path)
         env = Environment(num_clf, real_set, res_set, prob_set, label_map, label_count_set, sequential=sequential)
         learn = get_learn_function(algorithm)
+        # model = learn(env, 0, num_training, learning_rate, epsilon, discount_factor, random_state, **network_kwargs)
         model = learn(env, 0, num_training, learning_rate, epsilon, discount_factor, random_state, **network_kwargs)
-        # model.save(model_path)
+        model.save(model_path)
         # model.load(model_path)
-        rl_cmatrix = env.evaluation(model, 1, verbose=True)
+        rl_cmatrix, avg_clf = env.evaluation(model, 1, verbose=False)
+        rl_size += avg_clf
+        print('%.2f classifiers used' % (avg_clf))
         # print(rl_cmatrix)
         rl_res = U.computeConfMatrix(rl_cmatrix)
+        for i in range(4):
+            rl_stat[i] += rl_res[i]
         out_model.append('rl')
         out_res.append(rl_res)
 
         U.outputs(out_model, out_res)
         print(np.mean(train_accu))
         print(U.formatFloats(train_accu, 2) + '\n')
+        print(np.mean(valid_accu))
+        print(U.formatFloats(valid_accu, 2) + '\n')
         print(np.mean(test_accu))
         print(U.formatFloats(test_accu, 2) + '\n')
         print(np.mean(full_test_accu))
         print(U.formatFloats(full_test_accu, 2) + '\n')
-        break
+        # break
 
+    mv_stat = [n / 10 for n in mv_stat]
+    wv_stat = [n / 10 for n in wv_stat]
+    fs_stat = [n / 10 for n in fs_stat]
+    rl_stat = [n / 10 for n in rl_stat]
+    fs_size /= 10
+    rl_size /= 10
+    avg_full_test_accu /= 10
+    avg_test_accu /= 10
+    U.outputs(['mv', 'wv', 'fs', 'rl'], [mv_stat, wv_stat, fs_stat, rl_stat])
+    print('fs avg size: %.5f, rl avg size: %.5f' % (fs_size, rl_size))
+    print('full test avg accu: %.5f, test avg accu: %.5f' % (avg_full_test_accu, avg_test_accu))
     training_time = time.time() - start_time - data_reading_time
     print('\ntraining takes %.3f sec' % (training_time))
 

@@ -127,7 +127,7 @@ def learn(env, in_set, num_training, learning_rate, epsilon, discount_factor, ra
         if (i + 1) % log_freq == 0:
             print('finished epoch', (i + 1))
             print('average loss:', total_loss / total_sample_size)
-            # print(env.evaluation(model, 1))
+            # print(env.evaluation(model, 1)[0])
             total_loss = 0.0
             total_sample_size = 0
     return model

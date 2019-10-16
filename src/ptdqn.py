@@ -142,6 +142,12 @@ def learn(env, in_set, num_training, learning_rate, epsilon, discount_factor, ra
     model = DQN(env, (256, 256), learning_rate, discount_factor)
     num_ins = env.numInstance(in_set)
 
+    # shouldn't be here
+    res_model = DQN(env, (256, 256), learning_rate, discount_factor)
+    min_avg_clf = float('inf')
+    max_accu = float('-inf')
+    max_accu_episode = 0
+
     # compute loss for eaily termination
     min_loss = float('inf')
     min_loss_episode = 0
@@ -187,18 +193,36 @@ def learn(env, in_set, num_training, learning_rate, epsilon, discount_factor, ra
             sample.clear()
         if i % log_freq == 0:
             # training log
-            print('\nfinished epoch: %d:\nexploration: %.3f, sampling: %.3f\nlosses: %s' 
-                  % (i, exploration, sample_portion, U.formatFloats(losses, 3)))
-            rl_cmatrix = env.evaluation(model, 1, verbose=False)
+            # print('\nfinished epoch: %d:\nexploration: %.3f, sampling: %.3f\nlosses: %s' 
+            #       % (i, exploration, sample_portion, U.formatFloats(losses, 3)))
+            rl_cmatrix, avg_clf = env.evaluation(model, 0, verbose=False)
             rl_res = U.computeConfMatrix(rl_cmatrix)
-            U.outputs(['rl'], [rl_res])
+            # U.outputs(['rl'], [rl_res])
             losses.clear()
+            # shouldn't be here
+            if rl_res[0] > max_accu or (rl_res[0] == max_accu and avg_clf < min_avg_clf):
+                max_accu = rl_res[0]
+                max_accu_episode = i
+                min_avg_clf = avg_clf
+                res_model.net.load_state_dict(model.net.state_dict())
 
         # dynamic exploration rate
         exploration *= fading_rate
         exploration = max(exploration, 0.1) # keep at least 0.1 exploration rate
-    print('\nmin loss: %.3f, episode: %d\n' % (min_loss, min_loss_episode))
-    return model
+    rl_cmatrix, _ = env.evaluation(res_model, 0, verbose=False)
+    rl_res = U.computeConfMatrix(rl_cmatrix)
+    U.outputs(['max0'], [rl_res])
+    rl_cmatrix, _ = env.evaluation(res_model, 3, verbose=False)
+    rl_res = U.computeConfMatrix(rl_cmatrix)
+    U.outputs(['max3'], [rl_res])
+    rl_cmatrix, _ = env.evaluation(res_model, 1, verbose=False)
+    rl_res = U.computeConfMatrix(rl_cmatrix)
+    U.outputs(['max1'], [rl_res])
+    print('\nmin loss: %.3f, episode: %d\nmax accu: %.3f, episode: %d\n' 
+          % (min_loss, min_loss_episode, max_accu, max_accu_episode))
+    # return model
+    # shouldn't be here
+    return res_model
 
 
 

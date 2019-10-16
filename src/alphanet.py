@@ -149,7 +149,7 @@ def learn(env, in_set, num_training, learning_rate, epsilon, discount_factor, ra
             print('finished epoch', (i + 1))
             print('average policy loss:', total_p_loss / total_sample_size)
             print('average value loss:', total_v_loss / total_sample_size)
-            # print(env.evaluation(model, 1))
+            # print(env.evaluation(model, 1)[0])
             total_p_loss = 0.0
             total_v_loss = 0.0
             total_sample_size = 0

@@ -128,11 +128,11 @@ class Environment():
                     reward = prob
                 else:
                     reward = 0.0
-                pred = state.evaluation()
-                if pred == self.real_set[in_set].iloc[in_row]:
-                    reward = 1.0
-                else:
-                    reward = 0.0
+                # pred = state.evaluation()
+                # if pred == self.real_set[in_set].iloc[in_row]:
+                #     reward = 1.0
+                # else:
+                #     reward = 0.0
         else:
             # TODO: nondeterministic state transition using probabilistic predictions
             pass
@@ -185,9 +185,9 @@ class Environment():
                           ', real:', self.label_map[real], 
                           ', pred:', self.label_map[pred])
             avg_clf /= len(self.res_set[in_set])
-            print('%.2f classifiers used' % (avg_clf))
+            # print('%.2f classifiers used' % (avg_clf))
         else:
             # TODO: nondeterministic state transition using probabilistic predictions
             pass
-        return conf_matrix
+        return (conf_matrix, avg_clf)
 
