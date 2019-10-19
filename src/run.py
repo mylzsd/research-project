@@ -69,7 +69,7 @@ def train(dataset,
     data = rdr.read(dataset)
     print(data.shape)
     # shuffle dataset
-    # data = data.sample(frac=1, random_state=random_state).reset_index(drop=True)
+    data = data.sample(frac=1, random_state=random_state).reset_index(drop=True)
 
     data_reading_time = time.time() - start_time
     print('reading data takes %.3f sec' % (data_reading_time))
@@ -124,7 +124,7 @@ def train(dataset,
     avg_full_test_accu = 0.0
     avg_test_accu = 0.0
 
-    term = 10
+    term = 5
     kf = KFold(n_splits=10, random_state=random_state)
     for i, (train_idx, test_idx) in enumerate(kf.split(data)):
         print('\nRunning iteration %d of 10 fold...' % (i + 1))
