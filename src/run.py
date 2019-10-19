@@ -207,8 +207,8 @@ def train(dataset,
         print('%.2f classifiers used' % (avg_clf))
         # print(rl_cmatrix)
         rl_res = U.computeConfMatrix(rl_cmatrix)
-        for i in range(4):
-            rl_stat[i] += rl_res[i]
+        for s in range(4):
+            rl_stat[s] += rl_res[s]
         out_model.append('rl')
         out_res.append(rl_res)
 
@@ -221,7 +221,7 @@ def train(dataset,
         print(U.formatFloats(test_accu, 2) + '\n')
         print(np.mean(full_test_accu))
         print(U.formatFloats(full_test_accu, 2) + '\n')
-        if i == term:
+        if i >= term - 1:
             break
 
     mv_stat = [n / term for n in mv_stat]
