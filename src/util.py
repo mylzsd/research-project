@@ -10,17 +10,17 @@ def computeConfMatrix(conf_matrix):
     f_count = 0
     for i in range(conf_matrix.shape[0]):
         tp = conf_matrix[i, i]
+        tp_fp = conf_matrix.sum(axis=0)[i]
+        tp_fn = conf_matrix.sum(axis=1)[i]
         if tp > 0:
-            tp_fp = conf_matrix.sum(axis=0)[i]
-            tp_fn = conf_matrix.sum(axis=1)[i]
             correct += tp
             precision += float(tp) / tp_fp * float(tp_fn) / total_count  # normalized by the portion of true label
             recall += float(tp) / tp_fn
-            if tp_fn > 0:
-                r_count += 1
             f_score += float(2 * tp) / (tp_fp + tp_fn)
-            if tp_fp + tp_fn > 0:
-                f_count += 1
+        if tp_fn > 0:
+            r_count += 1
+        if tp_fp + tp_fn > 0:
+            f_count += 1
     accuracy = float(correct) / total_count
     # precision /= conf_matrix.shape[0]
     recall /= r_count
