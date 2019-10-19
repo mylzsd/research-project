@@ -124,7 +124,7 @@ def train(dataset,
     avg_full_test_accu = 0.0
     avg_test_accu = 0.0
 
-    term = 5
+    term = 4
     kf = KFold(n_splits=10, random_state=random_state)
     for i, (train_idx, test_idx) in enumerate(kf.split(data)):
         print('\nRunning iteration %d of 10 fold...' % (i + 1))
