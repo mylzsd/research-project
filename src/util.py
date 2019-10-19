@@ -14,7 +14,7 @@ def computeConfMatrix(conf_matrix):
         tp_fn = conf_matrix.sum(axis=1)[i]
         if tp > 0:
             correct += tp
-            precision += float(tp) / tp_fp * float(tp_fn) / total_count  # normalized by the portion of true label
+            precision += float(tp) / float(tp_fp) * float(tp_fn) / float(total_count)  # normalized by the portion of true label
             recall += float(tp) / tp_fn
             f_score += float(2 * tp) / (tp_fp + tp_fn)
         if tp_fn > 0:
