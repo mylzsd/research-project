@@ -312,6 +312,30 @@ def glass():
 
 
 '''
+(270, 14)
+(270, 21)
+'''
+def heart():
+    data = pd.read_csv(data_dir + 'heart/heart.csv', header=None, sep=' ')
+    columns = ['age', 'sex', 'chest_pain', 'resting_blood_pressure', 
+               'serum_cholestoral', 'fasting_blood_sugar', 
+               'resting_electrocardiographic', 'maximum_heart_rate', 
+               'exercise_induced_angina', 'oldpeak', 'slope', 
+               'major vessels', 'thal', 'class']
+    bool_columns = ['sex', 'fasting_blood_sugar', 'exercise_induced_angina']
+    cate_columns = ['chest_pain', 'resting_electrocardiographic', 'thal']
+    data.columns = columns
+    # cast boolean to numerical
+    for col in bool_columns:
+        boolColumn([data], col, 0.0, 1.0)
+    # cast categorical to numerical
+    for col in cate_columns:
+        cateColumn([data], col, '?')
+    data.infer_objects()
+    return data
+
+
+'''
 (155, 20)
 (155, 20)
 '''
@@ -396,6 +420,7 @@ def read(dataset):
         'dematology': dematology,
         'ecoli': ecoli,
         'glass': glass,
+        'heart': heart,
         'hepatitis': hepatitis,
         'human_activity': human_activity,
         'iris': iris,
