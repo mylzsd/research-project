@@ -82,7 +82,7 @@ def train(dataset,
             label_map[l] = len(label_map)
     print('number of labels: %d' % (len(label_map)))
 
-    feature_type = 1
+    feature_type = 3
     features = list()
     for i in range(num_clf):
         if feature_type == 1:
@@ -102,7 +102,7 @@ def train(dataset,
     # features = [list(range(num_feature))] * num_clf
     # print(features)
 
-    clf_type = 5
+    clf_type = 1
     if clf_type == 1:
         clf_types = ['dt']
     elif clf_type == 2:
