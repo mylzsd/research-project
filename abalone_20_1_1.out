@@ -1,0 +1,9 @@
+{'dataset': 'abalone', 'algorithm': 'ptdqn', 'num_clf': 20, 'num_training': 400000, 'learning_rate': 0.1, 'discount_factor': 1.0, 'epsilon': 0.1, 'random_state': 2277, 'portion': 0.5, 'sequential': False}
+(4177, 11)
+reading data takes 2.923 sec
+number of labels: 28
+
+Running iteration 1 of 10 fold...
+[11, 0, 10, 8, 5, 15, 17, 4]
+using cpu
+using cpu
