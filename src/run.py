@@ -82,7 +82,7 @@ def train(dataset,
             label_map[l] = len(label_map)
     print('number of labels: %d' % (len(label_map)))
 
-    feature_type = 3
+    feature_type = 1
     features = list()
     for i in range(num_clf):
         if feature_type == 1:
@@ -133,7 +133,7 @@ def train(dataset,
         out_res = []
         train = data.iloc[train_idx, :]
         test = data.iloc[test_idx, :]
-        train_clf, train_ens = rdr.splitByPortion(train, portion, random_state)
+        train_clf, train_ens = rdr.splitByPortion(train, 0.6, random_state)
         train_dqn, valid_dqn = rdr.splitByPortion(train_ens, 0.5, random_state)
         # print(train_clf.shape)
         # print(train_ens.shape)
@@ -147,8 +147,8 @@ def train(dataset,
         
         # results for majority vote and weighted vote
         bm_cluster = Cluster(num_clf, clf_types, features, label_map, random_state=random_state)
-        bm_cluster.train(train)
-        # bm_cluster.train(train_clf)
+        # bm_cluster.train(train)
+        bm_cluster.train(train_clf)
         full_test_accu = bm_cluster.accuracy(test)
         avg_full_test_accu += np.mean(full_test_accu)
 
