@@ -195,7 +195,7 @@ def learn(env, in_set, num_training, learning_rate, epsilon, discount_factor, ra
             # training log
             # print('\nfinished epoch: %d:\nexploration: %.3f, sampling: %.3f\nlosses: %s' 
             #       % (i, exploration, sample_portion, U.formatFloats(losses, 3)))
-            rl_cmatrix, avg_clf = env.evaluation(model, 1, verbose=False)
+            rl_cmatrix, avg_clf = env.evaluation(model, 0, verbose=False)
             rl_res = U.computeConfMatrix(rl_cmatrix)
             # U.outputs(['rl'], [rl_res])
             losses.clear()
