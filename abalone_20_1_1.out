@@ -1,9 +1,138 @@
-{'dataset': 'abalone', 'algorithm': 'ptdqn', 'num_clf': 20, 'num_training': 400000, 'learning_rate': 0.1, 'discount_factor': 1.0, 'epsilon': 0.1, 'random_state': 2277, 'portion': 0.5, 'sequential': False}
+{'dataset': 'abalone', 'algorithm': 'ptdqn', 'num_clf': 20, 'num_training': 400000, 'learning_rate': 0.1, 'discount_factor': 1.0, 'epsilon': 0.1, 'random_state': 6588, 'portion': 0.5, 'sequential': False}
 (4177, 11)
-reading data takes 2.923 sec
+reading data takes 2.856 sec
 number of labels: 28
 
 Running iteration 1 of 10 fold...
-[11, 0, 10, 8, 5, 15, 17, 4]
+[4, 0, 16, 3, 12, 10, 18, 5, 17, 1, 7, 15]
 using cpu
 using cpu
+    accuracy, precision, recall, f_score
+max0: 0.2086, 0.1889, 0.1111, 0.0955
+
+    accuracy, precision, recall, f_score
+max3: 0.2290, 0.2141, 0.1321, 0.1184
+
+    accuracy, precision, recall, f_score
+max1: 0.2225, 0.2204, 0.1113, 0.1073
+
+
+min loss: 0.009, episode: 3000
+max accu: 0.222, episode: 260000
+
+4.41 classifiers used
+    accuracy, precision, recall, f_score
+mv: 0.2321, 0.2213, 0.1144, 0.1092
+wv: 0.2488, 0.2345, 0.1210, 0.1146
+fs: 0.2177, 0.2057, 0.0882, 0.0823
+rl: 0.2225, 0.2204, 0.1113, 0.1073
+
+0.18014354066985644
+0.16, 0.21, 0.17, 0.21, 0.17, 0.18, 0.15, 0.18, 0.16, 0.16, 0.16, 0.16, 0.18, 0.17, 0.18, 0.18, 0.16, 0.17, 0.19, 0.20
+
+0.17954545454545454
+0.19, 0.16, 0.16, 0.17, 0.18, 0.15, 0.18, 0.14, 0.18, 0.16, 0.16, 0.16, 0.18, 0.18, 0.20, 0.17, 0.18, 0.17, 0.21, 0.18
+
+
+Running iteration 2 of 10 fold...
+[11, 0, 3, 10, 7, 4, 5, 18, 19]
+using cpu
+using cpu
+    accuracy, precision, recall, f_score
+max0: 0.2278, 0.2142, 0.1210, 0.1146
+
+    accuracy, precision, recall, f_score
+max3: 0.2279, 0.2166, 0.1471, 0.1350
+
+    accuracy, precision, recall, f_score
+max1: 0.2488, 0.2629, 0.1326, 0.1241
+
+
+min loss: 0.008, episode: 1000
+max accu: 0.249, episode: 150000
+
+8.27 classifiers used
+    accuracy, precision, recall, f_score
+mv: 0.2536, 0.2292, 0.1861, 0.1514
+wv: 0.2584, 0.2281, 0.1869, 0.1466
+fs: 0.2344, 0.2341, 0.1823, 0.1578
+rl: 0.2488, 0.2629, 0.1326, 0.1241
+
+0.19880382775119618
+0.20, 0.20, 0.21, 0.19, 0.20, 0.20, 0.18, 0.23, 0.21, 0.18, 0.18, 0.20, 0.16, 0.19, 0.19, 0.19, 0.19, 0.20, 0.17, 0.19
+
+0.19844497607655498
+0.17, 0.20, 0.16, 0.19, 0.17, 0.16, 0.18, 0.20, 0.20, 0.18, 0.20, 0.19, 0.22, 0.21, 0.19, 0.21, 0.19, 0.22, 0.21, 0.22
+
+
+Running iteration 3 of 10 fold...
+[10, 0, 11, 16, 2, 9, 17, 12]
+using cpu
+using cpu
+    accuracy, precision, recall, f_score
+max0: 0.2283, 0.2198, 0.1066, 0.1058
+
+    accuracy, precision, recall, f_score
+max3: 0.2290, 0.2239, 0.1328, 0.1316
+
+    accuracy, precision, recall, f_score
+max1: 0.2105, 0.1997, 0.1273, 0.1231
+
+
+min loss: 0.017, episode: 1000
+max accu: 0.211, episode: 100000
+
+3.40 classifiers used
+    accuracy, precision, recall, f_score
+mv: 0.2105, 0.2160, 0.1242, 0.1238
+wv: 0.2177, 0.2146, 0.1227, 0.1175
+fs: 0.2057, 0.2091, 0.1222, 0.1290
+rl: 0.2105, 0.1997, 0.1273, 0.1231
+
+0.19473684210526315
+0.17, 0.17, 0.20, 0.19, 0.18, 0.19, 0.18, 0.17, 0.18, 0.20, 0.19, 0.22, 0.19, 0.19, 0.17, 0.19, 0.17, 0.18, 0.22, 0.23
+
+0.19677033492822965
+0.17, 0.19, 0.18, 0.22, 0.20, 0.20, 0.22, 0.21, 0.18, 0.25, 0.20, 0.20, 0.18, 0.18, 0.20, 0.14, 0.21, 0.17, 0.13, 0.21
+
+
+Running iteration 4 of 10 fold...
+[19, 0, 15, 9, 4, 1, 12, 16]
+using cpu
+using cpu
+    accuracy, precision, recall, f_score
+max0: 0.2044, 0.1988, 0.0994, 0.0950
+
+    accuracy, precision, recall, f_score
+max3: 0.1981, 0.1936, 0.1197, 0.1129
+
+    accuracy, precision, recall, f_score
+max1: 0.2010, 0.1920, 0.1684, 0.1397
+
+
+min loss: 0.021, episode: 1000
+max accu: 0.201, episode: 380000
+
+1.07 classifiers used
+    accuracy, precision, recall, f_score
+mv: 0.1914, 0.1849, 0.1686, 0.1607
+wv: 0.1842, 0.1768, 0.1422, 0.1407
+fs: 0.1914, 0.1843, 0.1307, 0.1149
+rl: 0.2010, 0.1920, 0.1684, 0.1397
+
+0.173444976076555
+0.14, 0.15, 0.16, 0.16, 0.16, 0.19, 0.18, 0.19, 0.16, 0.18, 0.15, 0.15, 0.18, 0.18, 0.18, 0.15, 0.17, 0.18, 0.16, 0.19
+
+0.17212918660287083
+0.14, 0.16, 0.21, 0.16, 0.15, 0.16, 0.19, 0.16, 0.15, 0.17, 0.18, 0.18, 0.16, 0.18, 0.17, 0.18, 0.19, 0.14, 0.16, 0.16
+
+    accuracy, precision, recall, f_score
+mv: 0.2219, 0.2129, 0.1483, 0.1363
+wv: 0.2273, 0.2135, 0.1432, 0.1299
+fs: 0.2123, 0.2083, 0.1308, 0.1210
+rl: 0.2207, 0.2187, 0.1349, 0.1236
+
+fs avg size: 9.25000, rl avg size: 4.28708
+full test avg accu: 0.18672, test avg accu: 0.18678
+
+training takes 4026.937 sec

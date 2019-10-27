@@ -31,7 +31,7 @@ def computeConfMatrix(conf_matrix):
 def outputs(algs, measurements):
     print('    accuracy, precision, recall, f_score')
     for a, m in zip(algs, measurements):
-    	print('%s: %.6f, %.6f, %.6f, %.6f' % (a, m[0], m[1], m[2], m[3]))
+    	print('%s: %.4f, %.4f, %.4f, %.4f' % (a, m[0], m[1], m[2], m[3]))
     print()
 
 

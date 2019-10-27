@@ -102,7 +102,7 @@ def train(dataset,
     # features = [list(range(num_feature))] * num_clf
     # print(features)
 
-    clf_type = 1
+    clf_type = 5
     if clf_type == 1:
         clf_types = ['dt']
     elif clf_type == 2:
@@ -124,7 +124,7 @@ def train(dataset,
     avg_full_test_accu = 0.0
     avg_test_accu = 0.0
 
-    term = 3
+    term = 4
     kf = KFold(n_splits=10, random_state=random_state)
     for i, (train_idx, test_idx) in enumerate(kf.split(data)):
         print('\nRunning iteration %d of 10 fold...' % (i + 1))
@@ -133,7 +133,7 @@ def train(dataset,
         out_res = []
         train = data.iloc[train_idx, :]
         test = data.iloc[test_idx, :]
-        train_clf, train_ens = rdr.splitByPortion(train, 0.6, random_state)
+        train_clf, train_ens = rdr.splitByPortion(train, portion, random_state)
         train_dqn, valid_dqn = rdr.splitByPortion(train_ens, 0.5, random_state)
         # print(train_clf.shape)
         # print(train_ens.shape)
@@ -171,14 +171,16 @@ def train(dataset,
         # classifiers trained by half data
         rl_cluster = Cluster(num_clf, clf_types, features, label_map, random_state=random_state)
         rl_cluster.train(train_clf)
-        train_accu = rl_cluster.accuracy(train_ens)
-        valid_accu = rl_cluster.accuracy(valid_dqn)
+        # train_accu = rl_cluster.accuracy(train_ens)
+        # valid_accu = rl_cluster.accuracy(valid_dqn)
         test_accu = rl_cluster.accuracy(test)
         avg_test_accu += np.mean(test_accu)
 
-        real_set = [train_ens.iloc[:, -1], test.iloc[:, -1], train_dqn.iloc[:, -1], valid_dqn.iloc[:, -1]]
         res_set = [rl_cluster.results(train_ens), rl_cluster.results(test), rl_cluster.results(train_dqn), rl_cluster.results(valid_dqn)]
         prob_set = [rl_cluster.resProb(train_ens), rl_cluster.resProb(test), rl_cluster.resProb(train_dqn), rl_cluster.resProb(valid_dqn)]
+        # res_set = [bm_cluster.results(train_ens), bm_cluster.results(test), bm_cluster.results(train_dqn), bm_cluster.results(valid_dqn)]
+        # prob_set = [bm_cluster.resProb(train_ens), bm_cluster.resProb(test), bm_cluster.resProb(train_dqn), bm_cluster.resProb(valid_dqn)]
+        real_set = [train_ens.iloc[:, -1], test.iloc[:, -1], train_dqn.iloc[:, -1], valid_dqn.iloc[:, -1]]
         label_count_set = []
 
         # FS algorithm
@@ -213,10 +215,10 @@ def train(dataset,
         out_res.append(rl_res)
 
         U.outputs(out_model, out_res)
-        print(np.mean(train_accu))
-        print(U.formatFloats(train_accu, 2) + '\n')
-        print(np.mean(valid_accu))
-        print(U.formatFloats(valid_accu, 2) + '\n')
+        # print(np.mean(train_accu))
+        # print(U.formatFloats(train_accu, 2) + '\n')
+        # print(np.mean(valid_accu))
+        # print(U.formatFloats(valid_accu, 2) + '\n')
         print(np.mean(test_accu))
         print(U.formatFloats(test_accu, 2) + '\n')
         print(np.mean(full_test_accu))
