@@ -14,7 +14,8 @@ def computeConfMatrix(conf_matrix):
         tp_fn = conf_matrix.sum(axis=1)[i]
         if tp > 0:
             correct += tp
-            precision += float(tp) / float(tp_fp) * float(tp_fn) / float(total_count)  # normalized by the portion of true label
+            # normalized by the portion of true label
+            precision += float(tp) / float(tp_fp) * float(tp_fn) / float(total_count)
             recall += float(tp) / tp_fn
             f_score += float(2 * tp) / (tp_fp + tp_fn)
         if tp_fn > 0:
@@ -31,9 +32,9 @@ def computeConfMatrix(conf_matrix):
 def outputs(algs, measurements):
     if len(algs) == 0:
         return
-    print('    accuracy, precision, recall, f_score')
+    print('      accuracy, precision, recall, f_score')
     for a, m in zip(algs, measurements):
-    	print('%s: %.4f, %.4f, %.4f, %.4f' % (a, m[0], m[1], m[2], m[3]))
+        print('{:>4}: {:.4f}, {:.4f}, {:.4f}, {:.4f}'.format(a, m[0], m[1], m[2], m[3]))
     print()
 
 

@@ -207,7 +207,7 @@ def train(dataset,
         out_time.append(time_cost)
         time_costs[1] += time_cost
         print('voting takes %.3f sec' % (time_cost))
-
+        '''
         # FS
         start_time = time.time()
         fs_model = fs.train(num_clf, real_set[0], res_set[0])
@@ -223,7 +223,7 @@ def train(dataset,
         out_time.append(time_cost)
         time_costs[2] += time_cost
         print('FS takes %.3f sec' % (time_cost))
-        
+        '''
         # AdaBoost
         start_time = time.time()
         adab = AdaBoost(num_clf, random_state)
