@@ -1,6 +1,5 @@
 import os
 import pandas as pd
-from sklearn.model_selection import KFold
 
 
 '''
@@ -411,20 +410,20 @@ def lymphography():
 def read(dataset):
     data_map = {
         'abalone': abalone, 
-        'audiology': audiology,
+        'audio': audiology,
         'avila': avila, 
-        'breast_cancer': breast_cancer,
-        'breast_w': breast_w,
+        'bc': breast_cancer,
+        'bw': breast_w,
         'cmc': cmc,
-        'credit_card': credit_card,
-        'dematology': dematology,
+        'credit': credit_card,
+        'demat': dematology,
         'ecoli': ecoli,
         'glass': glass,
         'heart': heart,
-        'hepatitis': hepatitis,
-        'human_activity': human_activity,
+        'hepa': hepatitis,
+        'ha': human_activity,
         'iris': iris,
-        'lymphography': lymphography
+        'lymph': lymphography
     }
     return data_map[dataset]()
 

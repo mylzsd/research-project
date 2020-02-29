@@ -87,8 +87,7 @@ class Environment():
                  real_set,
                  res_set, 
                  prob_set, 
-                 label_map, 
-                 label_count_set, 
+                 label_map,  
                  sequential=True,
                  features=None, 
                  feature_cost=None):
@@ -98,7 +97,6 @@ class Environment():
         self.res_set = res_set
         self.prob_set = prob_set
         self.label_map = label_map
-        self.label_count_set = label_count_set
 
     # return an initial blank state
     def initState(self):

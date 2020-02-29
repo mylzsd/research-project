@@ -1,28 +1,32 @@
-from classifier import Cluster
+from classifier import Ensemble
 from environment import Environment
+from adaboost import AdaBoost
 import fs
 import reader as rdr
 import util as U
-import sys
 import random as rd
 import numpy as np
 import argparse
 import time
+import sys
 from collections import Counter
 from importlib import import_module
 from sklearn.model_selection import KFold
+
+
+LOAD_CLF = True
 
 
 def readCommand(argv):
     parser = argparse.ArgumentParser()
     parser.add_argument('-d', '--dataset', metavar='DATASET', required=True)
     parser.add_argument('-a', '--algorithm', metavar='ALGORITHM', required=True)
-    parser.add_argument('-n', '--num-clf', type=int, default=50)
+    parser.add_argument('-n', '--num-clf', type=int, default=100)
     parser.add_argument('-l', '--learning-rate', type=float, default=0.1)
     parser.add_argument('-f', '--discount-factor', type=float, default=1.0)
     parser.add_argument('-t', '--num-training', type=int, default=10000)
     parser.add_argument('-e', '--epsilon', type=float, default=0.1)
-    parser.add_argument('-r', '--random-state', type=int, default=rd.randint(1, 10000))
+    parser.add_argument('-r', '--random-state', type=int, default=6666)
     parser.add_argument('-p', '--portion', type=float, default=0.5)
     parser.add_argument('-s', '--sequential', type=bool, default=True)
     
@@ -54,25 +58,25 @@ def get_learn_function(alg):
 def train(dataset,
           algorithm,
           random_state,
-          num_clf=50,
+          num_clf=100,
           num_training=10000,
           learning_rate=0.1,
           discount_factor=1.0,
           epsilon=1.0,
-          portion=0.5,
+          portion=0.56,
           sequential=True,
           **network_kwargs):
     rd.seed(random_state)
     np.random.seed(random_state)
+    
     start_time = time.time()
-
     data = rdr.read(dataset)
-    print(data.shape)
+    time_cost = time.time() - start_time
+    print('reading data takes %.3f sec' % (time_cost))
+    print('data shape:', data.shape)
     # shuffle dataset
     data = data.sample(frac=1, random_state=random_state).reset_index(drop=True)
 
-    data_reading_time = time.time() - start_time
-    print('reading data takes %.3f sec' % (data_reading_time))
 
     num_feature = data.shape[1] - 1
     label_map = dict()
@@ -88,9 +92,10 @@ def train(dataset,
         if feature_type == 1:
             features.append(list(range(num_feature)))
         elif feature_type == 2:
-            features.append(rd.choices(list(range(num_feature)), k=int(np.ceil(num_feature * 0.5))))
+            features.append(rd.choices(list(range(num_feature)), 
+                k=int(np.ceil(num_feature * 0.5))))
         elif feature_type == 3:
-            # first 1/3 features for first 1/3 clf, second for second, and third for third
+            # every 1/3 classifiers get 1/3 features
             size = int((num_feature - 1) / 3) + 1
             index = int((num_clf - 1) / 3) + 1
             if i < index:
@@ -99,7 +104,6 @@ def train(dataset,
                 features.append(list(range(size, 2 * size)))
             else:
                 features.append(list(range(2 * size, num_feature)))
-    # features = [list(range(num_feature))] * num_clf
     # print(features)
 
     clf_type = 5
@@ -118,74 +122,95 @@ def train(dataset,
     mv_stat = [0.0] * 4
     wv_stat = [0.0] * 4
     fs_stat = [0.0] * 4
-    rl_stat = [0.0] * 4
+    adab_stat = [0.0] * 4
+    eprl_stat = [0.0] * 4
+    ibrl_stat = [0.0] * 4
+    time_costs = [0.0] * 6
     fs_size = 0.0
-    rl_size = 0.0
+    eprl_size = 0.0
+    ibrl_size = 0.0
     avg_full_test_accu = 0.0
-    avg_test_accu = 0.0
+    avg_part_test_accu = 0.0
 
-    term = 4
-    kf = KFold(n_splits=10, random_state=random_state)
+    term = 10
+    kf = KFold(n_splits=term, random_state=random_state)
     for i, (train_idx, test_idx) in enumerate(kf.split(data)):
         print('\nRunning iteration %d of 10 fold...' % (i + 1))
-        # print(test_idx)
         out_model = []
         out_res = []
+        out_time = []
         train = data.iloc[train_idx, :]
         test = data.iloc[test_idx, :]
         train_clf, train_ens = rdr.splitByPortion(train, portion, random_state)
-        train_dqn, valid_dqn = rdr.splitByPortion(train_ens, 0.5, random_state)
-        # print(train_clf.shape)
-        # print(train_ens.shape)
-        # print(test.shape)
-        mdp_label_count = Counter()
-        for l in train_ens.iloc[:, -1]:
-            mdp_label_count[l] += 1
-        test_label_count = Counter()
-        for l in test.iloc[:, -1]:
-            test_label_count[l] += 1
-        
-        # results for majority vote and weighted vote
-        bm_cluster = Cluster(num_clf, clf_types, features, label_map, random_state=random_state)
-        # bm_cluster.train(train)
-        bm_cluster.train(train_clf)
-        full_test_accu = bm_cluster.accuracy(test)
-        avg_full_test_accu += np.mean(full_test_accu)
+        # print(train_clf.shape, train_ens.shape, test.shape)
 
-        mv_cmatrix = bm_cluster.majorityVote(test)
+        # train or load ensembles
+        start_time = time.time()
+        # full ensemble
+        persistence = 'models/clfs/d{}n{:d}c{:d}f{:d}r{:d}/i{:d}full/'.format(
+            dataset, num_clf, clf_type, feature_type, random_state, i)
+        if LOAD_CLF:
+            full_ensemble = Ensemble(num_clf, clf_types, features, label_map, 
+                persistence=persistence)
+        else:
+            full_ensemble = Ensemble(num_clf, clf_types, features, label_map, 
+                random_state=random_state)
+            full_ensemble.train(train)
+            full_ensemble.saveClf(persistence)
+        # part ensemble
+        persistence = 'models/clfs/d{}n{:d}c{:d}f{:d}r{:d}/i{:d}part/'.format(
+            dataset, num_clf, clf_type, feature_type, random_state, i)
+        if LOAD_CLF:
+            part_ensemble = Ensemble(num_clf, clf_types, features, label_map, 
+                persistence=persistence)
+        else:
+            part_ensemble = Ensemble(num_clf, clf_types, features, label_map, 
+                random_state=random_state)
+            part_ensemble.train(train_clf)
+            part_ensemble.saveClf(persistence)
+        # creat environment
+        real_set = [train_ens.iloc[:, -1], test.iloc[:, -1]]
+        res_set = [part_ensemble.results(train_ens), part_ensemble.results(test)]
+        prob_set = [part_ensemble.resProb(train_ens), part_ensemble.resProb(test)]
+        env = Environment(num_clf, real_set, res_set, prob_set, label_map)
+        time_cost = time.time() - start_time
+        time_costs[0] += time_cost
+        print('training/loading ensembles takes %.3f sec' % (time_cost))
+    
+        # get the performance of basic classifiers
+        # full ensemble
+        full_test_accu = full_ensemble.accuracy(test)
+        avg_full_test_accu += np.mean(full_test_accu)
+        # part ensemble
+        part_test_accu = part_ensemble.accuracy(test)
+        avg_part_test_accu += np.mean(part_test_accu)
+        
+        # voting techniques
+        start_time = time.time()
+        # majority vote
+        mv_cmatrix = full_ensemble.majorityVote(test)
         # print(mv_cmatrix)
         mv_res = U.computeConfMatrix(mv_cmatrix)
         for s in range(4):
             mv_stat[s] += mv_res[s]
         out_model.append('mv')
         out_res.append(mv_res)
-
-        wv_cmatrix = bm_cluster.weightedVote(test)
+        # weighted vote
+        wv_cmatrix = full_ensemble.weightedVote(test)
         # print(wv_cmatrix)
         wv_res = U.computeConfMatrix(wv_cmatrix)
         for s in range(4):
             wv_stat[s] += wv_res[s]
         out_model.append('wv')
         out_res.append(wv_res)
+        time_cost = time.time() - start_time
+        out_time.append(time_cost)
+        time_costs[1] += time_cost
+        print('voting takes %.3f sec' % (time_cost))
 
-        # classifiers trained by half data
-        rl_cluster = Cluster(num_clf, clf_types, features, label_map, random_state=random_state)
-        rl_cluster.train(train_clf)
-        # train_accu = rl_cluster.accuracy(train_ens)
-        # valid_accu = rl_cluster.accuracy(valid_dqn)
-        test_accu = rl_cluster.accuracy(test)
-        avg_test_accu += np.mean(test_accu)
-
-        res_set = [rl_cluster.results(train_ens), rl_cluster.results(test), rl_cluster.results(train_dqn), rl_cluster.results(valid_dqn)]
-        prob_set = [rl_cluster.resProb(train_ens), rl_cluster.resProb(test), rl_cluster.resProb(train_dqn), rl_cluster.resProb(valid_dqn)]
-        # res_set = [bm_cluster.results(train_ens), bm_cluster.results(test), bm_cluster.results(train_dqn), bm_cluster.results(valid_dqn)]
-        # prob_set = [bm_cluster.resProb(train_ens), bm_cluster.resProb(test), bm_cluster.resProb(train_dqn), bm_cluster.resProb(valid_dqn)]
-        real_set = [train_ens.iloc[:, -1], test.iloc[:, -1], train_dqn.iloc[:, -1], valid_dqn.iloc[:, -1]]
-        label_count_set = []
-
-        # FS algorithm
+        # FS
+        start_time = time.time()
         fs_model = fs.train(num_clf, real_set[0], res_set[0])
-        print(fs_model)
         fs_size += len(fs_model)
         fs_cmatrix = fs.evaluation(fs_model, real_set[1], res_set[1], label_map)
         # print(fs_cmatrix)
@@ -194,51 +219,81 @@ def train(dataset,
             fs_stat[s] += fs_res[s]
         out_model.append('fs')
         out_res.append(fs_res)
+        time_cost = time.time() - start_time
+        out_time.append(time_cost)
+        time_costs[2] += time_cost
+        print('FS takes %.3f sec' % (time_cost))
+        
+        # AdaBoost
+        start_time = time.time()
+        adab = AdaBoost(num_clf, random_state)
+        adab.train(train)
+        adab_cmatrix = adab.evaluation(test, label_map)
+        adab_res = U.computeConfMatrix(adab_cmatrix)
+        for s in range(4):
+            adab_stat[s] += adab_res[s]
+        out_model.append('adab')
+        out_res.append(adab_res)
+        time_cost = time.time() - start_time
+        out_time.append(time_cost)
+        time_costs[3] += time_cost
+        print('AdaBoost takes %.3f sec' % (time_cost))
+        '''
+        # EPRL
+        start_time = time.time()
 
-        # CBRL model
+        time_cost = time.time() - start_time
+        out_time.append(time_cost)
+        time_costs[4] += time_cost
+        print('EPRL takes %.3f sec' % (time_cost))
+
+        # IBRL
+        start_time = time.time()
         model_path = 'models/d{}n{:d}c{:d}f{:d}r{:d}i{:d}.ris'.format(dataset, num_clf, clf_type, feature_type, random_state, i)
         # print(model_path)
-        env = Environment(num_clf, real_set, res_set, prob_set, label_map, label_count_set, sequential=sequential)
         learn = get_learn_function(algorithm)
         model = learn(env, 0, num_training, learning_rate, epsilon, discount_factor, random_state, **network_kwargs)
-        # model = learn(env, 2, num_training, learning_rate, epsilon, discount_factor, random_state, **network_kwargs)
         model.save(model_path)
         # model.load(model_path)
-        rl_cmatrix, avg_clf = env.evaluation(model, 1, verbose=False)
-        rl_size += avg_clf
-        print('%.2f classifiers used' % (avg_clf))
-        # print(rl_cmatrix)
-        rl_res = U.computeConfMatrix(rl_cmatrix)
+        ibrl_cmatrix, avg_clf = env.evaluation(model, 1, verbose=False)
+        ibrl_size += avg_clf
+        # print(ibrl_cmatrix)
+        ibrl_res = U.computeConfMatrix(ibrl_cmatrix)
         for s in range(4):
-            rl_stat[s] += rl_res[s]
+            ibrl_stat[s] += ibrl_res[s]
         out_model.append('rl')
-        out_res.append(rl_res)
-
+        out_res.append(ibrl_res)
+        time_cost = time.time() - start_time
+        out_time.append(time_cost)
+        time_costs[5] += time_cost
+        print('IBRL takes %.3f sec' % (time_cost))
+        '''
         U.outputs(out_model, out_res)
-        # print(np.mean(train_accu))
-        # print(U.formatFloats(train_accu, 2) + '\n')
-        # print(np.mean(valid_accu))
-        # print(U.formatFloats(valid_accu, 2) + '\n')
-        print(np.mean(test_accu))
-        print(U.formatFloats(test_accu, 2) + '\n')
         print(np.mean(full_test_accu))
         print(U.formatFloats(full_test_accu, 2) + '\n')
-        if i >= term - 1:
-            break
+        print(np.mean(part_test_accu))
+        print(U.formatFloats(part_test_accu, 2) + '\n')
 
     mv_stat = [n / term for n in mv_stat]
     wv_stat = [n / term for n in wv_stat]
     fs_stat = [n / term for n in fs_stat]
-    rl_stat = [n / term for n in rl_stat]
+    adab_stat = [n / term for n in adab_stat]
+    eprl_stat = [n / term for n in eprl_stat]
+    ibrl_stat = [n / term for n in ibrl_stat]
+    time_costs = [n / term for n in time_costs]
     fs_size /= term
-    rl_size /= term
+    eprl_size /= term
+    ibrl_size /= term
     avg_full_test_accu /= term
-    avg_test_accu /= term
-    U.outputs(['mv', 'wv', 'fs', 'rl'], [mv_stat, wv_stat, fs_stat, rl_stat])
-    print('fs avg size: %.5f, rl avg size: %.5f' % (fs_size, rl_size))
-    print('full test avg accu: %.5f, test avg accu: %.5f' % (avg_full_test_accu, avg_test_accu))
-    training_time = time.time() - start_time - data_reading_time
-    print('\ntraining takes %.3f sec' % (training_time))
+    avg_part_test_accu /= term
+    U.outputs(['mv', 'wv', 'fs', 'adab', 'eprl', 'ibrl'], 
+              [mv_stat, wv_stat, fs_stat, adab_stat, eprl_stat, ibrl_stat])
+    print('time costs: clf, V, FS, AdaBoost, EPRL, IBRL\n       ' 
+        + U.formatFloats(time_costs, 2))
+    print('FS size: %.5f, EPRL size: %.5f, IBRL size: %.5f' 
+        % (fs_size, eprl_size, ibrl_size))
+    print('full test avg accu: %.5f, part test avg accu: %.5f' 
+        % (avg_full_test_accu, avg_part_test_accu))
 
 
 if __name__ == '__main__':

@@ -1,4 +1,4 @@
-from classifier import Cluster
+from classifier import Ensemble
 from collections import Counter
 import reader
 import time
@@ -57,7 +57,7 @@ def mlp(rdr, dataset, num_clf, hidden_layers, **clf_kwargs):
     num_feature = train_clf.shape[1] - 1
 
     print('Training classifiers:', time.asctime(time.localtime(time.time())))
-    pure_clf = Cluster(num_clf, ['rf'], [list(range(num_feature))] * num_clf, **clf_kwargs)
+    pure_clf = Ensemble(num_clf, ['rf'], [list(range(num_feature))] * num_clf, **clf_kwargs)
     pure_clf.train(train)
     pure_scores = pure_clf.majorityVote(test)
 
@@ -66,7 +66,7 @@ def mlp(rdr, dataset, num_clf, hidden_layers, **clf_kwargs):
         feature = rd.sample(range(num_feature), int(num_feature / 2))
         features.append(feature)
 
-    cluster = Cluster(num_clf, ['rf'], features, **clf_kwargs)
+    cluster = Ensemble(num_clf, ['rf'], features, **clf_kwargs)
     cluster.train(train_clf)
     clf_scores = cluster.majorityVote(test)
 
@@ -238,7 +238,7 @@ def examine(rdr, dataset, num_clf, reuse, **clf_kwargs):
 
     num_feature = train.shape[1] - 1
     features = [list(range(num_feature))] * num_clf
-    cluster = Cluster(num_clf, ['rf'], features, label_map=None, **clf_kwargs)
+    cluster = Ensemble(num_clf, ['rf'], features, label_map=None, **clf_kwargs)
     
     label_map = dict()
     index = 65
@@ -293,7 +293,7 @@ def variance(rdr, random_state):
         features = [list(range(num_feature))] * 100
         for n in n_estimators:
             kwargs = {'n_estimators': n, 'random_state': random_state}
-            cluster = Cluster(100, ['rf'], features, **kwargs)
+            cluster = Ensemble(100, ['rf'], features, **kwargs)
             cluster.train(train)
             scores = cluster.accuracy(test)
             print('%03d estimators: mean %f, var %f, max %f, min %f' 

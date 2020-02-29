@@ -5,15 +5,19 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.naive_bayes import GaussianNB
 from collections import Counter
+from joblib import dump, load
 import pandas as pd
 import random as rd
 import numpy as np
+import os
 
 
 class Classifier:
 
-    def __init__(self, classifier_type, feature, **clf_kwarg):
-        if classifier_type == 'dt':
+    def __init__(self, classifier_type='', clf=None, **clf_kwarg):
+        if clf is not None:
+            self.clf = clf
+        elif classifier_type == 'dt':
             self.clf = DecisionTreeClassifier(random_state=clf_kwarg['random_state'],
                                               max_features=clf_kwarg['max_features'])
         # elif classifier_type == 'rf':
@@ -47,9 +51,9 @@ class Classifier:
         return self.clf.classes_
 
 
-class Cluster:
+class Ensemble:
 
-    def __init__(self, size, types, features, label_map, **clf_kwarg):
+    def __init__(self, size, types, features, label_map, persistence='', **clf_kwarg):
         if len(features) != size:
             raise ValueError('length of feature does not match number of classifiers')
         self.size = size
@@ -57,14 +61,18 @@ class Cluster:
         self.label_map = label_map
         self.clf_types = []
         self.classifiers = []
-        for i in range(size):
-            self.clf_types.append(types[i % len(types)])
-            clf_kwarg['random_state'] = rd.randint(1, 10000)
-            clf_kwarg['max_features'] = 'sqrt'
-            clf_kwarg['hidden_layer_sizes'] = (8,)
-            clf_kwarg['max_iter'] = 1000
-            clf_kwarg['n_neighbors'] = int(np.ceil(np.sqrt(self.size)))
-            self.classifiers.append(Classifier(self.clf_types[i], features[i], **clf_kwarg))
+        if os.path.isdir(persistence):
+            self.loadClf(persistence, types)
+        else:
+            for i in range(size):
+                self.clf_types.append(types[i % len(types)])
+                clf_kwarg['random_state'] = rd.randint(1, 10000)
+                clf_kwarg['max_features'] = 'sqrt'
+                clf_kwarg['hidden_layer_sizes'] = (8,)
+                clf_kwarg['max_iter'] = 1000
+                clf_kwarg['n_neighbors'] = int(np.ceil(np.sqrt(self.size)))
+                self.classifiers.append(Classifier(
+                    classifier_type=self.clf_types[i], **clf_kwarg))
 
     def train(self, data, bootstrap=True):
         for i in range(self.size):
@@ -154,4 +162,18 @@ class Cluster:
             pred = vote.most_common()[0][0]
             conf_matrix[self.label_map[real], self.label_map[pred]] += 1
         return conf_matrix
+
+    def loadClf(self, persistence, types):
+        if not os.path.isdir(persistence):
+            raise IOError('No such directory')
+        for i in range(self.size):
+            clf = load('{}{:d}.clf'.format(persistence, i))
+            self.clf_types.append(types[i % len(types)])
+            self.classifiers.append(Classifier(clf=clf))
+
+    def saveClf(self, persistence):
+        if not os.path.isdir(persistence):
+            os.makedirs(persistence)
+        for i in range(self.size):
+            dump(self.classifiers[i].clf, '{}{:d}.clf'.format(persistence, i))
 
