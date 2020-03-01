@@ -15,6 +15,7 @@ from sklearn.model_selection import KFold
 
 
 LOAD_CLF = True
+LOAD_IBRL = False
 
 
 def readCommand(argv):
@@ -86,6 +87,19 @@ def train(dataset,
             label_map[l] = len(label_map)
     print('number of labels: %d' % (len(label_map)))
 
+    clf_type = 1
+    if clf_type == 1:
+        clf_types = ['dt']
+    elif clf_type == 2:
+        clf_types = ['mlp']
+    elif clf_type == 3:
+        clf_types = ['knn']
+    elif clf_type == 4:
+        clf_types = ['nb']
+    elif clf_type == 5:
+        clf_types = ['dt', 'mlp', 'knn', 'nb']
+    # print(clf_types)
+
     feature_type = 1
     features = list()
     for i in range(num_clf):
@@ -105,19 +119,6 @@ def train(dataset,
             else:
                 features.append(list(range(2 * size, num_feature)))
     # print(features)
-
-    clf_type = 5
-    if clf_type == 1:
-        clf_types = ['dt']
-    elif clf_type == 2:
-        clf_types = ['mlp']
-    elif clf_type == 3:
-        clf_types = ['knn']
-    elif clf_type == 4:
-        clf_types = ['nb']
-    elif clf_type == 5:
-        clf_types = ['dt', 'mlp', 'knn', 'nb']
-    # print(clf_types)
 
     mv_stat = [0.0] * 4
     wv_stat = [0.0] * 4
@@ -184,7 +185,7 @@ def train(dataset,
         # part ensemble
         part_test_accu = part_ensemble.accuracy(test)
         avg_part_test_accu += np.mean(part_test_accu)
-        
+        '''
         # voting techniques
         start_time = time.time()
         # majority vote
@@ -207,7 +208,7 @@ def train(dataset,
         out_time.append(time_cost)
         time_costs[1] += time_cost
         print('voting takes %.3f sec' % (time_cost))
-        '''
+        
         # FS
         start_time = time.time()
         fs_model = fs.train(num_clf, real_set[0], res_set[0])
@@ -223,7 +224,7 @@ def train(dataset,
         out_time.append(time_cost)
         time_costs[2] += time_cost
         print('FS takes %.3f sec' % (time_cost))
-        '''
+        
         # AdaBoost
         start_time = time.time()
         adab = AdaBoost(num_clf, random_state)
@@ -238,7 +239,7 @@ def train(dataset,
         out_time.append(time_cost)
         time_costs[3] += time_cost
         print('AdaBoost takes %.3f sec' % (time_cost))
-        '''
+        
         # EPRL
         start_time = time.time()
 
@@ -246,15 +247,22 @@ def train(dataset,
         out_time.append(time_cost)
         time_costs[4] += time_cost
         print('EPRL takes %.3f sec' % (time_cost))
-
+        
         # IBRL
         start_time = time.time()
-        model_path = 'models/d{}n{:d}c{:d}f{:d}r{:d}i{:d}.ris'.format(dataset, num_clf, clf_type, feature_type, random_state, i)
+        model_folder = 'models/ibrls/d{}n{:d}c{:d}f{:d}r{:d}/'.format(
+            dataset, num_clf, clf_type, feature_type, random_state)
+        if not LOAD_IBRL and not os.path.isdir(model_folder):
+            os.makedirs(model_folder)
+        model_path = '{}/i{:d}.ibrl'.format(model_folder, i)
         # print(model_path)
-        learn = get_learn_function(algorithm)
-        model = learn(env, 0, num_training, learning_rate, epsilon, discount_factor, random_state, **network_kwargs)
-        model.save(model_path)
-        # model.load(model_path)
+        if LOAD_IBRL:
+            model.load(model_path)
+        else:
+            learn = get_learn_function(algorithm)
+            model = learn(env, 0, num_training, learning_rate, epsilon, 
+                discount_factor, random_state, **network_kwargs)
+            model.save(model_path)
         ibrl_cmatrix, avg_clf = env.evaluation(model, 1, verbose=False)
         ibrl_size += avg_clf
         # print(ibrl_cmatrix)

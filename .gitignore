@@ -1,5 +1,4 @@
 *.pyc
 *.tmp
-bin/*
 models/*
 *.out
