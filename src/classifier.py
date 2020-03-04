@@ -15,19 +15,19 @@ import os
 class Classifier:
 
     def __init__(self, classifier_type='', clf=None, **clf_kwarg):
-        rs = clf_kwarg['random_state']
         if clf is not None:
             self.clf = clf
         elif classifier_type == 'dt':
-            self.clf = DecisionTreeClassifier(random_state=rs, 
+            self.clf = DecisionTreeClassifier(random_state=clf_kwarg['random_state'], 
                                               max_features='sqrt',
                                               max_depth=4)
         # elif classifier_type == 'rf':
-        #     self.clf = RandomForestClassifier(random_state=rs)
+        #     self.clf = RandomForestClassifier(random_state=clf_kwarg['random_state'])
         # elif classifier_type == 'svm':
-        #     self.clf = SVC(random_state=rs)
+        #     self.clf = SVC(random_state=clf_kwarg['random_state'])
         elif classifier_type == 'mlp':
-            self.clf = MLPClassifier(random_state=rs, hidden_layer_sizes=(8,))
+            self.clf = MLPClassifier(random_state=clf_kwarg['random_state'], 
+                                     hidden_layer_sizes=(8,))
         elif classifier_type == 'knn':
             self.clf = KNeighborsClassifier(algorithm='brute')
         elif classifier_type == 'nb':

@@ -14,7 +14,7 @@ from importlib import import_module
 from sklearn.model_selection import KFold
 
 
-LOAD_CLF = False
+LOAD_CLF = True
 LOAD_IBRL = False
 
 
