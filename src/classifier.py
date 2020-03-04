@@ -15,21 +15,21 @@ import os
 class Classifier:
 
     def __init__(self, classifier_type='', clf=None, **clf_kwarg):
+        rs = clf_kwarg['random_state']
         if clf is not None:
             self.clf = clf
         elif classifier_type == 'dt':
-            self.clf = DecisionTreeClassifier(random_state=clf_kwarg['random_state'],
-                                              max_features=clf_kwarg['max_features'])
+            self.clf = DecisionTreeClassifier(random_state=rs, 
+                                              max_features='sqrt',
+                                              max_depth=4)
         # elif classifier_type == 'rf':
-        #     self.clf = RandomForestClassifier(random_state=clf_kwarg['random_state'])
+        #     self.clf = RandomForestClassifier(random_state=rs)
         # elif classifier_type == 'svm':
-        #     self.clf = SVC(random_state=clf_kwarg['random_state'])
-        elif classifier_type == 'knn':
-            self.clf = KNeighborsClassifier(n_neighbors=clf_kwarg['n_neighbors'])
+        #     self.clf = SVC(random_state=rs)
         elif classifier_type == 'mlp':
-            self.clf = MLPClassifier(random_state=clf_kwarg['random_state'],
-                                     hidden_layer_sizes=clf_kwarg['hidden_layer_sizes'], 
-                                     max_iter=clf_kwarg['max_iter'])
+            self.clf = MLPClassifier(random_state=rs, hidden_layer_sizes=(8,))
+        elif classifier_type == 'knn':
+            self.clf = KNeighborsClassifier(algorithm='brute')
         elif classifier_type == 'nb':
             self.clf = GaussianNB()
         else:
@@ -67,10 +67,6 @@ class Ensemble:
             for i in range(size):
                 self.clf_types.append(types[i % len(types)])
                 clf_kwarg['random_state'] = rd.randint(1, 10000)
-                clf_kwarg['max_features'] = 'sqrt'
-                clf_kwarg['hidden_layer_sizes'] = (8,)
-                clf_kwarg['max_iter'] = 1000
-                clf_kwarg['n_neighbors'] = int(np.ceil(np.sqrt(self.size)))
                 self.classifiers.append(Classifier(
                     classifier_type=self.clf_types[i], **clf_kwarg))
 

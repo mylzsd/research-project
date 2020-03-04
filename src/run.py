@@ -14,7 +14,7 @@ from importlib import import_module
 from sklearn.model_selection import KFold
 
 
-LOAD_CLF = True
+LOAD_CLF = False
 LOAD_IBRL = False
 
 
@@ -76,7 +76,7 @@ def train(dataset,
     print('reading data takes %.3f sec' % (time_cost))
     print('data shape:', data.shape)
     # shuffle dataset
-    data = data.sample(frac=1, random_state=random_state).reset_index(drop=True)
+    # data = data.sample(frac=1, random_state=random_state).reset_index(drop=True)
 
 
     num_feature = data.shape[1] - 1
@@ -126,7 +126,7 @@ def train(dataset,
     adab_stat = [0.0] * 4
     eprl_stat = [0.0] * 4
     ibrl_stat = [0.0] * 4
-    time_costs = [0.0] * 6
+    time_costs = [0.0] * 7
     fs_size = 0.0
     eprl_size = 0.0
     ibrl_size = 0.0
@@ -169,14 +169,20 @@ def train(dataset,
                 random_state=random_state)
             part_ensemble.train(train_clf)
             part_ensemble.saveClf(persistence)
+        time_cost = time.time() - start_time
+        time_costs[0] += time_cost
+        print('%s ensembles takes %.3f sec' % 
+            ('loading' if LOAD_CLF else 'training', time_cost))
+
         # creat environment
+        start_time = time.time()
         real_set = [train_ens.iloc[:, -1], test.iloc[:, -1]]
         res_set = [part_ensemble.results(train_ens), part_ensemble.results(test)]
         prob_set = [part_ensemble.resProb(train_ens), part_ensemble.resProb(test)]
         env = Environment(num_clf, real_set, res_set, prob_set, label_map)
         time_cost = time.time() - start_time
-        time_costs[0] += time_cost
-        print('training/loading ensembles takes %.3f sec' % (time_cost))
+        time_costs[1] += time_cost
+        print('creating environment takes %.3f sec' % (time_cost))
     
         # get the performance of basic classifiers
         # full ensemble
@@ -206,7 +212,7 @@ def train(dataset,
         out_res.append(wv_res)
         time_cost = time.time() - start_time
         out_time.append(time_cost)
-        time_costs[1] += time_cost
+        time_costs[2] += time_cost
         print('voting takes %.3f sec' % (time_cost))
         
         # FS
@@ -222,7 +228,7 @@ def train(dataset,
         out_res.append(fs_res)
         time_cost = time.time() - start_time
         out_time.append(time_cost)
-        time_costs[2] += time_cost
+        time_costs[3] += time_cost
         print('FS takes %.3f sec' % (time_cost))
         
         # AdaBoost
@@ -237,7 +243,7 @@ def train(dataset,
         out_res.append(adab_res)
         time_cost = time.time() - start_time
         out_time.append(time_cost)
-        time_costs[3] += time_cost
+        time_costs[4] += time_cost
         print('AdaBoost takes %.3f sec' % (time_cost))
         
         # EPRL
@@ -245,7 +251,7 @@ def train(dataset,
 
         time_cost = time.time() - start_time
         out_time.append(time_cost)
-        time_costs[4] += time_cost
+        time_costs[5] += time_cost
         print('EPRL takes %.3f sec' % (time_cost))
         
         # IBRL
@@ -273,7 +279,7 @@ def train(dataset,
         out_res.append(ibrl_res)
         time_cost = time.time() - start_time
         out_time.append(time_cost)
-        time_costs[5] += time_cost
+        time_costs[6] += time_cost
         print('IBRL takes %.3f sec' % (time_cost))
         '''
         U.outputs(out_model, out_res)
@@ -296,7 +302,7 @@ def train(dataset,
     avg_part_test_accu /= term
     U.outputs(['mv', 'wv', 'fs', 'adab', 'eprl', 'ibrl'], 
               [mv_stat, wv_stat, fs_stat, adab_stat, eprl_stat, ibrl_stat])
-    print('time costs: clf, V, FS, AdaBoost, EPRL, IBRL\n       ' 
+    print('time costs: C, E, V, FS, Ada, EPRL, IBRL\n       ' 
         + U.formatFloats(time_costs, 2))
     print('FS size: %.5f, EPRL size: %.5f, IBRL size: %.5f' 
         % (fs_size, eprl_size, ibrl_size))
