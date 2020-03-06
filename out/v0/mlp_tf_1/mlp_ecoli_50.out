@@ -1,0 +1,26 @@
+Namespace(dataset='ecoli', mode='mlp', n_estimators=1, num_clf=50, random_state=4922, reuse=False)
+Dataset ecoli
+(151, 8)
+(151, 8)
+(34, 8)
+Training classifiers: Tue Mar 26 19:53:01 2019
+Training sci mlp: Tue Mar 26 19:53:03 2019
+Number of label: 8
+(151, 401)
+(34, 401)
+Training tf mlp: Tue Mar 26 19:53:15 2019
+epoch: 99, cost: 1.811768, accuracy: 0.403974, mse: 2.585430
+epoch: 199, cost: 1.490216, accuracy: 0.470199, mse: 2.839910
+epoch: 299, cost: 1.260764, accuracy: 0.576159, mse: 3.584302
+epoch: 399, cost: 1.089226, accuracy: 0.642384, mse: 4.511298
+epoch: 499, cost: 0.945748, accuracy: 0.701987, mse: 5.239786
+epoch: 599, cost: 0.822007, accuracy: 0.748344, mse: 5.854414
+epoch: 699, cost: 0.730367, accuracy: 0.788079, mse: 6.243548
+epoch: 799, cost: 0.654818, accuracy: 0.827815, mse: 6.651647
+epoch: 899, cost: 0.596951, accuracy: 0.860927, mse: 6.988739
+epoch: 999, cost: 0.554683, accuracy: 0.860927, mse: 7.276567
+full set majority vote: 0.764706
+part set majority vote: 0.705882
+sci mlp: 0.7058823529411765
+tf mlp: 0.47058824
+Finish time: Tue Mar 26 19:57:49 2019

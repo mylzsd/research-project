@@ -1,0 +1,12 @@
+Namespace(dataset='ecoli', mode='mlp', n_estimators=1, num_clf=100, random_state=2374, reuse=False)
+Dataset ecoli
+(151, 8)
+(151, 8)
+(34, 8)
+Training classifiers: Mon Mar 18 00:52:12 2019
+Training mlp: Mon Mar 18 00:52:17 2019
+Number of label: 8
+full set majority vote: 0.882353
+half set majority vote: 0.705882
+mlp: 0.8235294117647058
+Finish time: Mon Mar 18 00:53:09 2019

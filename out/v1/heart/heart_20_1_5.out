@@ -1,0 +1,138 @@
+{'dataset': 'heart', 'algorithm': 'ptdqn', 'num_clf': 20, 'num_training': 350000, 'learning_rate': 0.1, 'discount_factor': 1.0, 'epsilon': 0.1, 'random_state': 7087, 'portion': 0.5, 'sequential': False}
+(270, 21)
+reading data takes 0.852 sec
+number of labels: 2
+
+Running iteration 1 of 10 fold...
+[15, 0, 2, 1, 5, 16, 7]
+using cpu
+using cpu
+    accuracy, precision, recall, f_score
+max0: 0.7190, 0.7346, 0.7271, 0.7188
+
+    accuracy, precision, recall, f_score
+max3: 0.8033, 0.8033, 0.8007, 0.8007
+
+    accuracy, precision, recall, f_score
+max1: 0.8889, 0.8926, 0.8920, 0.8864
+
+
+min loss: 0.011, episode: 269000
+max accu: 0.889, episode: 170000
+
+6.63 classifiers used
+    accuracy, precision, recall, f_score
+mv: 0.8889, 0.8895, 0.8778, 0.8831
+wv: 0.8519, 0.8519, 0.8466, 0.8466
+fs: 0.7778, 0.7900, 0.7841, 0.7750
+rl: 0.8889, 0.8926, 0.8920, 0.8864
+
+0.712962962962963
+0.66, 0.51, 0.70, 0.74, 0.77, 0.62, 0.77, 0.70, 0.74, 0.85, 0.70, 0.70, 0.66, 0.59, 0.81, 0.85, 0.77, 0.51, 0.70, 0.81
+
+0.7611111111111111
+0.81, 0.85, 0.70, 0.77, 0.85, 0.59, 0.85, 0.81, 0.77, 0.81, 0.85, 0.74, 0.70, 0.88, 0.81, 0.70, 0.55, 0.66, 0.59, 0.85
+
+
+Running iteration 2 of 10 fold...
+[11, 0]
+using cpu
+using cpu
+    accuracy, precision, recall, f_score
+max0: 0.7603, 0.7588, 0.7485, 0.7505
+
+    accuracy, precision, recall, f_score
+max3: 0.8033, 0.8101, 0.7841, 0.7906
+
+    accuracy, precision, recall, f_score
+max1: 0.7407, 0.7698, 0.7167, 0.7158
+
+
+min loss: 0.012, episode: 232000
+max accu: 0.741, episode: 320000
+
+9.44 classifiers used
+    accuracy, precision, recall, f_score
+mv: 0.7778, 0.7875, 0.7833, 0.7775
+wv: 0.7778, 0.7875, 0.7833, 0.7775
+fs: 0.7778, 0.7804, 0.7667, 0.7699
+rl: 0.7407, 0.7698, 0.7167, 0.7158
+
+0.5981481481481481
+0.74, 0.55, 0.59, 0.74, 0.66, 0.59, 0.51, 0.55, 0.77, 0.33, 0.70, 0.77, 0.70, 0.33, 0.59, 0.62, 0.77, 0.18, 0.62, 0.55
+
+0.6129629629629629
+0.62, 0.59, 0.55, 0.59, 0.62, 0.66, 0.66, 0.40, 0.70, 0.51, 0.55, 0.48, 0.74, 0.70, 0.66, 0.77, 0.62, 0.74, 0.59, 0.40
+
+
+Running iteration 3 of 10 fold...
+[11, 0]
+using cpu
+using cpu
+    accuracy, precision, recall, f_score
+max0: 0.7769, 0.7751, 0.7616, 0.7642
+
+    accuracy, precision, recall, f_score
+max3: 0.7869, 0.7872, 0.7584, 0.7666
+
+    accuracy, precision, recall, f_score
+max1: 0.8148, 0.8181, 0.8167, 0.8138
+
+
+min loss: 0.013, episode: 271000
+max accu: 0.815, episode: 330000
+
+8.15 classifiers used
+    accuracy, precision, recall, f_score
+mv: 0.7407, 0.7399, 0.7333, 0.7349
+wv: 0.7407, 0.7399, 0.7333, 0.7349
+fs: 0.8148, 0.8150, 0.8083, 0.8107
+rl: 0.8148, 0.8181, 0.8167, 0.8138
+
+0.6370370370370371
+0.66, 0.74, 0.62, 0.77, 0.70, 0.51, 0.55, 0.77, 0.62, 0.44, 0.48, 0.81, 0.62, 0.74, 0.44, 0.85, 0.59, 0.44, 0.51, 0.77
+
+0.6333333333333333
+0.74, 0.44, 0.59, 0.77, 0.62, 0.48, 0.44, 0.74, 0.74, 0.48, 0.51, 0.74, 0.59, 0.59, 0.51, 0.77, 0.74, 0.74, 0.55, 0.81
+
+
+Running iteration 4 of 10 fold...
+[0, 1, 12, 6]
+using cpu
+using cpu
+    accuracy, precision, recall, f_score
+max0: 0.8347, 0.8363, 0.8309, 0.8285
+
+    accuracy, precision, recall, f_score
+max3: 0.8525, 0.8541, 0.8473, 0.8443
+
+    accuracy, precision, recall, f_score
+max1: 0.8519, 0.8605, 0.8544, 0.8516
+
+
+min loss: 0.013, episode: 173000
+max accu: 0.852, episode: 170000
+
+19.30 classifiers used
+    accuracy, precision, recall, f_score
+mv: 0.7778, 0.7778, 0.7775, 0.7775
+wv: 0.7778, 0.7778, 0.7775, 0.7775
+fs: 0.7407, 0.7414, 0.7390, 0.7393
+rl: 0.8519, 0.8605, 0.8544, 0.8516
+
+0.6481481481481481
+0.81, 0.66, 0.62, 0.62, 0.66, 0.33, 0.62, 0.74, 0.66, 0.33, 0.74, 0.66, 0.77, 0.62, 0.51, 0.77, 0.66, 0.66, 0.62, 0.77
+
+0.6425925925925926
+0.70, 0.40, 0.59, 0.74, 0.74, 0.70, 0.51, 0.70, 0.59, 0.66, 0.62, 0.70, 0.66, 0.77, 0.59, 0.62, 0.81, 0.33, 0.62, 0.70
+
+    accuracy, precision, recall, f_score
+mv: 0.7963, 0.7987, 0.7930, 0.7932
+wv: 0.7870, 0.7893, 0.7852, 0.7841
+fs: 0.7778, 0.7817, 0.7745, 0.7737
+rl: 0.8241, 0.8352, 0.8199, 0.8169
+
+fs avg size: 3.75000, rl avg size: 10.87963
+full test avg accu: 0.66250, test avg accu: 0.64907
+
+training takes 7108.960 sec

@@ -1,0 +1,12 @@
+Namespace(dataset='human_activity', mode='mlp', n_estimators=1, num_clf=100, random_state=3997, reuse=False)
+Dataset human_activity
+(3676, 562)
+(3676, 562)
+(2947, 562)
+Training classifiers: Mon Mar 18 01:00:42 2019
+Training mlp: Mon Mar 18 01:11:56 2019
+Number of label: 6
+full set majority vote: 0.927044
+half set majority vote: 0.926705
+mlp: 0.9222938581608415
+Finish time: Mon Mar 18 01:15:19 2019

@@ -1,0 +1,11 @@
+{'mode': 'mlp', 'dataset': 'dematology', 'num_clf': 100, 'reuse': False, 'random_state': 2567, 'num_estimators': 100}
+(164, 35)
+(165, 35)
+(37, 35)
+Training classifiers: Tue Mar 12 13:57:19 2019
+Training mlp: Tue Mar 12 13:57:54 2019
+Number of label: 6
+1.0 1.0 1.0
+0.8108108108108109 1.0 0.9264864864864863
+0.972972972972973
+Finish time: Tue Mar 12 13:59:03 2019

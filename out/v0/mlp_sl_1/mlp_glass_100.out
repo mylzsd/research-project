@@ -1,0 +1,12 @@
+Namespace(dataset='glass', mode='mlp', n_estimators=1, num_clf=100, random_state=8558, reuse=False)
+Dataset glass
+(96, 10)
+(97, 10)
+(21, 10)
+Training classifiers: Mon Mar 18 00:53:21 2019
+Training mlp: Mon Mar 18 00:53:24 2019
+Number of label: 6
+full set majority vote: 0.904762
+half set majority vote: 0.809524
+mlp: 0.9047619047619048
+Finish time: Mon Mar 18 00:53:54 2019

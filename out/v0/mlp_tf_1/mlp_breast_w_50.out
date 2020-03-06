@@ -1,0 +1,26 @@
+Namespace(dataset='breast_w', mode='mlp', n_estimators=1, num_clf=50, random_state=7418, reuse=False)
+Dataset breast_w
+(314, 10)
+(315, 10)
+(70, 10)
+Training classifiers: Tue Mar 26 19:23:34 2019
+Training sci mlp: Tue Mar 26 19:23:38 2019
+Number of label: 2
+(315, 101)
+(70, 101)
+Training tf mlp: Tue Mar 26 19:23:40 2019
+epoch: 99, cost: 0.546342, accuracy: 0.641270, mse: 0.657047
+epoch: 199, cost: 0.436732, accuracy: 0.904762, mse: 0.917512
+epoch: 299, cost: 0.322950, accuracy: 0.939683, mse: 1.332635
+epoch: 399, cost: 0.235529, accuracy: 0.965079, mse: 1.818334
+epoch: 499, cost: 0.180749, accuracy: 0.968254, mse: 2.310182
+epoch: 599, cost: 0.147773, accuracy: 0.971429, mse: 2.759146
+epoch: 699, cost: 0.126943, accuracy: 0.974603, mse: 3.154545
+epoch: 799, cost: 0.112887, accuracy: 0.974603, mse: 3.507543
+epoch: 899, cost: 0.102727, accuracy: 0.974603, mse: 3.820193
+epoch: 999, cost: 0.094906, accuracy: 0.974603, mse: 4.101368
+full set majority vote: 0.971429
+part set majority vote: 0.985714
+sci mlp: 0.9857142857142858
+tf mlp: 0.95714283
+Finish time: Tue Mar 26 19:28:10 2019

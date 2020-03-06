@@ -1,0 +1,26 @@
+Namespace(dataset='audiology', mode='mlp', n_estimators=1, num_clf=50, random_state=3608, reuse=False)
+Dataset audiology
+(100, 95)
+(100, 95)
+(26, 95)
+Training classifiers: Tue Mar 26 18:58:18 2019
+Training sci mlp: Tue Mar 26 18:58:20 2019
+Number of label: 24
+(100, 1201)
+(26, 1201)
+Training tf mlp: Tue Mar 26 18:59:34 2019
+epoch: 99, cost: 0.656818, accuracy: 0.880000, mse: 112.379718
+epoch: 199, cost: 0.182462, accuracy: 0.960000, mse: 91.112198
+epoch: 299, cost: 0.107296, accuracy: 0.990000, mse: 89.667724
+epoch: 399, cost: 0.076958, accuracy: 1.000000, mse: 89.509957
+epoch: 499, cost: 0.057077, accuracy: 1.000000, mse: 89.446855
+epoch: 599, cost: 0.045835, accuracy: 1.000000, mse: 89.306827
+epoch: 699, cost: 0.038928, accuracy: 1.000000, mse: 89.342554
+epoch: 799, cost: 0.034046, accuracy: 1.000000, mse: 89.480574
+epoch: 899, cost: 0.030381, accuracy: 1.000000, mse: 89.645813
+epoch: 999, cost: 0.027552, accuracy: 1.000000, mse: 89.821573
+full set majority vote: 0.846154
+part set majority vote: 0.846154
+sci mlp: 0.7692307692307693
+tf mlp: 0.26923078
+Finish time: Tue Mar 26 19:04:33 2019

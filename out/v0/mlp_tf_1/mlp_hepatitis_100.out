@@ -1,0 +1,26 @@
+Namespace(dataset='hepatitis', mode='mlp', n_estimators=1, num_clf=100, random_state=8056, reuse=False)
+Dataset hepatitis
+(70, 20)
+(70, 20)
+(15, 20)
+Training classifiers: Tue Mar 26 20:17:45 2019
+Training sci mlp: Tue Mar 26 20:17:47 2019
+Number of label: 2
+(70, 201)
+(15, 201)
+Training tf mlp: Tue Mar 26 20:17:49 2019
+epoch: 99, cost: 0.408255, accuracy: 0.857143, mse: 1.457327
+epoch: 199, cost: 0.389809, accuracy: 0.857143, mse: 1.486201
+epoch: 299, cost: 0.374129, accuracy: 0.871429, mse: 1.509477
+epoch: 399, cost: 0.359638, accuracy: 0.871429, mse: 1.531592
+epoch: 499, cost: 0.347508, accuracy: 0.900000, mse: 1.554109
+epoch: 599, cost: 0.337786, accuracy: 0.900000, mse: 1.577517
+epoch: 699, cost: 0.329879, accuracy: 0.914286, mse: 1.600943
+epoch: 799, cost: 0.323369, accuracy: 0.914286, mse: 1.623927
+epoch: 899, cost: 0.317991, accuracy: 0.914286, mse: 1.646319
+epoch: 999, cost: 0.308740, accuracy: 0.914286, mse: 1.670201
+full set majority vote: 0.933333
+part set majority vote: 0.933333
+sci mlp: 0.8
+tf mlp: 0.73333335
+Finish time: Tue Mar 26 20:22:16 2019

@@ -1,0 +1,12 @@
+Namespace(dataset='iris', mode='mlp', n_estimators=1, num_clf=50, random_state=1153, reuse=False)
+Dataset iris
+(135, 5)
+(135, 5)
+(30, 5)
+Training classifiers: Mon Mar 18 01:15:20 2019
+Training mlp: Mon Mar 18 01:15:22 2019
+Number of label: 3
+full set majority vote: 1.000000
+half set majority vote: 0.933333
+mlp: 0.9666666666666667
+Finish time: Mon Mar 18 01:15:27 2019

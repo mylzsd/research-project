@@ -1,0 +1,26 @@
+Namespace(dataset='lymphography', mode='mlp', n_estimators=1, num_clf=100, random_state=7278, reuse=False)
+Dataset lymphography
+(66, 39)
+(67, 39)
+(15, 39)
+Training classifiers: Tue Mar 26 21:11:05 2019
+Training sci mlp: Tue Mar 26 21:11:06 2019
+Number of label: 4
+(67, 401)
+(15, 401)
+Training tf mlp: Tue Mar 26 21:11:12 2019
+epoch: 99, cost: 0.923328, accuracy: 0.492537, mse: 2.207473
+epoch: 199, cost: 0.667765, accuracy: 0.671642, mse: 2.492283
+epoch: 299, cost: 0.536800, accuracy: 0.880597, mse: 2.486813
+epoch: 399, cost: 0.454639, accuracy: 0.880597, mse: 2.403467
+epoch: 499, cost: 0.381301, accuracy: 0.925373, mse: 2.328551
+epoch: 599, cost: 0.311774, accuracy: 0.940298, mse: 2.270312
+epoch: 699, cost: 0.261938, accuracy: 0.955224, mse: 2.264589
+epoch: 799, cost: 0.232185, accuracy: 0.955224, mse: 2.306827
+epoch: 899, cost: 0.209445, accuracy: 0.955224, mse: 2.342391
+epoch: 999, cost: 0.191044, accuracy: 0.955224, mse: 2.373453
+full set majority vote: 0.733333
+part set majority vote: 0.800000
+sci mlp: 0.8
+tf mlp: 0.73333335
+Finish time: Tue Mar 26 21:15:41 2019
