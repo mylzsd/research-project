@@ -20,7 +20,7 @@ class Classifier:
         elif classifier_type == 'dt':
             self.clf = DecisionTreeClassifier(random_state=clf_kwarg['random_state'], 
                                               max_features='sqrt',
-                                              max_depth=4)
+                                              max_depth=8)
         # elif classifier_type == 'rf':
         #     self.clf = RandomForestClassifier(random_state=clf_kwarg['random_state'])
         # elif classifier_type == 'svm':

@@ -1,10 +1,13 @@
 from sklearn.ensemble import AdaBoostClassifier
+from sklearn.tree import DecisionTreeClassifier
 import numpy as np
 
 class AdaBoost:
 
     def __init__(self, num_clf, random_state):
-        self.clf = AdaBoostClassifier(n_estimators=num_clf, random_state=random_state)
+        self.clf = AdaBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=8),
+                                      n_estimators=num_clf, 
+                                      random_state=random_state)
 
     def train(self, data):
         X = data.iloc[:, :-1]

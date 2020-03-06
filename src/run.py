@@ -191,7 +191,7 @@ def train(dataset,
         # part ensemble
         part_test_accu = part_ensemble.accuracy(test)
         avg_part_test_accu += np.mean(part_test_accu)
-        '''
+        
         # voting techniques
         start_time = time.time()
         # majority vote
@@ -214,7 +214,7 @@ def train(dataset,
         out_time.append(time_cost)
         time_costs[2] += time_cost
         print('voting takes %.3f sec' % (time_cost))
-        
+        '''
         # FS
         start_time = time.time()
         fs_model = fs.train(num_clf, real_set[0], res_set[0])
