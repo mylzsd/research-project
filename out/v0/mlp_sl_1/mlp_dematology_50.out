@@ -1,0 +1,12 @@
+Namespace(dataset='dematology', mode='mlp', n_estimators=1, num_clf=50, random_state=933, reuse=False)
+Dataset dematology
+(164, 35)
+(165, 35)
+(37, 35)
+Training classifiers: Mon Mar 18 00:51:07 2019
+Training mlp: Mon Mar 18 00:51:10 2019
+Number of label: 6
+full set majority vote: 0.972973
+half set majority vote: 0.972973
+mlp: 0.972972972972973
+Finish time: Mon Mar 18 00:51:25 2019

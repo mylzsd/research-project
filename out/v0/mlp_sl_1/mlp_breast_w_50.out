@@ -1,0 +1,12 @@
+Namespace(dataset='breast_w', mode='mlp', n_estimators=1, num_clf=50, random_state=3650, reuse=False)
+Dataset breast_w
+(314, 10)
+(315, 10)
+(70, 10)
+Training classifiers: Mon Mar 18 00:49:32 2019
+Training mlp: Mon Mar 18 00:49:37 2019
+Number of label: 2
+full set majority vote: 1.000000
+half set majority vote: 0.971429
+mlp: 0.9857142857142858
+Finish time: Mon Mar 18 00:49:42 2019

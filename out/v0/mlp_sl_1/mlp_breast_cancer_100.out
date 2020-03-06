@@ -1,0 +1,12 @@
+Namespace(dataset='breast_cancer', mode='mlp', n_estimators=1, num_clf=100, random_state=2343, reuse=False)
+Dataset breast_cancer
+(128, 16)
+(129, 16)
+(29, 16)
+Training classifiers: Mon Mar 18 00:49:27 2019
+Training mlp: Mon Mar 18 00:49:31 2019
+Number of label: 2
+full set majority vote: 0.758621
+half set majority vote: 0.827586
+mlp: 0.8275862068965517
+Finish time: Mon Mar 18 00:49:31 2019

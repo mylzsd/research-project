@@ -1,0 +1,100 @@
+{'mode': 'variance', 'dataset': None, 'num_clf': 50, 'reuse': False, 'random_state': 482, 'num_estimators': 100}
+Dataset: audiology
+001 estimators: mean 0.625769, var 0.011061, max 0.846154, min 0.230769
+010 estimators: mean 0.776538, var 0.004044, max 0.923077, min 0.576923
+050 estimators: mean 0.791538, var 0.001248, max 0.884615, min 0.730769
+100 estimators: mean 0.794231, var 0.001047, max 0.884615, min 0.730769
+200 estimators: mean 0.791923, var 0.000802, max 0.846154, min 0.730769
+300 estimators: mean 0.793077, var 0.000733, max 0.846154, min 0.769231
+
+
+Dataset: breast_cancer
+001 estimators: mean 0.687586, var 0.006036, max 0.862069, min 0.517241
+010 estimators: mean 0.772069, var 0.002946, max 0.862069, min 0.655172
+050 estimators: mean 0.791034, var 0.001613, max 0.896552, min 0.689655
+100 estimators: mean 0.796897, var 0.001139, max 0.862069, min 0.724138
+200 estimators: mean 0.799310, var 0.001317, max 0.862069, min 0.724138
+300 estimators: mean 0.812069, var 0.000794, max 0.862069, min 0.724138
+
+
+Dataset: breast_w
+001 estimators: mean 0.965000, var 0.000397, max 1.000000, min 0.914286
+010 estimators: mean 0.977000, var 0.000093, max 1.000000, min 0.957143
+050 estimators: mean 0.981571, var 0.000046, max 1.000000, min 0.971429
+100 estimators: mean 0.982857, var 0.000033, max 0.985714, min 0.971429
+200 estimators: mean 0.984000, var 0.000022, max 0.985714, min 0.971429
+300 estimators: mean 0.984571, var 0.000015, max 0.985714, min 0.971429
+
+
+Dataset: cmc
+001 estimators: mean 0.430340, var 0.001379, max 0.503401, min 0.346939
+010 estimators: mean 0.466463, var 0.000563, max 0.551020, min 0.394558
+050 estimators: mean 0.468776, var 0.000242, max 0.496599, min 0.428571
+100 estimators: mean 0.472993, var 0.000235, max 0.517007, min 0.435374
+200 estimators: mean 0.475306, var 0.000166, max 0.510204, min 0.442177
+300 estimators: mean 0.476463, var 0.000139, max 0.510204, min 0.448980
+
+
+Dataset: dematology
+001 estimators: mean 0.891351, var 0.002629, max 1.000000, min 0.783784
+010 estimators: mean 0.954595, var 0.000305, max 1.000000, min 0.891892
+050 estimators: mean 0.955405, var 0.000166, max 0.972973, min 0.945946
+100 estimators: mean 0.954865, var 0.000162, max 0.972973, min 0.945946
+200 estimators: mean 0.952162, var 0.000129, max 0.972973, min 0.945946
+300 estimators: mean 0.951622, var 0.000121, max 0.972973, min 0.945946
+
+
+Dataset: ecoli
+001 estimators: mean 0.834706, var 0.002574, max 0.941176, min 0.676471
+010 estimators: mean 0.910294, var 0.000422, max 0.941176, min 0.852941
+050 estimators: mean 0.912059, var 0.000043, max 0.941176, min 0.882353
+100 estimators: mean 0.911765, var 0.000000, max 0.911765, min 0.911765
+200 estimators: mean 0.911765, var 0.000000, max 0.911765, min 0.911765
+300 estimators: mean 0.911765, var 0.000000, max 0.911765, min 0.911765
+
+
+Dataset: glass
+001 estimators: mean 0.537143, var 0.006625, max 0.714286, min 0.333333
+010 estimators: mean 0.587619, var 0.003956, max 0.714286, min 0.428571
+050 estimators: mean 0.621429, var 0.002058, max 0.714286, min 0.476190
+100 estimators: mean 0.638571, var 0.001410, max 0.714286, min 0.523810
+200 estimators: mean 0.653810, var 0.000991, max 0.714286, min 0.571429
+300 estimators: mean 0.659524, var 0.000652, max 0.714286, min 0.571429
+
+
+Dataset: hepatitis
+001 estimators: mean 0.691333, var 0.010192, max 0.866667, min 0.466667
+010 estimators: mean 0.754000, var 0.005573, max 0.866667, min 0.533333
+050 estimators: mean 0.742000, var 0.001569, max 0.866667, min 0.666667
+100 estimators: mean 0.736000, var 0.000437, max 0.800000, min 0.666667
+200 estimators: mean 0.734667, var 0.000087, max 0.800000, min 0.733333
+300 estimators: mean 0.733333, var 0.000000, max 0.733333, min 0.733333
+
+
+Dataset: human_activity
+001 estimators: mean 0.816342, var 0.000442, max 0.879878, min 0.751951
+010 estimators: mean 0.907346, var 0.000045, max 0.922633, min 0.886664
+050 estimators: mean 0.924160, var 0.000014, max 0.932474, min 0.914150
+100 estimators: mean 0.926532, var 0.000010, max 0.934849, min 0.917883
+200 estimators: mean 0.927224, var 0.000006, max 0.936206, min 0.920258
+300 estimators: mean 0.927645, var 0.000004, max 0.933152, min 0.921615
+
+
+Dataset: iris
+001 estimators: mean 0.980667, var 0.000382, max 1.000000, min 0.933333
+010 estimators: mean 0.997333, var 0.000082, max 1.000000, min 0.966667
+050 estimators: mean 1.000000, var 0.000000, max 1.000000, min 1.000000
+100 estimators: mean 1.000000, var 0.000000, max 1.000000, min 1.000000
+200 estimators: mean 1.000000, var 0.000000, max 1.000000, min 1.000000
+300 estimators: mean 1.000000, var 0.000000, max 1.000000, min 1.000000
+
+
+Dataset: lymphography
+001 estimators: mean 0.654000, var 0.010195, max 0.866667, min 0.400000
+010 estimators: mean 0.702667, var 0.004037, max 0.866667, min 0.600000
+050 estimators: mean 0.669333, var 0.000171, max 0.733333, min 0.666667
+100 estimators: mean 0.667333, var 0.000044, max 0.733333, min 0.666667
+200 estimators: mean 0.666667, var 0.000000, max 0.666667, min 0.666667
+300 estimators: mean 0.666667, var 0.000000, max 0.666667, min 0.666667
+
+

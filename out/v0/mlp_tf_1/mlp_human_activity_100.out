@@ -1,0 +1,26 @@
+Namespace(dataset='human_activity', mode='mlp', n_estimators=1, num_clf=100, random_state=6748, reuse=False)
+Dataset human_activity
+(3676, 562)
+(3676, 562)
+(2947, 562)
+Training classifiers: Tue Mar 26 20:35:40 2019
+Training sci mlp: Tue Mar 26 20:44:25 2019
+Number of label: 6
+(3676, 601)
+(2947, 601)
+Training tf mlp: Tue Mar 26 20:46:56 2019
+epoch: 99, cost: 1.553685, accuracy: 0.353101, mse: 1.128424
+epoch: 199, cost: 1.349664, accuracy: 0.443417, mse: 1.237321
+epoch: 299, cost: 1.243537, accuracy: 0.535092, mse: 1.344657
+epoch: 399, cost: 1.172242, accuracy: 0.564472, mse: 1.452658
+epoch: 499, cost: 1.114800, accuracy: 0.587051, mse: 1.575547
+epoch: 599, cost: 1.044668, accuracy: 0.609086, mse: 1.716465
+epoch: 699, cost: 0.977915, accuracy: 0.632753, mse: 1.878974
+epoch: 799, cost: 0.924143, accuracy: 0.687704, mse: 2.050437
+epoch: 899, cost: 0.875571, accuracy: 0.705386, mse: 2.234845
+epoch: 999, cost: 0.831775, accuracy: 0.724973, mse: 2.417743
+full set majority vote: 0.920937
+part set majority vote: 0.930098
+sci mlp: 0.9246691550729556
+tf mlp: 0.61146927
+Finish time: Tue Mar 26 20:57:14 2019

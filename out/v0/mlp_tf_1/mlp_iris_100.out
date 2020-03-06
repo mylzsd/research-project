@@ -1,0 +1,26 @@
+Namespace(dataset='iris', mode='mlp', n_estimators=1, num_clf=100, random_state=4288, reuse=False)
+Dataset iris
+(135, 5)
+(135, 5)
+(30, 5)
+Training classifiers: Tue Mar 26 21:01:51 2019
+Training sci mlp: Tue Mar 26 21:01:55 2019
+Number of label: 3
+(135, 301)
+(30, 301)
+Training tf mlp: Tue Mar 26 21:01:59 2019
+epoch: 99, cost: 0.517958, accuracy: 0.874074, mse: 2.241516
+epoch: 199, cost: 0.435169, accuracy: 0.940741, mse: 2.841792
+epoch: 299, cost: 0.367183, accuracy: 0.948148, mse: 3.341928
+epoch: 399, cost: 0.306733, accuracy: 0.962963, mse: 3.814946
+epoch: 499, cost: 0.250805, accuracy: 0.977778, mse: 4.316393
+epoch: 599, cost: 0.200785, accuracy: 0.992593, mse: 4.844208
+epoch: 699, cost: 0.164278, accuracy: 1.000000, mse: 5.392268
+epoch: 799, cost: 0.137579, accuracy: 1.000000, mse: 5.938301
+epoch: 899, cost: 0.116936, accuracy: 1.000000, mse: 6.472804
+epoch: 999, cost: 0.100655, accuracy: 1.000000, mse: 7.007634
+full set majority vote: 1.000000
+part set majority vote: 0.966667
+sci mlp: 1.0
+tf mlp: 0.9
+Finish time: Tue Mar 26 21:06:30 2019

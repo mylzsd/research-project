@@ -1,0 +1,26 @@
+Namespace(dataset='cmc', mode='mlp', n_estimators=1, num_clf=100, random_state=7836, reuse=False)
+Dataset cmc
+(663, 22)
+(663, 22)
+(147, 22)
+Training classifiers: Tue Mar 26 19:38:04 2019
+Training sci mlp: Tue Mar 26 19:38:18 2019
+Number of label: 3
+(663, 301)
+(147, 301)
+Training tf mlp: Tue Mar 26 19:38:29 2019
+epoch: 99, cost: 1.132603, accuracy: 0.334842, mse: 1.215575
+epoch: 199, cost: 1.095079, accuracy: 0.363499, mse: 0.904665
+epoch: 299, cost: 1.080534, accuracy: 0.396682, mse: 0.843146
+epoch: 399, cost: 1.072536, accuracy: 0.423831, mse: 0.830779
+epoch: 499, cost: 1.067497, accuracy: 0.425339, mse: 0.827749
+epoch: 599, cost: 1.063843, accuracy: 0.437406, mse: 0.832862
+epoch: 699, cost: 1.060917, accuracy: 0.443439, mse: 0.837794
+epoch: 799, cost: 1.058377, accuracy: 0.446456, mse: 0.842507
+epoch: 899, cost: 1.056023, accuracy: 0.452489, mse: 0.849265
+epoch: 999, cost: 1.053722, accuracy: 0.458522, mse: 0.856438
+full set majority vote: 0.496599
+part set majority vote: 0.476190
+sci mlp: 0.4217687074829932
+tf mlp: 0.3605442
+Finish time: Tue Mar 26 19:43:12 2019

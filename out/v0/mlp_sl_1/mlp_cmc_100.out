@@ -1,0 +1,12 @@
+Namespace(dataset='cmc', mode='mlp', n_estimators=1, num_clf=100, random_state=2323, reuse=False)
+Dataset cmc
+(663, 22)
+(663, 22)
+(147, 22)
+Training classifiers: Mon Mar 18 00:50:28 2019
+Training mlp: Mon Mar 18 00:50:45 2019
+Number of label: 3
+full set majority vote: 0.503401
+half set majority vote: 0.469388
+mlp: 0.40816326530612246
+Finish time: Mon Mar 18 00:51:06 2019
