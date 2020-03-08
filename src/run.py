@@ -100,7 +100,7 @@ def train(dataset,
         clf_types = ['dt', 'mlp', 'knn', 'nb']
     # print(clf_types)
 
-    feature_type = 1
+    feature_type = 3
     features = list()
     for i in range(num_clf):
         if feature_type == 1:
@@ -110,14 +110,15 @@ def train(dataset,
                 k=int(np.ceil(num_feature * 0.5))))
         elif feature_type == 3:
             # every 1/3 classifiers get 1/3 features
-            size = int((num_feature - 1) / 3) + 1
+            first_cut = int(np.ceil(num_feature / 3))
+            second_cut = int(np.ceil(num_feature / 3 * 2))
             index = int((num_clf - 1) / 3) + 1
             if i < index:
-                features.append(list(range(size)))
+                features.append(list(range(first_cut)))
             elif i < 2 * index:
-                features.append(list(range(size, 2 * size)))
+                features.append(list(range(first_cut, second_cut)))
             else:
-                features.append(list(range(2 * size, num_feature)))
+                features.append(list(range(second_cut, num_feature)))
     # print(features)
 
     mv_stat = [0.0] * 4
